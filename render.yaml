@@ -1,0 +1,55 @@
+# Deployment template. This file does not create services until imported in Render.
+services:
+  - type: web
+    name: geovyora-web
+    runtime: docker
+    plan: 0.5c-512mb
+    healthCheckPath: /health
+    envVars:
+      - fromGroup: geovyora-services
+      - key: DATABASE_URL
+        fromDatabase:
+          name: geovyora-db
+          property: connectionString
+      - key: COOKIE_SECURE
+        value: "1"
+      - key: SEED_DEMO
+        value: "0"
+  - type: worker
+    name: geovyora-worker
+    runtime: docker
+    plan: 0.5c-512mb
+    dockerCommand: python worker.py
+    envVars:
+      - fromGroup: geovyora-services
+      - key: DATABASE_URL
+        fromDatabase:
+          name: geovyora-db
+          property: connectionString
+      - key: SEED_DEMO
+        value: "0"
+databases:
+  - name: geovyora-db
+    plan: 0.1c-256mb
+    diskSizeGB: 1
+    ipAllowList: []
+    databaseName: geovyora
+    user: geovyora
+
+# Private credentials are added manually to this shared group in Render.
+# Never commit .env or service-account JSON files.
+envVarGroups:
+  - name: geovyora-services
+    envVars:
+      - key: S3_ENDPOINT_URL
+        value: https://s3.us-west-004.backblazeb2.com
+      - key: S3_REGION
+        value: us-west-004
+      - key: S3_BUCKET
+        value: geovyora-images-public
+      - key: PRIVATE_SUBMISSION_BUCKET
+        value: geovyora-submissions-private
+      - key: MEDIA_PUBLIC_URL
+        value: https://geovyora-images-public.s3.us-west-004.backblazeb2.com
+      - key: AWS_REQUEST_CHECKSUM_CALCULATION
+        value: when_required
