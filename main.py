@@ -25,7 +25,7 @@ uid=lambda: str(uuid.uuid4())
 @asynccontextmanager
 async def lifespan(app):
     migrate()
-    if os.getenv('SEED_DEMO','1')=='1': seed()
+    if os.getenv('SEED_DEMO','0')=='1': seed()
     initialize_features()
     yield
 app=FastAPI(title='Geovyora Media',lifespan=lifespan,docs_url=None,redoc_url=None)
@@ -60,8 +60,11 @@ def translate_record(record,locale,typ='article'):
     else:record['fallback']=True
     return record
 
+def public_demo_clause(alias=''):
+    return '' if os.getenv('ALLOW_DEMO_CONTENT','0')=='1' else ' AND '+alias+'demo=0'
+
 def article_list(where='1=1',args=(),limit=60):
-    return rows("SELECT * FROM articles WHERE status='published' AND "+where+' ORDER BY featured DESC,publish_at DESC LIMIT ?',(*args,limit))
+    return rows("SELECT * FROM articles WHERE status='published' AND "+where+public_demo_clause()+' ORDER BY featured DESC,publish_at DESC LIMIT ?',(*args,limit))
 def render(request,page,locale='ht',**kw):
     cfg=settings(); t=labels(locale);ui={}
     if page!='admin':
@@ -87,6 +90,8 @@ def render(request,page,locale='ht',**kw):
             base['seo_noindex']=bool(metadata['noindex'])
     origin=os.getenv('SITE_URL','http://localhost:8000').rstrip('/')
     base['canonical']=origin+request.url.path
+    base['share_image']=origin+'/static/geovyora-share.png'
+    base['copyright_year']=now()[:4]
     base['alternates']=[]
     if page=='article' and base.get('article'):
         a=base['article']
@@ -101,7 +106,7 @@ def render(request,page,locale='ht',**kw):
     base['structured_data']=None
     if page=='article' and base.get('article') and not base['article']['demo']:
         a=base['article']
-        base['structured_data']={'@context':'https://schema.org','@type':'Article','headline':a['title'],'description':a['subtitle'],'datePublished':a['publish_at'],'dateModified':a['updated_at'],'author':{'@type':'Person','name':a['author']},'publisher':{'@type':'Organization','name':cfg.get('brand','Geovyora')},'inLanguage':locale if a.get('translated') else a.get('original_locale',locale),'mainEntityOfPage':base['canonical']}
+        base['structured_data']={'@context':'https://schema.org','@type':'Article','headline':a['title'],'description':a['subtitle'],'datePublished':a['publish_at'],'dateModified':a['updated_at'],'author':{'@type':'Person','name':a['author']},'publisher':{'@type':'Organization','name':cfg.get('brand','Geovyora'),'logo':{'@type':'ImageObject','url':origin+'/static/geovyora-mark.png'}},'inLanguage':locale if a.get('translated') else a.get('original_locale',locale),'mainEntityOfPage':base['canonical']}
     base['corrections']=[]
     if page=='article' and base.get('article'):
         for revision in rows('SELECT data,created_at FROM revisions WHERE article_id=? ORDER BY created_at DESC LIMIT 30',(base['article']['id'],)):
@@ -367,7 +372,7 @@ def target_ok(typ,id):
     tables={'article':'articles','influencer':'influencers','video':'videos','comment':'comments'}
     if typ not in tables:raise HTTPException(422,'Invalid target')
     status='approved' if typ=='comment' else 'ready' if typ=='video' else 'published'
-    if not one('SELECT id FROM '+tables[typ]+' WHERE id=? AND status=?',(id,status)):raise HTTPException(404,'Kontni pa disponib.')
+    if not one('SELECT id FROM '+tables[typ]+' WHERE id=? AND status=?'+(public_demo_clause() if typ in ['article','influencer'] else ''),(id,status)):raise HTTPException(404,'Kontni pa disponib.')
 
 @app.post('/api/comments')
 async def comment_create(request:Request):
@@ -419,7 +424,7 @@ async def submission(request:Request):
     kind=f.get('kind')
     if kind not in ['influencer','news','contact','advertising','correction','removal']:raise HTTPException(422,'Invalid submission')
     sid=uid();attachments=[x for x in str(f.get('attachments','')).split(',') if x]
-    if len(attachments)>3:raise HTTPException(422,'Twa foto maksimòm.')
+    if len(attachments)>3:raise HTTPException(422,'Twa fichye maksimòm.')
     with connection() as c:
         for id in attachments:
             if not c.execute(sql('SELECT id FROM submission_assets WHERE id=? AND visitor_hash=? AND submission_id IS NULL'),(id,visitor(request))).fetchone():raise HTTPException(403,'Pyès joint sa a pa pou navigatè ou oswa li deja voye.')
@@ -521,7 +526,7 @@ def public(request:Request,locale:str,section:str='home',slug:str='',q:str='',ca
     allowed=['home','haiti','world','news','interviews','videos','video','trending','rankings','discoveries','influencers','influencer','article','search','notifications','saved','submit-influencer','submit-news','contact','advertising','about','privacy','terms','cookies','editorial','community','copyright','category','newsletter','newsletter-unsubscribe']
     if section not in allowed:raise HTTPException(404,'Paj sa a pa egziste.')
     if section=='article':
-        raw=one("SELECT * FROM articles WHERE slug=? AND status='published'",(slug,))
+        raw=one("SELECT * FROM articles WHERE slug=? AND status='published'"+public_demo_clause(),(slug,))
         if not raw:
             redirect=one('SELECT new_slug FROM redirects WHERE old_slug=?',(slug,))
             if redirect:return RedirectResponse('/'+locale+'/article/'+redirect['new_slug'],301)
@@ -533,7 +538,7 @@ def public(request:Request,locale:str,section:str='home',slug:str='',q:str='',ca
             write('INSERT INTO page_views VALUES (?,?,?,?,?) ON CONFLICT(article_id,visitor_hash,day) DO NOTHING',(uid(),a['id'],visitor(request),now()[:10],now()))
         data=article_list('id<>?',(a['id'],),3)
     elif section=='influencer':
-        p=one("SELECT * FROM influencers WHERE slug=? AND status='published'",(slug,))
+        p=one("SELECT * FROM influencers WHERE slug=? AND status='published'"+public_demo_clause(),(slug,))
         if not p:raise HTTPException(404,'Pwofil medya sa a pa disponib.')
         p.setdefault('locale','ht');p=translate_record(p,locale,'influencer');p['socials']=json.loads(p['socials']);p['metrics']=rows('SELECT * FROM influencer_metrics WHERE influencer_id=? ORDER BY observed_at DESC',(p['id'],));title=p['name'];data=article_list('influencer_id=?',(p['id'],))
     elif section=='video':
@@ -541,7 +546,7 @@ def public(request:Request,locale:str,section:str='home',slug:str='',q:str='',ca
         if not a:raise HTTPException(404,'Videyo sa a poko disponib.')
         title=a['title']
     elif section=='influencers':
-        where="status='published'";args=[]
+        where="status='published'"+public_demo_clause();args=[]
         for name,value in [('category',category),('residence',country)]:
             if value:where+=' AND '+name+'=?';args.append(value)
         if platform:where+=' AND socials LIKE ?';args.append('%"'+platform+'"%')
@@ -550,12 +555,12 @@ def public(request:Request,locale:str,section:str='home',slug:str='',q:str='',ca
         data=data[(page-1)*24:page*24]
     elif section=='search':
         data=[r for r in article_list(limit=5000) if search_matches(r,q,['title','subtitle','body','tags'])] if q else []
-        profiles=[r for r in rows("SELECT * FROM influencers WHERE status='published'") if search_matches(r,q,['name','username','category','bio'])] if q else []
+        profiles=[r for r in rows("SELECT * FROM influencers WHERE status='published'"+public_demo_clause()) if search_matches(r,q,['name','username','category','bio'])] if q else []
         videos=[r for r in rows("SELECT * FROM videos WHERE status='ready'") if search_matches(r,q,['title','description','category'])] if q else []
         return render(request,section,locale,articles=[translate_record(x,locale) for x in data[(page-1)*24:page*24]],q=q,title=title,profiles=profiles[:24],videos=videos[:24],total_results=len(data)+len(profiles)+len(videos))
     elif section=='videos':videos=rows("SELECT * FROM videos WHERE status='ready' ORDER BY created_at DESC")
     elif section in ['trending','rankings']:
-        data=rows("SELECT a.*,count(v.id) readership FROM articles a JOIN page_views v ON a.id=v.article_id WHERE a.status='published' AND v.day>=? GROUP BY a.id ORDER BY readership DESC LIMIT 24",((datetime.now(timezone.utc)-timedelta(days=7)).date().isoformat(),))
+        data=rows("SELECT a.*,count(v.id) readership FROM articles a JOIN page_views v ON a.id=v.article_id WHERE a.status='published'"+public_demo_clause("a.")+" AND v.day>=? GROUP BY a.id ORDER BY readership DESC LIMIT 24",((datetime.now(timezone.utc)-timedelta(days=7)).date().isoformat(),))
     elif section in ['home','haiti','world','news','interviews','discoveries','category']:
         where='1=1';args=[]
         if section in ['haiti','world']:where+=' AND region=?';args.append(section)
@@ -567,7 +572,7 @@ def public(request:Request,locale:str,section:str='home',slug:str='',q:str='',ca
             where+=' AND category=?';args.append(cat['name']);title=cat['name']
         if category:where+=' AND category=?';args.append(category)
         data=article_list(where,tuple(args),5000)[(page-1)*12:page*12]
-    return render(request,section,locale,articles=[translate_record(x,locale) for x in data] if section!='influencers' else [],profiles=data if section=='influencers' else rows("SELECT * FROM influencers WHERE status='published' LIMIT 4"),article=a,profile=p,videos=videos,title=title,q=q,category=category,country=country,platform=platform,sort=sort,pagination=page)
+    return render(request,section,locale,articles=[translate_record(x,locale) for x in data] if section!='influencers' else [],profiles=data if section=='influencers' else rows("SELECT * FROM influencers WHERE status='published'"+public_demo_clause()+" LIMIT 4"),article=a,profile=p,videos=videos,title=title,q=q,category=category,country=country,platform=platform,sort=sort,pagination=page)
 
 @app.post('/admin/campaigns/save')
 async def save_campaign(request:Request):

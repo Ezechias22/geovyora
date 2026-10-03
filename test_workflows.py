@@ -1,5 +1,5 @@
 import os,tempfile,unittest,uuid,re,json,time,hmac,hashlib
-TMP=tempfile.TemporaryDirectory();os.environ['SQLITE_PATH']=TMP.name+'/test.db';os.environ['DATABASE_URL']='';os.environ['SEED_DEMO']='1';os.environ['MUX_WEBHOOK_SECRET']='test-secret'
+TMP=tempfile.TemporaryDirectory();os.environ['SQLITE_PATH']=TMP.name+'/test.db';os.environ['DATABASE_URL']='';os.environ['SEED_DEMO']='1';os.environ['ALLOW_DEMO_CONTENT']='1';os.environ['MUX_WEBHOOK_SECRET']='test-secret'
 from fastapi.testclient import TestClient
 from main import app
 from db import one,rows,write

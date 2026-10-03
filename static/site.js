@@ -20,7 +20,7 @@ const dialog=$('#report-dialog');
 function openReport(type,id){const f=$('#report-form');f.reset();f.elements.target_type.value=type;f.elements.target_id.value=id;$('.form-status',f).textContent='';dialog.showModal()}
 $$('.report-btn').forEach(b=>b.onclick=()=>openReport(b.dataset.target,b.dataset.id));$('.close-dialog').onclick=()=>dialog.close();dialog.onclick=e=>{if(e.target===dialog)dialog.close()};
 $('#report-form').onsubmit=async e=>{e.preventDefault();const form=e.target,status=$('.form-status',form),btn=$('button.btn',form);btn.disabled=true;try{const d=await post('/api/reports',Object.fromEntries(new FormData(form)));status.textContent=copy(d.message);setTimeout(()=>dialog.close(),1300)}catch(err){status.textContent=copy(err.message)}finally{btn.disabled=false}};
-$$('.public-form').forEach(form=>form.onsubmit=async e=>{e.preventDefault();const status=$('.form-status',form),btn=$('button.btn:not([type=button])',form);btn.disabled=true;status.textContent=copy('Ap voye…');try{const d=await post(form.dataset.api,Object.fromEntries(new FormData(form)));form.reset();if($('.upload-status',form))$('.upload-status',form).textContent='';status.textContent=copy(d.message);if(d.unsubscribe_url){const link=make('a',' Lyen prive dezabònman');link.className='text-button';link.href=d.unsubscribe_url;status.append(link)}}catch(err){status.textContent=copy(err.message)}finally{btn.disabled=false}});
+$$('.public-form').forEach(form=>form.onsubmit=async e=>{e.preventDefault();if(form.dataset.uploading==='1'){toast('Tann chajman fichye yo fini.');return}const status=$('.form-status',form),btn=$('button.btn:not([type=button])',form);btn.disabled=true;status.textContent=copy('Ap voye…');try{const d=await post(form.dataset.api,Object.fromEntries(new FormData(form)));form.reset();if($('.upload-status',form))$('.upload-status',form).textContent='';status.textContent=copy(d.message);if(d.unsubscribe_url){const link=make('a',' Lyen prive dezabònman');link.className='text-button';link.href=d.unsubscribe_url;status.append(link)}}catch(err){status.textContent=copy(err.message)}finally{btn.disabled=false}});
 const commentSection=$('.comments-section');
 if(commentSection){
  const form=$('.comment-form',commentSection),list=$('.comment-list',commentSection),type=commentSection.dataset.target,id=commentSection.dataset.id;let page=1,all=[];
@@ -41,4 +41,26 @@ const languageDialog=$('#language-dialog');
 if(languageDialog){let options=[];function showLanguages(){const query=$('#language-search').value.toLocaleLowerCase();const box=$('.language-results',languageDialog);box.replaceChildren();options.filter(x=>(x.name+' '+x.code).toLocaleLowerCase().includes(query)).forEach(x=>{const b=make('button',x.name+' · '+x.code);b.type='button';b.onclick=()=>{document.cookie='vyora_locale='+encodeURIComponent(x.code)+';path=/;max-age=31536000;SameSite=Lax';localStorage.setItem('vyora_locale',x.code);const path=location.pathname.split('/');path[1]=x.code;location.href=path.join('/')+location.search};box.append(b)})}$('#language-more').onclick=async()=>{try{const d=await(await fetch('/api/languages')).json();options=d.languages;showLanguages();languageDialog.showModal();$('#language-search').focus()}catch{toast('Lis lang yo pa disponib.')}};$('#language-search').oninput=showLanguages;$('.close-language',languageDialog).onclick=()=>languageDialog.close();languageDialog.onclick=e=>{if(e.target===languageDialog)languageDialog.close()}}
 $$('.follow-creator').forEach(b=>b.onclick=async()=>{b.disabled=true;try{const d=await post('/api/push/follow',{id:b.dataset.id,remove:b.dataset.followed==='1'});b.dataset.followed=b.dataset.followed==='1'?'0':'1';toast(d.message)}catch(e){toast(e.message)}finally{b.disabled=false}});
 if($('#push-subscribe'))fetch('/api/push/preferences').then(r=>r.json()).then(d=>{if(d.subscribed){const topics=(d.preferences.topics||'').split(',');$$('input[name=topics]').forEach(input=>input.checked=topics.includes(input.value));$('.form-status').textContent='Notifikasyon aktive sou navigatè sa a.'}}).catch(()=>{});
-$$('.submission-upload').forEach(btn=>btn.onclick=async()=>{const form=btn.closest('form'),file=$('.submission-photo',form).files[0],status=$('.upload-status',form);if(!file){status.textContent=copy('Chwazi yon foto.');return}let attached=form.elements.attachments.value.split(',').filter(Boolean);if(attached.length>=3){status.textContent=copy('Twa foto maksimòm.');return}if(file.size>10*1024*1024){status.textContent=copy('Foto a depase 10 MB.');return}btn.disabled=true;try{const data=new FormData();data.set('file',file);data.set('csrf_token',csrf);const r=await fetch('/api/submissions/upload',{method:'POST',body:data});const d=await r.json();if(!r.ok)throw Error(d.detail||'Chajman echwe.');attached.push(d.id);form.elements.attachments.value=attached.join(',');status.textContent=attached.length+' '+copy('foto chaje an prive.');$('.submission-photo',form).value=''}catch(e){status.textContent=copy(e.message)}finally{btn.disabled=false}});
+
+$$('.submission-upload').forEach(btn=>{
+ const form=btn.closest('form'),input=$('.submission-photo',form),status=$('.upload-status',form),list=$('.attachment-list',form);
+ let records=[];
+ function show(){
+  form.elements.attachments.value=records.map(x=>x.id).join(',');list.replaceChildren();
+  records.forEach(record=>{const row=make('li'),name=make('span',record.name),remove=make('button','Retire','text-button');remove.type='button';remove.onclick=()=>{if(form.dataset.uploading==='1')return;records=records.filter(x=>x.id!==record.id);show()};row.append(name,remove);list.append(row)});
+ }
+ async function uploadFiles(){
+  if(form.dataset.uploading==='1')return;
+  const files=[...input.files];if(!files.length){status.textContent=copy('Chwazi yon fichye.');return}
+  if(records.length+files.length>3){status.textContent=copy('Twa fichye maksimòm.');return}
+  if(files.some(file=>file.size>10*1024*1024)){status.textContent=copy('Fichye a depase 10 MB.');return}
+  if(files.some(file=>! /\.(jpe?g|png|webp|pdf|txt)$/i.test(file.name))){status.textContent=copy('Fòma fichye sa a pa aksepte.');return}
+  form.dataset.uploading='1';btn.disabled=true;input.disabled=true;
+  const submit=$('button.btn:not([type=button])',form);submit.disabled=true;status.textContent=copy('Ap chaje fichye yo…');
+  try{
+   for(const file of files){const data=new FormData();data.set('file',file);data.set('csrf_token',csrf);const response=await fetch('/api/submissions/upload',{method:'POST',body:data});let result;try{result=await response.json()}catch{throw Error('Chajman fichye a echwe. Eseye ankò.')}if(!response.ok)throw Error(result.detail||'Chajman fichye a echwe. Eseye ankò.');records.push({id:result.id,name:file.name});show()}
+   status.textContent=copy('Fichye chaje an prive.');
+  }catch(error){status.textContent=copy(error.message)}finally{input.value='';form.dataset.uploading='0';btn.disabled=false;input.disabled=false;submit.disabled=false}
+ }
+ btn.onclick=uploadFiles;input.onchange=uploadFiles;form.addEventListener('reset',()=>{records=[];list.replaceChildren()});
+});

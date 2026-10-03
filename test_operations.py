@@ -105,3 +105,57 @@ class Operations(fixtures.Fixture):
   self.assertEqual(one('SELECT count(*) n FROM campaigns WHERE id=?',('reply-'+child,))['n'],1)
   recipients=rows('SELECT visitor_hash FROM deliveries WHERE campaign_id=?',('reply-'+child,));self.assertEqual(recipients,[{'visitor_hash':owner}])
   self.c.post('/api/push/unsubscribe',json={'csrf_token':token});self.assertEqual(one('SELECT status FROM deliveries WHERE campaign_id=?',('reply-'+child,))['status'],'cancelled')
+
+ def test_b2_presigned_put(self):
+  from unittest.mock import Mock
+  client=Mock();client.generate_presigned_url.return_value='https://example.test/upload'
+  c,t=self.login()
+  with patch.dict(os.environ,{'S3_BUCKET':'public-test','S3_ACCESS_KEY_ID':'test-key','S3_SECRET_ACCESS_KEY':'test-secret','MEDIA_PUBLIC_URL':'https://example.test/public'}),patch('boto3.client',return_value=client):
+   r=c.post('/admin/media/upload-url',data={'csrf_token':t,'content_type':'image/jpeg'})
+  self.assertEqual(r.status_code,200);self.assertEqual(r.json()['method'],'PUT');self.assertEqual(r.json()['headers'],{'Content-Type':'image/jpeg'})
+  self.assertEqual(client.generate_presigned_url.call_args.args[0],'put_object')
+  client.generate_presigned_post.assert_not_called()
+
+ def test_private_document_upload_validation_and_ownership(self):
+  from unittest.mock import Mock
+  from extensions import validate_attachment
+  from fastapi.testclient import TestClient
+  from main import app
+  document=b'%PDF-1.7\n1 0 obj<<>>endobj\n%%EOF'
+  self.assertEqual(validate_attachment(document,'proof.pdf','application/pdf'),('application/pdf','.pdf'))
+  for raw,name,mime in [(b'fake','proof.pdf','application/pdf'),(b'<svg/>','photo.svg','image/svg+xml'),(b'hello\x00','note.txt','text/plain')]:
+   with self.assertRaises(ValueError):validate_attachment(raw,name,mime)
+  self.assertEqual(validate_attachment('Sous vérifiée'.encode(),'notes.txt','text/plain')[0],'text/plain; charset=utf-8')
+  token=self.token();storage=Mock()
+  with patch.dict(os.environ,{'PRIVATE_SUBMISSION_BUCKET':'private-test'}),patch('extensions.s3_client',return_value=storage):
+   response=self.c.post('/api/submissions/upload',data={'csrf_token':token},files={'file':('proof.pdf',document,'application/pdf')})
+   self.assertEqual(response.status_code,200,response.text);id=response.json()['id']
+   self.assertEqual(storage.put_object.call_args.kwargs['Bucket'],'private-test')
+   self.assertIn('attachment',storage.put_object.call_args.kwargs['ContentDisposition'])
+   self.assertEqual(storage.put_object.call_args.kwargs['ContentType'],'application/pdf')
+   other=TestClient(app);other_token=self.token(other)
+   payload={'csrf_token':other_token,'kind':'contact','name':'Proof request','body':'Please review this document.','attachments':id}
+   self.assertEqual(other.post('/api/submissions',json=payload).status_code,403)
+   payload['csrf_token']=token
+   self.assertEqual(self.c.post('/api/submissions',json=payload).status_code,200)
+   self.assertEqual(self.c.post('/api/submissions',json=payload).status_code,403)
+   self.assertEqual(TestClient(app).get('/admin/submission-assets/'+id).status_code,401)
+
+ def test_production_interface_and_demo_visibility(self):
+  from localization import ui_text
+  from html.parser import HTMLParser
+  class VisibleText(HTMLParser):
+   def __init__(self):super().__init__();self.text=[]
+   def handle_data(self,text):self.text.append(text.strip())
+  with patch.dict(os.environ,{'ALLOW_DEMO_CONTENT':'0'}):
+   self.assertEqual(self.c.get('/en/article/voix-qui-traversent-les-frontieres').status_code,404)
+   self.assertEqual(self.c.get('/en/influencer/naya-lumiere').status_code,404)
+   for lang in ['fr','en','pt-BR','es']:
+    response=self.c.get('/'+lang+'/discoveries');parser=VisibleText();parser.feed(response.text)
+    for source in ['Komedi','Mòd','Bote','Biznis','Teknoloji','Espò','Kwizin','Edikasyon','Vwayaj','Dekouvèt']:
+     self.assertIn(ui_text(source,lang),parser.text)
+     self.assertNotIn(source,parser.text)
+    for page in ['about','privacy','terms','cookies','editorial','community','copyright']:
+     response=self.c.get('/'+lang+'/'+page);self.assertEqual(response.status_code,200)
+     self.assertNotIn('Tèks pwovizwa',response.text);self.assertNotIn('FÈ AK KREYATIVITE',response.text)
+     self.assertIn('/static/geovyora-mark.png',response.text)

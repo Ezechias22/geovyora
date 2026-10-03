@@ -26,7 +26,7 @@ def s3_client():
     if not all(os.getenv(k) for k in ['S3_BUCKET','S3_ACCESS_KEY_ID','S3_SECRET_ACCESS_KEY','MEDIA_PUBLIC_URL']):raise HTTPException(503,'Storage foto poko konekte.')
     import boto3
     from botocore.config import Config
-    return boto3.client('s3',endpoint_url=os.getenv('S3_ENDPOINT_URL') or None,region_name=os.getenv('S3_REGION','us-east-1'),aws_access_key_id=os.environ['S3_ACCESS_KEY_ID'],aws_secret_access_key=os.environ['S3_SECRET_ACCESS_KEY'],config=Config(signature_version='s3v4'))
+    return boto3.client('s3',endpoint_url=os.getenv('S3_ENDPOINT_URL') or None,region_name=os.getenv('S3_REGION','us-east-1'),aws_access_key_id=os.environ['S3_ACCESS_KEY_ID'],aws_secret_access_key=os.environ['S3_SECRET_ACCESS_KEY'],config=Config(signature_version='s3v4',request_checksum_calculation='when_required'))
 
 def validate_image(raw,mime):
     from PIL import Image,UnidentifiedImageError
@@ -43,6 +43,25 @@ def validate_image(raw,mime):
                 image.verify()
         except (UnidentifiedImageError,OSError,Image.DecompressionBombError,Image.DecompressionBombWarning):raise ValueError('Foto a pa valab oswa li domaje.')
     return width,height
+
+def validate_attachment(raw,filename,mime):
+    if not raw:raise ValueError('Chwazi yon fichye.')
+    if len(raw)>10*1024*1024:raise ValueError('Fichye a depase 10 MB.')
+    extension=__import__('pathlib').Path(filename).suffix.lower()
+    images={'.jpg':'image/jpeg','.jpeg':'image/jpeg','.png':'image/png','.webp':'image/webp'}
+    if extension in images:
+        expected=images[extension]
+        if mime not in [expected,'application/octet-stream',None]:raise ValueError('Fòma fichye sa a pa aksepte.')
+        validate_image(raw,expected)
+        return expected,'.jpg' if extension=='.jpeg' else extension
+    if extension=='.pdf' and raw.startswith(b'%PDF-') and b'%%EOF' in raw[-4096:]:
+        return 'application/pdf','.pdf'
+    if extension=='.txt':
+        try:text=raw.decode('utf-8')
+        except UnicodeDecodeError:raise ValueError('Fòma fichye sa a pa aksepte.')
+        if any(ord(c)<32 and c not in '\n\r\t' for c in text):raise ValueError('Fòma fichye sa a pa aksepte.')
+        return 'text/plain; charset=utf-8','.txt'
+    raise ValueError('Fòma fichye sa a pa aksepte.')
 
 def verify_media(record,client=None):
     client=client or s3_client();stream=None
@@ -218,21 +237,22 @@ def install(app):
 
     @app.post('/api/submissions/upload')
     async def public_upload(request:Request):
-        core.same_origin(request);core.rate(request,'submission-upload',6,3600)
+        core.same_origin(request);core.rate(request,'submission-upload',12,3600)
         f=await request.form()
         if not __import__('hmac').compare_digest(str(f.get('csrf_token','')),request.state.public_csrf):raise HTTPException(403,'Rechaje paj la.')
         if not os.getenv('PRIVATE_SUBMISSION_BUCKET'):raise HTTPException(503,'Pyès jointes prive poko konekte.')
         upload=f.get('file')
-        if not hasattr(upload,'read'):raise HTTPException(422,'Chwazi yon foto.')
-        raw=await upload.read(10*1024*1024+1);mime=upload.content_type
-        try:validate_image(raw,mime)
+        if not hasattr(upload,'read'):raise HTTPException(422,'Chwazi yon fichye.')
+        try:raw=await upload.read(10*1024*1024+1)
+        finally:await upload.close()
+        try:mime,extension=validate_attachment(raw,upload.filename or '',upload.content_type)
         except ValueError as error:raise HTTPException(422,str(error))
-        id=uid();extension={'image/jpeg':'.jpg','image/png':'.png','image/webp':'.webp'}[mime];key='submissions/'+id+extension
-        try:s3_client().put_object(Bucket=os.environ['PRIVATE_SUBMISSION_BUCKET'],Key=key,Body=raw,ContentType=mime)
+        id=uid();key='submissions/'+id+extension
+        try:s3_client().put_object(Bucket=os.environ['PRIVATE_SUBMISSION_BUCKET'],Key=key,Body=raw,ContentType=mime,ContentDisposition='attachment; filename="'+id+extension+'"')
         except HTTPException:raise
-        except Exception:raise HTTPException(503,'Chajman foto a echwe. Eseye ankò.')
+        except Exception:raise HTTPException(503,'Chajman fichye a echwe. Eseye ankò.')
         write('INSERT INTO submission_assets VALUES (?,?,?,?,?,?,?)',(id,None,visitor(request),key,mime,len(raw),now()))
-        return {'ok':True,'id':id,'message':'Foto a chaje an prive pou ekip revizyon an.'}
+        return {'ok':True,'id':id,'message':'Fichye chaje an prive.'}
 
     @app.get('/admin/submission-assets/{id}')
     def private_asset(request:Request,id:str):
