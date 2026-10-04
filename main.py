@@ -300,6 +300,12 @@ async def save_article(request:Request):
     if old and old['slug']!=slug:write('INSERT INTO redirects VALUES (?,?) ON CONFLICT(old_slug) DO UPDATE SET new_slug=excluded.new_slug',(old['slug'],slug))
     if old:write('UPDATE articles SET '+','.join(x+'=?' for x in fields.split(','))+' WHERE id=?',(*values,id))
     else:write('INSERT INTO articles(id,'+fields+',created_at) VALUES ('+','.join('?' for _ in range(22))+')',(id,*values,now()))
+    # Preserve verified translations when only image or publishing metadata changes.
+    if old:
+        current=one('SELECT * FROM articles WHERE id=?',(id,))
+        if all(old[k]==current[k] for k in ['title','subtitle','body','locale']):
+            for tr in rows("SELECT * FROM translations WHERE target_type='article' AND target_id=? AND version=? AND manual=1",(id,old['updated_at'])):
+                write('INSERT INTO translations(id,target_type,target_id,version,locale,data,manual,created_at) VALUES (?,?,?,?,?,?,?,?) ON CONFLICT(target_type,target_id,version,locale) DO NOTHING',(uid(),'article',id,current['updated_at'],tr['locale'],tr['data'],1,now()))
     audit(u,'article.save',id,status);return RedirectResponse('/admin/articles?saved=1',303)
 
 @app.post('/admin/influencers/save')
