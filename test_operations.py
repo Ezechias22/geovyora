@@ -159,3 +159,35 @@ class Operations(fixtures.Fixture):
      response=self.c.get('/'+lang+'/'+page);self.assertEqual(response.status_code,200)
      self.assertNotIn('Tèks pwovizwa',response.text);self.assertNotIn('FÈ AK KREYATIVITE',response.text)
      self.assertIn('/static/geovyora-mark.png',response.text)
+
+ @patch('main.rate')
+ def test_admin_languages_preserve_editorial_values_and_diagnostics(self,rate_mock):
+  from unittest.mock import patch
+  from localization import ui_text
+  c,t=self.login();stamp=datetime.now(timezone.utc).isoformat();article=one("SELECT id FROM articles LIMIT 1")
+  write('UPDATE articles SET title=?,body=? WHERE id=?',('Tit','Paramèt',article['id']))
+  keys={'MUX_TOKEN_ID':'','MUX_TOKEN_SECRET':'','S3_BUCKET':'','S3_ENDPOINT_URL':'','S3_REGION':'','S3_ACCESS_KEY_ID':'','S3_SECRET_ACCESS_KEY':'','MEDIA_PUBLIC_URL':'','FIREBASE_PUBLIC_CONFIG':'','FIREBASE_SERVICE_ACCOUNT':'','FIREBASE_VAPID_KEY':''}
+  expected={'fr':'Vue d’ensemble','en':'Overview','pt-BR':'Visão geral','es':'Resumen'}
+  with patch.dict(os.environ,keys):
+   for locale,caption in expected.items():
+    r=c.get('/admin?lang='+locale);self.assertEqual(r.status_code,200);self.assertIn(caption,r.text);self.assertIn('id="admin-language"',r.text);self.assertIn('<code>MUX_TOKEN_ID</code>',r.text)
+    r=c.get('/admin/articles?edit='+article['id']+'&lang='+locale);self.assertEqual(r.status_code,200)
+    self.assertIn('name="title" value="Tit"',r.text);self.assertIn('>Paramèt</textarea>',r.text)
+    self.assertIn('value="Kilti"',r.text);self.assertIn('value="draft"',r.text);self.assertIn('editor-image-file',r.text);self.assertIn('editor-video-file',r.text)
+   c.cookies.set('geovyora_admin_locale','pt-BR')
+   self.assertIn('Visão geral',c.get('/admin').text)
+  write('UPDATE articles SET title=?,body=? WHERE id=?',('Article QA','Editorial body for subsequent tests.',article['id']))
+
+ @patch('main.rate')
+ def test_mux_upload_returns_slug_for_inline_editor_and_requires_role(self,rate_mock):
+  from unittest.mock import AsyncMock,MagicMock,patch
+  from types import SimpleNamespace
+  c,t=self.login();client=MagicMock();client.__aenter__.return_value.post=AsyncMock(return_value=SimpleNamespace(status_code=201,json=lambda:{'data':{'id':'qa-mux-upload','url':'https://upload.mux.com/qa'}}))
+  with patch.dict(os.environ,{'MUX_TOKEN_ID':'qa-token','MUX_TOKEN_SECRET':'qa-secret'}),patch('main.httpx.AsyncClient',return_value=client):
+   r=c.post('/admin/videos/upload',headers={'Accept':'application/json'},data={'csrf_token':t,'title':'Inline video QA','locale':'en'})
+   self.assertEqual(r.status_code,200,r.text);result=r.json();record=one('SELECT * FROM videos WHERE id=?',(result['id'],))
+   self.assertEqual(record['slug'],result['slug']);self.assertEqual(record['status'],'uploading');self.assertEqual(record['upload_id'],'qa-mux-upload')
+   moderator,mt=self.login('moderator');self.assertEqual(moderator.post('/admin/videos/upload',headers={'Accept':'application/json'},data={'csrf_token':mt,'title':'Unauthorized video'}).status_code,403)
+   before=client.__aenter__.return_value.post.await_count
+   self.assertEqual(c.post('/admin/videos/upload',headers={'Accept':'application/json'},data={'csrf_token':t,'title':'x'}).status_code,422)
+   self.assertEqual(client.__aenter__.return_value.post.await_count,before)

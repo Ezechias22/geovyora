@@ -66,7 +66,12 @@ def public_demo_clause(alias=''):
 def article_list(where='1=1',args=(),limit=60):
     return rows("SELECT * FROM articles WHERE status='published' AND "+where+public_demo_clause()+' ORDER BY featured DESC,publish_at DESC LIMIT ?',(*args,limit))
 def render(request,page,locale='ht',**kw):
-    cfg=settings(); t=labels(locale);ui={}
+    cfg=settings()
+    if page=='admin':
+        chosen=request.query_params.get('lang') or request.cookies.get('geovyora_admin_locale') or request.headers.get('accept-language','').split(',')[0].split(';')[0]
+        locale=normalize_language(chosen) or cfg.get('default_locale','ht')
+        if locale not in LANGUAGES:locale='en'
+    t=labels(locale);ui={} 
     if page!='admin':
         from localization import ui_translation,queue_ui
         ui=ui_translation(locale) if locale!='ht' else {}
@@ -74,6 +79,15 @@ def render(request,page,locale='ht',**kw):
         if locale!='ht':queue_ui(locale)
     base={'request':request,'locale':locale,'t':t,'languages':language_map(),'settings':cfg,'brand':cfg.get('brand','Geovyora'),'page':page,'categories':categories(),'staff':session(request),'csrf_token':request.state.public_csrf,'title':cfg.get('brand','Geovyora'),'description':'Magazin sou kreyatè Ayisyen, dyaspora ak mond lan.','path':request.url.path,'ads_allowed':False}
     base.update(kw)
+    if page=='admin':
+        from admin_localization import COPY,admin_text
+        base['admin_languages']=LANGUAGES
+        base['admin_text']=admin_text
+        base['admin_copy']={text:admin_text(text,locale) for text in COPY}
+        base['admin_greeting']={'ht':'Bonjou','fr':'Bonjour','en':'Hello','pt-BR':'Olá','es':'Hola'}.get(locale,'Hello')
+        base['media_library']=rows("SELECT url,content_type FROM media_assets WHERE status='ready' ORDER BY created_at DESC LIMIT 40")
+        base['video_library']=rows("SELECT slug,title FROM videos WHERE status='ready' ORDER BY created_at DESC LIMIT 100")
+
     base['direction']='rtl' if locale.split('-')[0] in __import__('jobs').RTL else 'ltr'
     base['language_ui_fallback']=locale not in language_map()
     base['banners']=rows("SELECT * FROM ad_placements WHERE active=1 AND (locale='' OR locale=?)",(locale,)) if page!='admin' else []
@@ -119,10 +133,13 @@ def render(request,page,locale='ht',**kw):
         displayed=base.get('article')
         base['ads_allowed']=bool(displayed and not displayed['demo'] and displayed.get('translated') and displayed.get('original_locale')!=locale or displayed and not displayed['demo'] and displayed.get('original_locale')==locale)
     response=templates.TemplateResponse(request=request,name=('admin.html' if page=='admin' else 'site.html'),context=base)
-    if page!='admin':
+    if page=='admin':
+        from admin_localization import localize_admin
+        response.body=localize_admin(response.body.decode('utf-8'),locale).encode('utf-8')
+    else:
         from localization import localize_html
         response.body=localize_html(response.body.decode('utf-8'),locale).encode('utf-8')
-        response.headers['content-length']=str(len(response.body))
+    response.headers['content-length']=str(len(response.body))
     blocks=re.findall(r'<script type="application/ld\+json">(.*?)</script>',response.body.decode('utf-8'),re.S)
     import base64
     request.state.schema_hashes=["'sha256-"+base64.b64encode(hashlib.sha256(block.encode()).digest()).decode()+"'" for block in blocks]
@@ -158,7 +175,7 @@ async def cookies_and_headers(request,call_next):
 
 @app.exception_handler(HTTPException)
 async def http_error(request,exc):
-    if request.url.path.startswith('/api'):return JSONResponse({'detail':exc.detail},status_code=exc.status_code)
+    if request.url.path.startswith('/api') or request.headers.get('accept')=='application/json':return JSONResponse({'detail':exc.detail},status_code=exc.status_code)
     return HTMLResponse('<!doctype html><html lang="ht"><meta name="viewport" content="width=device-width"><link rel="stylesheet" href="/static/style.css"><body><main class="simple"><a class="logo" href="/">Geovyora<span>✦</span></a><h1>'+str(exc.status_code)+'</h1><p>'+html.escape(str(exc.detail))+'</p><a class="btn" href="/">Retounen sou sit la</a></main></body></html>',status_code=exc.status_code)
 
 @app.get('/health')
@@ -247,9 +264,14 @@ def admin(request:Request,section:str='overview',edit:str=''):
     counts['pending_comments']=one("SELECT count(*) n FROM comments WHERE status='pending'")['n']
     counts['pending_reports']=one("SELECT count(*) n FROM reports WHERE status IN ('pending','in_review')")['n']
     counts['views']=one('SELECT count(*) n FROM page_views')['n']
-    services={'Mux':bool(os.getenv('MUX_TOKEN_ID') and os.getenv('MUX_TOKEN_SECRET')),'Google Translation':bool(os.getenv('GOOGLE_TRANSLATION_KEY')),'Storage':bool(os.getenv('S3_BUCKET') and os.getenv('MEDIA_PUBLIC_URL')),'Firebase':bool(os.getenv('FIREBASE_PUBLIC_CONFIG') and os.getenv('FIREBASE_SERVICE_ACCOUNT')),'AdSense':settings().get('ads_enabled')=='1'}
+    service_keys={'Mux':['MUX_TOKEN_ID','MUX_TOKEN_SECRET'],'Google Translation':['GOOGLE_TRANSLATION_KEY'],'Storage':['S3_BUCKET','S3_ENDPOINT_URL','S3_REGION','S3_ACCESS_KEY_ID','S3_SECRET_ACCESS_KEY','MEDIA_PUBLIC_URL'],'Firebase':['FIREBASE_PUBLIC_CONFIG','FIREBASE_SERVICE_ACCOUNT','FIREBASE_VAPID_KEY']}
+    service_details={name:{'missing':[key for key in keys if not os.getenv(key)],'optional':name=='Google Translation'} for name,keys in service_keys.items()}
+    services={name:not detail['missing'] for name,detail in service_details.items()}
+    services['AdSense']=settings().get('ads_enabled')=='1'
+    service_details['AdSense']={'missing':[],'optional':True}
+
     popular=rows("SELECT a.title,count(v.id) views FROM articles a LEFT JOIN page_views v ON a.id=v.article_id GROUP BY a.id,a.title ORDER BY views DESC LIMIT 8")
-    return render(request,'admin',u=u,mode=section,data=data,record=record,counts=counts,services=services,popular=popular,staff_csrf=u['csrf'],campaigns=rows('SELECT * FROM campaigns ORDER BY created_at DESC'),translation_jobs=rows('SELECT * FROM translation_jobs ORDER BY created_at DESC LIMIT 100'),usage=one('SELECT characters FROM usage_months WHERE month=?',(now()[:7],)) or {'characters':0},banners=rows('SELECT * FROM ad_placements ORDER BY created_at DESC') if section=='ads' else [],metrics=rows('SELECT * FROM influencer_metrics WHERE influencer_id=? ORDER BY observed_at DESC',(edit,)) if section=='influencers' and edit else [],deliveries=rows('SELECT status,count(*) n FROM deliveries GROUP BY status'))
+    return render(request,'admin',u=u,mode=section,data=data,record=record,counts=counts,services=services,service_details=service_details,popular=popular,staff_csrf=u['csrf'],campaigns=rows('SELECT * FROM campaigns ORDER BY created_at DESC'),translation_jobs=rows('SELECT * FROM translation_jobs ORDER BY created_at DESC LIMIT 100'),usage=one('SELECT characters FROM usage_months WHERE month=?',(now()[:7],)) or {'characters':0},banners=rows('SELECT * FROM ad_placements ORDER BY created_at DESC') if section=='ads' else [],metrics=rows('SELECT * FROM influencer_metrics WHERE influencer_id=? ORDER BY observed_at DESC',(edit,)) if section=='influencers' and edit else [],deliveries=rows('SELECT status,count(*) n FROM deliveries GROUP BY status'))
 
 @app.post('/admin/articles/save')
 async def save_article(request:Request):
@@ -456,13 +478,14 @@ async def save_translation(request:Request):
 async def mux_upload(request:Request):
     f=await request.form();u=csrf(request,f.get('csrf_token'));require(request,EDITOR)
     if not os.getenv('MUX_TOKEN_ID') or not os.getenv('MUX_TOKEN_SECRET'):raise HTTPException(503,'Konekte kle Mux yo anvan ou chaje yon videyo.')
-    id=uid();site=os.getenv('SITE_URL','http://localhost:8000').rstrip('/')
+    title=clean(f.get('title'),200,3);description=clean(f.get('description'),3000)
+    id=uid();video_slug=slugify(title)+'-'+id[:6];site=os.getenv('SITE_URL','http://localhost:8000').rstrip('/')
     async with httpx.AsyncClient(timeout=30) as client:
         resp=await client.post('https://api.mux.com/video/v1/uploads',auth=(os.environ['MUX_TOKEN_ID'],os.environ['MUX_TOKEN_SECRET']),json={'cors_origin':site,'new_asset_settings':{'playback_policies':['public'],'video_quality':'basic','passthrough':id}})
     if resp.status_code not in [200,201]:raise HTTPException(502,'Mux pa disponib. Eseye ankò.')
-    data=resp.json()['data'];title=clean(f.get('title'),200,3)
-    write('INSERT INTO videos(id,slug,title,description,upload_id,status,locale,created_at) VALUES (?,?,?,?,?,?,?,?)',(id,slugify(title)+'-'+id[:6],title,clean(f.get('description'),3000),data['id'],'uploading',f.get('locale','ht'),now()))
-    audit(u,'video.upload',id);return {'url':data['url'],'id':id,'max_bytes':int(os.getenv('MAX_VIDEO_BYTES','1073741824'))}
+    data=resp.json()['data']
+    write('INSERT INTO videos(id,slug,title,description,upload_id,status,locale,created_at) VALUES (?,?,?,?,?,?,?,?)',(id,video_slug,title,description,data['id'],'uploading',f.get('locale','ht'),now()))
+    audit(u,'video.upload',id);return {'url':data['url'],'id':id,'slug':video_slug,'max_bytes':int(os.getenv('MAX_VIDEO_BYTES','1073741824'))}
 @app.post('/api/webhooks/mux')
 async def mux_webhook(request:Request):
     raw=await request.body();secret=os.getenv('MUX_WEBHOOK_SECRET','');header=request.headers.get('mux-signature','')
