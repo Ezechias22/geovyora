@@ -325,3 +325,15 @@ class AdminLocalizer(Localizer):
 def localize_admin(source,locale):
     if locale=='ht':return source
     parser=AdminLocalizer(locale);parser.feed(source);return ''.join(parser.parts)
+
+COPY.update({
+'Teste koneksyon sèvis yo': ['Tester les connexions','Test service connections','Testar conexões','Probar conexiones'],
+'Rezilta tès sa a sèlman; yo pa sove.': ['Résultats de ce test uniquement ; non enregistrés.','Results for this test only; not saved.','Resultados deste teste; não salvos.','Resultados de esta prueba; no guardados.'],
+'Detay konfigirasyon': ['Détails de configuration','Configuration details','Detalhes da configuração','Detalles de configuración'],
+'Aksè Mux verifye.': ['Accès Mux vérifié.','Mux access verified.','Acesso Mux verificado.','Acceso Mux verificado.'],
+'Aksè de bucket yo verifye; teste chajman yon foto tou.': ['Accès aux deux buckets vérifié ; testez aussi un envoi de photo.','Access to both buckets verified; also test a photo upload.','Acesso aos dois buckets verificado; teste também o envio de foto.','Acceso a ambos buckets verificado; pruebe también subir una foto.'],
+'Otantifikasyon Firebase verifye; livrezon notifikasyon poko teste.': ['Authentification Firebase vérifiée ; envoi de notifications non testé.','Firebase authentication verified; notification delivery not tested.','Autenticação Firebase verificada; entrega de notificações não testada.','Autenticación Firebase verificada; entrega de notificaciones no probada.'],
+'Tès la echwe. Verifye kle yo, dwa aksè ak koneksyon sèvis la.': ['Échec du test. Vérifiez les clés, les autorisations et la connexion du service.','Test failed. Check keys, permissions and service connectivity.','Teste falhou. Verifique chaves, permissões e conexão do serviço.','Prueba fallida. Revise claves, permisos y conexión del servicio.']
+})
+
+COPY.update({'Tès reyisi':['Test réussi','Test passed','Teste aprovado','Prueba exitosa'],'Tès echwe':['Échec du test','Test failed','Teste falhou','Prueba fallida']})

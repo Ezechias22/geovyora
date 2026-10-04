@@ -235,7 +235,7 @@ def logout(request:Request,csrf_token:str=Form(...)):
 
 @app.get('/admin')
 @app.get('/admin/{section}')
-def admin(request:Request,section:str='overview',edit:str=''):
+def admin(request:Request,section:str='overview',edit:str='',service_checks=None):
     u=session(request)
     if not u:return RedirectResponse('/admin/login',302)
     editable=['articles','influencers','videos','translations','categories','tags','media','seo']
@@ -264,14 +264,14 @@ def admin(request:Request,section:str='overview',edit:str=''):
     counts['pending_comments']=one("SELECT count(*) n FROM comments WHERE status='pending'")['n']
     counts['pending_reports']=one("SELECT count(*) n FROM reports WHERE status IN ('pending','in_review')")['n']
     counts['views']=one('SELECT count(*) n FROM page_views')['n']
-    service_keys={'Mux':['MUX_TOKEN_ID','MUX_TOKEN_SECRET'],'Google Translation':['GOOGLE_TRANSLATION_KEY'],'Storage':['S3_BUCKET','S3_ENDPOINT_URL','S3_REGION','S3_ACCESS_KEY_ID','S3_SECRET_ACCESS_KEY','MEDIA_PUBLIC_URL'],'Firebase':['FIREBASE_PUBLIC_CONFIG','FIREBASE_SERVICE_ACCOUNT','FIREBASE_VAPID_KEY']}
+    service_keys={'Mux':['MUX_TOKEN_ID','MUX_TOKEN_SECRET'],'Google Translation':['GOOGLE_TRANSLATION_KEY'],'Storage':['S3_BUCKET','S3_ENDPOINT_URL','S3_REGION','S3_ACCESS_KEY_ID','S3_SECRET_ACCESS_KEY','MEDIA_PUBLIC_URL','PRIVATE_SUBMISSION_BUCKET'],'Firebase':['FIREBASE_PUBLIC_CONFIG','FIREBASE_SERVICE_ACCOUNT','FIREBASE_VAPID_KEY']}
     service_details={name:{'missing':[key for key in keys if not os.getenv(key)],'optional':name=='Google Translation'} for name,keys in service_keys.items()}
     services={name:not detail['missing'] for name,detail in service_details.items()}
     services['AdSense']=settings().get('ads_enabled')=='1'
     service_details['AdSense']={'missing':[],'optional':True}
 
     popular=rows("SELECT a.title,count(v.id) views FROM articles a LEFT JOIN page_views v ON a.id=v.article_id GROUP BY a.id,a.title ORDER BY views DESC LIMIT 8")
-    return render(request,'admin',u=u,mode=section,data=data,record=record,counts=counts,services=services,service_details=service_details,popular=popular,staff_csrf=u['csrf'],campaigns=rows('SELECT * FROM campaigns ORDER BY created_at DESC'),translation_jobs=rows('SELECT * FROM translation_jobs ORDER BY created_at DESC LIMIT 100'),usage=one('SELECT characters FROM usage_months WHERE month=?',(now()[:7],)) or {'characters':0},banners=rows('SELECT * FROM ad_placements ORDER BY created_at DESC') if section=='ads' else [],metrics=rows('SELECT * FROM influencer_metrics WHERE influencer_id=? ORDER BY observed_at DESC',(edit,)) if section=='influencers' and edit else [],deliveries=rows('SELECT status,count(*) n FROM deliveries GROUP BY status'))
+    return render(request,'admin',u=u,mode=section,data=data,record=record,counts=counts,services=services,service_details=service_details,service_checks=service_checks or {},popular=popular,staff_csrf=u['csrf'],campaigns=rows('SELECT * FROM campaigns ORDER BY created_at DESC'),translation_jobs=rows('SELECT * FROM translation_jobs ORDER BY created_at DESC LIMIT 100'),usage=one('SELECT characters FROM usage_months WHERE month=?',(now()[:7],)) or {'characters':0},banners=rows('SELECT * FROM ad_placements ORDER BY created_at DESC') if section=='ads' else [],metrics=rows('SELECT * FROM influencer_metrics WHERE influencer_id=? ORDER BY observed_at DESC',(edit,)) if section=='influencers' and edit else [],deliveries=rows('SELECT status,count(*) n FROM deliveries GROUP BY status'))
 
 @app.post('/admin/articles/save')
 async def save_article(request:Request):
@@ -653,3 +653,14 @@ install(app)
 app.get("/{locale}")(public)
 app.get("/{locale}/{section}")(public)
 app.get("/{locale}/{section}/{slug}")(public)
+
+@app.post('/admin/services/check')
+async def check_services(request:Request):
+    import asyncio
+    from service_checks import run_check
+    f=await request.form()
+    csrf(request,f.get('csrf_token'));require(request,ADMIN)
+    rate(request,'service-check',5,60)
+    names=['Mux','Storage','Firebase']
+    results=await asyncio.gather(*(asyncio.to_thread(run_check,name) for name in names))
+    return admin(request,service_checks=dict(zip(names,results)))

@@ -191,3 +191,17 @@ class Operations(fixtures.Fixture):
    before=client.__aenter__.return_value.post.await_count
    self.assertEqual(c.post('/admin/videos/upload',headers={'Accept':'application/json'},data={'csrf_token':t,'title':'x'}).status_code,422)
    self.assertEqual(client.__aenter__.return_value.post.await_count,before)
+
+class ServiceDiagnostics(fixtures.Fixture):
+ @patch('main.rate')
+ def test_diagnostics_access_and_safe_failures(self,mock_rate):
+  c,t=self.login()
+  with patch('service_checks.check_mux',return_value='Aksè Mux verifye.'),patch('service_checks.check_storage',side_effect=RuntimeError('PRIVATE-SECRET')),patch('service_checks.check_firebase',return_value='Otantifikasyon Firebase verifye; livrezon notifikasyon poko teste.'):
+   r=c.post('/admin/services/check',data={'csrf_token':t})
+   self.assertEqual(r.status_code,200)
+   self.assertNotIn('PRIVATE-SECRET',r.text)
+   self.assertIn('Tès la echwe.',r.text)
+   self.assertIn('Aksè Mux verifye.',r.text)
+  self.assertEqual(c.post('/admin/services/check',data={'csrf_token':'wrong'}).status_code,403)
+  m,token=self.login('moderator')
+  self.assertEqual(m.post('/admin/services/check',data={'csrf_token':token}).status_code,403)
