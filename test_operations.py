@@ -34,6 +34,21 @@ class Operations(fixtures.Fixture):
    version=a2['updated_at'];write('INSERT INTO translations VALUES (?,?,?,?,?,?,?,?) ON CONFLICT(target_type,target_id,version,locale) DO UPDATE SET data=excluded.data,manual=1',(str(uuid.uuid4()),'article',a2['id'],version,'fr',json.dumps({'title':'Tit manyèl'}),1,datetime.now(timezone.utc).isoformat()))
    write("UPDATE translation_jobs SET status='queued' WHERE id=?",(job['job_id'],));process_translation_jobs(fake,20)
    self.assertEqual(json.loads(one('SELECT data FROM translations WHERE target_id=? AND locale=?',(a2['id'],'fr'))['data'])['title'],'Tit manyèl')
+ def test_profile_edit_refreshes_translation_cache(self):
+  profile=one("SELECT * FROM influencers WHERE slug='naelle-jean'")
+  previous=profile['updated_at'] or profile['created_at']
+  write("DELETE FROM translations WHERE target_type='influencer' AND target_id=? AND locale='fr'",(profile['id'],))
+  write('INSERT INTO translations VALUES (?,?,?,?,?,?,?,?)',(str(uuid.uuid4()),'influencer',profile['id'],previous,'fr',json.dumps({'bio':'Ansyen tradiksyon'}),1,datetime.now(timezone.utc).isoformat()))
+  client,token=self.login()
+  form={'csrf_token':token,'id':profile['id'],'slug':profile['slug'],'name':profile['name'],'username':profile['username'],'origin':profile['origin'],'residence':profile['residence'],'category':profile['category'],'bio':'Nouvo bio pou verifye invalidasyon tradiksyon an.','image':profile['image'],'languages':profile['languages'],'status':profile['status']}
+  if profile['demo']:form['demo']='on'
+  for platform,url in json.loads(profile['socials'] or '{}').items():form[platform]=url
+  self.assertEqual(client.post('/admin/influencers/save',data=form).status_code,200)
+  updated=one('SELECT * FROM influencers WHERE id=?',(profile['id'],))
+  self.assertNotEqual(updated['updated_at'],previous)
+  with patch.dict(os.environ,{'GOOGLE_TRANSLATION_KEY':''}):
+   result=queue_translation('influencer',updated,'fr')
+  self.assertFalse(result['ok'])
  def test_push_targeting_caps_unsubscribe_and_idempotence(self):
   stamp=datetime.now(timezone.utc).isoformat();prefix=str(uuid.uuid4())
   for suffix,locale,topic in [('one','ht','Kilti'),('two','fr','Kilti'),('three','ht','Mizik')]:write('INSERT INTO push_subscriptions VALUES (?,?,?,?,?)',(prefix+suffix,'test-token-'+prefix+suffix,locale,topic,stamp))

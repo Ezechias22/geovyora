@@ -318,12 +318,13 @@ async def save_influencer(request:Request):
     status=f.get('status','draft')
     if status not in ['draft','published','archived']:raise HTTPException(422,'Invalid status')
     if u['role']=='editor':status='draft'
-    vals=(slugify(f.get('slug') or f.get('name')),clean(f.get('name'),120,2),clean(f.get('username'),100),clean(f.get('origin'),100),clean(f.get('residence'),100),clean(f.get('category'),100),clean(f.get('bio'),10000,10),safe_url(f.get('image')),json.dumps(socials),f.get('languages','ht'),int(f.get('demo')=='on'),status)
-    fields='slug,name,username,origin,residence,category,bio,image,socials,languages,demo,status'
+    stamp=now()
+    vals=(slugify(f.get('slug') or f.get('name')),clean(f.get('name'),120,2),clean(f.get('username'),100),clean(f.get('origin'),100),clean(f.get('residence'),100),clean(f.get('category'),100),clean(f.get('bio'),10000,10),safe_url(f.get('image')),json.dumps(socials),f.get('languages','ht'),int(f.get('demo')=='on'),status,stamp)
+    fields='slug,name,username,origin,residence,category,bio,image,socials,languages,demo,status,updated_at'
     clash=one('SELECT id FROM influencers WHERE slug=? AND id<>?',(vals[0],id))
     if clash:raise HTTPException(409,'Slug deja itilize.')
     if old:write('UPDATE influencers SET '+','.join(x+'=?' for x in fields.split(','))+' WHERE id=?',(*vals,id))
-    else:write('INSERT INTO influencers(id,'+fields+',created_at) VALUES ('+','.join('?' for _ in range(14))+')',(id,*vals,now()))
+    else:write('INSERT INTO influencers(id,'+fields+',created_at) VALUES ('+','.join('?' for _ in range(15))+')',(id,*vals,stamp))
     audit(u,'influencer.save',id);return RedirectResponse('/admin/influencers?saved=1',303)
 
 @app.post('/admin/moderate')

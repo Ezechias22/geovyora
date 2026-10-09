@@ -1,8 +1,8 @@
 # Geovyora — sa ou bezwen fè manyèlman
 
-Kòd la prepare; etap sa yo mande kont ou, kle prive ou oswa enfòmasyon reyèl ou.
+Geovyora deja anliy sou `https://geovyora.com`. Lis sa a konsène koneksyon sèvis ki poko verifye; li pa mande pou kreye yon dezyèm sit oswa ranplase baz done pwodiksyon an. Atik Ariana Lafond lan ak foto li dwe rete nan baz done pwodiksyon aktyèl la.
 
-1. Mete pwojè a nan depo Git ou epi enpòte `render.yaml` nan Render. Blueprint la prepare web, worker ak PostgreSQL. Plan yo peye; verifye pri yo anvan konfime sèvis yo. Mete domèn ou ak HTTPS nan `SITE_URL`.
+1. Si w ap itilize Render, verifye web service, worker ak baz done ki deja sèvi sit live la anvan ou fè chanjman. Pa enpòte blueprint la kòm yon nouvo stack si objektif la se mete ajou sèvis ki egziste deja yo. Mete `SITE_URL=https://geovyora.com` sou web ak worker.
 2. Ranpli gwoup anviwònman `vyora-services` yon sèl fwa. Web ak worker pataje li. Mete kle Mux, Google Translation, Firebase ak S3 ki nan `.env.example`. Kite bucket soumisyon an prive. Pa mete kle yo nan Git.
 3. Nan shell web la: `python manage.py create-admin`. Chwazi imel, non ak modpas ou; pa gen modpas pa defo. Antre nan `/admin`.
 4. Ranpli non responsab biznis la, kontak, adrès ak tèks legal yo nan CMS. Yon modèl legal pa yon validasyon legal. Ajoute vrè atik, pwofil, sous, foto ak videyo ou gen dwa itilize. Deplwaman pwodiksyon pa ajoute demonstrasyon yo.

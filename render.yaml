@@ -41,6 +41,8 @@ databases:
 envVarGroups:
   - name: geovyora-services
     envVars:
+      - key: SITE_URL
+        value: https://geovyora.com
       - key: S3_ENDPOINT_URL
         value: https://s3.us-west-004.backblazeb2.com
       - key: S3_REGION

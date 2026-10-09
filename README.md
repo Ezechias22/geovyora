@@ -124,7 +124,7 @@ Limit MAX_VIDEO_BYTES kontwole UI anvan upload URL kreye. Mux URL la ale dirèk 
 
 ## Hosting san Cloudflare
 
-Pa gen Cloudflare nan pwojè sa a. Sit la **poko anliy**; pa gen okenn sèvis peye kreye oswa acha fèt.
+Pa gen Cloudflare nan pwojè sa a. Geovyora deja anliy sou `https://geovyora.com`. Atik Ariana Lafond lan ak foto li se kontni pwodiksyon; konsève yo lè w ap deplwaye sou baz done ki deja sèvi sit la. `render.yaml` se yon modèl pou kreye yon nouvo stack, li pa metòd pou modifye sit pwodiksyon an; verifye sèvis ak baz done ki egziste deja yo anvan ou enpòte li.
 
 - **Docker lokal**: `cp .env.example .env` epi `docker compose up --build`. PostgreSQL pèsistan ak worker. Admin: `docker compose exec web python manage.py create-admin`. Modpas DB nan compose se pou dev sèlman; ranplase li pou pwodiksyon.
 - **Render**: `render.yaml` prepare web, worker ak PostgreSQL. Enpòte depo Git/blueprint ou sou kont pa ou, ranpli SITE_URL, kle sèvis, epi konfigire menm kle ki nesesè nan worker la. Modèl la itilize plan peye pou evite sèvis dòmi; verifye plan/tarif yo anvan aktive.
@@ -170,7 +170,7 @@ python -m unittest discover -v
 
 **Poko teste live**: PostgreSQL/Docker/Render, uploads Mux/S3 reyèl, Firebase push reyèl, Google Translation reyèl, AdSense/CMP, imèl newsletter, gwo chaj ak load testing. Tès ekstèn yo itilize doubles/mocks kote endike. Sa pa vle di sèvis yo konekte.
 
-Preview screenshot yo nan `preview/`. Tout atik/pwofil demo yo fiktif epi make. Imaj studio a se yon illustration orijinal jenere pa IA. Ranplase demo, konplete enfòmasyon antrepriz/politik, verifye dwa medya epi teste koneksyon sèvis yo anvan lansman piblik.
+Tout atik/pwofil demo yo fiktif epi make. Imaj studio a se yon illustration orijinal jenere pa IA. Ranplase demo, konplete enfòmasyon antrepriz/politik, verifye dwa medya epi teste koneksyon sèvis yo anvan lansman piblik.
 
 ## Referans
 

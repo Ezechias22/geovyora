@@ -20,7 +20,7 @@ for key in keys:
     lines.append(key+"='"+value+"'")
 if not any(line.startswith('MUX_TOKEN_ID=') or line.startswith('S3_ACCESS_KEY_ID=') for line in lines):
     raise SystemExit('Kle Mux/S3 yo pa jwenn nan .env sa a.')
-lines += ['SITE_URL=https://geovyora-web.onrender.com','COOKIE_SECURE=1','SEED_DEMO=0','ALLOW_DEMO_CONTENT=0','AWS_REQUEST_CHECKSUM_CALCULATION=when_required']
+lines += ['SITE_URL=https://geovyora.com','COOKIE_SECURE=1','SEED_DEMO=0','ALLOW_DEMO_CONTENT=0','AWS_REQUEST_CHECKSUM_CALCULATION=when_required']
 # DATABASE_URL is intentionally excluded to preserve the deployed Neon database.
 print('\n'.join(lines))
 '@ | .\.venv\Scripts\python.exe -
