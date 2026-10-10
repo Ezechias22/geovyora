@@ -12,13 +12,25 @@ class Operations(fixtures.Fixture):
  # Avoid rerunning inherited V1 methods: this class extends only the fixtures/helpers.
  def test_categories_tags_and_seo(self):
   c,t=self.login();r=c.post('/admin/taxonomy/save',data={'csrf_token':t,'table':'categories','name':'Syans','active':'on','sort_order':'1'});self.assertEqual(r.status_code,200)
-  self.assertIn('Syans',self.c.get('/ht/news').text);cat=one("SELECT * FROM categories WHERE name='Syans'");self.assertEqual(self.c.get('/ht/category/'+cat['slug']).status_code,200)
+  self.assertNotIn('href="?category=Syans"',self.c.get('/ht/news').text);cat=one("SELECT * FROM categories WHERE name='Syans'");empty_category=self.c.get('/ht/category/'+cat['slug']);self.assertEqual(empty_category.status_code,200);self.assertIn('noindex,nofollow',empty_category.text)
   self.assertEqual(c.post('/admin/taxonomy/save',data={'csrf_token':t,'table':'tags','name':'Dokimantè'}).status_code,200)
   a=one("SELECT * FROM articles WHERE slug='voix-qui-traversent-les-frontieres'")
   self.assertEqual(c.post('/admin/seo/save',data={'csrf_token':t,'target_type':'article','target_id':a['id'],'locale':'ht','title':'Tit SEO espesifik','description':'Deskripsyon SEO presi','noindex':'on'}).status_code,200)
   r=self.c.get('/ht/article/'+a['slug']);self.assertIn('<title>Tit SEO espesifik',r.text);self.assertIn('Deskripsyon SEO presi',r.text);self.assertIn('noindex,nofollow',r.text)
   for section in ['categories','tags','seo','newsletter','account']:
    self.assertEqual(c.get('/admin/'+section).status_code,200,section)
+ def test_empty_categories_stay_out_of_public_filters_for_every_locale(self):
+  from i18n import LANGUAGES
+  name='Empty Category SEO Regression';slug='empty-category-seo-regression'
+  write('INSERT INTO categories(id,name,slug,sort_order,active) VALUES (?,?,?,?,?)',(str(uuid.uuid4()),name,slug,999,1))
+  try:
+   for locale in LANGUAGES:
+    listing=self.c.get('/'+locale+'/news');self.assertEqual(listing.status_code,200)
+    self.assertIn('lang="'+locale+'"',listing.text)
+    self.assertNotIn('href="?category='+name+'"',listing.text)
+    empty=self.c.get('/'+locale+'/category/'+slug);self.assertEqual(empty.status_code,200)
+    self.assertIn('noindex,nofollow',empty.text)
+  finally:write('DELETE FROM categories WHERE slug=?',(slug,))
  def test_queue_dedup_budget_and_manual_translation(self):
   a=one("SELECT * FROM articles WHERE slug='mizik-nouvo-jenerasyon'");locale='es';version=a['updated_at']
   write('DELETE FROM translations WHERE target_id=? AND locale=?',(a['id'],locale));write('DELETE FROM translation_jobs WHERE target_id=? AND locale=?',(a['id'],locale))

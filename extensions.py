@@ -19,6 +19,9 @@ def initialize_features():
         for k,v in {'brand':'Geovyora','tagline':'Kilti. Kreyativite. Enpak.','default_locale':'ht','translation_limit':'100000','ads_enabled':'0','publisher_id':'','ad_slot':'','contact_email':'','push_daily_limit':'3','editorial_v2_initialized':'1','contact_company':'','contact_address':'','homepage_sections':'latest,creators,notifications'}.items():write('INSERT INTO settings(key,value) VALUES (?,?) ON CONFLICT(key) DO NOTHING',(k,v))
 
 def categories():return [r['name'] for r in rows('SELECT name FROM categories WHERE active=1 ORDER BY sort_order,name')]
+def public_categories():
+    demo_filter='' if os.getenv('ALLOW_DEMO_CONTENT','0')=='1' else ' AND a.demo=0'
+    return [r['name'] for r in rows("SELECT c.name FROM categories c WHERE c.active=1 AND EXISTS (SELECT 1 FROM articles a WHERE a.category=c.name AND a.status='published'"+demo_filter+") ORDER BY c.sort_order,c.name")]
 def normalize_search(value):return ''.join(c for c in unicodedata.normalize('NFKD',value.casefold()) if not unicodedata.combining(c))
 def search_matches(record,query,fields):return all(part in normalize_search(' '.join(str(record.get(k,'') or '') for k in fields)) for part in normalize_search(query).split())
 

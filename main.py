@@ -13,7 +13,7 @@ from security import hash_password,verify_password,digest,session,require,csrf,s
 from i18n import LANGUAGES,labels
 from seed import seed
 from jobs import language_map,normalize_language,queue_translation,enqueue_campaign
-from extensions import initialize_features,categories,normalize_search,search_matches
+from extensions import initialize_features,categories,public_categories,normalize_search,search_matches
 ROOT=Path(__file__).parent
 EDITOR=['super_admin','admin','editor']
 MOD=['super_admin','admin','moderator']
@@ -77,7 +77,7 @@ def render(request,page,locale='ht',**kw):
         ui=ui_translation(locale) if locale!='ht' else {}
         t.update({k[6:]:v for k,v in ui.items() if k.startswith('label:')})
         if locale!='ht':queue_ui(locale)
-    base={'request':request,'locale':locale,'t':t,'languages':language_map(),'settings':cfg,'brand':cfg.get('brand','Geovyora'),'page':page,'categories':categories(),'staff':session(request),'csrf_token':request.state.public_csrf,'title':cfg.get('brand','Geovyora'),'description':'Magazin sou kreyatè Ayisyen, dyaspora ak mond lan.','path':request.url.path,'ads_allowed':False}
+    base={'request':request,'locale':locale,'t':t,'languages':language_map(),'settings':cfg,'brand':cfg.get('brand','Geovyora'),'page':page,'categories':categories() if page=='admin' else public_categories(),'staff':session(request),'csrf_token':request.state.public_csrf,'title':cfg.get('brand','Geovyora'),'description':'Magazin sou kreyatè Ayisyen, dyaspora ak mond lan.','path':request.url.path,'ads_allowed':False}
     base.update(kw)
     if page=='admin':
         from admin_localization import COPY,admin_text
@@ -91,7 +91,7 @@ def render(request,page,locale='ht',**kw):
     base['direction']='rtl' if locale.split('-')[0] in __import__('jobs').RTL else 'ltr'
     base['language_ui_fallback']=locale not in language_map()
     base['banners']=rows("SELECT * FROM ad_placements WHERE active=1 AND (locale='' OR locale=?)",(locale,)) if page!='admin' else []
-    base['seo_noindex']=False
+    base['seo_noindex']=bool(base.get('seo_noindex',False))
     trend_since=(datetime.now(timezone.utc)-timedelta(days=7)).date().isoformat()
     section_stats=one(
         "SELECT (SELECT COUNT(*) FROM articles WHERE status='published'"+public_demo_clause()+" AND kind='interview') AS interviews, "
@@ -109,7 +109,7 @@ def render(request,page,locale='ht',**kw):
     base['public_nav']=[('home',''),('haiti','haiti'),('world','world'),('news','news')]
     for nav_key in ['interviews','videos','trending','discoveries']:
         if base['show_'+nav_key]:base['public_nav'].append((nav_key,nav_key))
-    base['seo_noindex']=(page=='interviews' and not base['show_interviews'] or page=='discoveries' and not base['show_discoveries'] or page=='videos' and not base['show_videos'] or page in ['trending','rankings'] and not base['show_trending'] or page=='influencers' and not base['show_influencers'])
+    base['seo_noindex']=bool(base['seo_noindex'] or page=='interviews' and not base['show_interviews'] or page=='discoveries' and not base['show_discoveries'] or page=='videos' and not base['show_videos'] or page in ['trending','rankings'] and not base['show_trending'] or page=='influencers' and not base['show_influencers'])
     base['submission_upload_configured']=bool(os.getenv('PRIVATE_SUBMISSION_BUCKET') and os.getenv('S3_ACCESS_KEY_ID') and os.getenv('S3_SECRET_ACCESS_KEY'))
     base['max_video_bytes']=int(os.getenv('MAX_VIDEO_BYTES','1073741824'))
     record=base.get('article') or base.get('profile')
@@ -620,7 +620,8 @@ def public(request:Request,locale:str,section:str='home',slug:str='',q:str='',ca
             where+=' AND category=?';args.append(cat['name']);title=cat['name']
         if category:where+=' AND category=?';args.append(category)
         data=article_list(where,tuple(args),5000)[(page-1)*12:page*12]
-    return render(request,section,locale,articles=[translate_record(x,locale) for x in data] if section!='influencers' else [],profiles=data if section=='influencers' else rows("SELECT * FROM influencers WHERE status='published'"+public_demo_clause()+" LIMIT 4"),article=a,profile=p,videos=videos,title=title,q=q,category=category,country=country,platform=platform,sort=sort,pagination=page)
+    empty_archive=section in ['home','haiti','world','news','interviews','discoveries','category','trending','rankings','videos','influencers'] and not (videos if section=='videos' else data)
+    return render(request,section,locale,articles=[translate_record(x,locale) for x in data] if section!='influencers' else [],profiles=data if section=='influencers' else rows("SELECT * FROM influencers WHERE status='published'"+public_demo_clause()+" LIMIT 4"),article=a,profile=p,videos=videos,title=title,q=q,category=category,country=country,platform=platform,sort=sort,pagination=page,seo_noindex=empty_archive)
 
 @app.post('/admin/campaigns/save')
 async def save_campaign(request:Request):
