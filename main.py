@@ -608,7 +608,12 @@ def public(request:Request,locale:str,section:str='home',slug:str='',q:str='',ca
         return render(request,section,locale,articles=[translate_record(x,locale) for x in data[(page-1)*24:page*24]],q=q,title=title,profiles=profiles[:24],videos=videos[:24],total_results=len(data)+len(profiles)+len(videos))
     elif section=='videos':videos=rows("SELECT * FROM videos WHERE status='ready' ORDER BY created_at DESC")
     elif section in ['trending','rankings']:
-        data=rows("SELECT a.*,count(v.id) readership FROM articles a JOIN page_views v ON a.id=v.article_id WHERE a.status='published'"+public_demo_clause("a.")+" AND v.day>=? GROUP BY a.id ORDER BY readership DESC LIMIT 24",((datetime.now(timezone.utc)-timedelta(days=7)).date().isoformat(),))
+        trending_query="SELECT a.*,count(v.id) readership FROM articles a JOIN page_views v ON a.id=v.article_id WHERE a.status='published'"+public_demo_clause("a.")+" AND v.day>=?"
+        trending_args=[(datetime.now(timezone.utc)-timedelta(days=7)).date().isoformat()]
+        if category:
+            trending_query+=" AND a.category=?"
+            trending_args.append(category)
+        data=rows(trending_query+" GROUP BY a.id ORDER BY readership DESC LIMIT 24",tuple(trending_args))
     elif section in ['home','haiti','world','news','interviews','discoveries','category']:
         where='1=1';args=[]
         if section in ['haiti','world']:where+=' AND region=?';args.append(section)

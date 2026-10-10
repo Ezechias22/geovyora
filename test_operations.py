@@ -1,5 +1,5 @@
 """V2 integration tests reuse the temporary test database from test_workflows."""
-import io,json,os,uuid
+import io,json,os,uuid,re
 from datetime import datetime,timezone,timedelta
 from unittest.mock import patch
 import test_workflows as fixtures
@@ -10,6 +10,31 @@ from PIL import Image
 
 class Operations(fixtures.Fixture):
  # Avoid rerunning inherited V1 methods: this class extends only the fixtures/helpers.
+ def test_trending_filter_and_images_on_every_article_card(self):
+  sport=one("SELECT * FROM articles WHERE slug='voix-qui-traversent-les-frontieres'")
+  culture=one("SELECT * FROM articles WHERE slug='mizik-nouvo-jenerasyon'")
+  self.assertIsNotNone(sport);self.assertIsNotNone(culture)
+  original_categories={sport['id']:sport['category'],culture['id']:culture['category']}
+  stamp=datetime.now(timezone.utc).isoformat();day=stamp[:10];view_ids=[]
+  try:
+   write("UPDATE articles SET category='Espò' WHERE id=?",(sport['id'],))
+   write("UPDATE articles SET category='Kilti' WHERE id=?",(culture['id'],))
+   for article in (sport,culture):
+    view_id=str(uuid.uuid4());view_ids.append(view_id)
+    write('INSERT INTO page_views VALUES (?,?,?,?,?)',(view_id,article['id'],'category-filter-'+view_id,day,stamp))
+   response=self.c.get('/ht/trending?category=Esp%C3%B2')
+   self.assertEqual(response.status_code,200)
+   self.assertIn('/ht/article/'+sport['slug'],response.text)
+   self.assertNotIn('/ht/article/'+culture['slug'],response.text)
+   news=self.c.get('/ht/news')
+   self.assertEqual(news.status_code,200)
+   cards=re.findall(r'<article class="story-card">(.*?)</article>',news.text,re.S)
+   self.assertTrue(cards)
+   for card in cards:
+    self.assertRegex(card,r'<a[^>]+class="card-image[^"]*"[^>]*>\s*<img src="/static/editorial\.jpg"')
+  finally:
+   for view_id in view_ids:write('DELETE FROM page_views WHERE id=?',(view_id,))
+   for article_id,category_name in original_categories.items():write('UPDATE articles SET category=? WHERE id=?',(category_name,article_id))
  def test_categories_tags_and_seo(self):
   c,t=self.login();r=c.post('/admin/taxonomy/save',data={'csrf_token':t,'table':'categories','name':'Syans','active':'on','sort_order':'1'});self.assertEqual(r.status_code,200)
   self.assertNotIn('href="?category=Syans"',self.c.get('/ht/news').text);cat=one("SELECT * FROM categories WHERE name='Syans'");empty_category=self.c.get('/ht/category/'+cat['slug']);self.assertEqual(empty_category.status_code,200);self.assertIn('noindex,nofollow',empty_category.text)
