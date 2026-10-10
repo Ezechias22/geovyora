@@ -92,6 +92,24 @@ def render(request,page,locale='ht',**kw):
     base['language_ui_fallback']=locale not in language_map()
     base['banners']=rows("SELECT * FROM ad_placements WHERE active=1 AND (locale='' OR locale=?)",(locale,)) if page!='admin' else []
     base['seo_noindex']=False
+    trend_since=(datetime.now(timezone.utc)-timedelta(days=7)).date().isoformat()
+    section_stats=one(
+        "SELECT (SELECT COUNT(*) FROM articles WHERE status='published'"+public_demo_clause()+" AND kind='interview') AS interviews, "
+        "(SELECT COUNT(*) FROM articles WHERE status='published'"+public_demo_clause()+" AND category='Dekouvèt') AS discoveries, "
+        "(SELECT COUNT(*) FROM videos WHERE status='ready') AS videos, "
+        "(SELECT COUNT(*) FROM influencers WHERE status='published'"+public_demo_clause()+") AS influencers, "
+        "(SELECT COUNT(*) FROM page_views v JOIN articles a ON a.id=v.article_id WHERE a.status='published'"+public_demo_clause('a.')+" AND v.day>=?) AS trending",
+        (trend_since,)
+    ) or {}
+    base['show_interviews']=int(section_stats.get('interviews') or 0)>0
+    base['show_discoveries']=int(section_stats.get('discoveries') or 0)>0
+    base['show_videos']=int(section_stats.get('videos') or 0)>0
+    base['show_influencers']=int(section_stats.get('influencers') or 0)>0
+    base['show_trending']=int(section_stats.get('trending') or 0)>0
+    base['public_nav']=[('home',''),('haiti','haiti'),('world','world'),('news','news')]
+    for nav_key in ['interviews','videos','trending','discoveries']:
+        if base['show_'+nav_key]:base['public_nav'].append((nav_key,nav_key))
+    base['seo_noindex']=(page=='interviews' and not base['show_interviews'] or page=='discoveries' and not base['show_discoveries'] or page=='videos' and not base['show_videos'] or page in ['trending','rankings'] and not base['show_trending'] or page=='influencers' and not base['show_influencers'])
     base['submission_upload_configured']=bool(os.getenv('PRIVATE_SUBMISSION_BUCKET') and os.getenv('S3_ACCESS_KEY_ID') and os.getenv('S3_SECRET_ACCESS_KEY'))
     base['max_video_bytes']=int(os.getenv('MAX_VIDEO_BYTES','1073741824'))
     record=base.get('article') or base.get('profile')
