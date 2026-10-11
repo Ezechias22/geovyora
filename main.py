@@ -125,6 +125,8 @@ def render(request,page,locale='ht',**kw):
     base['share_image']=origin+'/static/geovyora-share.png'
     base['copyright_year']=now()[:4]
     base['alternates']=[]
+    if page=='home':
+        base['alternates']=[{'locale':l,'url':origin+'/'+l} for l in LANGUAGES]
     if page=='article' and base.get('article'):
         a=base['article']
         base['canonical']=origin+'/'+(locale if a.get('translated') else a.get('original_locale',locale))+'/article/'+a['slug']
