@@ -2911,6 +2911,12 @@ PHRASES.update({
     'Culture. Créativité. Impact.':['Culture. Créativité. Impact.','Culture. Creativity. Impact.','Cultura. Criatividade. Impacto.','Cultura. Creatividad. Impacto.'],
     'Rédaction Geovyora':['Rédaction Geovyora','Geovyora Editorial Team','Equipe editorial Geovyora','Equipo editorial de Geovyora'],
 })
+PHRASES.update({
+    'Navigasyon prensipal':['Navigation principale','Main navigation','Navegação principal','Navegación principal'],
+    'Fèmen':['Fermer','Close','Fechar','Cerrar'],
+    'Tri kòmantè':['Trier les commentaires','Sort comments','Ordenar comentários','Ordenar comentarios'],
+    'Tri':['Trier','Sort','Ordenar','Ordenar'],
+})
 def localized_category(value,locale,catalog=None):
     """Return a visitor-facing category label while keeping the stored value stable."""
     index=LOCALES.get(locale)
