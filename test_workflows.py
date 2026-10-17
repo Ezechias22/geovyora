@@ -16,6 +16,15 @@ class Fixture(unittest.TestCase):
  def login(self,role='super_admin'):
   c=TestClient(app);t=self.token(c);r=c.post('/admin/login',data={'email':role+'@test.local','password':'Test-Password-12345','csrf_token':t});self.assertEqual(r.status_code,200);return c,one('SELECT csrf FROM sessions WHERE token_hash=?',(digest(c.cookies['vyora_staff']),))['csrf']
 class Workflows(Fixture):
+ def test_public_submission_copy_is_localized(self):
+  from i18n import labels
+  pages=[('contact','contact_intro'),('submit-news','contact_intro'),('submit-influencer','creator_intro'),('advertising','advertising_intro')]
+  for locale in ['fr','en','pt-BR','es']:
+   copy=labels(locale)
+   for page,key in pages:
+    response=self.c.get('/'+locale+'/'+page)
+    self.assertEqual(response.status_code,200,locale+"/"+page)
+    self.assertIn(copy[key],response.text,locale+"/"+page)
  def test_routes(self):
   for l in ['fr','en','pt-BR','es']:
    for p in ['', '/news','/haiti','/world','/interviews','/videos','/influencers','/notifications','/saved','/contact','/about','/search?q=Kreyativite','/trending']:
