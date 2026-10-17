@@ -14,6 +14,7 @@ from i18n import LANGUAGES,labels
 from seed import seed
 from jobs import language_map,normalize_language,queue_translation,enqueue_campaign
 from extensions import initialize_features,categories,public_categories,normalize_search,search_matches
+from localization import localized_category
 ROOT=Path(__file__).parent
 EDITOR=['super_admin','admin','editor']
 MOD=['super_admin','admin','moderator']
@@ -75,13 +76,18 @@ def source_label(url):
 def translate_record(record,locale,typ='article'):
     original=record.get('locale','fr')
     record=dict(record)
+    source_category=record.get('category')
     record['original_locale']=original;record['translated']=False;record['fallback']=False
-    if locale==original:return record
-    version=record.get('updated_at',record.get('created_at',''))
-    cache=one('SELECT * FROM translations WHERE target_type=? AND target_id=? AND version=? AND locale=?',(typ,record['id'],version,locale))
-    if cache:
-        record.update(json.loads(cache['data']));record['translated']=True;record['machine_translation']=not bool(cache['manual'])
-    else:record['fallback']=True
+    if locale!=original:
+        version=record.get('updated_at',record.get('created_at',''))
+        cache=one('SELECT * FROM translations WHERE target_type=? AND target_id=? AND version=? AND locale=?',(typ,record['id'],version,locale))
+        if cache:
+            record.update(json.loads(cache['data']));record['translated']=True;record['machine_translation']=not bool(cache['manual'])
+        else:record['fallback']=True
+    # Category values are database keys used by filters; only the display label changes.
+    if source_category is not None:
+        record['category']=source_category
+        record['category_label']=localized_category(source_category,locale)
     return record
 
 def public_demo_clause(alias=''):
@@ -101,8 +107,21 @@ def render(request,page,locale='fr',**kw):
         ui=ui_translation(locale)
         t.update({k[6:]:v for k,v in ui.items() if k.startswith('label:')})
         queue_ui(locale)
-    base={'request':request,'locale':locale,'t':t,'languages':language_map(),'settings':cfg,'brand':cfg.get('brand','Geovyora'),'page':page,'categories':categories() if page=='admin' else public_categories(),'staff':session(request),'csrf_token':request.state.public_csrf,'title':cfg.get('brand','Geovyora'),'description':'Magazine consacré aux créateurs haïtiens, à la diaspora et aux voix du monde.','path':request.url.path,'ads_allowed':False}
+    category_values=categories() if page=='admin' else public_categories()
+    base={'request':request,'locale':locale,'t':t,'languages':language_map(),'settings':cfg,'brand':cfg.get('brand','Geovyora'),'page':page,'categories':category_values if page=='admin' else [{'value':name,'label':localized_category(name,locale,ui)} for name in category_values],'staff':session(request),'csrf_token':request.state.public_csrf,'title':cfg.get('brand','Geovyora'),'description':'Magazine consacré aux créateurs haïtiens, à la diaspora et aux voix du monde.','path':request.url.path,'ads_allowed':False}
     base.update(kw)
+    if page!='admin':
+        def with_category_label(item):
+            if not item or not item.get('category'):
+                return item
+            item=dict(item)
+            item['category_label']=localized_category(item['category'],locale,ui)
+            return item
+        for key in ('article','profile'):
+            base[key]=with_category_label(base.get(key))
+        for key in ('articles','profiles'):
+            if base.get(key) is not None:
+                base[key]=[with_category_label(item) for item in base[key]]
     if page=='admin':
         from admin_localization import COPY,admin_text
         base['admin_languages']=LANGUAGES
@@ -657,7 +676,7 @@ def public(request:Request,locale:str,section:str='home',slug:str='',q:str='',ca
         if section=='category':
             cat=one('SELECT name FROM categories WHERE slug=? AND active=1',(slug,))
             if not cat:raise HTTPException(404,'Kategori pa jwenn.')
-            where+=' AND category=?';args.append(cat['name']);title=cat['name']
+            where+=' AND category=?';args.append(cat['name']);title=localized_category(cat['name'],locale)
         if category:where+=' AND category=?';args.append(category)
         data=article_list(where,tuple(args),5000)[(page-1)*12:page*12]
     empty_archive=section in ['home','haiti','world','news','interviews','discoveries','category','trending','rankings','videos','influencers'] and not (videos if section=='videos' else data)

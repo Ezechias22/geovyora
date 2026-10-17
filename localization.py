@@ -2893,6 +2893,13 @@ PHRASES.update({'Kreyatè yo nan sant istwa a.': ['Les créateurs au cœur du r�
                                                                                                                                                                                                         'revisarlo.'],
  'Kontakte ekip la': ['Contacter la rédaction', 'Contact the team', 'Contate a equipe', 'Contacta con el equipo']})
 LOCALES={'fr':0,'en':1,'pt-BR':2,'es':3}
+def localized_category(value,locale,catalog=None):
+    """Return a visitor-facing category label while keeping the stored value stable."""
+    index=LOCALES.get(locale)
+    if index is not None and value in PHRASES:
+        return PHRASES[value][index]
+    return (catalog or {}).get('phrase:'+str(value),value)
+
 def ui_text(value,locale):
     i=LOCALES.get(locale)
     return PHRASES[value][i] if i is not None and value in PHRASES else value

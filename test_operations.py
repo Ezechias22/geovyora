@@ -11,6 +11,27 @@ from PIL import Image
 
 class Operations(fixtures.Fixture):
  # Avoid rerunning inherited V1 methods: this class extends only the fixtures/helpers.
+ def test_public_category_display_is_localized_but_filter_value_stays_internal(self):
+  article=one("SELECT * FROM articles WHERE slug='voix-qui-traversent-les-frontieres'")
+  self.assertIsNotNone(article)
+  previous=article['category']
+  expected={'fr':'Culture','en':'Culture','pt-BR':'Cultura','es':'Cultura'}
+  try:
+   write("UPDATE articles SET category='Kilti' WHERE id=?",(article['id'],))
+   for locale,label in expected.items():
+    detail=self.c.get('/'+locale+'/article/'+article['slug'])
+    self.assertEqual(detail.status_code,200)
+    self.assertIn(' / '+label+'</div>',detail.text)
+    self.assertNotIn(' / Kilti</div>',detail.text)
+    self.assertIn('<span class="accent-tag">'+label+'</span>',detail.text)
+    listing=self.c.get('/'+locale+'/news')
+    self.assertEqual(listing.status_code,200)
+    self.assertIn('href="?category=Kilti"',listing.text)
+    self.assertRegex(listing.text,r'>\s*'+re.escape(label)+r'\s*</a>')
+    self.assertNotIn('>Kilti</a>',listing.text)
+  finally:
+   write('UPDATE articles SET category=? WHERE id=?',(previous,article['id']))
+
  def test_article_sources_are_labeled_and_whatsapp_shares_canonical_https_url(self):
   from main import source_label
   self.assertEqual(source_label('https://www.reuters.com/story/example'),'Reuters')
