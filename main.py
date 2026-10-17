@@ -15,6 +15,7 @@ from seed import seed
 from jobs import language_map,normalize_language,queue_translation,enqueue_campaign
 from extensions import initialize_features,categories,public_categories,normalize_search,search_matches
 from localization import localized_category
+from error_localization import BACK_LABELS,error_message,locale_from_scope
 ROOT=Path(__file__).parent
 EDITOR=['super_admin','admin','editor']
 MOD=['super_admin','admin','moderator']
@@ -218,7 +219,13 @@ async def cookies_and_headers(request,call_next):
     request.state.public_csrf=digest('csrf|'+v)
     try: response=await call_next(request)
     except Exception:
-        logging.exception('Unhandled application error');return JSONResponse({'detail':'Sèvis la pa disponib. Eseye ankò.'},status_code=503)
+        logging.exception('Unhandled application error')
+        locale=locale_from_scope(request.scope)
+        if request.url.path.startswith('/api') or 'application/json' in request.headers.get('accept',''):
+            return JSONResponse({'detail':error_message('',503,locale)},status_code=503)
+        message=html.escape(error_message('',503,locale))
+        label=html.escape(BACK_LABELS[locale])
+        return HTMLResponse('<!doctype html><html lang="'+locale+'"><meta name="viewport" content="width=device-width"><link rel="stylesheet" href="/static/style.css"><body><main class="simple"><a class="logo" href="/">Geovyora<span>✦</span></a><h1>503</h1><p>'+message+'</p><a class="btn" href="/'+locale+'">'+label+'</a></main></body></html>',status_code=503)
     if request.cookies.get('vyora_visitor')!=v:response.set_cookie('vyora_visitor',v,max_age=365*86400,httponly=True,secure=os.getenv('COOKIE_SECURE','0')=='1',samesite='lax')
     response.headers['X-Content-Type-Options']='nosniff';response.headers['Referrer-Policy']='strict-origin-when-cross-origin'
     response.headers['X-Frame-Options']='SAMEORIGIN'
@@ -240,8 +247,11 @@ async def cookies_and_headers(request,call_next):
 
 @app.exception_handler(HTTPException)
 async def http_error(request,exc):
-    if request.url.path.startswith('/api') or request.headers.get('accept')=='application/json':return JSONResponse({'detail':exc.detail},status_code=exc.status_code)
-    return HTMLResponse('<!doctype html><html lang="fr"><meta name="viewport" content="width=device-width"><link rel="stylesheet" href="/static/style.css"><body><main class="simple"><a class="logo" href="/">Geovyora<span>✦</span></a><h1>'+str(exc.status_code)+'</h1><p>'+html.escape(str(exc.detail))+'</p><a class="btn" href="/fr">Retour au site</a></main></body></html>',status_code=exc.status_code)
+    locale=locale_from_scope(request.scope)
+    message=error_message(exc.detail,exc.status_code,locale)
+    if request.url.path.startswith('/api') or 'application/json' in request.headers.get('accept',''):
+        return JSONResponse({'detail':message},status_code=exc.status_code,headers=getattr(exc,'headers',None))
+    return HTMLResponse('<!doctype html><html lang="'+locale+'"><meta name="viewport" content="width=device-width"><link rel="stylesheet" href="/static/style.css"><body><main class="simple"><a class="logo" href="/">Geovyora<span>✦</span></a><h1>'+str(exc.status_code)+'</h1><p>'+html.escape(message)+'</p><a class="btn" href="/'+locale+'">'+html.escape(BACK_LABELS[locale])+'</a></main></body></html>',status_code=exc.status_code,headers=getattr(exc,'headers',None))
 
 @app.get('/health')
 def health():one('SELECT 1');return {'status':'ok'}

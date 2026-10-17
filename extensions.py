@@ -199,11 +199,14 @@ def install(app):
 
     @app.get('/api/translation-jobs/{id}')
     def job_status(request:Request,id:str):
+        from error_localization import error_message,locale_from_scope
         job=one('SELECT * FROM translation_jobs WHERE id=?',(id,))
         if not job:raise HTTPException(404,'Travay pa jwenn.')
         core.target_ok(job['target_type'],job['target_id'])
         cached=one('SELECT data FROM translations WHERE target_type=? AND target_id=? AND version=? AND locale=?',(job['target_type'],job['target_id'],job['version'],job['locale']))
-        return {'status':job['status'],'message':job['error'],'ok':bool(cached),'data':json.loads(cached['data']) if cached else None}
+        locale=locale_from_scope(request.scope)
+        message=error_message(job['error'],503,locale) if job['error'] else ''
+        return {'status':job['status'],'message':message,'ok':bool(cached),'data':json.loads(cached['data']) if cached else None}
 
     @app.post('/admin/translation-jobs/retry')
     async def retry_translation(request:Request):

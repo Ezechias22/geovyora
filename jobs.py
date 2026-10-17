@@ -20,15 +20,17 @@ def normalize_language(code):
     return None
 
 def queue_translation(typ,record,locale):
+    from error_localization import error_message,localized_message
     fields=['title','subtitle','body'] if typ=='article' else ['bio'] if typ=='influencer' else ['body']
     version=record.get('updated_at',record.get('created_at',''))
     cached=one('SELECT data FROM translations WHERE target_type=? AND target_id=? AND version=? AND locale=?',(typ,record['id'],version,locale))
     if cached:return {'ok':True,'data':json.loads(cached['data'])}
-    if not os.getenv('GOOGLE_TRANSLATION_KEY'):return {'ok':False,'message':'Tradiksyon otomatik poko konekte. Ou ka li orijinal la.'}
+    if not os.getenv('GOOGLE_TRANSLATION_KEY'):return {'ok':False,'message':error_message('Tradiksyon otomatik poko konekte. Ou ka li orijinal la.',503,locale)}
     payload=record['payload'] if typ=='ui' else {k:record[k] for k in fields};id=uid();stamp=now()
     write('INSERT INTO translation_jobs(id,target_type,target_id,version,locale,payload,next_try,created_at) VALUES (?,?,?,?,?,?,?,?) ON CONFLICT(target_type,target_id,version,locale) DO NOTHING',(id,typ,record['id'],version,locale,json.dumps(payload),stamp,stamp))
     job=one('SELECT * FROM translation_jobs WHERE target_type=? AND target_id=? AND version=? AND locale=?',(typ,record['id'],version,locale))
-    return {'ok':False,'queued':job['status'] in ['queued','processing'],'job_id':job['id'],'status':job['status'],'message':job['error'] or 'Tradiksyon an antre nan fil travay la. Orijinal la toujou disponib.'}
+    message=job['error'] or 'Tradiksyon an antre nan fil travay la. Orijinal la toujou disponib.'
+    return {'ok':False,'queued':job['status'] in ['queued','processing'],'job_id':job['id'],'status':job['status'],'message':error_message(message,503,locale)}
 
 def google_translate(payload,locale):
     # Bound request size and query count; only return a complete record for the cache.

@@ -11,6 +11,33 @@ from PIL import Image
 
 class Operations(fixtures.Fixture):
  # Avoid rerunning inherited V1 methods: this class extends only the fixtures/helpers.
+ def test_http_errors_are_localized_and_do_not_leak_creole(self):
+  from fastapi.testclient import TestClient
+  from main import app
+  expected={'fr':'La page ou le contenu demandé est introuvable.','en':'The requested page or content could not be found.','pt-BR':'A página ou o conteúdo solicitado não foi encontrado.','es':'No se encontró la página o el contenido solicitado.'}
+  for locale,message in expected.items():
+   response=self.c.get('/'+locale+'/missing-route-for-error-test')
+   self.assertEqual(response.status_code,404)
+   self.assertIn('<html lang="'+locale+'">',response.text)
+   self.assertIn(message,response.text)
+   self.assertNotIn('Paj sa a pa egziste.',response.text)
+  response=self.c.post('/api/comments',json={'csrf_token':'invalid','target_type':'article','target_id':'missing','name':'Reader','body':'A valid enough comment'},headers={'Accept':'application/json','X-Geovyora-Locale':'es'})
+  self.assertEqual(response.status_code,403)
+  self.assertEqual(response.json()['detail'],'No tienes permiso para hacer eso.')
+  self.assertNotIn('Rechaje paj la.',response.text)
+  from jobs import queue_translation
+  with patch.dict(os.environ,{'GOOGLE_TRANSLATION_KEY':''}):
+   queued=queue_translation('article',{'id':'error-localization-test','updated_at':'v1','title':'Test','subtitle':'Test','body':'Test'},'es')
+  self.assertEqual(queued['message'],'La traducción automática no está configurada. Puedes leer el original.')
+  homepage=self.c.get('/en')
+  self.assertIn('This browser does not support push notifications.',homepage.text)
+  with patch('main.settings',side_effect=RuntimeError('private diagnostic text')),patch('main.logging.exception'):
+   response=TestClient(app).get('/',headers={'Accept-Language':'es'})
+  self.assertEqual(response.status_code,503)
+  self.assertIn('<html lang="es">',response.text)
+  self.assertIn('El servicio no está disponible temporalmente.',response.text)
+  self.assertNotIn('private diagnostic text',response.text)
+
  def test_public_category_display_is_localized_but_filter_value_stays_internal(self):
   article=one("SELECT * FROM articles WHERE slug='voix-qui-traversent-les-frontieres'")
   self.assertIsNotNone(article)

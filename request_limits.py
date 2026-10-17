@@ -1,6 +1,7 @@
 """Bound requests including chunked uploads; reject before parsing oversized bodies."""
 from fastapi import HTTPException
 from fastapi.responses import JSONResponse
+from error_localization import error_message,locale_from_scope
 class RequestSizeLimit:
     def __init__(self,app):self.app=app
     async def __call__(self,scope,receive,send):
@@ -9,7 +10,9 @@ class RequestSizeLimit:
         headers=dict(scope.get('headers',[]))
         try:length=int(headers.get(b'content-length',b'0'))
         except ValueError:length=limit+1
-        if length<0 or length>limit:return await JSONResponse({'detail':'Demann lan depase limit la.'},status_code=413)(scope,receive,send)
+        if length<0 or length>limit:
+            locale=locale_from_scope(scope)
+            return await JSONResponse({'detail':error_message('Demann lan depase limit la.',413,locale)},status_code=413)(scope,receive,send)
         consumed=0
         async def bounded_receive():
             nonlocal consumed

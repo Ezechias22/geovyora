@@ -42,7 +42,7 @@ def migrate():
         for p in migrations:
             if not c.execute(sql('SELECT version FROM schema_migrations WHERE version=?'),(p.name,)).fetchone():
                 if p.suffix=='.sql':
-                    for statement in p.read_text().split(';'):
+                    for statement in p.read_text(encoding='utf-8-sig').split(';'):
                         if statement.strip(): c.execute(statement)
                 else:
                     spec=importlib.util.spec_from_file_location('geovyora_migration_'+p.stem.replace('-','_'),p)
