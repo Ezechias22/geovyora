@@ -106,6 +106,8 @@ def render(request,page,locale='fr',**kw):
         from localization import ui_translation,queue_ui
         ui=ui_translation(locale)
         t.update({k[6:]:v for k,v in ui.items() if k.startswith('label:')})
+        t['haiti']=localized_category('Ayiti',locale,ui)
+        t['world']=localized_category('Mond',locale,ui)
         queue_ui(locale)
     category_values=categories() if page=='admin' else public_categories()
     base={'request':request,'locale':locale,'t':t,'languages':language_map(),'settings':cfg,'brand':cfg.get('brand','Geovyora'),'page':page,'categories':category_values if page=='admin' else [{'value':name,'label':localized_category(name,locale,ui)} for name in category_values],'staff':session(request),'csrf_token':request.state.public_csrf,'title':cfg.get('brand','Geovyora'),'description':'Magazine consacré aux créateurs haïtiens, à la diaspora et aux voix du monde.','path':request.url.path,'ads_allowed':False}
