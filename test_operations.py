@@ -53,7 +53,8 @@ class Operations(fixtures.Fixture):
     self.assertIn('<span class="accent-tag">'+label+'</span>',detail.text)
     listing=self.c.get('/'+locale+'/news')
     self.assertEqual(listing.status_code,200)
-    self.assertIn('href="?category=Kilti"',listing.text)
+    self.assertRegex(listing.text,r'href="\?category=[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12}"')
+    self.assertNotIn('href="?category=Kilti"',listing.text)
     self.assertRegex(listing.text,r'>\s*'+re.escape(label)+r'\s*</a>')
     self.assertNotIn('>Kilti</a>',listing.text)
   finally:
@@ -124,8 +125,15 @@ class Operations(fixtures.Fixture):
    self.assertEqual(news.status_code,200)
    cards=re.findall(r'<article class="story-card">(.*?)</article>',news.text,re.S)
    self.assertTrue(cards)
+   articles={article['slug']:article for article in rows("SELECT slug,image FROM articles WHERE status='published'")}
    for card in cards:
-    self.assertRegex(card,r'<a[^>]+class="card-image[^"]*"[^>]*>\s*<img src="/static/editorial\.jpg"')
+    match=re.search(r'<a href="/fr/article/([^"]+)"',card)
+    self.assertIsNotNone(match)
+    article=articles[match.group(1)]
+    if article['image']:
+     self.assertIn('<img src="{}"'.format(article['image']),card)
+    else:
+     self.assertIn('<span class="card-symbol">',card)
   finally:
    for view_id in view_ids:write('DELETE FROM page_views WHERE id=?',(view_id,))
    for article_id,category_name in original_categories.items():write('UPDATE articles SET category=? WHERE id=?',(category_name,article_id))

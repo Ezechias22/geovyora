@@ -96,6 +96,20 @@ def public_demo_clause(alias=''):
 
 def article_list(where='1=1',args=(),limit=60):
     return rows("SELECT * FROM articles WHERE status='published' AND "+where+public_demo_clause()+' ORDER BY featured DESC,publish_at DESC LIMIT ?',(*args,limit))
+def public_profile_languages(value):
+    import unicodedata
+    hidden={'ht','haitian creole','creole haitien','haitian creole language','kreyol','creole','creole language'}
+    visible=[]
+    for part in str(value or '').split(','):
+        label=part.strip()
+        if not label:
+            continue
+        key=unicodedata.normalize('NFKD',label).encode('ascii','ignore').decode().casefold()
+        if key in hidden or key.startswith('ht-'):
+            continue
+        visible.append(label)
+    return ', '.join(visible)
+
 def render(request,page,locale='fr',**kw):
     cfg=settings()
     if page=='admin':
@@ -127,6 +141,11 @@ def render(request,page,locale='fr',**kw):
                 return item
             item=dict(item)
             item['category_label']=localized_category(item['category'],locale,ui)
+            for field in ('origin','residence'):
+                if item.get(field):
+                    item[field+'_label']=localized_category(item[field],locale,ui)
+            if item.get('languages'):
+                item['languages_label']=public_profile_languages(item['languages'])
             return item
         for key in ('article','profile'):
             base[key]=with_category_label(base.get(key))

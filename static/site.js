@@ -5,7 +5,8 @@ const $=(s,r=document)=>r.querySelector(s);
 const $$=(s,r=document)=>[...r.querySelectorAll(s)];
 const actionCopy={'fr':{'Reponn':'Répondre','Rapòte':'Signaler','Tradui':'Traduire','Modifye':'Modifier','Retire':'Supprimer','Anile':'Annuler'},'en':{'Reponn':'Reply','Rapòte':'Report','Tradui':'Translate','Modifye':'Edit','Retire':'Remove','Anile':'Cancel'},'pt-BR':{'Reponn':'Responder','Rapòte':'Denunciar','Tradui':'Traduzir','Modifye':'Editar','Retire':'Remover','Anile':'Cancelar'},'es':{'Reponn':'Responder','Rapòte':'Denunciar','Tradui':'Traducir','Modifye':'Editar','Retire':'Eliminar','Anile':'Cancelar'}};
 const interfaceCopy=Object.fromEntries($$('#ui-copy [data-source]').map(el=>[el.dataset.source,el.textContent]));
-const copy=text=>interfaceCopy[text]||actionCopy[locale]?.[text]||text;
+const publicSourceKey=text=>{let hash=2166136261;for(const char of String(text).trim()){hash^=char.codePointAt(0);hash=Math.imul(hash,16777619)}return 'k_'+(hash>>>0).toString(16).padStart(8,'0')};
+const copy=text=>interfaceCopy[publicSourceKey(text)]||actionCopy[locale]?.[text]||text;
 const make=(tag,text,cls)=>{const el=document.createElement(tag);if(text!==undefined)el.textContent=copy(text);if(cls)el.className=cls;return el};
 function toast(text){const e=$('#toast');e.textContent=copy(text);e.style.display='block';clearTimeout(window.toastTimer);window.toastTimer=setTimeout(()=>e.style.display='none',4500)}
 async function post(url,data){const r=await fetch(url,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({...data,csrf_token:csrf})});let d;try{d=await r.json()}catch{throw Error('Sèvis la pa disponib. Eseye ankò.')}if(!r.ok)throw Error(typeof d.detail==='string'?d.detail:'Verifye chan yo epi eseye ankò.');return d}

@@ -1,5 +1,6 @@
 """Offline deployment checks and consistent database backup/restore."""
 import argparse, json, os, sqlite3, subprocess
+from contextlib import closing
 from pathlib import Path
 from urllib.parse import urlparse
 import db
@@ -30,9 +31,11 @@ def backup(target):
         else:
             source=Path(db.PATH).resolve()
             if not source.exists():raise ValueError('Source database does not exist.')
-            with sqlite3.connect(source) as src, sqlite3.connect(target) as dst:
-                src.backup(dst)
-                if dst.execute('PRAGMA integrity_check').fetchone()[0]!='ok':raise ValueError('Backup integrity check failed.')
+            with closing(sqlite3.connect(source)) as src:
+                with closing(sqlite3.connect(target)) as dst:
+                    src.backup(dst)
+                    if dst.execute('PRAGMA integrity_check').fetchone()[0]!='ok':raise ValueError('Backup integrity check failed.')
+                    dst.commit()
     except Exception:
         target.unlink(missing_ok=True);raise
     return target
@@ -42,11 +45,13 @@ def restore_sqlite(source,target):
     if not source.is_file():raise ValueError('Backup not found.')
     if target.exists():raise ValueError('Restore only to a new database path; existing databases are never overwritten.')
     target.parent.mkdir(parents=True,exist_ok=True)
-    with sqlite3.connect(f'{source.as_uri()}?mode=ro',uri=True) as src:
+    with closing(sqlite3.connect(f'{source.as_uri()}?mode=ro',uri=True)) as src:
         if src.execute('PRAGMA integrity_check').fetchone()[0]!='ok':raise ValueError('Invalid backup.')
         fd=os.open(target,os.O_WRONLY|os.O_CREAT|os.O_EXCL,0o600);os.close(fd)
         try:
-            with sqlite3.connect(target) as dst:src.backup(dst)
+            with closing(sqlite3.connect(target)) as dst:
+                src.backup(dst)
+                dst.commit()
         except Exception:target.unlink(missing_ok=True);raise
     return target
 

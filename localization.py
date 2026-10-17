@@ -2906,6 +2906,25 @@ PHRASES.update({
 'Limit tradiksyon mwa sa a rive.': ['La limite mensuelle de traduction est atteinte.', 'The monthly translation limit has been reached.', 'O limite mensal de tradução foi atingido.', 'Se alcanzó el límite mensual de traducción.'],
 'Sèvis tradiksyon an pa disponib; orijinal la toujou disponib.': ['Le service de traduction est indisponible ; l’original reste accessible.', 'The translation service is unavailable; the original remains available.', 'O serviço de tradução está indisponível; o original continua disponível.', 'El servicio de traducción no está disponible; el original sigue disponible.'],
 'Verifye sèvis tradiksyon an oswa lang lan.': ['Vérifiez le service de traduction ou la langue sélectionnée.', 'Check the translation service or selected language.', 'Verifique o serviço de tradução ou o idioma selecionado.', 'Revisa el servicio de traducción o el idioma seleccionado.']})
+PHRASES.update({
+ 'Sponsorisé':['Sponsorisé','Sponsored','Patrocinado','Patrocinado'],
+ 'Sources':['Sources','Sources','Fontes','Fuentes'],
+ 'Publicité · consent requis':['Publicité · consentement requis','Advertising · consent required','Publicidade · consentimento necessário','Publicidad · se requiere consentimiento'],
+ 'Website':['Site web','Website','Site','Sitio web'],
+ 'A–Z':['A–Z','A–Z','A–Z','A–Z'],
+ 'Geovyora STUDIO':['Geovyora STUDIO','Geovyora STUDIO','Geovyora STUDIO','Geovyora STUDIO'],
+ 'Cookies':['Cookies','Cookies','Cookies','Cookies'],
+ 'Spam':['Spam','Spam','Spam','Spam'],
+ 'Copyright':['Droits d’auteur','Copyright','Direitos autorais','Derechos de autor'],
+ 'Lyen prive dezabònman':['Lien privé de désabonnement','Private unsubscribe link','Link privado para cancelar inscrição','Enlace privado para cancelar suscripción'],
+ 'Culture. Créativité. Impact.':['Culture. Créativité. Impact.','Culture. Creativity. Impact.','Cultura. Criatividade. Impacto.','Cultura. Creatividad. Impacto.'],
+ 'Kreyatè Ayisyen, kilti nou, istwa nou. Ayiti ak dyaspora a.':['Créateurs haïtiens, culture et histoires. Haïti et sa diaspora.','Haitian creators, culture and stories. Haiti and its diaspora.','Criadores haitianos, nossa cultura e histórias. Haiti e sua diáspora.','Creadores haitianos, nuestra cultura e historias. Haití y su diáspora.'],
+ 'Lòt vwa, lòt kilti. Kreyativite atravè mond lan.':['D’autres voix, d’autres cultures. La créativité à travers le monde.','Other voices, other cultures. Creativity around the world.','Outras vozes, outras culturas. Criatividade pelo mundo.','Otras voces, otras culturas. Creatividad en todo el mundo.'],
+ 'Atik ki plis li sou Geovyora pandan 7 dènye jou yo. Done sou sit sa a sèlman.':['Les articles les plus lus sur Geovyora au cours des sept derniers jours. Données de ce site uniquement.','The most-read Geovyora stories over the past seven days. Data from this site only.','Os artigos mais lidos na Geovyora nos últimos sete dias. Dados apenas deste site.','Los artículos más leídos de Geovyora en los últimos siete días. Datos de este sitio.'],
+ 'Konvèsasyon sou lide, eksperyans ak travay kreyatif.':['Des conversations sur les idées, l’expérience et le travail créatif.','Conversations about ideas, experience and creative work.','Conversas sobre ideias, experiências e trabalho criativo.','Conversaciones sobre ideas, experiencias y trabajo creativo.'],
+ 'Ou konnen yon kreyatè nou ta dwe dekouvri? Pataje non li, orijin li ak lyen ofisyèl li yo.':['Vous connaissez un créateur à découvrir ? Partagez son nom, son origine et ses liens officiels.','Know a creator we should discover? Share their name, origin, and official links.','Conhece um criador que deveríamos descobrir? Compartilhe seu nome, origem e links oficiais.','¿Conoces a un creador que deberíamos descubrir? Comparte su nombre, origen y enlaces oficiales.'],
+ 'Tout peyi rezidans':['Tous les pays de résidence','All countries of residence','Todos os países de residência','Todos los países de residencia'],
+})
 LOCALES={'fr':0,'en':1,'pt-BR':2,'es':3}
 PHRASES.update({
     'Culture. Créativité. Impact.':['Culture. Créativité. Impact.','Culture. Creativity. Impact.','Cultura. Criatividade. Impacto.','Cultura. Creatividad. Impacto.'],
@@ -2927,6 +2946,13 @@ def localized_category(value,locale,catalog=None):
 def ui_text(value,locale):
     i=LOCALES.get(locale)
     return PHRASES[value][i] if i is not None and value in PHRASES else value
+def public_source_key(value):
+    value=str(value).strip()
+    digest=2166136261
+    for char in value:
+        digest=((digest ^ ord(char))*16777619)&0xffffffff
+    return 'k_'+format(digest,'08x')
+
 class Localizer(HTMLParser):
     def __init__(self,locale):super().__init__(convert_charrefs=False);self.locale=locale;self.parts=[];self.verbatim=0;self.catalog=ui_translation(locale);self.stack=[]
     def translated(self,value):
@@ -2944,7 +2970,10 @@ class Localizer(HTMLParser):
     def handle_starttag(self,tag,attrs):
         source=self.get_starttag_text()
         for key,value in attrs:
-            if key in ['placeholder','aria-label','title'] and (value in PHRASES or 'phrase:'+str(value) in self.catalog):
+            if key=='data-source':
+                old=html.escape(value,quote=True)
+                source=source.replace('data-source=\"'+old+'\"','data-source=\"'+public_source_key(value)+'\"')
+            elif key in ['placeholder','aria-label','title'] and (value in PHRASES or 'phrase:'+str(value) in self.catalog):
                 old=html.escape(value,quote=True);new=html.escape(self.translated(value),quote=True);source=source.replace('"'+old+'"','"'+new+'"')
         self.parts.append(source)
         protected=tag in ['script','style'] or any(key=='class' and ('article-body' in (val or '') or 'profile-bio' in (val or '')) for key,val in attrs)
