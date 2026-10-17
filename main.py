@@ -110,8 +110,16 @@ def render(request,page,locale='fr',**kw):
         t['haiti']=localized_category('Ayiti',locale,ui)
         t['world']=localized_category('Mond',locale,ui)
         queue_ui(locale)
-    category_values=categories() if page=='admin' else public_categories()
-    base={'request':request,'locale':locale,'t':t,'languages':language_map(),'settings':cfg,'brand':cfg.get('brand','Geovyora'),'page':page,'categories':category_values if page=='admin' else [{'value':name,'label':localized_category(name,locale,ui)} for name in category_values],'staff':session(request),'csrf_token':request.state.public_csrf,'title':cfg.get('brand','Geovyora'),'description':'Magazine consacré aux créateurs haïtiens, à la diaspora et aux voix du monde.','path':request.url.path,'ads_allowed':False}
+    category_names=categories() if page=='admin' else public_categories()
+    if page=='admin':
+        category_values=category_names
+    else:
+        category_values=[]
+        for name in category_names:
+            category_record=one('SELECT id FROM categories WHERE name=? AND active=1',(name,))
+            if category_record:
+                category_values.append({'id':category_record['id'],'value':name,'name':name,'label':localized_category(name,locale,ui)})
+    base={'request':request,'locale':locale,'t':t,'languages':language_map(),'settings':cfg,'brand':cfg.get('brand','Geovyora'),'page':page,'categories':category_values,'staff':session(request),'csrf_token':request.state.public_csrf,'title':cfg.get('brand','Geovyora'),'description':'Magazine consacré aux créateurs haïtiens, à la diaspora et aux voix du monde.','path':request.url.path,'ads_allowed':False}
     base.update(kw)
     if page!='admin':
         def with_category_label(item):
@@ -636,6 +644,14 @@ async def unsubscribe(request:Request):
 
 def public(request:Request,locale:str,section:str='home',slug:str='',q:str='',category:str='',country:str='',platform:str='',sort:str='recent',page:int=1,original:int=0):
     if locale not in language_map():raise HTTPException(404,'Lang sa a pa disponib.')
+    category_filter=''
+    if category and section in ['home','haiti','world','news','interviews','discoveries','category','trending','rankings']:
+        category_record=one('SELECT id,name FROM categories WHERE id=? AND active=1',(category,))
+        if not category_record:
+            category_record=one('SELECT id,name FROM categories WHERE name=? AND active=1',(category,))
+        if category_record:
+            category_filter=category_record['id']
+            category=category_record['name']
     page=max(1,min(page,1000));a=None;p=None;videos=[];data=[];title=labels(locale).get(section,section)
     allowed=['home','haiti','world','news','interviews','videos','video','trending','rankings','discoveries','influencers','influencer','article','search','notifications','saved','submit-influencer','submit-news','contact','advertising','about','privacy','terms','cookies','editorial','community','copyright','category','newsletter','newsletter-unsubscribe']
     if section not in allowed:raise HTTPException(404,'Paj sa a pa egziste.')
@@ -692,7 +708,7 @@ def public(request:Request,locale:str,section:str='home',slug:str='',q:str='',ca
         if category:where+=' AND category=?';args.append(category)
         data=article_list(where,tuple(args),5000)[(page-1)*12:page*12]
     empty_archive=section in ['home','haiti','world','news','interviews','discoveries','category','trending','rankings','videos','influencers'] and not (videos if section=='videos' else data)
-    return render(request,section,locale,articles=[translate_record(x,locale) for x in data] if section!='influencers' else [],profiles=data if section=='influencers' else rows("SELECT * FROM influencers WHERE status='published'"+public_demo_clause()+" LIMIT 4"),article=a,profile=p,videos=videos,title=title,q=q,category=category,country=country,platform=platform,sort=sort,pagination=page,seo_noindex=empty_archive)
+    return render(request,section,locale,articles=[translate_record(x,locale) for x in data] if section!='influencers' else [],profiles=data if section=='influencers' else rows("SELECT * FROM influencers WHERE status='published'"+public_demo_clause()+" LIMIT 4"),article=a,profile=p,videos=videos,title=title,q=q,category=category,category_filter=category_filter,country=country,platform=platform,sort=sort,pagination=page,seo_noindex=empty_archive)
 
 @app.post('/admin/campaigns/save')
 async def save_campaign(request:Request):

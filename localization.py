@@ -2907,6 +2907,10 @@ PHRASES.update({
 'Sèvis tradiksyon an pa disponib; orijinal la toujou disponib.': ['Le service de traduction est indisponible ; l’original reste accessible.', 'The translation service is unavailable; the original remains available.', 'O serviço de tradução está indisponível; o original continua disponível.', 'El servicio de traducción no está disponible; el original sigue disponible.'],
 'Verifye sèvis tradiksyon an oswa lang lan.': ['Vérifiez le service de traduction ou la langue sélectionnée.', 'Check the translation service or selected language.', 'Verifique o serviço de tradução ou o idioma selecionado.', 'Revisa el servicio de traducción o el idioma seleccionado.']})
 LOCALES={'fr':0,'en':1,'pt-BR':2,'es':3}
+PHRASES.update({
+    'Culture. Créativité. Impact.':['Culture. Créativité. Impact.','Culture. Creativity. Impact.','Cultura. Criatividade. Impacto.','Cultura. Creatividad. Impacto.'],
+    'Rédaction Geovyora':['Rédaction Geovyora','Geovyora Editorial Team','Equipe editorial Geovyora','Equipo editorial de Geovyora'],
+})
 def localized_category(value,locale,catalog=None):
     """Return a visitor-facing category label while keeping the stored value stable."""
     index=LOCALES.get(locale)
@@ -2922,6 +2926,9 @@ class Localizer(HTMLParser):
     def translated(self,value):
         local=ui_text(value,self.locale)
         if local!=value:return local
+        editorial='Tradiksyon editoryal'
+        if value.startswith(editorial):
+            return ui_text(editorial,self.locale)+value[len(editorial):]
         for phrase in ['Tout dwa rezève.', 'kategori']:
             if phrase=='Tout dwa rezève.' and value.startswith('© ') and value.endswith(phrase):
                 return value[:-len(phrase)]+ui_text(phrase,self.locale)
