@@ -80,10 +80,11 @@ HTML, scripts ak embeds lib pa egzekite nan kò atik la. Vidyo embedded yo bezwe
 - Lòt lang soti nan lis Google Translation reyèl la: **Admin → Tradiksyon → Mete lis lang Google yo ajou**. Lis la gen yon rechèch nan header. Pa gen lis "tout lang sou tè a" envante.
 - RTL sipòte pou lang tankou Arab ak Ebre. Lang siplemantè sèvi ak labels anglè jiskaske tradiksyon UI a pare.
 - Tradiksyon atik, bio, kòmantè ak UI pase nan yon fil travay pèsistan ak deduplikasyon pa kontni/vèsyon/lang, cache, retries limite ak yon limit reyèl karaktè pa mwa.
-- Worker prepare senk lang prensipal yo pou atik ki pibliye; lòt lang sou demann. Kòmantè tradui sèlman lè lektè a mande sa.
+- Sit la sèvi ak kat lang piblik: français, English, português (Brasil) ak español. Ansyen lyen kreyòl yo redirije sou vèsyon française a; kòd lang sa a pa parèt nan navigasyon, API oswa sitemap.
+- Worker prepare kat lang piblik yo pou atik ki pibliye; lòt lang sou demann, eksepte kòd lang ki te retire a. Kòmantè tradui sèlman lè lektè a mande sa.
 - Tradiksyon UI fèt sèlman sou tèks interface ki nan kòd la, pa sou non/pseudo ni done moun antre nan fòm yo.
 - Tradiksyon editoryal pa ranplase otomatikman. Lè sous la chanje, vèsyon tradiksyon anvan yo rete konsève; nouvo vèsyon an bezwen nouvo tradiksyon.
-- Lè pa gen kle, limit rive oswa sèvis echwe, orijinal la toujou lizib. Gen kèk tèks/politik ki rete an Kreyòl san sèvis tradiksyon; paj politik yo make sa.
+- Lè pa gen kle, limit rive oswa sèvis echwe, tradiksyon ki deja an cache yo rete disponib. Kontni san tradiksyon franse pa parèt an piblik jiskaske ekip la prepare li nan yon lang ki sipòte.
 - Demann ki echwe kapab konsome rezèv bidjè a: limit la rete konservatif. Tès avèk provider simile pase; sèvis reyèl la poko teste san kle.
 
 ## Notifikasyon
@@ -102,7 +103,7 @@ HTML, scripts ak embeds lib pa egzekite nan kò atik la. Vidyo embedded yo bezwe
 - Foto CMS: presigned POST nan S3-compatible storage, JPEG/PNG/WebP, 10 MB. Endpoint verifye bytes reyèl, fòma, dimansyon, foto anime ak fichye domaje anvan make ready.
 - Foto soumisyon: validasyon avan upload nan PRIVATE_SUBMISSION_BUCKET. Fichye yo pa gen URL piblik; sèlman staff otorize resevwa yon lyen download tanporè 120 segonn.
 - Piblisite dirèk: bannè make Publicité, lang configurable, activate/deactivate. Pa parèt sou paj demo.
-- AdSense: publisher/ad-slot settings ak ads.txt prepare. **Script AdSense toujou pa aktive**: apwobasyon Google, yon CMP apwopriye/sètifye kote obligatwa, consent tests ak validasyon lang kò paj la rete obligatwa. Pa gen ads sou kontni Kreyòl, admin, drafts oswa demo. Pa gen revni pwomèt.
+- AdSense: publisher/ad-slot settings ak ads.txt prepare. **Script AdSense toujou pa aktive**: apwobasyon Google, yon CMP apwopriye/sètifye kote obligatwa ak tès konsantman rete obligatwa. Pa gen ads nan admin, drafts oswa kontni demo. Pa gen revni pwomèt.
 
 ## Kle sèvis yo
 

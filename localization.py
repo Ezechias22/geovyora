@@ -2897,7 +2897,7 @@ def ui_text(value,locale):
     i=LOCALES.get(locale)
     return PHRASES[value][i] if i is not None and value in PHRASES else value
 class Localizer(HTMLParser):
-    def __init__(self,locale):super().__init__(convert_charrefs=False);self.locale=locale;self.parts=[];self.verbatim=0;self.catalog=ui_translation(locale) if locale!='ht' else {};self.stack=[]
+    def __init__(self,locale):super().__init__(convert_charrefs=False);self.locale=locale;self.parts=[];self.verbatim=0;self.catalog=ui_translation(locale);self.stack=[]
     def translated(self,value):
         local=ui_text(value,self.locale)
         if local!=value:return local
@@ -2931,7 +2931,6 @@ class Localizer(HTMLParser):
     def handle_decl(self,decl):self.parts.append('<!'+decl+'>')
     def handle_comment(self,text):self.parts.append('<!--'+text+'-->')
 def localize_html(source,locale):
-    if locale=='ht':return source
     parser=Localizer(locale);parser.feed(source);return ''.join(parser.parts)
 
 def ui_catalog():

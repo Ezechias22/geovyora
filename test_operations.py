@@ -22,11 +22,11 @@ class Operations(fixtures.Fixture):
    for article in (sport,culture):
     view_id=str(uuid.uuid4());view_ids.append(view_id)
     write('INSERT INTO page_views VALUES (?,?,?,?,?)',(view_id,article['id'],'category-filter-'+view_id,day,stamp))
-   response=self.c.get('/ht/trending?category=Esp%C3%B2')
+   response=self.c.get('/fr/trending?category=Esp%C3%B2')
    self.assertEqual(response.status_code,200)
-   self.assertIn('/ht/article/'+sport['slug'],response.text)
-   self.assertNotIn('/ht/article/'+culture['slug'],response.text)
-   news=self.c.get('/ht/news')
+   self.assertIn('/fr/article/'+sport['slug'],response.text)
+   self.assertNotIn('/fr/article/'+culture['slug'],response.text)
+   news=self.c.get('/fr/news')
    self.assertEqual(news.status_code,200)
    cards=re.findall(r'<article class="story-card">(.*?)</article>',news.text,re.S)
    self.assertTrue(cards)
@@ -37,11 +37,11 @@ class Operations(fixtures.Fixture):
    for article_id,category_name in original_categories.items():write('UPDATE articles SET category=? WHERE id=?',(category_name,article_id))
  def test_categories_tags_and_seo(self):
   c,t=self.login();r=c.post('/admin/taxonomy/save',data={'csrf_token':t,'table':'categories','name':'Syans','active':'on','sort_order':'1'});self.assertEqual(r.status_code,200)
-  self.assertNotIn('href="?category=Syans"',self.c.get('/ht/news').text);cat=one("SELECT * FROM categories WHERE name='Syans'");empty_category=self.c.get('/ht/category/'+cat['slug']);self.assertEqual(empty_category.status_code,200);self.assertIn('noindex,nofollow',empty_category.text)
+  self.assertNotIn('href="?category=Syans"',self.c.get('/fr/news').text);cat=one("SELECT * FROM categories WHERE name='Syans'");empty_category=self.c.get('/fr/category/'+cat['slug']);self.assertEqual(empty_category.status_code,200);self.assertIn('noindex,nofollow',empty_category.text)
   self.assertEqual(c.post('/admin/taxonomy/save',data={'csrf_token':t,'table':'tags','name':'Dokimantè'}).status_code,200)
   a=one("SELECT * FROM articles WHERE slug='voix-qui-traversent-les-frontieres'")
-  self.assertEqual(c.post('/admin/seo/save',data={'csrf_token':t,'target_type':'article','target_id':a['id'],'locale':'ht','title':'Tit SEO espesifik','description':'Deskripsyon SEO presi','noindex':'on'}).status_code,200)
-  r=self.c.get('/ht/article/'+a['slug']);self.assertIn('<title>Tit SEO espesifik',r.text);self.assertIn('Deskripsyon SEO presi',r.text);self.assertIn('noindex,nofollow',r.text)
+  self.assertEqual(c.post('/admin/seo/save',data={'csrf_token':t,'target_type':'article','target_id':a['id'],'locale':'fr','title':'Tit SEO espesifik','description':'Deskripsyon SEO presi','noindex':'on'}).status_code,200)
+  r=self.c.get('/fr/article/'+a['slug']);self.assertIn('<title>Tit SEO espesifik',r.text);self.assertIn('Deskripsyon SEO presi',r.text);self.assertIn('noindex,nofollow',r.text)
   for section in ['categories','tags','seo','newsletter','account']:
    self.assertEqual(c.get('/admin/'+section).status_code,200,section)
  def test_empty_categories_stay_out_of_public_filters_for_every_locale(self):
@@ -88,9 +88,9 @@ class Operations(fixtures.Fixture):
   self.assertFalse(result['ok'])
  def test_push_targeting_caps_unsubscribe_and_idempotence(self):
   stamp=datetime.now(timezone.utc).isoformat();prefix=str(uuid.uuid4())
-  for suffix,locale,topic in [('one','ht','Kilti'),('two','fr','Kilti'),('three','ht','Mizik')]:write('INSERT INTO push_subscriptions VALUES (?,?,?,?,?)',(prefix+suffix,'test-token-'+prefix+suffix,locale,topic,stamp))
+  for suffix,locale,topic in [('one','en','Kilti'),('two','fr','Kilti'),('three','en','Mizik')]:write('INSERT INTO push_subscriptions VALUES (?,?,?,?,?)',(prefix+suffix,'test-token-'+prefix+suffix,locale,topic,stamp))
   def campaign(n,topic='Kilti'):
-   id=prefix+n;write('INSERT INTO campaigns(id,title,body,url,locale,status,created_at,topic) VALUES (?,?,?,?,?,?,?,?)',(id,'Tès kanpay','Yon mesaj tès','/ht/news','ht','draft',stamp,topic));return id
+   id=prefix+n;write('INSERT INTO campaigns(id,title,body,url,locale,status,created_at,topic) VALUES (?,?,?,?,?,?,?,?)',(id,'Tès kanpay','Yon mesaj tès','/en/news','en','draft',stamp,topic));return id
   first=campaign('first');self.assertTrue(enqueue_campaign(first));self.assertFalse(enqueue_campaign(first));sent=[]
   def fake(c,s):sent.append(s['visitor_hash'])
   process_push_jobs(fake,100);process_push_jobs(fake,100);self.assertEqual(sent,[prefix+'one'])
@@ -101,17 +101,17 @@ class Operations(fixtures.Fixture):
  def test_metrics_and_private_bans(self):
   c,t=self.login();p=one("SELECT * FROM influencers WHERE slug='naelle-jean'")
   r=c.post('/admin/metrics/save',data={'csrf_token':t,'influencer_id':p['id'],'platform':'YouTube','followers':'123','source_url':'https://example.org/source','observed_at':'2026-01-01T12:00'});self.assertEqual(r.status_code,200)
-  self.assertIn('https://example.org/source',self.c.get('/ht/influencer/naelle-jean').text)
+  self.assertIn('https://example.org/source',self.c.get('/fr/influencer/naelle-jean').text)
   a=one("SELECT id FROM articles WHERE slug='voix-qui-traversent-les-frontieres'");token=self.token();r=self.c.post('/api/comments',json={'csrf_token':token,'target_type':'article','target_id':a['id'],'name':'Bann tès','body':'Yon kòmantè pou tès limit tanporè.'});id=r.json()['id']
   self.assertEqual(c.post('/admin/visitors/ban',data={'csrf_token':t,'comment_id':id,'hours':'1','reason':'Abi tès'}).status_code,200)
   self.assertEqual(self.c.post('/api/comments',json={'csrf_token':token,'target_type':'article','target_id':a['id'],'name':'Bann tès','body':'Yon lòt kòmantè.'}).status_code,403)
   c.post('/admin/visitors/unban',data={'csrf_token':t,'comment_id':id})
  def test_newsletter_and_accent_search(self):
   token=self.token();email=str(uuid.uuid4())+'@example.org'
-  r=self.c.post('/api/newsletter/subscribe',json={'csrf_token':token,'email':email,'locale':'ht','consent':True});self.assertEqual(r.status_code,200);private=r.json()['unsubscribe_url'].split('token=')[1]
-  self.assertEqual(self.c.get('/ht/newsletter-unsubscribe?token='+private).status_code,200);self.assertEqual(one('SELECT status FROM newsletter_subscribers WHERE email=?',(email,))['status'],'active')
+  r=self.c.post('/api/newsletter/subscribe',json={'csrf_token':token,'email':email,'locale':'fr','consent':True});self.assertEqual(r.status_code,200);private=r.json()['unsubscribe_url'].split('token=')[1]
+  self.assertEqual(self.c.get('/fr/newsletter-unsubscribe?token='+private).status_code,200);self.assertEqual(one('SELECT status FROM newsletter_subscribers WHERE email=?',(email,))['status'],'active')
   self.c.post('/api/newsletter/unsubscribe',json={'csrf_token':token,'token':private});self.assertEqual(one('SELECT status FROM newsletter_subscribers WHERE email=?',(email,))['status'],'unsubscribed')
-  self.assertIn('Naëlle Jean',self.c.get('/ht/search?q=Naelle').text)
+  self.assertIn('Naëlle Jean',self.c.get('/fr/search?q=Naelle').text)
  def test_media_validation(self):
   image=io.BytesIO();Image.new('RGB',(32,24),'green').save(image,format='PNG');raw=image.getvalue();self.assertEqual(validate_image(raw,'image/png'),(32,24))
   with self.assertRaises(ValueError):validate_image(b'not-a-photo','image/png')
@@ -148,7 +148,7 @@ class Operations(fixtures.Fixture):
  def test_reply_push_respects_consent_and_single_delivery(self):
   from security import digest
   a=one("SELECT id FROM articles WHERE slug='voix-qui-traversent-les-frontieres'");token=self.token();owner=digest(self.c.cookies.get('vyora_visitor'));stamp=datetime.now(timezone.utc).isoformat()
-  write('INSERT INTO push_subscriptions VALUES (?,?,?,?,?) ON CONFLICT(visitor_hash) DO UPDATE SET token=excluded.token',(owner,'consented-test-token','ht','Kilti',stamp))
+  write('INSERT INTO push_subscriptions VALUES (?,?,?,?,?) ON CONFLICT(visitor_hash) DO UPDATE SET token=excluded.token',(owner,'consented-test-token','fr','Kilti',stamp))
   r=self.c.post('/api/comments',json={'csrf_token':token,'target_type':'article','target_id':a['id'],'name':'Mèt kòmantè','body':'Yon kòmantè avèk opt-in pou repons.','subscribe_reply':True});parent=r.json()['id'];c,ct=self.login('moderator')
   c.post('/admin/moderate',data={'csrf_token':ct,'table':'comments','id':parent,'status':'approved','reason':'Valab pou tès'})
   other=__import__('fastapi').testclient.TestClient(__import__('main').app);ot=self.token(other)
@@ -248,12 +248,12 @@ class ServiceDiagnostics(fixtures.Fixture):
  @patch('main.rate')
  def test_diagnostics_access_and_safe_failures(self,mock_rate):
   c,t=self.login()
-  with patch('service_checks.check_mux',return_value='Aksè Mux verifye.'),patch('service_checks.check_storage',side_effect=RuntimeError('PRIVATE-SECRET')),patch('service_checks.check_firebase',return_value='Otantifikasyon Firebase verifye; livrezon notifikasyon poko teste.'):
+  with patch('service_checks.check_mux',return_value='Accès Mux vérifié.'),patch('service_checks.check_storage',side_effect=RuntimeError('PRIVATE-SECRET')),patch('service_checks.check_firebase',return_value='Authentification Firebase vérifiée ; livraison des notifications non testée.'):
    r=c.post('/admin/services/check',data={'csrf_token':t})
    self.assertEqual(r.status_code,200)
    self.assertNotIn('PRIVATE-SECRET',r.text)
-   self.assertIn('Tès la echwe.',r.text)
-   self.assertIn('Aksè Mux verifye.',r.text)
+   self.assertIn('Échec du test. Vérifiez les clés, les autorisations et la connexion du service.',r.text)
+   self.assertIn('Accès Mux vérifié.',r.text)
   self.assertEqual(c.post('/admin/services/check',data={'csrf_token':'wrong'}).status_code,403)
   m,token=self.login('moderator')
   self.assertEqual(m.post('/admin/services/check',data={'csrf_token':token}).status_code,403)

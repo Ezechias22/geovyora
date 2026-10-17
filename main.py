@@ -49,7 +49,7 @@ def clean(value,limit,minimum=0):
     return value
 
 def translate_record(record,locale,typ='article'):
-    original=record.get('locale','ht')
+    original=record.get('locale','fr')
     record=dict(record)
     record['original_locale']=original;record['translated']=False;record['fallback']=False
     if locale==original:return record
@@ -65,26 +65,26 @@ def public_demo_clause(alias=''):
 
 def article_list(where='1=1',args=(),limit=60):
     return rows("SELECT * FROM articles WHERE status='published' AND "+where+public_demo_clause()+' ORDER BY featured DESC,publish_at DESC LIMIT ?',(*args,limit))
-def render(request,page,locale='ht',**kw):
+def render(request,page,locale='fr',**kw):
     cfg=settings()
     if page=='admin':
         chosen=request.query_params.get('lang') or request.cookies.get('geovyora_admin_locale') or request.headers.get('accept-language','').split(',')[0].split(';')[0]
-        locale=normalize_language(chosen) or cfg.get('default_locale','ht')
+        locale=normalize_language(chosen) or cfg.get('default_locale','fr')
         if locale not in LANGUAGES:locale='en'
     t=labels(locale);ui={} 
     if page!='admin':
         from localization import ui_translation,queue_ui
-        ui=ui_translation(locale) if locale!='ht' else {}
+        ui=ui_translation(locale)
         t.update({k[6:]:v for k,v in ui.items() if k.startswith('label:')})
-        if locale!='ht':queue_ui(locale)
-    base={'request':request,'locale':locale,'t':t,'languages':language_map(),'settings':cfg,'brand':cfg.get('brand','Geovyora'),'page':page,'categories':categories() if page=='admin' else public_categories(),'staff':session(request),'csrf_token':request.state.public_csrf,'title':cfg.get('brand','Geovyora'),'description':'Magazin sou kreyatè Ayisyen, dyaspora ak mond lan.','path':request.url.path,'ads_allowed':False}
+        queue_ui(locale)
+    base={'request':request,'locale':locale,'t':t,'languages':language_map(),'settings':cfg,'brand':cfg.get('brand','Geovyora'),'page':page,'categories':categories() if page=='admin' else public_categories(),'staff':session(request),'csrf_token':request.state.public_csrf,'title':cfg.get('brand','Geovyora'),'description':'Magazine consacré aux créateurs haïtiens, à la diaspora et aux voix du monde.','path':request.url.path,'ads_allowed':False}
     base.update(kw)
     if page=='admin':
         from admin_localization import COPY,admin_text
         base['admin_languages']=LANGUAGES
         base['admin_text']=admin_text
         base['admin_copy']={text:admin_text(text,locale) for text in COPY}
-        base['admin_greeting']={'ht':'Bonjou','fr':'Bonjour','en':'Hello','pt-BR':'Olá','es':'Hola'}.get(locale,'Hello')
+        base['admin_greeting']={'fr':'Bonjour','en':'Hello','pt-BR':'Olá','es':'Hola'}.get(locale,'Hello')
         base['media_library']=rows("SELECT url,content_type FROM media_assets WHERE status='ready' ORDER BY created_at DESC LIMIT 40")
         base['video_library']=rows("SELECT slug,title FROM videos WHERE status='ready' ORDER BY created_at DESC LIMIT 100")
 
@@ -131,8 +131,8 @@ def render(request,page,locale='ht',**kw):
         a=base['article']
         base['canonical']=origin+'/'+(locale if a.get('translated') else a.get('original_locale',locale))+'/article/'+a['slug']
         version=a.get('updated_at','')
-        langs=[a.get('original_locale',locale)]+[x['locale'] for x in rows("SELECT locale FROM translations WHERE target_type='article' AND target_id=? AND version=?",(a['id'],version))]
-        base['alternates']=[{'locale':l,'url':origin+'/'+l+'/article/'+a['slug']} for l in set(langs)]
+        langs={a.get('original_locale',locale)}|{x['locale'] for x in rows("SELECT locale FROM translations WHERE target_type='article' AND target_id=? AND version=?",(a['id'],version))}
+        base['alternates']=[{'locale':l,'url':origin+'/'+l+'/article/'+a['slug']} for l in sorted(langs & set(language_map()))]
     base['body_blocks']=[]
     if page=='article' and base.get('article'):
         from content import body_blocks
@@ -196,7 +196,7 @@ async def cookies_and_headers(request,call_next):
 @app.exception_handler(HTTPException)
 async def http_error(request,exc):
     if request.url.path.startswith('/api') or request.headers.get('accept')=='application/json':return JSONResponse({'detail':exc.detail},status_code=exc.status_code)
-    return HTMLResponse('<!doctype html><html lang="ht"><meta name="viewport" content="width=device-width"><link rel="stylesheet" href="/static/style.css"><body><main class="simple"><a class="logo" href="/">Geovyora<span>✦</span></a><h1>'+str(exc.status_code)+'</h1><p>'+html.escape(str(exc.detail))+'</p><a class="btn" href="/">Retounen sou sit la</a></main></body></html>',status_code=exc.status_code)
+    return HTMLResponse('<!doctype html><html lang="fr"><meta name="viewport" content="width=device-width"><link rel="stylesheet" href="/static/style.css"><body><main class="simple"><a class="logo" href="/">Geovyora<span>✦</span></a><h1>'+str(exc.status_code)+'</h1><p>'+html.escape(str(exc.detail))+'</p><a class="btn" href="/fr">Retour au site</a></main></body></html>',status_code=exc.status_code)
 
 @app.get('/health')
 def health():one('SELECT 1');return {'status':'ok'}
@@ -204,7 +204,7 @@ def health():one('SELECT 1');return {'status':'ok'}
 def root(request:Request):
     chosen=request.cookies.get('vyora_locale')
     if chosen not in language_map():
-        chosen=settings().get('default_locale','ht')
+        chosen=settings().get('default_locale','fr')
         preferences=[]
         for part in request.headers.get('accept-language','').split(','):
             segments=part.strip().split(';');quality=1.0
@@ -215,6 +215,14 @@ def root(request:Request):
             if key and quality>0:preferences.append((quality,key))
         if preferences:chosen=sorted(preferences,key=lambda x:x[0],reverse=True)[0][1]
     return RedirectResponse('/'+chosen,status_code=302)
+
+@app.get('/ht',include_in_schema=False)
+@app.get('/ht/{path:path}',include_in_schema=False)
+def legacy_creole_redirect(request:Request,path:str=''):
+    target='/fr'+request.url.path[3:]
+    if request.url.query:target+='?'+request.url.query
+    return RedirectResponse(target,status_code=301)
+
 @app.get('/robots.txt')
 def robots():return Response('User-agent: *\nDisallow: /admin\nDisallow: /api\nDisallow: /*/search\nSitemap: '+os.getenv('SITE_URL','http://localhost:8000')+'/sitemap.xml\n',media_type='text/plain')
 @app.get('/sitemap.xml')
@@ -224,12 +232,12 @@ def sitemap():
     for a in article_list(limit=5000):
         if a['demo']:continue
         langs={a['locale']}|{r['locale'] for r in rows("SELECT locale FROM translations WHERE target_type='article' AND target_id=? AND version=?",(a['id'],a['updated_at']))}
-        for lang in langs:
+        for lang in langs & set(language_map()):
             meta=one("SELECT noindex FROM seo_metadata WHERE target_type='article' AND target_id=? AND locale=?",(a['id'],lang))
             if not meta or not meta['noindex']:paths.append('/'+lang+'/article/'+a['slug'])
     for p in rows("SELECT * FROM influencers WHERE status='published' AND demo=0"):
-        meta=one("SELECT noindex FROM seo_metadata WHERE target_type='influencer' AND target_id=? AND locale='ht'",(p['id'],))
-        if not meta or not meta['noindex']:paths.append('/ht/influencer/'+p['slug'])
+        meta=one("SELECT noindex FROM seo_metadata WHERE target_type='influencer' AND target_id=? AND locale='fr'",(p['id'],))
+        if not meta or not meta['noindex']:paths.append('/fr/influencer/'+p['slug'])
     return Response('<?xml version="1.0"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'+''.join('<url><loc>'+html.escape(site+p)+'</loc></url>' for p in paths)+'</urlset>',media_type='application/xml')
 @app.get('/ads.txt')
 def ads_txt():
@@ -313,7 +321,7 @@ async def save_article(request:Request):
     slug=slugify(f.get('slug') or f.get('title'))
     clash=one('SELECT id FROM articles WHERE slug=? AND id<>?',(slug,id))
     if clash:raise HTTPException(409,'Slug sa a deja itilize.')
-    locale=f.get('locale','ht')
+    locale=f.get('locale','fr')
     if locale not in language_map():raise HTTPException(422,'Lang pa valab.')
     values=(slug,clean(f.get('title'),220,3),clean(f.get('subtitle'),500),clean(f.get('body'),100000,10),clean(f.get('category'),80,1),f.get('region','haiti'),f.get('kind','article'),safe_url(f.get('image')),clean(f.get('image_credit'),500),clean(f.get('author'),100,1),locale,status,int(f.get('featured')=='on'),int(f.get('demo')=='on'),int(f.get('sponsored')=='on'),publish_at,now(),clean(f.get('sources'),5000),clean(f.get('tags'),500),f.get('influencer_id') or None)
     fields='slug,title,subtitle,body,category,region,kind,image,image_credit,author,locale,status,featured,demo,sponsored,publish_at,updated_at,sources,tags,influencer_id'
@@ -339,7 +347,7 @@ async def save_influencer(request:Request):
     if status not in ['draft','published','archived']:raise HTTPException(422,'Invalid status')
     if u['role']=='editor':status='draft'
     stamp=now()
-    vals=(slugify(f.get('slug') or f.get('name')),clean(f.get('name'),120,2),clean(f.get('username'),100),clean(f.get('origin'),100),clean(f.get('residence'),100),clean(f.get('category'),100),clean(f.get('bio'),10000,10),safe_url(f.get('image')),json.dumps(socials),f.get('languages','ht'),int(f.get('demo')=='on'),status,stamp)
+    vals=(slugify(f.get('slug') or f.get('name')),clean(f.get('name'),120,2),clean(f.get('username'),100),clean(f.get('origin'),100),clean(f.get('residence'),100),clean(f.get('category'),100),clean(f.get('bio'),10000,10),safe_url(f.get('image')),json.dumps(socials),f.get('languages',''),int(f.get('demo')=='on'),status,stamp)
     fields='slug,name,username,origin,residence,category,bio,image,socials,languages,demo,status,updated_at'
     clash=one('SELECT id FROM influencers WHERE slug=? AND id<>?',(vals[0],id))
     if clash:raise HTTPException(409,'Slug deja itilize.')
@@ -365,7 +373,7 @@ async def moderate(request:Request):
                 typ=child['target_type'];tables={'article':'articles','influencer':'influencers','video':'videos'};record=one('SELECT slug FROM '+tables[typ]+' WHERE id=?',(child['target_id'],))
                 link='/'+sub['locale']+'/'+typ+'/'+record['slug']
                 cid='reply-'+id
-                messages={'ht':('Nouvo repons','Yon moun reponn kòmantè ou a.'),'fr':('Nouvelle réponse','Quelqu’un a répondu à votre commentaire.'),'en':('New reply','Someone replied to your comment.'),'pt-BR':('Nova resposta','Alguém respondeu ao seu comentário.'),'es':('Nueva respuesta','Alguien respondió a tu comentario.')}
+                messages={'fr':('Nouvelle réponse','Quelqu’un a répondu à votre commentaire.'),'en':('New reply','Someone replied to your comment.'),'pt-BR':('Nova resposta','Alguém respondeu ao seu comentário.'),'es':('Nueva respuesta','Alguien respondió a tu comentario.')}
                 title,message=messages.get(sub['locale'],messages['en'])
                 write("INSERT INTO campaigns(id,title,body,url,locale,status,created_at,audience_hash) VALUES (?,?,?,?,?,'draft',?,?) ON CONFLICT(id) DO NOTHING",(cid,'Geovyora · '+title,message,link,sub['locale'],now(),parent['visitor_hash']))
                 enqueue_campaign(cid)
@@ -402,6 +410,7 @@ async def restore(request:Request):
     revision=one('SELECT * FROM revisions WHERE id=?',(f.get('id'),))
     if not revision:raise HTTPException(404,'Revision not found')
     record=json.loads(revision['data']);current=one('SELECT * FROM articles WHERE id=?',(revision['article_id'],))
+    if record.get('locale','fr') not in language_map():raise HTTPException(409,'Cette ancienne version utilise une langue qui n’est plus prise en charge.')
     write('INSERT INTO revisions VALUES (?,?,?,?,?)',(uid(),current['id'],json.dumps(current),u['id'],now()))
     fields=['title','subtitle','body','category','sources','tags','image','image_credit']
     write('UPDATE articles SET '+','.join(k+'=?' for k in fields)+',updated_at=?,status=? WHERE id=?',(*[record[k] for k in fields],now(),'draft',current['id']));audit(u,'revision.restore',revision['id']);return RedirectResponse('/admin/articles?edit='+current['id'],303)
@@ -511,7 +520,7 @@ async def mux_upload(request:Request):
         resp=await client.post('https://api.mux.com/video/v1/uploads',auth=(os.environ['MUX_TOKEN_ID'],os.environ['MUX_TOKEN_SECRET']),json={'cors_origin':site,'new_asset_settings':{'playback_policies':['public'],'video_quality':'basic','passthrough':id}})
     if resp.status_code not in [200,201]:raise HTTPException(502,'Mux pa disponib. Eseye ankò.')
     data=resp.json()['data']
-    write('INSERT INTO videos(id,slug,title,description,upload_id,status,locale,created_at) VALUES (?,?,?,?,?,?,?,?)',(id,video_slug,title,description,data['id'],'uploading',f.get('locale','ht'),now()))
+    write('INSERT INTO videos(id,slug,title,description,upload_id,status,locale,created_at) VALUES (?,?,?,?,?,?,?,?)',(id,video_slug,title,description,data['id'],'uploading',f.get('locale','fr'),now()))
     audit(u,'video.upload',id);return {'url':data['url'],'id':id,'slug':video_slug,'max_bytes':int(os.getenv('MAX_VIDEO_BYTES','1073741824'))}
 @app.post('/api/webhooks/mux')
 async def mux_webhook(request:Request):
@@ -550,7 +559,7 @@ def push_sw():
 async def push_subscribe(request:Request):
     f=await public_form(request);rate(request,'subscribe',10,3600)
     if not push_config()['configured']:raise HTTPException(503,'Notifikasyon push poko konekte.')
-    locale=f.get('locale','ht')
+    locale=f.get('locale','fr')
     if locale not in language_map():raise HTTPException(422,'Invalid locale')
     token=clean(f.get('token'),2000,10);topics=clean(f.get('topics'),2000)
     existing=one('SELECT topics FROM push_subscriptions WHERE visitor_hash=?',(visitor(request),))
@@ -590,7 +599,7 @@ def public(request:Request,locale:str,section:str='home',slug:str='',q:str='',ca
     elif section=='influencer':
         p=one("SELECT * FROM influencers WHERE slug=? AND status='published'"+public_demo_clause(),(slug,))
         if not p:raise HTTPException(404,'Pwofil medya sa a pa disponib.')
-        p.setdefault('locale','ht');p=translate_record(p,locale,'influencer');p['socials']=json.loads(p['socials']);p['metrics']=rows('SELECT * FROM influencer_metrics WHERE influencer_id=? ORDER BY observed_at DESC',(p['id'],));title=p['name'];data=article_list('influencer_id=?',(p['id'],))
+        p.setdefault('locale','fr');p=translate_record(p,locale,'influencer');p['socials']=json.loads(p['socials']);p['metrics']=rows('SELECT * FROM influencer_metrics WHERE influencer_id=? ORDER BY observed_at DESC',(p['id'],));title=p['name'];data=article_list('influencer_id=?',(p['id'],))
     elif section=='video':
         a=one("SELECT * FROM videos WHERE slug=? AND status='ready'",(slug,))
         if not a:raise HTTPException(404,'Videyo sa a poko disponib.')
@@ -633,7 +642,7 @@ def public(request:Request,locale:str,section:str='home',slug:str='',q:str='',ca
 @app.post('/admin/campaigns/save')
 async def save_campaign(request:Request):
     f=await request.form();u=csrf(request,f.get('csrf_token'));require(request,ADMIN)
-    link=clean(f.get('url'),500,2);locale=f.get('locale','ht')
+    link=clean(f.get('url'),500,2);locale=f.get('locale','fr')
     if not link.startswith('/'+locale+'/') or '\\' in link or locale not in language_map():raise HTTPException(422,'Lyen relatif ak lang lan pa valab.')
     scheduled=f.get('scheduled_at') or None;status='draft'
     if scheduled:

@@ -2,7 +2,7 @@
 from localization import Localizer, ui_text, LOCALES
 from html.parser import HTMLParser
 from i18n import KEYS,VALUES
-BASE_LABELS={value:key for key,value in zip(KEYS,VALUES['ht'])}
+BASE_LABELS={value:key for key,value in zip(KEYS,VALUES['source'])}
 COPY = {}
 _ROWS = '''ESPAS EDITORYAL|ESPACE ÉDITORIAL|EDITORIAL WORKSPACE|ESPAÇO EDITORIAL|ESPACIO EDITORIAL
 Apèsi|Vue d’ensemble|Overview|Visão geral|Resumen
@@ -257,7 +257,7 @@ JPG, PNG oswa WebP · 10 MB maksimòm. Foto pwodiksyon yo ale nan S3-compatible 
 Kanpay yo filtre selon lang, sijè oswa enfliyansè. Dezabònman an anile livrezon ki poko fèt.|Les campagnes sont filtrées par langue, sujet ou créateur. Le désabonnement annule les envois en attente.|Campaigns filter by language, topic or creator. Unsubscribing cancels pending deliveries.|Campanhas filtram por idioma, tema ou criador. Cancelar a inscrição cancela entregas pendentes.|Las campañas filtran por idioma, tema o creador. La baja cancela entregas pendientes.
 Travay yo pase nan worker la. Demann ki gen livrezon ensèten pa retounen otomatikman nan fil la pou evite push repete.|Les tâches nécessitent le worker. Les livraisons incertaines ne sont pas relancées automatiquement afin d’éviter les doublons.|Jobs require the worker. Uncertain deliveries are not retried automatically to avoid duplicate notifications.|Tarefas exigem o worker. Entregas incertas não são repetidas automaticamente para evitar notificações duplicadas.|Las tareas requieren el worker. Las entregas inciertas no se reintentan automáticamente para evitar duplicados.
 Lekti inik pa navigatè, atik ak jou. Pa reprezante kantite moun inik atravè aparèy.|Lectures uniques par navigateur, article et jour. Ce ne sont pas des personnes uniques entre appareils.|Unique reads by browser, story and day. This does not count unique people across devices.|Leituras únicas por navegador, artigo e dia. Não representa pessoas únicas entre dispositivos.|Lecturas únicas por navegador, artículo y día. No cuenta personas únicas entre dispositivos.
-AdSense dezaktive sou kontni demo ak paj Kreyòl. Konekte yon CMP apwopriye, jwenn apwobasyon Google epi verifye lang kò kontni an anvan aktivasyon.|AdSense reste désactivé sur les démonstrations et pages créoles. Avant activation : consentement approprié, approbation Google et vérification de la langue du contenu.|AdSense stays disabled on demo content and Creole pages. Activation requires appropriate consent management, Google approval and content language verification.|AdSense fica desativado em demonstrações e páginas em crioulo. Ativar exige gestão de consentimento, aprovação Google e verificação do idioma do conteúdo.|AdSense permanece desactivado en demostraciones y páginas en criollo. Activarlo requiere gestión de consentimiento, aprobación Google y verificación del idioma del contenido.
+AdSense dezaktive sou kontni demo. Konekte yon CMP apwopriye epi jwenn apwobasyon Google anvan aktivasyon.|AdSense reste désactivé sur les démonstrations. Configurez une CMP appropriée et obtenez l’approbation de Google avant toute activation.|AdSense stays disabled on demo content. Configure an appropriate CMP and obtain Google approval before activation.|AdSense fica desativado em demonstrações. Configure uma CMP apropriada e obtenha a aprovação do Google antes de ativar.|AdSense permanece desactivado en demostraciones. Configure una CMP adecuada y obtenga la aprobación de Google antes de activarlo.
 Script AdSense pa chaje nan vèsyon sa a san entegrasyon konsantman final la. Pa gen revni oswa apwobasyon pwomèt.|Le script AdSense nécessite l’intégration finale du consentement. Aucun revenu ni approbation n’est garanti.|AdSense scripts require final consent integration. Revenue and approval are not guaranteed.|Scripts AdSense exigem integração final de consentimento. Receita e aprovação não são garantidas.|Los scripts AdSense requieren la integración final del consentimiento. No se garantizan ingresos ni aprobación.
 Opsyonèl · pa aktive|Facultatif · non activé|Optional · not enabled|Opcional · não ativado|Opcional · no activado
 karaktè itilize mwa sa a.|caractères utilisés ce mois-ci.|characters used this month.|caracteres usados neste mês.|caracteres usados este mes.
@@ -323,7 +323,6 @@ class AdminLocalizer(Localizer):
         self.parts[start]=source
 
 def localize_admin(source,locale):
-    if locale=='ht':return source
     parser=AdminLocalizer(locale);parser.feed(source);return ''.join(parser.parts)
 
 COPY.update({

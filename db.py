@@ -1,4 +1,4 @@
-import os, sqlite3, threading
+import os, sqlite3, threading, importlib.util
 from pathlib import Path
 from contextlib import contextmanager
 ROOT=Path(__file__).parent
@@ -38,8 +38,14 @@ def migrate():
         if URL:c.execute('SELECT pg_advisory_xact_lock(861410073)')
         else:c.execute('BEGIN IMMEDIATE')
         c.execute('CREATE TABLE IF NOT EXISTS schema_migrations(version TEXT PRIMARY KEY)')
-        for p in sorted((ROOT/'migrations').glob('*.sql')):
+        migrations=sorted([*ROOT.joinpath('migrations').glob('*.sql'),*ROOT.joinpath('migrations').glob('*.py')],key=lambda p:p.name)
+        for p in migrations:
             if not c.execute(sql('SELECT version FROM schema_migrations WHERE version=?'),(p.name,)).fetchone():
-                for statement in p.read_text().split(';'):
-                    if statement.strip(): c.execute(statement)
+                if p.suffix=='.sql':
+                    for statement in p.read_text().split(';'):
+                        if statement.strip(): c.execute(statement)
+                else:
+                    spec=importlib.util.spec_from_file_location('geovyora_migration_'+p.stem.replace('-','_'),p)
+                    module=importlib.util.module_from_spec(spec);spec.loader.exec_module(module)
+                    module.apply(c,sql)
                 c.execute(sql('INSERT INTO schema_migrations(version) VALUES (?)'),(p.name,))

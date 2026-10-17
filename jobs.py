@@ -6,11 +6,12 @@ from db import one,rows,write,connection,sql
 
 now=lambda:datetime.now(timezone.utc).isoformat()
 uid=lambda:str(uuid.uuid4())
-PRIMARY={'ht':'Kreyòl','fr':'Français','en':'English','pt-BR':'Português','es':'Español'}
+PRIMARY={'fr':'Français','en':'English','pt-BR':'Português','es':'Español'}
 RTL={'ar','fa','he','iw','ur','ps','sd','ug','yi','dv','ckb'}
 
 def language_map():
-    return {**{r['code']:r['name'] for r in rows('SELECT code,name FROM supported_languages')},**PRIMARY}
+    dynamic={r['code']:r['name'] for r in rows('SELECT code,name FROM supported_languages') if r['code'].lower().split('-')[0]!='ht'}
+    return {**dynamic,**PRIMARY}
 def normalize_language(code):
     langs=language_map();code=(code or '').strip()
     if code in langs:return code

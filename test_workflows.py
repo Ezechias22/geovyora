@@ -12,22 +12,53 @@ class Fixture(unittest.TestCase):
   for role in ['super_admin','editor','moderator']:write('INSERT INTO staff(id,email,name,password_hash,role) VALUES (?,?,?,?,?)',(str(uuid.uuid4()),role+'@test.local',role,hash_password('Test-Password-12345'),role))
  @classmethod
  def tearDownClass(cls):cls.c.__exit__(None,None,None);TMP.cleanup()
- def token(self,c=None):return re.search('name="csrf-token" content="([^"]+)"',(c or self.c).get('/ht').text)[1]
+ def token(self,c=None):return re.search('name="csrf-token" content="([^"]+)"',(c or self.c).get('/fr').text)[1]
  def login(self,role='super_admin'):
   c=TestClient(app);t=self.token(c);r=c.post('/admin/login',data={'email':role+'@test.local','password':'Test-Password-12345','csrf_token':t});self.assertEqual(r.status_code,200);return c,one('SELECT csrf FROM sessions WHERE token_hash=?',(digest(c.cookies['vyora_staff']),))['csrf']
 class Workflows(Fixture):
  def test_routes(self):
-  for l in ['ht','fr','en','pt-BR','es']:
+  for l in ['fr','en','pt-BR','es']:
    for p in ['', '/news','/haiti','/world','/interviews','/videos','/influencers','/notifications','/saved','/contact','/about','/search?q=Kreyativite','/trending']:
     self.assertEqual(self.c.get('/'+l+p).status_code,200,l+p)
-  self.assertEqual(self.c.get('/',headers={'accept-language':'pt-BR,pt;q=.8'}).url.path,'/pt-BR');self.assertEqual(self.c.get('/ht/unknown').status_code,404)
+  self.assertEqual(self.c.get('/',headers={'accept-language':'pt-BR,pt;q=.8'}).url.path,'/pt-BR');self.assertEqual(self.c.get('/fr/unknown').status_code,404)
+ def test_creole_locale_is_removed(self):
+  from i18n import LANGUAGES
+  from jobs import language_map,normalize_language
+  stamp='2026-01-01T00:00:00+00:00'
+  write('INSERT INTO supported_languages VALUES (?,?,?,?) ON CONFLICT(code) DO NOTHING',('ht','Kreyòl',0,stamp))
+  write('INSERT INTO supported_languages VALUES (?,?,?,?) ON CONFLICT(code) DO NOTHING',('ht-HT','Haitian Creole',0,stamp))
+  self.assertEqual(set(LANGUAGES),{'fr','en','pt-BR','es'})
+  self.assertNotIn('ht',language_map())
+  self.assertNotIn('ht-HT',language_map())
+  self.assertIsNone(normalize_language('ht'))
+  self.assertIsNone(normalize_language('ht-HT'))
+  self.assertEqual(one("SELECT value FROM settings WHERE key='default_locale'")['value'],'fr')
+  self.assertEqual(one("SELECT count(*) AS n FROM articles WHERE lower(locale)='ht'")['n'],0)
+  self.assertEqual(one("SELECT count(*) AS n FROM translations WHERE lower(locale)='ht'")['n'],0)
+  codes={item['code'] for item in self.c.get('/api/languages').json()['languages']}
+  self.assertEqual(codes,{'fr','en','pt-BR','es'})
+  client=TestClient(app)
+  self.assertEqual(client.get('/',follow_redirects=False).headers['location'],'/fr')
+  self.assertEqual(client.get('/',headers={'accept-language':'ht'},follow_redirects=False).headers['location'],'/fr')
+  legacy=client.get('/ht/article/exemple?source=ancien',follow_redirects=False)
+  self.assertEqual(legacy.status_code,301)
+  self.assertEqual(legacy.headers['location'],'/fr/article/exemple?source=ancien')
+  self.assertNotIn('value="ht"',self.c.get('/fr').text)
+  article=one("SELECT * FROM articles WHERE status='published' AND demo=0 LIMIT 1")
+  previous=dict(article);previous.update(locale='ht',title='Ansyen tit kreyòl',body='Ansyen tèks kreyòl pou tès la.')
+  revision_id=str(uuid.uuid4());staff=one("SELECT id FROM staff WHERE email='super_admin@test.local'")
+  write('INSERT INTO revisions VALUES (?,?,?,?,?)',(revision_id,article['id'],json.dumps(previous),staff['id'],stamp))
+  admin,token=self.login()
+  rejected=admin.post('/admin/revisions/restore',data={'csrf_token':token,'id':revision_id})
+  self.assertEqual(rejected.status_code,409)
+  self.assertEqual(one('SELECT title FROM articles WHERE id=?',(article['id'],))['title'],article['title'])
  def test_admin_publish_and_revisions(self):
   c,t=self.login()
   for s in ['','articles','influencers','videos','comments','reports','submissions','translations','analytics','settings','team','notifications','ads','audit']:self.assertEqual(c.get('/admin'+('/'+s if s else '')).status_code,200,s)
-  f={'csrf_token':t,'title':'Tès editoryal reyèl','body':'Kontni pou verifye piblikasyon nan CMS la.','category':'Kilti','author':'Editè tès','status':'draft','locale':'ht','slug':'integration-test'}
+  f={'csrf_token':t,'title':'Tès editoryal reyèl','body':'Kontni pou verifye piblikasyon nan CMS la.','category':'Kilti','author':'Editè tès','status':'draft','locale':'fr','slug':'integration-test'}
   r=c.post('/admin/articles/save',data=f);self.assertEqual(r.status_code,200,r.text[:100]);a=one("SELECT * FROM articles WHERE slug='integration-test'")
-  self.assertEqual(self.c.get('/ht/article/integration-test').status_code,404);self.assertEqual(c.get('/admin/preview/'+a['id']).status_code,200);self.assertEqual(TestClient(app).get('/admin/preview/'+a['id']).status_code,401)
-  f.update(id=a['id'],status='published');self.assertEqual(c.post('/admin/articles/save',data=f).status_code,200);self.assertEqual(self.c.get('/ht/article/integration-test').status_code,200);self.assertIn('Tès editoryal reyèl',self.c.get('/ht/search?q=editoryal').text)
+  self.assertEqual(self.c.get('/fr/article/integration-test').status_code,404);self.assertEqual(c.get('/admin/preview/'+a['id']).status_code,200);self.assertEqual(TestClient(app).get('/admin/preview/'+a['id']).status_code,401)
+  f.update(id=a['id'],status='published');self.assertEqual(c.post('/admin/articles/save',data=f).status_code,200);self.assertEqual(self.c.get('/fr/article/integration-test').status_code,200);self.assertIn('Tès editoryal reyèl',self.c.get('/fr/search?q=editoryal').text)
   f['title']='Tit korije';c.post('/admin/articles/save',data=f);self.assertTrue(rows('SELECT * FROM revisions WHERE article_id=?',(a['id'],)))
  def test_comments_threads_moderation_and_ownership(self):
   a=one("SELECT id FROM articles WHERE slug='voix-qui-traversent-les-frontieres'");t=self.token();d={'csrf_token':t,'target_type':'article','target_id':a['id'],'name':'Lektè tès','body':'Yon kòmantè pou moderasyon.'};r=self.c.post('/api/comments',json=d);self.assertEqual(r.status_code,200);id=r.json()['id']

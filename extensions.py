@@ -16,7 +16,7 @@ def initialize_features():
             for tag in a['tags'].split(','):
                 tag=tag.strip()
                 if tag:write('INSERT INTO tags VALUES (?,?,?) ON CONFLICT(name) DO NOTHING',(uid(),tag,core.slugify(tag)))
-        for k,v in {'brand':'Geovyora','tagline':'Kilti. Kreyativite. Enpak.','default_locale':'ht','translation_limit':'100000','ads_enabled':'0','publisher_id':'','ad_slot':'','contact_email':'','push_daily_limit':'3','editorial_v2_initialized':'1','contact_company':'','contact_address':'','homepage_sections':'latest,creators,notifications'}.items():write('INSERT INTO settings(key,value) VALUES (?,?) ON CONFLICT(key) DO NOTHING',(k,v))
+        for k,v in {'brand':'Geovyora','tagline':'Culture. Créativité. Impact.','default_locale':'fr','translation_limit':'100000','ads_enabled':'0','publisher_id':'','ad_slot':'','contact_email':'','push_daily_limit':'3','editorial_v2_initialized':'1','contact_company':'','contact_address':'','homepage_sections':'latest,creators,notifications'}.items():write('INSERT INTO settings(key,value) VALUES (?,?) ON CONFLICT(key) DO NOTHING',(k,v))
 
 def categories():return [r['name'] for r in rows('SELECT name FROM categories WHERE active=1 ORDER BY sort_order,name')]
 def public_categories():
@@ -113,7 +113,7 @@ def install(app):
     @app.post('/admin/seo/save')
     async def seo_save(request:Request):
         f=await request.form();u=csrf(request,f.get('csrf_token'));require(request,core.EDITOR)
-        typ=f.get('target_type');id=f.get('target_id');locale=f.get('locale','ht')
+        typ=f.get('target_type');id=f.get('target_id');locale=f.get('locale','fr')
         if typ not in ['article','influencer'] or locale not in language_map():raise HTTPException(422,'Kontni oswa lang pa valab.')
         if not one('SELECT id FROM '+('articles' if typ=='article' else 'influencers')+' WHERE id=?',(id,)):raise HTTPException(404,'Kontni pa jwenn.')
         title=core.clean(f.get('title'),120);description=core.clean(f.get('description'),300);noindex=int(f.get('noindex')=='on')
@@ -192,6 +192,7 @@ def install(app):
         with connection() as c:
             for item in result.json().get('data',{}).get('languages',[]):
                 code=item['language']
+                if code.lower().split('-')[0]=='ht':continue
                 if not re.fullmatch('[A-Za-z]{2,3}(-[A-Za-z0-9]{2,8})?',code):continue
                 c.execute(sql('INSERT INTO supported_languages VALUES (?,?,?,?) ON CONFLICT(code) DO UPDATE SET name=excluded.name,rtl=excluded.rtl,updated_at=excluded.updated_at'),(code,item.get('name',code),int(code in RTL),now()))
         core.audit(u,'languages.refresh','site');return RedirectResponse('/admin/translations?saved=1',303)
@@ -226,7 +227,7 @@ def install(app):
 
     @app.post('/api/newsletter/subscribe')
     async def newsletter(request:Request):
-        f=await core.public_form(request);core.rate(request,'newsletter',5,3600);email=core.clean(f.get('email'),250,5).lower();locale=f.get('locale','ht')
+        f=await core.public_form(request);core.rate(request,'newsletter',5,3600);email=core.clean(f.get('email'),250,5).lower();locale=f.get('locale','fr')
         if not re.fullmatch(r'[^\s@]+@[^\s@]+\.[^\s@]+',email) or locale not in language_map() or f.get('consent') not in [True,'on']:raise HTTPException(422,'Bay yon imel valab ak konsantman pou newsletter la.')
         token=secrets.token_urlsafe(32);exists=one('SELECT id,status FROM newsletter_subscribers WHERE email=?',(email,))
         if exists and exists['status']=='active':return {'ok':True,'message':'Demann lan resevwa. Si imel sa a deja abòne, abònman an rete aktif.'}

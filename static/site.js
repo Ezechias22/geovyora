@@ -1,5 +1,5 @@
 'use strict';
-const locale=document.body.dataset.locale||'ht';
+const locale=document.body.dataset.locale||'fr';
 const csrf=document.querySelector('meta[name="csrf-token"]').content;
 const $=(s,r=document)=>r.querySelector(s);
 const $$=(s,r=document)=>[...r.querySelectorAll(s)];
