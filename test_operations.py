@@ -2,6 +2,7 @@
 import io,json,os,uuid,re
 from datetime import datetime,timezone,timedelta
 from unittest.mock import patch
+from urllib.parse import unquote
 import test_workflows as fixtures
 from db import rows,one,write
 from jobs import queue_translation,process_translation_jobs,enqueue_campaign,process_push_jobs,InvalidSubscription
@@ -10,6 +11,51 @@ from PIL import Image
 
 class Operations(fixtures.Fixture):
  # Avoid rerunning inherited V1 methods: this class extends only the fixtures/helpers.
+ def test_article_sources_are_labeled_and_whatsapp_shares_canonical_https_url(self):
+  from main import source_label
+  self.assertEqual(source_label('https://www.reuters.com/story/example'),'Reuters')
+  self.assertEqual(source_label('https://lenouvelliste.com/article/example'),'Le Nouvelliste')
+  self.assertEqual(source_label('https://www.example.org/story'),'example.org')
+  article=one("SELECT * FROM articles WHERE slug='voix-qui-traversent-les-frontieres'")
+  self.assertIsNotNone(article)
+  previous=article.get('sources','')
+  try:
+   write('UPDATE articles SET sources=? WHERE id=?',('https://www.reuters.com/story/example',article['id']))
+   with patch.dict(os.environ,{'SITE_URL':'https://geovyora.com'}):
+    response=self.c.get('/fr/article/'+article['slug'])
+   self.assertEqual(response.status_code,200)
+   self.assertIn('>Reuters</a>',response.text)
+   self.assertNotIn('>https://www.reuters.com/story/example</a>',response.text)
+   match=re.search(r'href="https://wa\.me/\?text=([^"]+)"',response.text)
+   self.assertIsNotNone(match)
+   shared=unquote(match.group(1))
+   self.assertTrue(shared.startswith('https://geovyora.com/fr/article/'))
+   self.assertNotIn('http://',shared)
+  finally:
+   write('UPDATE articles SET sources=? WHERE id=?',(previous,article['id']))
+
+ def test_community_policy_heading_is_localized(self):
+  expected={'fr':'Règles de la communauté','en':'Community guidelines','pt-BR':'Diretrizes da comunidade','es':'Normas de la comunidad'}
+  for locale,title in expected.items():
+   response=self.c.get('/'+locale+'/community')
+   self.assertEqual(response.status_code,200)
+   self.assertIn('<h1>'+title+'<span class="heading-dot">.</span></h1>',response.text)
+
+ def test_adsense_privacy_and_cookie_notices_match_loaded_code(self):
+  phrases={
+   'fr':'code de vérification du site Google AdSense est installé',
+   'en':'Google AdSense site verification code is installed',
+   'pt-BR':'código de verificação do site do Google AdSense está instalado',
+   'es':'código de verificación de Google AdSense está instalado',
+  }
+  for locale,phrase in phrases.items():
+   for page in ('privacy','cookies'):
+    response=self.c.get('/'+locale+'/'+page)
+    self.assertEqual(response.status_code,200)
+    self.assertIn(phrase,response.text)
+    self.assertIn('https://policies.google.com/technologies/partner-sites?',response.text)
+    self.assertIn('https://adssettings.google.com/',response.text)
+
  def test_trending_filter_and_images_on_every_article_card(self):
   sport=one("SELECT * FROM articles WHERE slug='voix-qui-traversent-les-frontieres'")
   culture=one("SELECT * FROM articles WHERE slug='mizik-nouvo-jenerasyon'")

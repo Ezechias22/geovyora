@@ -2,7 +2,7 @@ import os,json,uuid,secrets,time,hmac,hashlib,html,re,logging
 from datetime import datetime,timezone,timedelta
 from contextlib import asynccontextmanager
 from pathlib import Path
-from urllib.parse import urlencode
+from urllib.parse import urlencode,urlsplit
 import httpx
 from fastapi import FastAPI,Request,Form,HTTPException
 from fastapi.responses import HTMLResponse,RedirectResponse,JSONResponse,Response
@@ -47,6 +47,30 @@ def clean(value,limit,minimum=0):
     value=str(value or '').strip()
     if len(value)>limit or len(value)<minimum: raise HTTPException(422,'Longè chan an pa valab.')
     return value
+
+def source_label(url):
+    host=(urlsplit(url or '').hostname or '').lower().removeprefix('www.')
+    labels={
+        'lenouvelliste.com':'Le Nouvelliste',
+        'juno7.ht':'Juno7',
+        'belidemag.net':'Bèlide Magazine',
+        'wyffest.com':'World Youth Festival',
+        'fr.linkedin.com':'LinkedIn · Bovann K.',
+        'linkedin.com':'LinkedIn',
+        'togo-today.com':'Togo Today',
+        'concacaf.com':'Concacaf',
+        'apnews.com':'Associated Press (AP)',
+        'commons.wikimedia.org':'Wikimedia Commons',
+        'creativecommons.org':'Creative Commons',
+        'sec.gov':'U.S. Securities and Exchange Commission (SEC)',
+        'prnewswire.com':'PR Newswire',
+        'intellectual-property-helpdesk.ec.europa.eu':'European IP Helpdesk',
+        'reuters.com':'Reuters',
+        'haiti.org':'Embassy of Haiti',
+        'ny1.com':'NY1 / Associated Press',
+        'thegrio.com':'TheGrio',
+    }
+    return labels.get(host,host)
 
 def translate_record(record,locale,typ='article'):
     original=record.get('locale','fr')
@@ -148,7 +172,7 @@ def render(request,page,locale='fr',**kw):
             if note:base['corrections'].append({'note':note,'date':revision['created_at'][:10]})
     base['home_sections']=[v for v in cfg.get('homepage_sections','latest,creators,notifications').split(',') if v in ['latest','creators','notifications']]
     if base.get('article') and base['article'].get('sources'):
-        base['sources_list']=[{'text':x.strip(),'url':safe_url(x.strip()) if x.strip().startswith('https://') else None} for x in base['article']['sources'].splitlines() if x.strip()]
+        base['sources_list']=[{'text':x.strip(),'url':safe_url(x.strip()) if x.strip().startswith('https://') else None,'label':source_label(x.strip()) if x.strip().startswith('https://') else x.strip()} for x in base['article']['sources'].splitlines() if x.strip()]
     if page!='admin' and locale in ['fr','en','pt-BR','es'] and cfg.get('ads_enabled')=='1' and cfg.get('publisher_id') and os.getenv('ADS_CONSENT_READY')=='1':
         displayed=base.get('article')
         base['ads_allowed']=bool(displayed and not displayed['demo'] and displayed.get('translated') and displayed.get('original_locale')!=locale or displayed and not displayed['demo'] and displayed.get('original_locale')==locale)

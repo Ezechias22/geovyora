@@ -103,7 +103,7 @@ HTML, scripts ak embeds lib pa egzekite nan kò atik la. Vidyo embedded yo bezwe
 - Foto CMS: presigned POST nan S3-compatible storage, JPEG/PNG/WebP, 10 MB. Endpoint verifye bytes reyèl, fòma, dimansyon, foto anime ak fichye domaje anvan make ready.
 - Foto soumisyon: validasyon avan upload nan PRIVATE_SUBMISSION_BUCKET. Fichye yo pa gen URL piblik; sèlman staff otorize resevwa yon lyen download tanporè 120 segonn.
 - Piblisite dirèk: bannè make Publicité, lang configurable, activate/deactivate. Pa parèt sou paj demo.
-- AdSense: publisher/ad-slot settings ak ads.txt prepare. **Script AdSense toujou pa aktive**: apwobasyon Google, yon CMP apwopriye/sètifye kote obligatwa ak tès konsantman rete obligatwa. Pa gen ads nan admin, drafts oswa kontni demo. Pa gen revni pwomèt.
+- AdSense: kòd verifikasyon sit la chaje sou paj piblik yo; pa gen anons k ap sèvi ni espas anons ki aktive kounye a. Apwobasyon Google ak entegrasyon CMP ki aplikab la rete pou fini anvan aktivasyon. Pou anons pèsonalize nan EEA, Wayòm Ini ak Swis, Google egzije yon CMP sètifye ki entegre ak TCF la. Pa gen ads nan admin, drafts oswa kontni demo. Pa gen revni ni apwobasyon ki garanti.
 
 ## Kle sèvis yo
 
@@ -169,7 +169,7 @@ python -m unittest discover -v
 
 **QA Chromium**: sove atik, voye kontak, login admin, kreye kategori ak kanpay draft, meni mobil. Desktop 1440px; mobil 390px. Home, anyè, atik, kontak, admin, kategori, tags, SEO, notifikasyon, tradiksyon, newsletter, ekip ak kont ekip la teste san overflow horizontal ni erè JavaScript.
 
-**Poko teste live**: PostgreSQL/Docker/Render, uploads Mux/S3 reyèl, Firebase push reyèl, Google Translation reyèl, AdSense/CMP, imèl newsletter, gwo chaj ak load testing. Tès ekstèn yo itilize doubles/mocks kote endike. Sa pa vle di sèvis yo konekte.
+**Poko teste live**: PostgreSQL/Docker/Render, uploads Mux/S3 reyèl, Firebase push reyèl, Google Translation reyèl, difizyon anons AdSense/CMP, imèl newsletter, gwo chaj ak load testing. Kòd verifikasyon AdSense lan chaje, men sa pa vle di kont lan apwouve oswa anons yo ap sèvi. Tès ekstèn yo itilize doubles/mocks kote endike. Sa pa vle di sèvis yo konekte.
 
 Tout atik/pwofil demo yo fiktif epi make. Imaj studio a se yon illustration orijinal jenere pa IA. Ranplase demo, konplete enfòmasyon antrepriz/politik, verifye dwa medya epi teste koneksyon sèvis yo anvan lansman piblik.
 

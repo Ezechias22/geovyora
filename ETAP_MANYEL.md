@@ -7,7 +7,7 @@ Geovyora deja anliy sou `https://geovyora.com`. Lis sa a konsène koneksyon sèv
 3. Nan shell web la: `python manage.py create-admin`. Chwazi imel, non ak modpas ou; pa gen modpas pa defo. Antre nan `/admin`.
 4. Ranpli non responsab biznis la, kontak, adrès ak tèks legal yo nan CMS. Yon modèl legal pa yon validasyon legal. Ajoute vrè atik, pwofil, sous, foto ak videyo ou gen dwa itilize. Deplwaman pwodiksyon pa ajoute demonstrasyon yo.
 5. Nan Mux, mete webhook HTTPS `/api/webhooks/mux`; nan Firebase, aktive pwojè web/push ak VAPID; nan Google, aktive Translation ak limit depans; nan S3, mete CORS ak règleman bucket apwopriye. Teste yon vrè upload, tradiksyon ak notifikasyon apre koneksyon.
-6. AdSense: mande apwobasyon epi konfigire yon CMP sètifye kote obligatwa. Script piblisite a poko aktive nan kòd la. Entegrasyon CMP ak AdSense rete travay apre ou chwazi founisè a ak jwenn apwobasyon.
+6. AdSense: kòd verifikasyon sit la deja chaje sou paj piblik yo, men sit la poko sèvi anons. Tcheke estati ak rezon espesifik yo nan paj AdSense la; imèl jeneral la pa bay rezon pèsonalize a. Anvan ou aktive anons, verifye kondisyon kont lan, sèvi ak yon CMP ki apwopriye kote sa aplikab, epi teste konfigirasyon an. Pou anons pèsonalize nan EEA, Wayòm Ini ak Swis, Google egzije yon CMP sètifye ki entegre ak TCF la.
 7. Newsletter: koleksyon ak dezabònman pare. Voye kanpay imel mande yon founisè imel, domèn ekspeditè valide ak entegrasyon livrezon; sa poko fèt.
 8. Aktive sovgad otomatik hosting lan, monitoring ak politik konsèvasyon done/foto prive. Teste restorasyon. Zouti lokal ki anba yo deja pare, men yo pa otomatikman aktive sovgad hosting ou.
 
