@@ -287,6 +287,10 @@ Piblisite|Publicité|Advertising|Publicidade|Publicidad
 Storage|Stockage|Storage|Armazenamento|Almacenamiento
 Geovyora / ADMINISTRATION|Geovyora / ADMINISTRATION|Geovyora / ADMINISTRATION|Geovyora / ADMINISTRAÇÃO|Geovyora / ADMINISTRACIÓN
 '''
+_ROWS += '''
+Refresh Mux statuses|Actualiser les statuts Mux|Refresh Mux statuses|Atualizar status do Mux|Actualizar estados de Mux
+Mux refresh: {ready} ready; {processing} processing; {errors} errors; {failed} could not be checked; {remaining} still pending.|Actualisation Mux : {ready} prêtes ; {processing} en traitement ; {errors} en erreur ; {failed} non vérifiées ; {remaining} encore en attente.|Mux refresh: {ready} ready; {processing} processing; {errors} errors; {failed} could not be checked; {remaining} still pending.|Atualização do Mux: {ready} prontas; {processing} em processamento; {errors} com erro; {failed} não verificadas; {remaining} ainda pendentes.|Actualización de Mux: {ready} listas; {processing} en proceso; {errors} con error; {failed} no verificadas; {remaining} aún pendientes.
+'''
 for row in _ROWS.strip().splitlines():
     if not row.strip():continue
     source,*translations=row.split('|')

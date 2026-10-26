@@ -374,7 +374,7 @@ def admin(request:Request,section:str='overview',edit:str='',service_checks=None
     counts['pending_comments']=one("SELECT count(*) n FROM comments WHERE status='pending'")['n']
     counts['pending_reports']=one("SELECT count(*) n FROM reports WHERE status IN ('pending','in_review')")['n']
     counts['views']=one('SELECT count(*) n FROM page_views')['n']
-    service_keys={'Mux':['MUX_TOKEN_ID','MUX_TOKEN_SECRET'],'Google Translation':['GOOGLE_TRANSLATION_KEY'],'Storage':['S3_BUCKET','S3_ENDPOINT_URL','S3_REGION','S3_ACCESS_KEY_ID','S3_SECRET_ACCESS_KEY','MEDIA_PUBLIC_URL','PRIVATE_SUBMISSION_BUCKET'],'Firebase':['FIREBASE_PUBLIC_CONFIG','FIREBASE_SERVICE_ACCOUNT','FIREBASE_VAPID_KEY']}
+    service_keys={'Mux':['MUX_TOKEN_ID','MUX_TOKEN_SECRET','MUX_WEBHOOK_SECRET'],'Google Translation':['GOOGLE_TRANSLATION_KEY'],'Storage':['S3_BUCKET','S3_ENDPOINT_URL','S3_REGION','S3_ACCESS_KEY_ID','S3_SECRET_ACCESS_KEY','MEDIA_PUBLIC_URL','PRIVATE_SUBMISSION_BUCKET'],'Firebase':['FIREBASE_PUBLIC_CONFIG','FIREBASE_SERVICE_ACCOUNT','FIREBASE_VAPID_KEY']}
     service_details={name:{'missing':[key for key in keys if not os.getenv(key)],'optional':name=='Google Translation'} for name,keys in service_keys.items()}
     services={name:not detail['missing'] for name,detail in service_details.items()}
     services['AdSense']=settings().get('ads_enabled')=='1'
@@ -625,6 +625,64 @@ async def mux_webhook(request:Request):
             if playback:c.execute(sql("UPDATE videos SET status='ready',asset_id=?,playback_id=? WHERE id=? OR asset_id=?"),(d.get('id'),playback,d.get('passthrough'),d.get('id')))
         elif kind in ['video.asset.errored','video.upload.errored']:c.execute(sql("UPDATE videos SET status='error' WHERE asset_id=? OR upload_id=? OR id=?"),(d.get('id'),d.get('id'),d.get('passthrough')))
     return {'ok':True}
+
+@app.post('/admin/videos/refresh')
+async def refresh_mux_videos(request:Request):
+    f=await request.form();u=csrf(request,f.get('csrf_token'));require(request,EDITOR);rate(request,'mux-status-refresh',5,600)
+    token_id=os.getenv('MUX_TOKEN_ID');token_secret=os.getenv('MUX_TOKEN_SECRET')
+    if not token_id or not token_secret:raise HTTPException(503,'Konekte kle API Mux yo nan Render anvan ou verifye videyo yo.')
+    pending=rows("SELECT * FROM videos WHERE status IN ('uploading','processing') ORDER BY created_at LIMIT 25")
+    ready_count=processing_count=error_count=failed_count=0
+    auth=(token_id,token_secret)
+    async with httpx.AsyncClient(timeout=20) as client:
+        for video in pending:
+            asset_id=video.get('asset_id')
+            try:
+                if not asset_id and video.get('upload_id'):
+                    upload_response=await client.get('https://api.mux.com/video/v1/uploads/'+video['upload_id'],auth=auth)
+                    if upload_response.status_code in (401,403):raise HTTPException(502,'Mux refize kle API yo. Verifye MUX_TOKEN_ID ak MUX_TOKEN_SECRET sou Render.')
+                    if upload_response.status_code!=200:
+                        failed_count+=1
+                        continue
+                    upload=upload_response.json().get('data') or {}
+                    upload_status=upload.get('status')
+                    asset_id=upload.get('asset_id')
+                    if upload_status in ('errored','cancelled','timed_out'):
+                        write("UPDATE videos SET status='error' WHERE id=?",(video['id'],));error_count+=1
+                        continue
+                    if not asset_id:
+                        write("UPDATE videos SET status='uploading' WHERE id=?",(video['id'],));processing_count+=1
+                        continue
+                    write('UPDATE videos SET asset_id=? WHERE id=?',(asset_id,video['id']))
+                if not asset_id:
+                    failed_count+=1
+                    continue
+                asset_response=await client.get('https://api.mux.com/video/v1/assets/'+asset_id,auth=auth)
+                if asset_response.status_code in (401,403):raise HTTPException(502,'Mux refize kle API yo. Verifye MUX_TOKEN_ID ak MUX_TOKEN_SECRET sou Render.')
+                if asset_response.status_code==404:
+                    write("UPDATE videos SET status='error' WHERE id=?",(video['id'],));error_count+=1
+                    continue
+                if asset_response.status_code!=200:
+                    failed_count+=1
+                    continue
+                asset=asset_response.json().get('data') or {}
+                asset_status=asset.get('status')
+                playback=next((item.get('id') for item in asset.get('playback_ids',[]) if item.get('policy')=='public' and item.get('id')),None)
+                if asset_status=='ready' and playback:
+                    write("UPDATE videos SET status='ready',asset_id=?,playback_id=? WHERE id=?",(asset.get('id') or asset_id,playback,video['id']));ready_count+=1
+                elif asset_status in ('errored','deleted') or asset_status=='ready':
+                    write("UPDATE videos SET status='error',asset_id=? WHERE id=?",(asset.get('id') or asset_id,video['id']));error_count+=1
+                else:
+                    write("UPDATE videos SET status='processing',asset_id=? WHERE id=?",(asset.get('id') or asset_id,video['id']));processing_count+=1
+            except HTTPException:
+                raise
+            except (httpx.HTTPError,ValueError,KeyError,TypeError):
+                failed_count+=1
+                logging.exception('Mux status refresh failed for video %s',video.get('id'))
+    remaining=one("SELECT count(*) n FROM videos WHERE status IN ('uploading','processing')")['n']
+    query=urlencode({'mux_refreshed':'1','ready':ready_count,'processing':processing_count,'errors':error_count,'failed':failed_count,'remaining':remaining})
+    audit(u,'video.status_refresh',str(len(pending)),f'{ready_count} ready; {processing_count} processing; {error_count} errors; {failed_count} failed')
+    return RedirectResponse('/admin/videos?'+query,303)
 
 @app.get('/api/push/config')
 def push_config():
