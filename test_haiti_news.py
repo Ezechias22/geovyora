@@ -15,6 +15,9 @@ class HaitiNews(unittest.TestCase):
     def test_additional_articles_publish_with_correct_regions_and_preserve_edits(self):
         self.verify_package('018_more_news_20261102.py', '2026-11-02-suite.json')
 
+    def test_brazil_articles_publish_without_replacing_existing_edits(self):
+        self.verify_package('020_brazil_elections_20261102.py', '2026-11-02-bresil.json')
+
     def test_rumor_clarification_preserves_other_edits_and_is_repeatable(self):
         spec = importlib.util.spec_from_file_location('rumor_clarification', ROOT / 'migrations/019_clarify_florida_rumor.py')
         module = importlib.util.module_from_spec(spec)
