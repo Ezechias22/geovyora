@@ -1,0 +1,3503 @@
+{
+  "checked_at": "2026-11-02T16:52:16.861695+00:00",
+  "code_commit": "f555518ccfdbf24a112fb2b59bebff8a374367d0",
+  "scope": {
+    "urls": 163,
+    "sitemap_urls": 64,
+    "article_urls": 60,
+    "assets": 10,
+    "external_sources": 49,
+    "automated_tests_passed": 63
+  },
+  "pages": [
+    {
+      "url": "https://geovyora.com/en",
+      "status": 200,
+      "language": "en",
+      "body_language": null,
+      "h1": "Ariana Lafond: from TikTok to the international stage",
+      "robots": "index,follow",
+      "canonical": [
+        "https://geovyora.com/en"
+      ],
+      "schema_errors": [],
+      "article_words": 0,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/en"
+    },
+    {
+      "url": "https://geovyora.com/en/about",
+      "status": 200,
+      "language": "en",
+      "body_language": null,
+      "h1": "About us.",
+      "robots": "index,follow",
+      "canonical": [
+        "https://geovyora.com/en/about"
+      ],
+      "schema_errors": [],
+      "article_words": 0,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/en/about"
+    },
+    {
+      "url": "https://geovyora.com/en/advertising",
+      "status": 200,
+      "language": "en",
+      "body_language": null,
+      "h1": "Advertise.",
+      "robots": "index,follow",
+      "canonical": [
+        "https://geovyora.com/en/advertising"
+      ],
+      "schema_errors": [],
+      "article_words": 0,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/en/advertising"
+    },
+    {
+      "url": "https://geovyora.com/en/article/ariana-lafond-tiktok-scene-internationale",
+      "status": 200,
+      "language": "en",
+      "body_language": "en",
+      "h1": "Ariana Lafond: from TikTok to the international stage",
+      "robots": "index,follow",
+      "canonical": [
+        "https://geovyora.com/en/article/ariana-lafond-tiktok-scene-internationale"
+      ],
+      "schema_errors": [],
+      "article_words": 344,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/en/article/ariana-lafond-tiktok-scene-internationale"
+    },
+    {
+      "url": "https://geovyora.com/en/article/bresil-elections-2026-audits-urnes-4-novembre",
+      "status": 200,
+      "language": "en",
+      "body_language": "en",
+      "h1": "Brazil’s elections: what the audit reports due on 4 November must document",
+      "robots": "index,follow",
+      "canonical": [
+        "https://geovyora.com/en/article/bresil-elections-2026-audits-urnes-4-novembre"
+      ],
+      "schema_errors": [],
+      "article_words": 448,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/en/article/bresil-elections-2026-audits-urnes-4-novembre"
+    },
+    {
+      "url": "https://geovyora.com/en/article/bresil-lula-reelection-programmes-sociaux-prochaines-etapes",
+      "status": 200,
+      "language": "en",
+      "body_language": "en",
+      "h1": "Brazil: after reelection, Lula pledges to maintain social programs",
+      "robots": "index,follow",
+      "canonical": [
+        "https://geovyora.com/en/article/bresil-lula-reelection-programmes-sociaux-prochaines-etapes"
+      ],
+      "schema_errors": [],
+      "article_words": 433,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/en/article/bresil-lula-reelection-programmes-sociaux-prochaines-etapes"
+    },
+    {
+      "url": "https://geovyora.com/en/article/bresil-registre-electoral-reouverture-3-novembre-2026",
+      "status": 200,
+      "language": "en",
+      "body_language": "en",
+      "h1": "Brazil: the electoral register reopens on 3 November. Which services resume?",
+      "robots": "index,follow",
+      "canonical": [
+        "https://geovyora.com/en/article/bresil-registre-electoral-reouverture-3-novembre-2026"
+      ],
+      "schema_errors": [],
+      "article_words": 445,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/en/article/bresil-registre-electoral-reouverture-3-novembre-2026"
+    },
+    {
+      "url": "https://geovyora.com/en/article/floride-learjet-1-novembre-faits-enquete",
+      "status": 200,
+      "language": "en",
+      "body_language": "en",
+      "h1": "Florida: a Learjet crashed on 1 November; the cause remains to be determined",
+      "robots": "index,follow",
+      "canonical": [
+        "https://geovyora.com/en/article/floride-learjet-1-novembre-faits-enquete"
+      ],
+      "schema_errors": [],
+      "article_words": 473,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/en/article/floride-learjet-1-novembre-faits-enquete"
+    },
+    {
+      "url": "https://geovyora.com/en/article/haiti-enfants-recrutement-gangs-prevention-reinsertion",
+      "status": 200,
+      "language": "en",
+      "body_language": "en",
+      "h1": "Children recruited by gangs in Haiti: protection must also provide ways out",
+      "robots": "index,follow",
+      "canonical": [
+        "https://geovyora.com/en/article/haiti-enfants-recrutement-gangs-prevention-reinsertion"
+      ],
+      "schema_errors": [],
+      "article_words": 441,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/en/article/haiti-enfants-recrutement-gangs-prevention-reinsertion"
+    },
+    {
+      "url": "https://geovyora.com/en/article/haiti-faim-2027-prevision-violence-agriculture",
+      "status": 200,
+      "language": "en",
+      "body_language": "en",
+      "h1": "Haiti: what the food-security warning for spring 2027 means",
+      "robots": "index,follow",
+      "canonical": [
+        "https://geovyora.com/en/article/haiti-faim-2027-prevision-violence-agriculture"
+      ],
+      "schema_errors": [],
+      "article_words": 471,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/en/article/haiti-faim-2027-prevision-violence-agriculture"
+    },
+    {
+      "url": "https://geovyora.com/en/article/haiti-insecurite-campagnes-proteger-civils",
+      "status": 200,
+      "language": "en",
+      "body_language": "en",
+      "h1": "Haiti: protecting rural communities becomes central to the response to gangs",
+      "robots": "index,follow",
+      "canonical": [
+        "https://geovyora.com/en/article/haiti-insecurite-campagnes-proteger-civils"
+      ],
+      "schema_errors": [],
+      "article_words": 429,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/en/article/haiti-insecurite-campagnes-proteger-civils"
+    },
+    {
+      "url": "https://geovyora.com/en/article/haiti-sanctions-armes-munitions-application",
+      "status": 200,
+      "language": "en",
+      "body_language": "en",
+      "h1": "Haiti: why sanctions against gangs also depend on ports and banks",
+      "robots": "index,follow",
+      "canonical": [
+        "https://geovyora.com/en/article/haiti-sanctions-armes-munitions-application"
+      ],
+      "schema_errors": [],
+      "article_words": 461,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/en/article/haiti-sanctions-armes-munitions-application"
+    },
+    {
+      "url": "https://geovyora.com/en/article/haytiles-ezechias-toussaint-entrepreneuriat-numerique",
+      "status": 200,
+      "language": "en",
+      "body_language": "en",
+      "h1": "Haytiles: a Haitian entrepreneur building digital services from Brazil",
+      "robots": "index,follow",
+      "canonical": [
+        "https://geovyora.com/en/article/haytiles-ezechias-toussaint-entrepreneuriat-numerique"
+      ],
+      "schema_errors": [],
+      "article_words": 548,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/en/article/haytiles-ezechias-toussaint-entrepreneuriat-numerique"
+    },
+    {
+      "url": "https://geovyora.com/en/article/khaby-lame-jimo-dijital-ako-975-milyon",
+      "status": 200,
+      "language": "en",
+      "body_language": "en",
+      "h1": "Khaby Lame and the digital twin plan: what does the $975 million agreement actually say?",
+      "robots": "index,follow",
+      "canonical": [
+        "https://geovyora.com/en/article/khaby-lame-jimo-dijital-ako-975-milyon"
+      ],
+      "schema_errors": [],
+      "article_words": 457,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/en/article/khaby-lame-jimo-dijital-ako-975-milyon"
+    },
+    {
+      "url": "https://geovyora.com/en/article/mrbeast-youtube-beast-land-influence-mondiale",
+      "status": 200,
+      "language": "en",
+      "body_language": "en",
+      "h1": "MrBeast, from YouTube to Beast Land: when videos become real-world experiences",
+      "robots": "index,follow",
+      "canonical": [
+        "https://geovyora.com/en/article/mrbeast-youtube-beast-land-influence-mondiale"
+      ],
+      "schema_errors": [],
+      "article_words": 572,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/en/article/mrbeast-youtube-beast-land-influence-mondiale"
+    },
+    {
+      "url": "https://geovyora.com/en/article/salvador-haiti-bukele-participation-ce-qui-est-confirme",
+      "status": 200,
+      "language": "en",
+      "body_language": "en",
+      "h1": "El Salvador and Haiti: what is confirmed beyond Bukele’s image",
+      "robots": "index,follow",
+      "canonical": [
+        "https://geovyora.com/en/article/salvador-haiti-bukele-participation-ce-qui-est-confirme"
+      ],
+      "schema_errors": [],
+      "article_words": 488,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/en/article/salvador-haiti-bukele-participation-ce-qui-est-confirme"
+    },
+    {
+      "url": "https://geovyora.com/en/article/wilson-isidor-deklarasyon-ayiti-repiblik-dominikenn",
+      "status": 200,
+      "language": "en",
+      "body_language": "en",
+      "h1": "Wilson Isidor: a Haiti brace, then a phrase that sparked debate",
+      "robots": "index,follow",
+      "canonical": [
+        "https://geovyora.com/en/article/wilson-isidor-deklarasyon-ayiti-repiblik-dominikenn"
+      ],
+      "schema_errors": [],
+      "article_words": 419,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/en/article/wilson-isidor-deklarasyon-ayiti-repiblik-dominikenn"
+    },
+    {
+      "url": "https://geovyora.com/en/article/wyclef-jean-influence-haitienne-diaspora-fugees",
+      "status": 200,
+      "language": "en",
+      "body_language": "en",
+      "h1": "Wyclef Jean: the Haitian voice that brought the diaspora into popular music",
+      "robots": "index,follow",
+      "canonical": [
+        "https://geovyora.com/en/article/wyclef-jean-influence-haitienne-diaspora-fugees"
+      ],
+      "schema_errors": [],
+      "article_words": 586,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/en/article/wyclef-jean-influence-haitienne-diaspora-fugees"
+    },
+    {
+      "url": "https://geovyora.com/en/community",
+      "status": 200,
+      "language": "en",
+      "body_language": null,
+      "h1": "Community guidelines.",
+      "robots": "index,follow",
+      "canonical": [
+        "https://geovyora.com/en/community"
+      ],
+      "schema_errors": [],
+      "article_words": 0,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/en/community"
+    },
+    {
+      "url": "https://geovyora.com/en/contact",
+      "status": 200,
+      "language": "en",
+      "body_language": null,
+      "h1": "Contact.",
+      "robots": "index,follow",
+      "canonical": [
+        "https://geovyora.com/en/contact"
+      ],
+      "schema_errors": [],
+      "article_words": 0,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/en/contact"
+    },
+    {
+      "url": "https://geovyora.com/en/cookies",
+      "status": 200,
+      "language": "en",
+      "body_language": null,
+      "h1": "Cookies.",
+      "robots": "index,follow",
+      "canonical": [
+        "https://geovyora.com/en/cookies"
+      ],
+      "schema_errors": [],
+      "article_words": 0,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/en/cookies"
+    },
+    {
+      "url": "https://geovyora.com/en/copyright",
+      "status": 200,
+      "language": "en",
+      "body_language": null,
+      "h1": "Copyright / Removal.",
+      "robots": "index,follow",
+      "canonical": [
+        "https://geovyora.com/en/copyright"
+      ],
+      "schema_errors": [],
+      "article_words": 0,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/en/copyright"
+    },
+    {
+      "url": "https://geovyora.com/en/discoveries",
+      "status": 200,
+      "language": "en",
+      "body_language": null,
+      "h1": "Discoveries.",
+      "robots": "noindex,nofollow",
+      "canonical": [
+        "https://geovyora.com/en/discoveries"
+      ],
+      "schema_errors": [],
+      "article_words": 0,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/en/discoveries"
+    },
+    {
+      "url": "https://geovyora.com/en/editorial",
+      "status": 200,
+      "language": "en",
+      "body_language": null,
+      "h1": "Our editorial method.",
+      "robots": "index,follow",
+      "canonical": [
+        "https://geovyora.com/en/editorial"
+      ],
+      "schema_errors": [],
+      "article_words": 0,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/en/editorial"
+    },
+    {
+      "url": "https://geovyora.com/en/haiti",
+      "status": 200,
+      "language": "en",
+      "body_language": null,
+      "h1": "Haiti.",
+      "robots": "index,follow",
+      "canonical": [
+        "https://geovyora.com/en/haiti"
+      ],
+      "schema_errors": [],
+      "article_words": 0,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/en/haiti"
+    },
+    {
+      "url": "https://geovyora.com/en/influencers",
+      "status": 200,
+      "language": "en",
+      "body_language": null,
+      "h1": "Creators.",
+      "robots": "noindex,nofollow",
+      "canonical": [
+        "https://geovyora.com/en/influencers"
+      ],
+      "schema_errors": [],
+      "article_words": 0,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/en/influencers"
+    },
+    {
+      "url": "https://geovyora.com/en/interviews",
+      "status": 200,
+      "language": "en",
+      "body_language": null,
+      "h1": "Interviews.",
+      "robots": "noindex,nofollow",
+      "canonical": [
+        "https://geovyora.com/en/interviews"
+      ],
+      "schema_errors": [],
+      "article_words": 0,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/en/interviews"
+    },
+    {
+      "url": "https://geovyora.com/en/news",
+      "status": 200,
+      "language": "en",
+      "body_language": null,
+      "h1": "News.",
+      "robots": "index,follow",
+      "canonical": [
+        "https://geovyora.com/en/news"
+      ],
+      "schema_errors": [],
+      "article_words": 0,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/en/news"
+    },
+    {
+      "url": "https://geovyora.com/en/newsletter",
+      "status": 200,
+      "language": "en",
+      "body_language": null,
+      "h1": "Geovyora stories in your inbox.",
+      "robots": "index,follow",
+      "canonical": [
+        "https://geovyora.com/en/newsletter"
+      ],
+      "schema_errors": [],
+      "article_words": 0,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/en/newsletter"
+    },
+    {
+      "url": "https://geovyora.com/en/notifications",
+      "status": 200,
+      "language": "en",
+      "body_language": null,
+      "h1": "Choose the stories that interest you.",
+      "robots": "noindex,nofollow",
+      "canonical": [
+        "https://geovyora.com/en/notifications"
+      ],
+      "schema_errors": [],
+      "article_words": 0,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/en/notifications"
+    },
+    {
+      "url": "https://geovyora.com/en/privacy",
+      "status": 200,
+      "language": "en",
+      "body_language": null,
+      "h1": "Privacy.",
+      "robots": "index,follow",
+      "canonical": [
+        "https://geovyora.com/en/privacy"
+      ],
+      "schema_errors": [],
+      "article_words": 0,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/en/privacy"
+    },
+    {
+      "url": "https://geovyora.com/en/saved",
+      "status": 200,
+      "language": "en",
+      "body_language": null,
+      "h1": "Saved stories.",
+      "robots": "noindex,nofollow",
+      "canonical": [
+        "https://geovyora.com/en/saved"
+      ],
+      "schema_errors": [],
+      "article_words": 0,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/en/saved"
+    },
+    {
+      "url": "https://geovyora.com/en/search?q=Haiti",
+      "status": 200,
+      "language": "en",
+      "body_language": null,
+      "h1": "Search.",
+      "robots": "noindex,nofollow",
+      "canonical": [
+        "https://geovyora.com/en/search"
+      ],
+      "schema_errors": [],
+      "article_words": 0,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/en/search?q=Haiti"
+    },
+    {
+      "url": "https://geovyora.com/en/submit-influencer",
+      "status": 200,
+      "language": "en",
+      "body_language": null,
+      "h1": "Suggest a creator.",
+      "robots": "index,follow",
+      "canonical": [
+        "https://geovyora.com/en/submit-influencer"
+      ],
+      "schema_errors": [],
+      "article_words": 0,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/en/submit-influencer"
+    },
+    {
+      "url": "https://geovyora.com/en/submit-news",
+      "status": 200,
+      "language": "en",
+      "body_language": null,
+      "h1": "Submit a story.",
+      "robots": "index,follow",
+      "canonical": [
+        "https://geovyora.com/en/submit-news"
+      ],
+      "schema_errors": [],
+      "article_words": 0,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/en/submit-news"
+    },
+    {
+      "url": "https://geovyora.com/en/terms",
+      "status": 200,
+      "language": "en",
+      "body_language": null,
+      "h1": "Terms.",
+      "robots": "index,follow",
+      "canonical": [
+        "https://geovyora.com/en/terms"
+      ],
+      "schema_errors": [],
+      "article_words": 0,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/en/terms"
+    },
+    {
+      "url": "https://geovyora.com/en/trending",
+      "status": 200,
+      "language": "en",
+      "body_language": null,
+      "h1": "Trending.",
+      "robots": "index,follow",
+      "canonical": [
+        "https://geovyora.com/en/trending"
+      ],
+      "schema_errors": [],
+      "article_words": 0,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/en/trending"
+    },
+    {
+      "url": "https://geovyora.com/en/videos",
+      "status": 200,
+      "language": "en",
+      "body_language": null,
+      "h1": "Videos.",
+      "robots": "noindex,nofollow",
+      "canonical": [
+        "https://geovyora.com/en/videos"
+      ],
+      "schema_errors": [],
+      "article_words": 0,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/en/videos"
+    },
+    {
+      "url": "https://geovyora.com/en/world",
+      "status": 200,
+      "language": "en",
+      "body_language": null,
+      "h1": "World.",
+      "robots": "index,follow",
+      "canonical": [
+        "https://geovyora.com/en/world"
+      ],
+      "schema_errors": [],
+      "article_words": 0,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/en/world"
+    },
+    {
+      "url": "https://geovyora.com/es",
+      "status": 200,
+      "language": "es",
+      "body_language": null,
+      "h1": "Ariana Lafond: de TikTok al escenario internacional",
+      "robots": "index,follow",
+      "canonical": [
+        "https://geovyora.com/es"
+      ],
+      "schema_errors": [],
+      "article_words": 0,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/es"
+    },
+    {
+      "url": "https://geovyora.com/es/about",
+      "status": 200,
+      "language": "es",
+      "body_language": null,
+      "h1": "Quiénes somos.",
+      "robots": "index,follow",
+      "canonical": [
+        "https://geovyora.com/es/about"
+      ],
+      "schema_errors": [],
+      "article_words": 0,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/es/about"
+    },
+    {
+      "url": "https://geovyora.com/es/advertising",
+      "status": 200,
+      "language": "es",
+      "body_language": null,
+      "h1": "Publicidad.",
+      "robots": "index,follow",
+      "canonical": [
+        "https://geovyora.com/es/advertising"
+      ],
+      "schema_errors": [],
+      "article_words": 0,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/es/advertising"
+    },
+    {
+      "url": "https://geovyora.com/es/article/ariana-lafond-tiktok-scene-internationale",
+      "status": 200,
+      "language": "es",
+      "body_language": "es",
+      "h1": "Ariana Lafond: de TikTok al escenario internacional",
+      "robots": "index,follow",
+      "canonical": [
+        "https://geovyora.com/es/article/ariana-lafond-tiktok-scene-internationale"
+      ],
+      "schema_errors": [],
+      "article_words": 384,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/es/article/ariana-lafond-tiktok-scene-internationale"
+    },
+    {
+      "url": "https://geovyora.com/es/article/bresil-elections-2026-audits-urnes-4-novembre",
+      "status": 200,
+      "language": "es",
+      "body_language": "es",
+      "h1": "Elecciones en Brasil: qué deben documentar las auditorías previstas hasta el 4 de noviembre",
+      "robots": "index,follow",
+      "canonical": [
+        "https://geovyora.com/es/article/bresil-elections-2026-audits-urnes-4-novembre"
+      ],
+      "schema_errors": [],
+      "article_words": 520,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/es/article/bresil-elections-2026-audits-urnes-4-novembre"
+    },
+    {
+      "url": "https://geovyora.com/es/article/bresil-lula-reelection-programmes-sociaux-prochaines-etapes",
+      "status": 200,
+      "language": "es",
+      "body_language": "es",
+      "h1": "Brasil: tras su reelección, Lula anuncia el mantenimiento de los programas sociales",
+      "robots": "index,follow",
+      "canonical": [
+        "https://geovyora.com/es/article/bresil-lula-reelection-programmes-sociaux-prochaines-etapes"
+      ],
+      "schema_errors": [],
+      "article_words": 509,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/es/article/bresil-lula-reelection-programmes-sociaux-prochaines-etapes"
+    },
+    {
+      "url": "https://geovyora.com/es/article/bresil-registre-electoral-reouverture-3-novembre-2026",
+      "status": 200,
+      "language": "es",
+      "body_language": "es",
+      "h1": "Brasil: el registro electoral reabre el 3 de noviembre, ¿qué trámites se reanudan?",
+      "robots": "index,follow",
+      "canonical": [
+        "https://geovyora.com/es/article/bresil-registre-electoral-reouverture-3-novembre-2026"
+      ],
+      "schema_errors": [],
+      "article_words": 505,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/es/article/bresil-registre-electoral-reouverture-3-novembre-2026"
+    },
+    {
+      "url": "https://geovyora.com/es/article/floride-learjet-1-novembre-faits-enquete",
+      "status": 200,
+      "language": "es",
+      "body_language": "es",
+      "h1": "Florida: un Learjet se estrelló el 1 de noviembre; la causa sigue por determinar",
+      "robots": "index,follow",
+      "canonical": [
+        "https://geovyora.com/es/article/floride-learjet-1-novembre-faits-enquete"
+      ],
+      "schema_errors": [],
+      "article_words": 523,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/es/article/floride-learjet-1-novembre-faits-enquete"
+    },
+    {
+      "url": "https://geovyora.com/es/article/haiti-enfants-recrutement-gangs-prevention-reinsertion",
+      "status": 200,
+      "language": "es",
+      "body_language": "es",
+      "h1": "Niños reclutados por pandillas en Haití: la protección también debe ofrecer vías de salida",
+      "robots": "index,follow",
+      "canonical": [
+        "https://geovyora.com/es/article/haiti-enfants-recrutement-gangs-prevention-reinsertion"
+      ],
+      "schema_errors": [],
+      "article_words": 492,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/es/article/haiti-enfants-recrutement-gangs-prevention-reinsertion"
+    },
+    {
+      "url": "https://geovyora.com/es/article/haiti-faim-2027-prevision-violence-agriculture",
+      "status": 200,
+      "language": "es",
+      "body_language": "es",
+      "h1": "Haití: qué significa la alerta alimentaria para marzo a junio de 2027",
+      "robots": "index,follow",
+      "canonical": [
+        "https://geovyora.com/es/article/haiti-faim-2027-prevision-violence-agriculture"
+      ],
+      "schema_errors": [],
+      "article_words": 527,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/es/article/haiti-faim-2027-prevision-violence-agriculture"
+    },
+    {
+      "url": "https://geovyora.com/es/article/haiti-insecurite-campagnes-proteger-civils",
+      "status": 200,
+      "language": "es",
+      "body_language": "es",
+      "h1": "Haití: proteger las zonas rurales se convierte en un objetivo central de la respuesta a las pandillas",
+      "robots": "index,follow",
+      "canonical": [
+        "https://geovyora.com/es/article/haiti-insecurite-campagnes-proteger-civils"
+      ],
+      "schema_errors": [],
+      "article_words": 500,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/es/article/haiti-insecurite-campagnes-proteger-civils"
+    },
+    {
+      "url": "https://geovyora.com/es/article/haiti-sanctions-armes-munitions-application",
+      "status": 200,
+      "language": "es",
+      "body_language": "es",
+      "h1": "Haití: por qué las sanciones contra las pandillas también dependen de los puertos y los bancos",
+      "robots": "index,follow",
+      "canonical": [
+        "https://geovyora.com/es/article/haiti-sanctions-armes-munitions-application"
+      ],
+      "schema_errors": [],
+      "article_words": 528,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/es/article/haiti-sanctions-armes-munitions-application"
+    },
+    {
+      "url": "https://geovyora.com/es/article/haytiles-ezechias-toussaint-entrepreneuriat-numerique",
+      "status": 200,
+      "language": "es",
+      "body_language": "es",
+      "h1": "Haytiles: un emprendedor haitiano desarrolla servicios digitales desde Brasil",
+      "robots": "index,follow",
+      "canonical": [
+        "https://geovyora.com/es/article/haytiles-ezechias-toussaint-entrepreneuriat-numerique"
+      ],
+      "schema_errors": [],
+      "article_words": 613,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/es/article/haytiles-ezechias-toussaint-entrepreneuriat-numerique"
+    },
+    {
+      "url": "https://geovyora.com/es/article/khaby-lame-jimo-dijital-ako-975-milyon",
+      "status": 200,
+      "language": "es",
+      "body_language": "es",
+      "h1": "Khaby Lame y el plan del gemelo digital: ¿qué dice realmente el acuerdo de 975 millones de dólares?",
+      "robots": "index,follow",
+      "canonical": [
+        "https://geovyora.com/es/article/khaby-lame-jimo-dijital-ako-975-milyon"
+      ],
+      "schema_errors": [],
+      "article_words": 521,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/es/article/khaby-lame-jimo-dijital-ako-975-milyon"
+    },
+    {
+      "url": "https://geovyora.com/es/article/mrbeast-youtube-beast-land-influence-mondiale",
+      "status": 200,
+      "language": "es",
+      "body_language": "es",
+      "h1": "MrBeast, de YouTube a Beast Land: cuando los videos se convierten en experiencias reales",
+      "robots": "index,follow",
+      "canonical": [
+        "https://geovyora.com/es/article/mrbeast-youtube-beast-land-influence-mondiale"
+      ],
+      "schema_errors": [],
+      "article_words": 626,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/es/article/mrbeast-youtube-beast-land-influence-mondiale"
+    },
+    {
+      "url": "https://geovyora.com/es/article/salvador-haiti-bukele-participation-ce-qui-est-confirme",
+      "status": 200,
+      "language": "es",
+      "body_language": "es",
+      "h1": "El Salvador y Haití: qué está confirmado más allá de la imagen de Bukele",
+      "robots": "index,follow",
+      "canonical": [
+        "https://geovyora.com/es/article/salvador-haiti-bukele-participation-ce-qui-est-confirme"
+      ],
+      "schema_errors": [],
+      "article_words": 533,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/es/article/salvador-haiti-bukele-participation-ce-qui-est-confirme"
+    },
+    {
+      "url": "https://geovyora.com/es/article/wilson-isidor-deklarasyon-ayiti-repiblik-dominikenn",
+      "status": 200,
+      "language": "es",
+      "body_language": "es",
+      "h1": "Wilson Isidor: doblete con Haití y una frase que desató el debate",
+      "robots": "index,follow",
+      "canonical": [
+        "https://geovyora.com/es/article/wilson-isidor-deklarasyon-ayiti-repiblik-dominikenn"
+      ],
+      "schema_errors": [],
+      "article_words": 453,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/es/article/wilson-isidor-deklarasyon-ayiti-repiblik-dominikenn"
+    },
+    {
+      "url": "https://geovyora.com/es/article/wyclef-jean-influence-haitienne-diaspora-fugees",
+      "status": 200,
+      "language": "es",
+      "body_language": "es",
+      "h1": "Wyclef Jean: la voz haitiana que llevó a la diáspora al centro de la música popular",
+      "robots": "index,follow",
+      "canonical": [
+        "https://geovyora.com/es/article/wyclef-jean-influence-haitienne-diaspora-fugees"
+      ],
+      "schema_errors": [],
+      "article_words": 624,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/es/article/wyclef-jean-influence-haitienne-diaspora-fugees"
+    },
+    {
+      "url": "https://geovyora.com/es/community",
+      "status": 200,
+      "language": "es",
+      "body_language": null,
+      "h1": "Normas de la comunidad.",
+      "robots": "index,follow",
+      "canonical": [
+        "https://geovyora.com/es/community"
+      ],
+      "schema_errors": [],
+      "article_words": 0,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/es/community"
+    },
+    {
+      "url": "https://geovyora.com/es/contact",
+      "status": 200,
+      "language": "es",
+      "body_language": null,
+      "h1": "Contacto.",
+      "robots": "index,follow",
+      "canonical": [
+        "https://geovyora.com/es/contact"
+      ],
+      "schema_errors": [],
+      "article_words": 0,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/es/contact"
+    },
+    {
+      "url": "https://geovyora.com/es/cookies",
+      "status": 200,
+      "language": "es",
+      "body_language": null,
+      "h1": "Cookies.",
+      "robots": "index,follow",
+      "canonical": [
+        "https://geovyora.com/es/cookies"
+      ],
+      "schema_errors": [],
+      "article_words": 0,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/es/cookies"
+    },
+    {
+      "url": "https://geovyora.com/es/copyright",
+      "status": 200,
+      "language": "es",
+      "body_language": null,
+      "h1": "Derechos de autor / Retirada.",
+      "robots": "index,follow",
+      "canonical": [
+        "https://geovyora.com/es/copyright"
+      ],
+      "schema_errors": [],
+      "article_words": 0,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/es/copyright"
+    },
+    {
+      "url": "https://geovyora.com/es/discoveries",
+      "status": 200,
+      "language": "es",
+      "body_language": null,
+      "h1": "Descubrimientos.",
+      "robots": "noindex,nofollow",
+      "canonical": [
+        "https://geovyora.com/es/discoveries"
+      ],
+      "schema_errors": [],
+      "article_words": 0,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/es/discoveries"
+    },
+    {
+      "url": "https://geovyora.com/es/editorial",
+      "status": 200,
+      "language": "es",
+      "body_language": null,
+      "h1": "Nuestro método editorial.",
+      "robots": "index,follow",
+      "canonical": [
+        "https://geovyora.com/es/editorial"
+      ],
+      "schema_errors": [],
+      "article_words": 0,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/es/editorial"
+    },
+    {
+      "url": "https://geovyora.com/es/haiti",
+      "status": 200,
+      "language": "es",
+      "body_language": null,
+      "h1": "Haití.",
+      "robots": "index,follow",
+      "canonical": [
+        "https://geovyora.com/es/haiti"
+      ],
+      "schema_errors": [],
+      "article_words": 0,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/es/haiti"
+    },
+    {
+      "url": "https://geovyora.com/es/influencers",
+      "status": 200,
+      "language": "es",
+      "body_language": null,
+      "h1": "Creadores.",
+      "robots": "noindex,nofollow",
+      "canonical": [
+        "https://geovyora.com/es/influencers"
+      ],
+      "schema_errors": [],
+      "article_words": 0,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/es/influencers"
+    },
+    {
+      "url": "https://geovyora.com/es/interviews",
+      "status": 200,
+      "language": "es",
+      "body_language": null,
+      "h1": "Entrevistas.",
+      "robots": "noindex,nofollow",
+      "canonical": [
+        "https://geovyora.com/es/interviews"
+      ],
+      "schema_errors": [],
+      "article_words": 0,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/es/interviews"
+    },
+    {
+      "url": "https://geovyora.com/es/news",
+      "status": 200,
+      "language": "es",
+      "body_language": null,
+      "h1": "Noticias.",
+      "robots": "index,follow",
+      "canonical": [
+        "https://geovyora.com/es/news"
+      ],
+      "schema_errors": [],
+      "article_words": 0,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/es/news"
+    },
+    {
+      "url": "https://geovyora.com/es/newsletter",
+      "status": 200,
+      "language": "es",
+      "body_language": null,
+      "h1": "Historias Geovyora en tu correo.",
+      "robots": "index,follow",
+      "canonical": [
+        "https://geovyora.com/es/newsletter"
+      ],
+      "schema_errors": [],
+      "article_words": 0,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/es/newsletter"
+    },
+    {
+      "url": "https://geovyora.com/es/notifications",
+      "status": 200,
+      "language": "es",
+      "body_language": null,
+      "h1": "Elige las historias que te interesan.",
+      "robots": "noindex,nofollow",
+      "canonical": [
+        "https://geovyora.com/es/notifications"
+      ],
+      "schema_errors": [],
+      "article_words": 0,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/es/notifications"
+    },
+    {
+      "url": "https://geovyora.com/es/privacy",
+      "status": 200,
+      "language": "es",
+      "body_language": null,
+      "h1": "Privacidad.",
+      "robots": "index,follow",
+      "canonical": [
+        "https://geovyora.com/es/privacy"
+      ],
+      "schema_errors": [],
+      "article_words": 0,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/es/privacy"
+    },
+    {
+      "url": "https://geovyora.com/es/saved",
+      "status": 200,
+      "language": "es",
+      "body_language": null,
+      "h1": "Artículos guardados.",
+      "robots": "noindex,nofollow",
+      "canonical": [
+        "https://geovyora.com/es/saved"
+      ],
+      "schema_errors": [],
+      "article_words": 0,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/es/saved"
+    },
+    {
+      "url": "https://geovyora.com/es/search?q=Haiti",
+      "status": 200,
+      "language": "es",
+      "body_language": null,
+      "h1": "Buscar.",
+      "robots": "noindex,nofollow",
+      "canonical": [
+        "https://geovyora.com/es/search"
+      ],
+      "schema_errors": [],
+      "article_words": 0,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/es/search?q=Haiti"
+    },
+    {
+      "url": "https://geovyora.com/es/submit-influencer",
+      "status": 200,
+      "language": "es",
+      "body_language": null,
+      "h1": "Proponer un creador.",
+      "robots": "index,follow",
+      "canonical": [
+        "https://geovyora.com/es/submit-influencer"
+      ],
+      "schema_errors": [],
+      "article_words": 0,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/es/submit-influencer"
+    },
+    {
+      "url": "https://geovyora.com/es/submit-news",
+      "status": 200,
+      "language": "es",
+      "body_language": null,
+      "h1": "Enviar una noticia.",
+      "robots": "index,follow",
+      "canonical": [
+        "https://geovyora.com/es/submit-news"
+      ],
+      "schema_errors": [],
+      "article_words": 0,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/es/submit-news"
+    },
+    {
+      "url": "https://geovyora.com/es/terms",
+      "status": 200,
+      "language": "es",
+      "body_language": null,
+      "h1": "Condiciones.",
+      "robots": "index,follow",
+      "canonical": [
+        "https://geovyora.com/es/terms"
+      ],
+      "schema_errors": [],
+      "article_words": 0,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/es/terms"
+    },
+    {
+      "url": "https://geovyora.com/es/trending",
+      "status": 200,
+      "language": "es",
+      "body_language": null,
+      "h1": "Tendencias.",
+      "robots": "index,follow",
+      "canonical": [
+        "https://geovyora.com/es/trending"
+      ],
+      "schema_errors": [],
+      "article_words": 0,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/es/trending"
+    },
+    {
+      "url": "https://geovyora.com/es/videos",
+      "status": 200,
+      "language": "es",
+      "body_language": null,
+      "h1": "Vídeos.",
+      "robots": "noindex,nofollow",
+      "canonical": [
+        "https://geovyora.com/es/videos"
+      ],
+      "schema_errors": [],
+      "article_words": 0,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/es/videos"
+    },
+    {
+      "url": "https://geovyora.com/es/world",
+      "status": 200,
+      "language": "es",
+      "body_language": null,
+      "h1": "Mundo.",
+      "robots": "index,follow",
+      "canonical": [
+        "https://geovyora.com/es/world"
+      ],
+      "schema_errors": [],
+      "article_words": 0,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/es/world"
+    },
+    {
+      "url": "https://geovyora.com/fr",
+      "status": 200,
+      "language": "fr",
+      "body_language": null,
+      "h1": "Ariana Lafond : de TikTok à la scène internationale",
+      "robots": "index,follow",
+      "canonical": [
+        "https://geovyora.com/fr"
+      ],
+      "schema_errors": [],
+      "article_words": 0,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/fr"
+    },
+    {
+      "url": "https://geovyora.com/fr/about",
+      "status": 200,
+      "language": "fr",
+      "body_language": null,
+      "h1": "À propos.",
+      "robots": "index,follow",
+      "canonical": [
+        "https://geovyora.com/fr/about"
+      ],
+      "schema_errors": [],
+      "article_words": 0,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/fr/about"
+    },
+    {
+      "url": "https://geovyora.com/fr/advertising",
+      "status": 200,
+      "language": "fr",
+      "body_language": null,
+      "h1": "Publicité.",
+      "robots": "index,follow",
+      "canonical": [
+        "https://geovyora.com/fr/advertising"
+      ],
+      "schema_errors": [],
+      "article_words": 0,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/fr/advertising"
+    },
+    {
+      "url": "https://geovyora.com/fr/article/ariana-lafond-tiktok-scene-internationale",
+      "status": 200,
+      "language": "fr",
+      "body_language": "fr",
+      "h1": "Ariana Lafond : de TikTok à la scène internationale",
+      "robots": "index,follow",
+      "canonical": [
+        "https://geovyora.com/fr/article/ariana-lafond-tiktok-scene-internationale"
+      ],
+      "schema_errors": [],
+      "article_words": 374,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/fr/article/ariana-lafond-tiktok-scene-internationale"
+    },
+    {
+      "url": "https://geovyora.com/fr/article/bresil-elections-2026-audits-urnes-4-novembre",
+      "status": 200,
+      "language": "fr",
+      "body_language": "fr",
+      "h1": "Élections au Brésil : ce que doivent documenter les audits attendus le 4 novembre",
+      "robots": "index,follow",
+      "canonical": [
+        "https://geovyora.com/fr/article/bresil-elections-2026-audits-urnes-4-novembre"
+      ],
+      "schema_errors": [],
+      "article_words": 518,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/fr/article/bresil-elections-2026-audits-urnes-4-novembre"
+    },
+    {
+      "url": "https://geovyora.com/fr/article/bresil-lula-reelection-programmes-sociaux-prochaines-etapes",
+      "status": 200,
+      "language": "fr",
+      "body_language": "fr",
+      "h1": "Brésil : après sa réélection, Lula annonce le maintien des programmes sociaux",
+      "robots": "index,follow",
+      "canonical": [
+        "https://geovyora.com/fr/article/bresil-lula-reelection-programmes-sociaux-prochaines-etapes"
+      ],
+      "schema_errors": [],
+      "article_words": 516,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/fr/article/bresil-lula-reelection-programmes-sociaux-prochaines-etapes"
+    },
+    {
+      "url": "https://geovyora.com/fr/article/bresil-registre-electoral-reouverture-3-novembre-2026",
+      "status": 200,
+      "language": "fr",
+      "body_language": "fr",
+      "h1": "Brésil : le registre électoral rouvre le 3 novembre, quelles démarches reprennent ?",
+      "robots": "index,follow",
+      "canonical": [
+        "https://geovyora.com/fr/article/bresil-registre-electoral-reouverture-3-novembre-2026"
+      ],
+      "schema_errors": [],
+      "article_words": 503,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/fr/article/bresil-registre-electoral-reouverture-3-novembre-2026"
+    },
+    {
+      "url": "https://geovyora.com/fr/article/floride-learjet-1-novembre-faits-enquete",
+      "status": 200,
+      "language": "fr",
+      "body_language": "fr",
+      "h1": "Floride : un Learjet s’est écrasé le 1er novembre, la cause reste à établir",
+      "robots": "index,follow",
+      "canonical": [
+        "https://geovyora.com/fr/article/floride-learjet-1-novembre-faits-enquete"
+      ],
+      "schema_errors": [],
+      "article_words": 537,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/fr/article/floride-learjet-1-novembre-faits-enquete"
+    },
+    {
+      "url": "https://geovyora.com/fr/article/haiti-enfants-recrutement-gangs-prevention-reinsertion",
+      "status": 200,
+      "language": "fr",
+      "body_language": "fr",
+      "h1": "Enfants recrutés par les gangs en Haïti : la protection doit aussi ouvrir des voies de sortie",
+      "robots": "index,follow",
+      "canonical": [
+        "https://geovyora.com/fr/article/haiti-enfants-recrutement-gangs-prevention-reinsertion"
+      ],
+      "schema_errors": [],
+      "article_words": 507,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/fr/article/haiti-enfants-recrutement-gangs-prevention-reinsertion"
+    },
+    {
+      "url": "https://geovyora.com/fr/article/haiti-faim-2027-prevision-violence-agriculture",
+      "status": 200,
+      "language": "fr",
+      "body_language": "fr",
+      "h1": "Haïti : ce que signifie l’alerte alimentaire pour le printemps 2027",
+      "robots": "index,follow",
+      "canonical": [
+        "https://geovyora.com/fr/article/haiti-faim-2027-prevision-violence-agriculture"
+      ],
+      "schema_errors": [],
+      "article_words": 549,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/fr/article/haiti-faim-2027-prevision-violence-agriculture"
+    },
+    {
+      "url": "https://geovyora.com/fr/article/haiti-insecurite-campagnes-proteger-civils",
+      "status": 200,
+      "language": "fr",
+      "body_language": "fr",
+      "h1": "Haïti : protéger les campagnes devient un enjeu central de la réponse aux gangs",
+      "robots": "index,follow",
+      "canonical": [
+        "https://geovyora.com/fr/article/haiti-insecurite-campagnes-proteger-civils"
+      ],
+      "schema_errors": [],
+      "article_words": 510,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/fr/article/haiti-insecurite-campagnes-proteger-civils"
+    },
+    {
+      "url": "https://geovyora.com/fr/article/haiti-sanctions-armes-munitions-application",
+      "status": 200,
+      "language": "fr",
+      "body_language": "fr",
+      "h1": "Haïti : pourquoi les sanctions contre les gangs se jouent aussi dans les ports et les banques",
+      "robots": "index,follow",
+      "canonical": [
+        "https://geovyora.com/fr/article/haiti-sanctions-armes-munitions-application"
+      ],
+      "schema_errors": [],
+      "article_words": 525,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/fr/article/haiti-sanctions-armes-munitions-application"
+    },
+    {
+      "url": "https://geovyora.com/fr/article/haytiles-ezechias-toussaint-entrepreneuriat-numerique",
+      "status": 200,
+      "language": "fr",
+      "body_language": "fr",
+      "h1": "Haytiles : un entrepreneur haïtien développe des services numériques depuis le Brésil",
+      "robots": "index,follow",
+      "canonical": [
+        "https://geovyora.com/fr/article/haytiles-ezechias-toussaint-entrepreneuriat-numerique"
+      ],
+      "schema_errors": [],
+      "article_words": 637,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/fr/article/haytiles-ezechias-toussaint-entrepreneuriat-numerique"
+    },
+    {
+      "url": "https://geovyora.com/fr/article/khaby-lame-jimo-dijital-ako-975-milyon",
+      "status": 200,
+      "language": "fr",
+      "body_language": "fr",
+      "h1": "Khaby Lame et son double numérique : que dit vraiment l’accord de 975 millions de dollars ?",
+      "robots": "index,follow",
+      "canonical": [
+        "https://geovyora.com/fr/article/khaby-lame-jimo-dijital-ako-975-milyon"
+      ],
+      "schema_errors": [],
+      "article_words": 535,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/fr/article/khaby-lame-jimo-dijital-ako-975-milyon"
+    },
+    {
+      "url": "https://geovyora.com/fr/article/mrbeast-youtube-beast-land-influence-mondiale",
+      "status": 200,
+      "language": "fr",
+      "body_language": "fr",
+      "h1": "MrBeast, de YouTube à Beast Land : l’influenceur qui transforme les vues en expérience mondiale",
+      "robots": "index,follow",
+      "canonical": [
+        "https://geovyora.com/fr/article/mrbeast-youtube-beast-land-influence-mondiale"
+      ],
+      "schema_errors": [],
+      "article_words": 665,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/fr/article/mrbeast-youtube-beast-land-influence-mondiale"
+    },
+    {
+      "url": "https://geovyora.com/fr/article/salvador-haiti-bukele-participation-ce-qui-est-confirme",
+      "status": 200,
+      "language": "fr",
+      "body_language": "fr",
+      "h1": "Salvador et Haïti : ce qui est confirmé, au-delà de l’image de Bukele",
+      "robots": "index,follow",
+      "canonical": [
+        "https://geovyora.com/fr/article/salvador-haiti-bukele-participation-ce-qui-est-confirme"
+      ],
+      "schema_errors": [],
+      "article_words": 557,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/fr/article/salvador-haiti-bukele-participation-ce-qui-est-confirme"
+    },
+    {
+      "url": "https://geovyora.com/fr/article/wilson-isidor-deklarasyon-ayiti-repiblik-dominikenn",
+      "status": 200,
+      "language": "fr",
+      "body_language": "fr",
+      "h1": "Wilson Isidor : un doublé pour Haïti, une phrase qui divise",
+      "robots": "index,follow",
+      "canonical": [
+        "https://geovyora.com/fr/article/wilson-isidor-deklarasyon-ayiti-repiblik-dominikenn"
+      ],
+      "schema_errors": [],
+      "article_words": 473,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/fr/article/wilson-isidor-deklarasyon-ayiti-repiblik-dominikenn"
+    },
+    {
+      "url": "https://geovyora.com/fr/article/wyclef-jean-influence-haitienne-diaspora-fugees",
+      "status": 200,
+      "language": "fr",
+      "body_language": "fr",
+      "h1": "Wyclef Jean, la voix haïtienne qui a porté la diaspora au cœur de la musique populaire",
+      "robots": "index,follow",
+      "canonical": [
+        "https://geovyora.com/fr/article/wyclef-jean-influence-haitienne-diaspora-fugees"
+      ],
+      "schema_errors": [],
+      "article_words": 640,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/fr/article/wyclef-jean-influence-haitienne-diaspora-fugees"
+    },
+    {
+      "url": "https://geovyora.com/fr/community",
+      "status": 200,
+      "language": "fr",
+      "body_language": null,
+      "h1": "Règles de la communauté.",
+      "robots": "index,follow",
+      "canonical": [
+        "https://geovyora.com/fr/community"
+      ],
+      "schema_errors": [],
+      "article_words": 0,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/fr/community"
+    },
+    {
+      "url": "https://geovyora.com/fr/contact",
+      "status": 200,
+      "language": "fr",
+      "body_language": null,
+      "h1": "Contact.",
+      "robots": "index,follow",
+      "canonical": [
+        "https://geovyora.com/fr/contact"
+      ],
+      "schema_errors": [],
+      "article_words": 0,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/fr/contact"
+    },
+    {
+      "url": "https://geovyora.com/fr/cookies",
+      "status": 200,
+      "language": "fr",
+      "body_language": null,
+      "h1": "Cookies.",
+      "robots": "index,follow",
+      "canonical": [
+        "https://geovyora.com/fr/cookies"
+      ],
+      "schema_errors": [],
+      "article_words": 0,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/fr/cookies"
+    },
+    {
+      "url": "https://geovyora.com/fr/copyright",
+      "status": 200,
+      "language": "fr",
+      "body_language": null,
+      "h1": "Copyright / Retrait.",
+      "robots": "index,follow",
+      "canonical": [
+        "https://geovyora.com/fr/copyright"
+      ],
+      "schema_errors": [],
+      "article_words": 0,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/fr/copyright"
+    },
+    {
+      "url": "https://geovyora.com/fr/discoveries",
+      "status": 200,
+      "language": "fr",
+      "body_language": null,
+      "h1": "Découvertes.",
+      "robots": "noindex,nofollow",
+      "canonical": [
+        "https://geovyora.com/fr/discoveries"
+      ],
+      "schema_errors": [],
+      "article_words": 0,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/fr/discoveries"
+    },
+    {
+      "url": "https://geovyora.com/fr/editorial",
+      "status": 200,
+      "language": "fr",
+      "body_language": null,
+      "h1": "Notre méthode éditoriale.",
+      "robots": "index,follow",
+      "canonical": [
+        "https://geovyora.com/fr/editorial"
+      ],
+      "schema_errors": [],
+      "article_words": 0,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/fr/editorial"
+    },
+    {
+      "url": "https://geovyora.com/fr/haiti",
+      "status": 200,
+      "language": "fr",
+      "body_language": null,
+      "h1": "Haïti.",
+      "robots": "index,follow",
+      "canonical": [
+        "https://geovyora.com/fr/haiti"
+      ],
+      "schema_errors": [],
+      "article_words": 0,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/fr/haiti"
+    },
+    {
+      "url": "https://geovyora.com/fr/influencers",
+      "status": 200,
+      "language": "fr",
+      "body_language": null,
+      "h1": "Créateurs.",
+      "robots": "noindex,nofollow",
+      "canonical": [
+        "https://geovyora.com/fr/influencers"
+      ],
+      "schema_errors": [],
+      "article_words": 0,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/fr/influencers"
+    },
+    {
+      "url": "https://geovyora.com/fr/interviews",
+      "status": 200,
+      "language": "fr",
+      "body_language": null,
+      "h1": "Entretiens.",
+      "robots": "noindex,nofollow",
+      "canonical": [
+        "https://geovyora.com/fr/interviews"
+      ],
+      "schema_errors": [],
+      "article_words": 0,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/fr/interviews"
+    },
+    {
+      "url": "https://geovyora.com/fr/news",
+      "status": 200,
+      "language": "fr",
+      "body_language": null,
+      "h1": "Actualités.",
+      "robots": "index,follow",
+      "canonical": [
+        "https://geovyora.com/fr/news"
+      ],
+      "schema_errors": [],
+      "article_words": 0,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/fr/news"
+    },
+    {
+      "url": "https://geovyora.com/fr/newsletter",
+      "status": 200,
+      "language": "fr",
+      "body_language": null,
+      "h1": "Les histoires Geovyora dans votre boîte mail.",
+      "robots": "index,follow",
+      "canonical": [
+        "https://geovyora.com/fr/newsletter"
+      ],
+      "schema_errors": [],
+      "article_words": 0,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/fr/newsletter"
+    },
+    {
+      "url": "https://geovyora.com/fr/notifications",
+      "status": 200,
+      "language": "fr",
+      "body_language": null,
+      "h1": "Choisissez les histoires qui vous intéressent.",
+      "robots": "noindex,nofollow",
+      "canonical": [
+        "https://geovyora.com/fr/notifications"
+      ],
+      "schema_errors": [],
+      "article_words": 0,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/fr/notifications"
+    },
+    {
+      "url": "https://geovyora.com/fr/privacy",
+      "status": 200,
+      "language": "fr",
+      "body_language": null,
+      "h1": "Confidentialité.",
+      "robots": "index,follow",
+      "canonical": [
+        "https://geovyora.com/fr/privacy"
+      ],
+      "schema_errors": [],
+      "article_words": 0,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/fr/privacy"
+    },
+    {
+      "url": "https://geovyora.com/fr/saved",
+      "status": 200,
+      "language": "fr",
+      "body_language": null,
+      "h1": "Articles enregistrés.",
+      "robots": "noindex,nofollow",
+      "canonical": [
+        "https://geovyora.com/fr/saved"
+      ],
+      "schema_errors": [],
+      "article_words": 0,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/fr/saved"
+    },
+    {
+      "url": "https://geovyora.com/fr/search?q=Haiti",
+      "status": 200,
+      "language": "fr",
+      "body_language": null,
+      "h1": "Recherche.",
+      "robots": "noindex,nofollow",
+      "canonical": [
+        "https://geovyora.com/fr/search"
+      ],
+      "schema_errors": [],
+      "article_words": 0,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/fr/search?q=Haiti"
+    },
+    {
+      "url": "https://geovyora.com/fr/submit-influencer",
+      "status": 200,
+      "language": "fr",
+      "body_language": null,
+      "h1": "Proposer un créateur.",
+      "robots": "index,follow",
+      "canonical": [
+        "https://geovyora.com/fr/submit-influencer"
+      ],
+      "schema_errors": [],
+      "article_words": 0,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/fr/submit-influencer"
+    },
+    {
+      "url": "https://geovyora.com/fr/submit-news",
+      "status": 200,
+      "language": "fr",
+      "body_language": null,
+      "h1": "Soumettre une information.",
+      "robots": "index,follow",
+      "canonical": [
+        "https://geovyora.com/fr/submit-news"
+      ],
+      "schema_errors": [],
+      "article_words": 0,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/fr/submit-news"
+    },
+    {
+      "url": "https://geovyora.com/fr/terms",
+      "status": 200,
+      "language": "fr",
+      "body_language": null,
+      "h1": "Conditions.",
+      "robots": "index,follow",
+      "canonical": [
+        "https://geovyora.com/fr/terms"
+      ],
+      "schema_errors": [],
+      "article_words": 0,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/fr/terms"
+    },
+    {
+      "url": "https://geovyora.com/fr/trending",
+      "status": 200,
+      "language": "fr",
+      "body_language": null,
+      "h1": "Tendances.",
+      "robots": "index,follow",
+      "canonical": [
+        "https://geovyora.com/fr/trending"
+      ],
+      "schema_errors": [],
+      "article_words": 0,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/fr/trending"
+    },
+    {
+      "url": "https://geovyora.com/fr/videos",
+      "status": 200,
+      "language": "fr",
+      "body_language": null,
+      "h1": "Vidéos.",
+      "robots": "noindex,nofollow",
+      "canonical": [
+        "https://geovyora.com/fr/videos"
+      ],
+      "schema_errors": [],
+      "article_words": 0,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/fr/videos"
+    },
+    {
+      "url": "https://geovyora.com/fr/world",
+      "status": 200,
+      "language": "fr",
+      "body_language": null,
+      "h1": "Monde.",
+      "robots": "index,follow",
+      "canonical": [
+        "https://geovyora.com/fr/world"
+      ],
+      "schema_errors": [],
+      "article_words": 0,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/fr/world"
+    },
+    {
+      "url": "https://geovyora.com/pt-BR",
+      "status": 200,
+      "language": "pt-BR",
+      "body_language": null,
+      "h1": "Ariana Lafond: do TikTok ao cenário internacional",
+      "robots": "index,follow",
+      "canonical": [
+        "https://geovyora.com/pt-BR"
+      ],
+      "schema_errors": [],
+      "article_words": 0,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/pt-BR"
+    },
+    {
+      "url": "https://geovyora.com/pt-BR/about",
+      "status": 200,
+      "language": "pt-BR",
+      "body_language": null,
+      "h1": "Sobre nós.",
+      "robots": "index,follow",
+      "canonical": [
+        "https://geovyora.com/pt-BR/about"
+      ],
+      "schema_errors": [],
+      "article_words": 0,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/pt-BR/about"
+    },
+    {
+      "url": "https://geovyora.com/pt-BR/advertising",
+      "status": 200,
+      "language": "pt-BR",
+      "body_language": null,
+      "h1": "Publicidade.",
+      "robots": "index,follow",
+      "canonical": [
+        "https://geovyora.com/pt-BR/advertising"
+      ],
+      "schema_errors": [],
+      "article_words": 0,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/pt-BR/advertising"
+    },
+    {
+      "url": "https://geovyora.com/pt-BR/article/ariana-lafond-tiktok-scene-internationale",
+      "status": 200,
+      "language": "pt-BR",
+      "body_language": "pt-BR",
+      "h1": "Ariana Lafond: do TikTok ao cenário internacional",
+      "robots": "index,follow",
+      "canonical": [
+        "https://geovyora.com/pt-BR/article/ariana-lafond-tiktok-scene-internationale"
+      ],
+      "schema_errors": [],
+      "article_words": 376,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/pt-BR/article/ariana-lafond-tiktok-scene-internationale"
+    },
+    {
+      "url": "https://geovyora.com/pt-BR/article/bresil-elections-2026-audits-urnes-4-novembre",
+      "status": 200,
+      "language": "pt-BR",
+      "body_language": "pt-BR",
+      "h1": "Eleições no Brasil: o que devem documentar os relatórios de auditoria esperados até 4 de novembro",
+      "robots": "index,follow",
+      "canonical": [
+        "https://geovyora.com/pt-BR/article/bresil-elections-2026-audits-urnes-4-novembre"
+      ],
+      "schema_errors": [],
+      "article_words": 499,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/pt-BR/article/bresil-elections-2026-audits-urnes-4-novembre"
+    },
+    {
+      "url": "https://geovyora.com/pt-BR/article/bresil-lula-reelection-programmes-sociaux-prochaines-etapes",
+      "status": 200,
+      "language": "pt-BR",
+      "body_language": "pt-BR",
+      "h1": "Brasil: após a reeleição, Lula anuncia a manutenção dos programas sociais",
+      "robots": "index,follow",
+      "canonical": [
+        "https://geovyora.com/pt-BR/article/bresil-lula-reelection-programmes-sociaux-prochaines-etapes"
+      ],
+      "schema_errors": [],
+      "article_words": 475,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/pt-BR/article/bresil-lula-reelection-programmes-sociaux-prochaines-etapes"
+    },
+    {
+      "url": "https://geovyora.com/pt-BR/article/bresil-registre-electoral-reouverture-3-novembre-2026",
+      "status": 200,
+      "language": "pt-BR",
+      "body_language": "pt-BR",
+      "h1": "Brasil: o cadastro eleitoral reabre em 3 de novembro; quais serviços voltam?",
+      "robots": "index,follow",
+      "canonical": [
+        "https://geovyora.com/pt-BR/article/bresil-registre-electoral-reouverture-3-novembre-2026"
+      ],
+      "schema_errors": [],
+      "article_words": 486,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/pt-BR/article/bresil-registre-electoral-reouverture-3-novembre-2026"
+    },
+    {
+      "url": "https://geovyora.com/pt-BR/article/floride-learjet-1-novembre-faits-enquete",
+      "status": 200,
+      "language": "pt-BR",
+      "body_language": "pt-BR",
+      "h1": "Flórida: um Learjet caiu em 1º de novembro; a causa ainda precisa ser esclarecida",
+      "robots": "index,follow",
+      "canonical": [
+        "https://geovyora.com/pt-BR/article/floride-learjet-1-novembre-faits-enquete"
+      ],
+      "schema_errors": [],
+      "article_words": 505,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/pt-BR/article/floride-learjet-1-novembre-faits-enquete"
+    },
+    {
+      "url": "https://geovyora.com/pt-BR/article/haiti-enfants-recrutement-gangs-prevention-reinsertion",
+      "status": 200,
+      "language": "pt-BR",
+      "body_language": "pt-BR",
+      "h1": "Crianças recrutadas por gangues no Haiti: a proteção também precisa abrir caminhos de saída",
+      "robots": "index,follow",
+      "canonical": [
+        "https://geovyora.com/pt-BR/article/haiti-enfants-recrutement-gangs-prevention-reinsertion"
+      ],
+      "schema_errors": [],
+      "article_words": 465,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/pt-BR/article/haiti-enfants-recrutement-gangs-prevention-reinsertion"
+    },
+    {
+      "url": "https://geovyora.com/pt-BR/article/haiti-faim-2027-prevision-violence-agriculture",
+      "status": 200,
+      "language": "pt-BR",
+      "body_language": "pt-BR",
+      "h1": "Haiti: o que significa o alerta alimentar para março a junho de 2027",
+      "robots": "index,follow",
+      "canonical": [
+        "https://geovyora.com/pt-BR/article/haiti-faim-2027-prevision-violence-agriculture"
+      ],
+      "schema_errors": [],
+      "article_words": 513,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/pt-BR/article/haiti-faim-2027-prevision-violence-agriculture"
+    },
+    {
+      "url": "https://geovyora.com/pt-BR/article/haiti-insecurite-campagnes-proteger-civils",
+      "status": 200,
+      "language": "pt-BR",
+      "body_language": "pt-BR",
+      "h1": "Haiti: proteger o interior torna-se uma prioridade na resposta às gangues",
+      "robots": "index,follow",
+      "canonical": [
+        "https://geovyora.com/pt-BR/article/haiti-insecurite-campagnes-proteger-civils"
+      ],
+      "schema_errors": [],
+      "article_words": 475,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/pt-BR/article/haiti-insecurite-campagnes-proteger-civils"
+    },
+    {
+      "url": "https://geovyora.com/pt-BR/article/haiti-sanctions-armes-munitions-application",
+      "status": 200,
+      "language": "pt-BR",
+      "body_language": "pt-BR",
+      "h1": "Haiti: por que as sanções contra as gangues também dependem dos portos e dos bancos",
+      "robots": "index,follow",
+      "canonical": [
+        "https://geovyora.com/pt-BR/article/haiti-sanctions-armes-munitions-application"
+      ],
+      "schema_errors": [],
+      "article_words": 488,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/pt-BR/article/haiti-sanctions-armes-munitions-application"
+    },
+    {
+      "url": "https://geovyora.com/pt-BR/article/haytiles-ezechias-toussaint-entrepreneuriat-numerique",
+      "status": 200,
+      "language": "pt-BR",
+      "body_language": "pt-BR",
+      "h1": "Haytiles: empreendedor haitiano desenvolve serviços digitais a partir do Brasil",
+      "robots": "index,follow",
+      "canonical": [
+        "https://geovyora.com/pt-BR/article/haytiles-ezechias-toussaint-entrepreneuriat-numerique"
+      ],
+      "schema_errors": [],
+      "article_words": 589,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/pt-BR/article/haytiles-ezechias-toussaint-entrepreneuriat-numerique"
+    },
+    {
+      "url": "https://geovyora.com/pt-BR/article/khaby-lame-jimo-dijital-ako-975-milyon",
+      "status": 200,
+      "language": "pt-BR",
+      "body_language": "pt-BR",
+      "h1": "Khaby Lame e o plano do gêmeo digital: o que diz, de fato, o acordo de US$ 975 milhões?",
+      "robots": "index,follow",
+      "canonical": [
+        "https://geovyora.com/pt-BR/article/khaby-lame-jimo-dijital-ako-975-milyon"
+      ],
+      "schema_errors": [],
+      "article_words": 520,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/pt-BR/article/khaby-lame-jimo-dijital-ako-975-milyon"
+    },
+    {
+      "url": "https://geovyora.com/pt-BR/article/mrbeast-youtube-beast-land-influence-mondiale",
+      "status": 200,
+      "language": "pt-BR",
+      "body_language": "pt-BR",
+      "h1": "MrBeast, do YouTube ao Beast Land: quando vídeos viram experiências reais",
+      "robots": "index,follow",
+      "canonical": [
+        "https://geovyora.com/pt-BR/article/mrbeast-youtube-beast-land-influence-mondiale"
+      ],
+      "schema_errors": [],
+      "article_words": 612,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/pt-BR/article/mrbeast-youtube-beast-land-influence-mondiale"
+    },
+    {
+      "url": "https://geovyora.com/pt-BR/article/salvador-haiti-bukele-participation-ce-qui-est-confirme",
+      "status": 200,
+      "language": "pt-BR",
+      "body_language": "pt-BR",
+      "h1": "El Salvador e Haiti: o que está confirmado além da imagem de Bukele",
+      "robots": "index,follow",
+      "canonical": [
+        "https://geovyora.com/pt-BR/article/salvador-haiti-bukele-participation-ce-qui-est-confirme"
+      ],
+      "schema_errors": [],
+      "article_words": 514,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/pt-BR/article/salvador-haiti-bukele-participation-ce-qui-est-confirme"
+    },
+    {
+      "url": "https://geovyora.com/pt-BR/article/wilson-isidor-deklarasyon-ayiti-repiblik-dominikenn",
+      "status": 200,
+      "language": "pt-BR",
+      "body_language": "pt-BR",
+      "h1": "Wilson Isidor: dois gols pelo Haiti e uma frase que gerou debate",
+      "robots": "index,follow",
+      "canonical": [
+        "https://geovyora.com/pt-BR/article/wilson-isidor-deklarasyon-ayiti-repiblik-dominikenn"
+      ],
+      "schema_errors": [],
+      "article_words": 441,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/pt-BR/article/wilson-isidor-deklarasyon-ayiti-repiblik-dominikenn"
+    },
+    {
+      "url": "https://geovyora.com/pt-BR/article/wyclef-jean-influence-haitienne-diaspora-fugees",
+      "status": 200,
+      "language": "pt-BR",
+      "body_language": "pt-BR",
+      "h1": "Wyclef Jean: a voz haitiana que levou a diáspora ao centro da música popular",
+      "robots": "index,follow",
+      "canonical": [
+        "https://geovyora.com/pt-BR/article/wyclef-jean-influence-haitienne-diaspora-fugees"
+      ],
+      "schema_errors": [],
+      "article_words": 613,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/pt-BR/article/wyclef-jean-influence-haitienne-diaspora-fugees"
+    },
+    {
+      "url": "https://geovyora.com/pt-BR/community",
+      "status": 200,
+      "language": "pt-BR",
+      "body_language": null,
+      "h1": "Diretrizes da comunidade.",
+      "robots": "index,follow",
+      "canonical": [
+        "https://geovyora.com/pt-BR/community"
+      ],
+      "schema_errors": [],
+      "article_words": 0,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/pt-BR/community"
+    },
+    {
+      "url": "https://geovyora.com/pt-BR/contact",
+      "status": 200,
+      "language": "pt-BR",
+      "body_language": null,
+      "h1": "Contato.",
+      "robots": "index,follow",
+      "canonical": [
+        "https://geovyora.com/pt-BR/contact"
+      ],
+      "schema_errors": [],
+      "article_words": 0,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/pt-BR/contact"
+    },
+    {
+      "url": "https://geovyora.com/pt-BR/cookies",
+      "status": 200,
+      "language": "pt-BR",
+      "body_language": null,
+      "h1": "Cookies.",
+      "robots": "index,follow",
+      "canonical": [
+        "https://geovyora.com/pt-BR/cookies"
+      ],
+      "schema_errors": [],
+      "article_words": 0,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/pt-BR/cookies"
+    },
+    {
+      "url": "https://geovyora.com/pt-BR/copyright",
+      "status": 200,
+      "language": "pt-BR",
+      "body_language": null,
+      "h1": "Direitos autorais / Remoção.",
+      "robots": "index,follow",
+      "canonical": [
+        "https://geovyora.com/pt-BR/copyright"
+      ],
+      "schema_errors": [],
+      "article_words": 0,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/pt-BR/copyright"
+    },
+    {
+      "url": "https://geovyora.com/pt-BR/discoveries",
+      "status": 200,
+      "language": "pt-BR",
+      "body_language": null,
+      "h1": "Descobertas.",
+      "robots": "noindex,nofollow",
+      "canonical": [
+        "https://geovyora.com/pt-BR/discoveries"
+      ],
+      "schema_errors": [],
+      "article_words": 0,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/pt-BR/discoveries"
+    },
+    {
+      "url": "https://geovyora.com/pt-BR/editorial",
+      "status": 200,
+      "language": "pt-BR",
+      "body_language": null,
+      "h1": "Nosso método editorial.",
+      "robots": "index,follow",
+      "canonical": [
+        "https://geovyora.com/pt-BR/editorial"
+      ],
+      "schema_errors": [],
+      "article_words": 0,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/pt-BR/editorial"
+    },
+    {
+      "url": "https://geovyora.com/pt-BR/haiti",
+      "status": 200,
+      "language": "pt-BR",
+      "body_language": null,
+      "h1": "Haiti.",
+      "robots": "index,follow",
+      "canonical": [
+        "https://geovyora.com/pt-BR/haiti"
+      ],
+      "schema_errors": [],
+      "article_words": 0,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/pt-BR/haiti"
+    },
+    {
+      "url": "https://geovyora.com/pt-BR/influencers",
+      "status": 200,
+      "language": "pt-BR",
+      "body_language": null,
+      "h1": "Criadores.",
+      "robots": "noindex,nofollow",
+      "canonical": [
+        "https://geovyora.com/pt-BR/influencers"
+      ],
+      "schema_errors": [],
+      "article_words": 0,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/pt-BR/influencers"
+    },
+    {
+      "url": "https://geovyora.com/pt-BR/interviews",
+      "status": 200,
+      "language": "pt-BR",
+      "body_language": null,
+      "h1": "Entrevistas.",
+      "robots": "noindex,nofollow",
+      "canonical": [
+        "https://geovyora.com/pt-BR/interviews"
+      ],
+      "schema_errors": [],
+      "article_words": 0,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/pt-BR/interviews"
+    },
+    {
+      "url": "https://geovyora.com/pt-BR/news",
+      "status": 200,
+      "language": "pt-BR",
+      "body_language": null,
+      "h1": "Notícias.",
+      "robots": "index,follow",
+      "canonical": [
+        "https://geovyora.com/pt-BR/news"
+      ],
+      "schema_errors": [],
+      "article_words": 0,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/pt-BR/news"
+    },
+    {
+      "url": "https://geovyora.com/pt-BR/newsletter",
+      "status": 200,
+      "language": "pt-BR",
+      "body_language": null,
+      "h1": "Histórias Geovyora no seu email.",
+      "robots": "index,follow",
+      "canonical": [
+        "https://geovyora.com/pt-BR/newsletter"
+      ],
+      "schema_errors": [],
+      "article_words": 0,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/pt-BR/newsletter"
+    },
+    {
+      "url": "https://geovyora.com/pt-BR/notifications",
+      "status": 200,
+      "language": "pt-BR",
+      "body_language": null,
+      "h1": "Escolha as histórias que interessam a você.",
+      "robots": "noindex,nofollow",
+      "canonical": [
+        "https://geovyora.com/pt-BR/notifications"
+      ],
+      "schema_errors": [],
+      "article_words": 0,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/pt-BR/notifications"
+    },
+    {
+      "url": "https://geovyora.com/pt-BR/privacy",
+      "status": 200,
+      "language": "pt-BR",
+      "body_language": null,
+      "h1": "Privacidade.",
+      "robots": "index,follow",
+      "canonical": [
+        "https://geovyora.com/pt-BR/privacy"
+      ],
+      "schema_errors": [],
+      "article_words": 0,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/pt-BR/privacy"
+    },
+    {
+      "url": "https://geovyora.com/pt-BR/saved",
+      "status": 200,
+      "language": "pt-BR",
+      "body_language": null,
+      "h1": "Artigos salvos.",
+      "robots": "noindex,nofollow",
+      "canonical": [
+        "https://geovyora.com/pt-BR/saved"
+      ],
+      "schema_errors": [],
+      "article_words": 0,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/pt-BR/saved"
+    },
+    {
+      "url": "https://geovyora.com/pt-BR/search?q=Haiti",
+      "status": 200,
+      "language": "pt-BR",
+      "body_language": null,
+      "h1": "Busca.",
+      "robots": "noindex,nofollow",
+      "canonical": [
+        "https://geovyora.com/pt-BR/search"
+      ],
+      "schema_errors": [],
+      "article_words": 0,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/pt-BR/search?q=Haiti"
+    },
+    {
+      "url": "https://geovyora.com/pt-BR/submit-influencer",
+      "status": 200,
+      "language": "pt-BR",
+      "body_language": null,
+      "h1": "Sugerir um criador.",
+      "robots": "index,follow",
+      "canonical": [
+        "https://geovyora.com/pt-BR/submit-influencer"
+      ],
+      "schema_errors": [],
+      "article_words": 0,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/pt-BR/submit-influencer"
+    },
+    {
+      "url": "https://geovyora.com/pt-BR/submit-news",
+      "status": 200,
+      "language": "pt-BR",
+      "body_language": null,
+      "h1": "Enviar uma notícia.",
+      "robots": "index,follow",
+      "canonical": [
+        "https://geovyora.com/pt-BR/submit-news"
+      ],
+      "schema_errors": [],
+      "article_words": 0,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/pt-BR/submit-news"
+    },
+    {
+      "url": "https://geovyora.com/pt-BR/terms",
+      "status": 200,
+      "language": "pt-BR",
+      "body_language": null,
+      "h1": "Termos.",
+      "robots": "index,follow",
+      "canonical": [
+        "https://geovyora.com/pt-BR/terms"
+      ],
+      "schema_errors": [],
+      "article_words": 0,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/pt-BR/terms"
+    },
+    {
+      "url": "https://geovyora.com/pt-BR/trending",
+      "status": 200,
+      "language": "pt-BR",
+      "body_language": null,
+      "h1": "Tendências.",
+      "robots": "index,follow",
+      "canonical": [
+        "https://geovyora.com/pt-BR/trending"
+      ],
+      "schema_errors": [],
+      "article_words": 0,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/pt-BR/trending"
+    },
+    {
+      "url": "https://geovyora.com/pt-BR/videos",
+      "status": 200,
+      "language": "pt-BR",
+      "body_language": null,
+      "h1": "Vídeos.",
+      "robots": "noindex,nofollow",
+      "canonical": [
+        "https://geovyora.com/pt-BR/videos"
+      ],
+      "schema_errors": [],
+      "article_words": 0,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/pt-BR/videos"
+    },
+    {
+      "url": "https://geovyora.com/pt-BR/world",
+      "status": 200,
+      "language": "pt-BR",
+      "body_language": null,
+      "h1": "Mundo.",
+      "robots": "index,follow",
+      "canonical": [
+        "https://geovyora.com/pt-BR/world"
+      ],
+      "schema_errors": [],
+      "article_words": 0,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/pt-BR/world"
+    },
+    {
+      "url": "https://geovyora.com/en/search",
+      "status": 200,
+      "language": "en",
+      "body_language": null,
+      "h1": "Search.",
+      "robots": "noindex,nofollow",
+      "canonical": [
+        "https://geovyora.com/en/search"
+      ],
+      "schema_errors": [],
+      "article_words": 0,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/en/search"
+    },
+    {
+      "url": "https://geovyora.com/es/search",
+      "status": 200,
+      "language": "es",
+      "body_language": null,
+      "h1": "Buscar.",
+      "robots": "noindex,nofollow",
+      "canonical": [
+        "https://geovyora.com/es/search"
+      ],
+      "schema_errors": [],
+      "article_words": 0,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/es/search"
+    },
+    {
+      "url": "https://geovyora.com/fr/search",
+      "status": 200,
+      "language": "fr",
+      "body_language": null,
+      "h1": "Recherche.",
+      "robots": "noindex,nofollow",
+      "canonical": [
+        "https://geovyora.com/fr/search"
+      ],
+      "schema_errors": [],
+      "article_words": 0,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/fr/search"
+    },
+    {
+      "url": "https://geovyora.com/pt-BR/search",
+      "status": 200,
+      "language": "pt-BR",
+      "body_language": null,
+      "h1": "Busca.",
+      "robots": "noindex,nofollow",
+      "canonical": [
+        "https://geovyora.com/pt-BR/search"
+      ],
+      "schema_errors": [],
+      "article_words": 0,
+      "creole_notice": false,
+      "demo_notice": false,
+      "active_ad_slots": false,
+      "verification_script": true,
+      "final_url": "https://geovyora.com/pt-BR/search"
+    },
+    {
+      "url": "http://geovyora.com/",
+      "status": 200,
+      "history": [
+        {
+          "status": 301,
+          "url": "http://geovyora.com/"
+        },
+        {
+          "status": 302,
+          "url": "https://geovyora.com/"
+        }
+      ],
+      "final_url": "https://geovyora.com/fr"
+    },
+    {
+      "url": "https://www.geovyora.com/",
+      "status": 200,
+      "history": [
+        {
+          "status": 301,
+          "url": "https://www.geovyora.com/"
+        },
+        {
+          "status": 302,
+          "url": "https://geovyora.com/"
+        }
+      ],
+      "final_url": "https://geovyora.com/fr"
+    },
+    {
+      "url": "https://geovyora.com/fr/not-a-real-page-audit",
+      "status": 404,
+      "history": [],
+      "final_url": "https://geovyora.com/fr/not-a-real-page-audit"
+    }
+  ],
+  "assets": [
+    {
+      "url": "https://geovyora-images-public.s3.us-west-004.backblazeb2.com/vyora/7582dfa9-d0f0-41c4-a5fe-7bb0ef5ecb41.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 79162
+    },
+    {
+      "url": "https://geovyora.com/static/apple-touch-icon.png",
+      "status": 200,
+      "type": "image/png",
+      "bytes": 16250
+    },
+    {
+      "url": "https://geovyora.com/static/articles/haytiles-ezechias-digital-services.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 202523
+    },
+    {
+      "url": "https://geovyora.com/static/articles/khaby-lame-2025.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 4553435
+    },
+    {
+      "url": "https://geovyora.com/static/articles/mrbeast.png",
+      "status": 200,
+      "type": "image/png",
+      "bytes": 1844425
+    },
+    {
+      "url": "https://geovyora.com/static/articles/wilson-isidor-2026.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 2062289
+    },
+    {
+      "url": "https://geovyora.com/static/articles/wyclef.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 1892202
+    },
+    {
+      "url": "https://geovyora.com/static/favicon.png",
+      "status": 200,
+      "type": "image/png",
+      "bytes": 4751
+    },
+    {
+      "url": "https://geovyora.com/static/geovyora-mark.png",
+      "status": 200,
+      "type": "image/png",
+      "bytes": 111049
+    },
+    {
+      "url": "https://geovyora.com/static/style.css?v=production-20261003",
+      "status": 200,
+      "type": "text/css; charset=utf-8",
+      "bytes": 41243
+    }
+  ],
+  "sources": [
+    {
+      "url": "https://agenciabrasil.ebc.com.br/politica/noticia/2026-11/lula-garante-que-programas-sociais-serao-mantidos",
+      "status": 200,
+      "final_url": "https://agenciabrasil.ebc.com.br/politica/noticia/2026-11/lula-garante-que-programas-sociais-serao-mantidos",
+      "title": [
+        "Lula garante que programas sociais serão mantidos | Agência Brasil"
+      ]
+    },
+    {
+      "url": "https://apnews.com/article/1328b020711e2bef10f0a3f8a1fa1987",
+      "status": 200,
+      "final_url": "https://apnews.com/article/mrbeast-sexual-harassment-pregnant-maternity-leave-lorrayne-mavromatis-1328b020711e2bef10f0a3f8a1fa1987",
+      "title": [
+        "MrBeast employee alleges harassment at the video production company Beast Industries | AP News"
+      ]
+    },
+    {
+      "url": "https://apnews.com/article/34ee8ca588f6e54b33f6f2723b3a510c",
+      "status": 200,
+      "final_url": "https://apnews.com/article/haiti-soccer-dominican-republic-isidor-concacaf-34ee8ca588f6e54b33f6f2723b3a510c",
+      "title": [
+        "A celebratory remark deepens rift between Haiti and the Dominican Republic | AP News"
+      ]
+    },
+    {
+      "url": "https://apnews.com/article/mrbeast-jimmy-donaldson-rockefeller-foundation-18f75839ecf7276a14bfcaf7caba07ba",
+      "status": 200,
+      "final_url": "https://apnews.com/article/mrbeast-jimmy-donaldson-rockefeller-foundation-18f75839ecf7276a14bfcaf7caba07ba",
+      "title": [
+        "MrBeast and the Rockefeller Foundation are teaming up to spark youth philanthropy | AP News"
+      ]
+    },
+    {
+      "url": "https://belidemag.net/societe/ariana-m-lafond-participe-au-festival-international-de-la-jeunesse-en-russie/",
+      "status": 200,
+      "final_url": "https://belidemag.net/societe/ariana-m-lafond-participe-au-festival-international-de-la-jeunesse-en-russie/",
+      "title": [
+        "Ariana M. Lafond participe au Festival international de la jeunesse en Russie – Belide Magazine"
+      ]
+    },
+    {
+      "url": "https://commons.wikimedia.org/wiki/File:Khaby_Lame,_Nov_2025.jpg",
+      "status": 200,
+      "final_url": "https://commons.wikimedia.org/wiki/File:Khaby_Lame,_Nov_2025.jpg",
+      "title": [
+        "File:Khaby Lame, Nov 2025.jpg - Wikimedia Commons"
+      ]
+    },
+    {
+      "url": "https://commons.wikimedia.org/wiki/File:MrBeast_in_2026_(cropped1).png",
+      "status": 200,
+      "final_url": "https://commons.wikimedia.org/wiki/File:MrBeast_in_2026_(cropped1).png",
+      "title": [
+        "File:MrBeast in 2026 (cropped1).png - Wikimedia Commons"
+      ]
+    },
+    {
+      "url": "https://commons.wikimedia.org/wiki/File:Wilson_Isidor_05092026_(3).jpg",
+      "status": 200,
+      "final_url": "https://commons.wikimedia.org/wiki/File:Wilson_Isidor_05092026_(3).jpg",
+      "title": [
+        "File:Wilson Isidor 05092026 (3).jpg - Wikimedia Commons"
+      ]
+    },
+    {
+      "url": "https://commons.wikimedia.org/wiki/File:Wyclef_Jean_(34393552216).jpg",
+      "status": 200,
+      "final_url": "https://commons.wikimedia.org/wiki/File:Wyclef_Jean_(34393552216).jpg",
+      "title": [
+        "File:Wyclef Jean (34393552216).jpg - Wikimedia Commons"
+      ]
+    },
+    {
+      "url": "https://creativecommons.org/licenses/by/2.0/",
+      "status": 200,
+      "final_url": "https://creativecommons.org/licenses/by/2.0/",
+      "title": [
+        "Deed - Attribution 2.0 Generic - Creative Commons"
+      ]
+    },
+    {
+      "url": "https://creativecommons.org/licenses/by/4.0/",
+      "status": 200,
+      "final_url": "https://creativecommons.org/licenses/by/4.0/",
+      "title": [
+        "Deed - Attribution 4.0 International - Creative Commons"
+      ]
+    },
+    {
+      "url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "status": 200,
+      "final_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "title": [
+        "Deed - CC0 1.0 Universal - Creative Commons"
+      ]
+    },
+    {
+      "url": "https://fr.linkedin.com/posts/bovann-k-559b8b3b6_comme-je-le-dis-toujours-les-opportunit%C3%A9s-activity-7509698423940349952-2D8w",
+      "status": 200,
+      "final_url": "https://fr.linkedin.com/posts/bovann-k-559b8b3b6_comme-je-le-dis-toujours-les-opportunit%C3%A9s-activity-7509698423940349952-2D8w",
+      "title": [
+        "Comme je le dis toujours : les opportunités sont dehors.\n\nAujourd’hui, avec mon ami et mon frère, nous sommes en Chine pour un moment exceptionnel : la remise de la voiture à Ariana, l’heureuse… | Bovann K. | 13 commentaires"
+      ]
+    },
+    {
+      "url": "https://haytiles.com/",
+      "status": 200,
+      "final_url": "https://haytiles.com/",
+      "title": [
+        "Haytile Top-up — Serviços digitais sem fronteiras"
+      ]
+    },
+    {
+      "url": "https://intellectual-property-helpdesk.ec.europa.eu/news-events/news/khaby-lame-sells-his-image-rights-create-ai-powered-digital-twins-britney-spears-sells-rights-her-2026-02-12_en",
+      "status": 200,
+      "final_url": "https://intellectual-property-helpdesk.ec.europa.eu/news-events/news/khaby-lame-sells-his-image-rights-create-ai-powered-digital-twins-britney-spears-sells-rights-her-2026-02-12_en",
+      "title": [
+        "Khaby Lame sells his image rights to create AI-powered digital twins - Britney Spears sells the rights to her music catalogue - IP Helpdesk"
+      ]
+    },
+    {
+      "url": "https://lenouvelliste.com/article/266189/ariana-dinfluenceuse-de-lannee-a-championne",
+      "status": 200,
+      "final_url": "https://lenouvelliste.com/article/266189/ariana-dinfluenceuse-de-lannee-a-championne",
+      "title": [
+        "Ariana: D&#x27;influenceuse de l&#x27;année à championne"
+      ]
+    },
+    {
+      "url": "https://lenouvelliste.com/en/article/272541/wilson-isidor-scores-his-first-brace-for-haiti",
+      "status": 200,
+      "final_url": "https://lenouvelliste.com/en/article/272541/wilson-isidor-scores-his-first-brace-for-haiti",
+      "title": [
+        "Wilson Isidor scores his first brace for Haiti"
+      ]
+    },
+    {
+      "url": "https://lenouvelliste.com/en/article/272591/the-celebration-of-wilson-isidor-was-strictly-sporting-according-to-the-haitian-football-federation",
+      "status": 200,
+      "final_url": "https://lenouvelliste.com/en/article/272591/the-celebration-of-wilson-isidor-was-strictly-sporting-according-to-the-haitian-football-federation",
+      "title": [
+        "The celebration of Wilson Isidor was strictly sporting, according to the Haitian Football Federation"
+      ]
+    },
+    {
+      "url": "https://news.un.org/fr/story/2026/09/1159573",
+      "status": 200,
+      "final_url": "https://news.un.org/fr/story/2026/09/1159573",
+      "title": [
+        "Haïti : le Conseil de sécurité prolonge le mandat de la force antigangs | ONU Info"
+      ]
+    },
+    {
+      "url": "https://news.un.org/fr/story/2026/10/1159597",
+      "status": 200,
+      "final_url": "https://news.un.org/fr/story/2026/10/1159597",
+      "title": [
+        "Haïti : les gangs enrôlent toujours plus d’enfants | ONU Info"
+      ]
+    },
+    {
+      "url": "https://news.un.org/fr/story/2026/10/1159672",
+      "status": 200,
+      "final_url": "https://news.un.org/fr/story/2026/10/1159672",
+      "title": [
+        "L&#039;objectif des sanctions visant Haïti : priver les gangs de munitions | ONU Info"
+      ]
+    },
+    {
+      "url": "https://news.un.org/fr/story/2026/10/1159684",
+      "status": 200,
+      "final_url": "https://news.un.org/fr/story/2026/10/1159684",
+      "title": [
+        "Haïti : la violence des gangs gagne les campagnes, sur fond de report des élections | ONU Info"
+      ]
+    },
+    {
+      "url": "https://news.un.org/fr/story/2026/10/1159744",
+      "status": 200,
+      "final_url": "https://news.un.org/fr/story/2026/10/1159744",
+      "title": [
+        "Haïti : l’insécurité alimentaire menace d’atteindre un niveau record | ONU Info"
+      ]
+    },
+    {
+      "url": "https://ny1.com/nyc/all-boroughs/ap-top-news/2026/08/05/qa-ms-lauryn-hill-on-the-diaspora-calling-festival-in-the-uk-the-fugees-legacy-and-dangelo",
+      "status": 200,
+      "final_url": "https://ny1.com/nyc/all-boroughs/ap-top-news/2026/08/05/qa-ms-lauryn-hill-on-the-diaspora-calling-festival-in-the-uk-the-fugees-legacy-and-dangelo",
+      "title": [
+        "Q&amp;A: Ms. Lauryn Hill on the Diaspora Calling! festival in the UK, the Fugees&#39; legacy and D&#39;Angelo"
+      ]
+    },
+    {
+      "url": "https://play.google.com/store/apps/details?id=com.haytile.topup",
+      "status": 200,
+      "final_url": "https://play.google.com/store/apps/details?id=com.haytile.topup",
+      "title": [
+        "Haytile Topup - Apps on Google Play"
+      ]
+    },
+    {
+      "url": "https://thegrio.com/2012/10/15/wyclef-jeans-charity-yele-haiti-shuts-down-amid-financial-scandal/",
+      "status": 403,
+      "final_url": "https://thegrio.com/2012/10/15/wyclef-jeans-charity-yele-haiti-shuts-down-amid-financial-scandal/",
+      "title": [
+        "Attention Required! | Cloudflare"
+      ]
+    },
+    {
+      "url": "https://togo-today.com/house-of-challenge-voici-les-prix-remportes-par-la-gagnante-ariana-video/",
+      "status": 200,
+      "final_url": "https://togo-today.com/house-of-challenge-voici-les-prix-remportes-par-la-gagnante-ariana-video/",
+      "title": [
+        "House of Challenge : Voici les prix remportés par la gagnante Ariana (vidéo) | Togo Today"
+      ]
+    },
+    {
+      "url": "https://www.concacaf.com/competitions/nations-league/news/bacuna-seals-curacao-s-third-straight-win",
+      "status": 200,
+      "final_url": "https://www.concacaf.com/competitions/nations-league/news/bacuna-seals-curacao-s-third-straight-win",
+      "title": [
+        "Bacuna seals Curaçao’s third straight win | Concacaf"
+      ]
+    },
+    {
+      "url": "https://www.concacaf.com/competitions/nations-league/news/haiti-and-curacao-advance-to-nations-league-quarterfinals",
+      "status": 200,
+      "final_url": "https://www.concacaf.com/competitions/nations-league/news/haiti-and-curacao-advance-to-nations-league-quarterfinals",
+      "title": [
+        "Haiti and Curaçao advance to Nations League Quarterfinals | Concacaf"
+      ]
+    },
+    {
+      "url": "https://www.faa.gov/newsroom/statements/accident_incidents",
+      "status": 200,
+      "final_url": "https://www.faa.gov/newsroom/statements/accident_incidents",
+      "title": [
+        "FAA Statements on Aviation Accidents and Incidents | Federal Aviation Administration"
+      ]
+    },
+    {
+      "url": "https://www.haiti.org/dt_team/wyclef-jean/",
+      "status": 200,
+      "final_url": "https://www.haiti.org/dt_team/wyclef-jean/",
+      "title": [
+        "WYCLEF JEAN &#8211; Embassy of Haiti"
+      ]
+    },
+    {
+      "url": "https://www.juno7.ht/ariana-lafond-house-of-challenge-togo/",
+      "status": 200,
+      "final_url": "https://www.juno7.ht/ariana-lafond-house-of-challenge-togo/",
+      "title": [
+        "Une Haïtienne de 19 ans remporte House of Challenge au Togo"
+      ]
+    },
+    {
+      "url": "https://www.ntsb.gov/investigations/process/Pages/default.aspx",
+      "status": 200,
+      "final_url": "https://www.ntsb.gov/investigations/process/Pages/default.aspx",
+      "title": [
+        "\r\n\t\r\n    The Investigative Process\r\n\r\n"
+      ]
+    },
+    {
+      "url": "https://www.presidencia.gob.sv/gobierno-de-el-salvador-ofrece-implementar-plan-control-territorial-en-haiti-para-combatir-criminalidad/",
+      "status": 200,
+      "final_url": "https://www.presidencia.gob.sv/gobierno-de-el-salvador-ofrece-implementar-plan-control-territorial-en-haiti-para-combatir-criminalidad/",
+      "title": [
+        "Gobierno de El Salvador ofrece implementar Plan Control Territorial en Haití para combatir criminalidad - Presidencia de la República de El Salvador"
+      ]
+    },
+    {
+      "url": "https://www.prnewswire.com/news-releases/rich-sparkle-holdings-closes-acquisition-of-tiktok-icon-khaby-lames-core-company-302658017.html",
+      "status": 200,
+      "final_url": "https://www.prnewswire.com/news-releases/rich-sparkle-holdings-closes-acquisition-of-tiktok-icon-khaby-lames-core-company-302658017.html",
+      "title": [
+        "Rich Sparkle Holdings Closes Acquisition of TikTok Icon Khaby Lame&#39;s Core Company"
+      ]
+    },
+    {
+      "url": "https://www.reuters.com/article/lifestyle/rapper-wyclef-jean-to-be-haitis-roving-ambassador-idUSN03411270/",
+      "status": 401,
+      "final_url": "https://www.reuters.com/article/lifestyle/rapper-wyclef-jean-to-be-haitis-roving-ambassador-idUSN03411270/",
+      "title": [
+        "reuters.com"
+      ]
+    },
+    {
+      "url": "https://www.reuters.com/article/lifestyle/wyclef-jean-squandered-haitian-relief-funds-report-idUSTRE7AQ0T2/",
+      "status": 401,
+      "final_url": "https://www.reuters.com/article/lifestyle/wyclef-jean-squandered-haitian-relief-funds-report-idUSTRE7AQ0T2/",
+      "title": [
+        "reuters.com"
+      ]
+    },
+    {
+      "url": "https://www.reuters.com/business/finance/new-money-advice-wyclef-jean-just-dropped-its-rap-2024-02-26/",
+      "status": 401,
+      "final_url": "https://www.reuters.com/business/finance/new-money-advice-wyclef-jean-just-dropped-its-rap-2024-02-26/",
+      "title": [
+        "reuters.com"
+      ]
+    },
+    {
+      "url": "https://www.reuters.com/business/media-telecom/mrbeast-chocolate-ads-were-misleading-us-childrens-watchdog-group-says-2025-09-18/",
+      "status": 401,
+      "final_url": "https://www.reuters.com/business/media-telecom/mrbeast-chocolate-ads-were-misleading-us-childrens-watchdog-group-says-2025-09-18/",
+      "title": [
+        "reuters.com"
+      ]
+    },
+    {
+      "url": "https://www.reuters.com/business/media-telecom/worlds-top-youtuber-mrbeast-launches-saudi-theme-park-2025-11-13/",
+      "status": 401,
+      "final_url": "https://www.reuters.com/business/media-telecom/worlds-top-youtuber-mrbeast-launches-saudi-theme-park-2025-11-13/",
+      "title": [
+        "reuters.com"
+      ]
+    },
+    {
+      "url": "https://www.sec.gov/Archives/edgar/data/2031688/000121390026002713/ea0272099-6k_rich.htm",
+      "status": 200,
+      "final_url": "https://www.sec.gov/Archives/edgar/data/2031688/000121390026002713/ea0272099-6k_rich.htm",
+      "title": []
+    },
+    {
+      "url": "https://www.sec.gov/Archives/edgar/data/2031688/000121390026104911/ea030682201ex99-1.htm",
+      "status": 200,
+      "final_url": "https://www.sec.gov/Archives/edgar/data/2031688/000121390026104911/ea030682201ex99-1.htm",
+      "title": []
+    },
+    {
+      "url": "https://www.sec.gov/Archives/edgar/data/2031688/000121390026104911/ea030682201ex99-2.htm",
+      "status": 200,
+      "final_url": "https://www.sec.gov/Archives/edgar/data/2031688/000121390026104911/ea030682201ex99-2.htm",
+      "title": [
+        "anpa-20260331"
+      ]
+    },
+    {
+      "url": "https://www.tse.jus.br/comunicacao/noticias/2026/Novembro/justica-eleitoral-reabre-o-cadastro-eleitoral-nesta-terca-feira-3",
+      "status": 200,
+      "final_url": "https://www.tse.jus.br/comunicacao/noticias/2026/Novembro/justica-eleitoral-reabre-o-cadastro-eleitoral-nesta-terca-feira-3",
+      "title": [
+        "Justiça Eleitoral reabre o cadastro eleitoral nesta terça-feira (3) — Tribunal Superior Eleitoral"
+      ]
+    },
+    {
+      "url": "https://www.tse.jus.br/comunicacao/noticias/2026/Novembro/tres-devem-encaminhar-ao-tse-relatorios-de-auditoria-das-urnas-eletronicas-ate-4-de-novembro",
+      "status": 200,
+      "final_url": "https://www.tse.jus.br/comunicacao/noticias/2026/Novembro/tres-devem-encaminhar-ao-tse-relatorios-de-auditoria-das-urnas-eletronicas-ate-4-de-novembro",
+      "title": [
+        "TREs devem encaminhar ao TSE relatórios de auditoria das urnas eletrônicas até 4 de novembro — Tribunal Superior Eleitoral"
+      ]
+    },
+    {
+      "url": "https://www.tse.jus.br/comunicacao/noticias/2026/Outubro/da-eleicao-a-diplomacao-entenda-as-etapas-ate-a-posse-dos-eleitos-238683",
+      "status": 200,
+      "final_url": "https://www.tse.jus.br/comunicacao/noticias/2026/Outubro/da-eleicao-a-diplomacao-entenda-as-etapas-ate-a-posse-dos-eleitos-238683",
+      "title": [
+        "Da eleição à diplomação: entenda as etapas até a posse dos eleitos — Tribunal Superior Eleitoral"
+      ]
+    },
+    {
+      "url": "https://www.tse.jus.br/comunicacao/noticias/2026/Outubro/resultados-do-2o-turno-das-eleicoes-2026-estao-disponiveis-em-pagina-do-tse",
+      "status": 200,
+      "final_url": "https://www.tse.jus.br/comunicacao/noticias/2026/Outubro/resultados-do-2o-turno-das-eleicoes-2026-estao-disponiveis-em-pagina-do-tse",
+      "title": [
+        "Resultados do 2º turno das Eleições 2026 estão disponíveis em página do TSE — Tribunal Superior Eleitoral"
+      ]
+    },
+    {
+      "url": "https://www.tse.jus.br/servicos-eleitorais/autoatendimento-eleitoral",
+      "status": 200,
+      "final_url": "https://www.tse.jus.br/servicos-eleitorais/autoatendimento-eleitoral",
+      "title": [
+        "Autoatendimento eleitoral — Tribunal Superior Eleitoral"
+      ]
+    },
+    {
+      "url": "https://wyffest.com/en/events/mfm2026",
+      "status": 200,
+      "final_url": "https://wyffest.com/en/events/mfm2026",
+      "title": [
+        "International  Festival of  Youth &amp;mdash; 2026 "
+      ]
+    }
+  ],
+  "browser": [
+    {
+      "path": "/fr",
+      "width": 1440,
+      "status": 200,
+      "overflow": false,
+      "javascript_errors": [],
+      "literal_breaks": false,
+      "mobile_menu_expanded": null,
+      "blocked_google_helper_requests": 1
+    },
+    {
+      "path": "/pt-BR/article/bresil-registre-electoral-reouverture-3-novembre-2026",
+      "width": 1440,
+      "status": 200,
+      "overflow": false,
+      "javascript_errors": [],
+      "literal_breaks": false,
+      "mobile_menu_expanded": null,
+      "blocked_google_helper_requests": 1
+    },
+    {
+      "path": "/fr/contact",
+      "width": 1440,
+      "status": 200,
+      "overflow": false,
+      "javascript_errors": [],
+      "literal_breaks": false,
+      "mobile_menu_expanded": null,
+      "blocked_google_helper_requests": 1
+    },
+    {
+      "path": "/fr/about",
+      "width": 1440,
+      "status": 200,
+      "overflow": false,
+      "javascript_errors": [],
+      "literal_breaks": false,
+      "mobile_menu_expanded": null,
+      "blocked_google_helper_requests": 1
+    },
+    {
+      "path": "/fr/article/wilson-isidor-deklarasyon-ayiti-repiblik-dominikenn",
+      "width": 1440,
+      "status": 200,
+      "overflow": false,
+      "javascript_errors": [],
+      "literal_breaks": false,
+      "mobile_menu_expanded": null,
+      "blocked_google_helper_requests": 1
+    },
+    {
+      "path": "/fr",
+      "width": 390,
+      "status": 200,
+      "overflow": false,
+      "javascript_errors": [],
+      "literal_breaks": false,
+      "mobile_menu_expanded": "true",
+      "blocked_google_helper_requests": 1
+    },
+    {
+      "path": "/pt-BR/article/bresil-registre-electoral-reouverture-3-novembre-2026",
+      "width": 390,
+      "status": 200,
+      "overflow": false,
+      "javascript_errors": [],
+      "literal_breaks": false,
+      "mobile_menu_expanded": null,
+      "blocked_google_helper_requests": 1
+    },
+    {
+      "path": "/fr/contact",
+      "width": 390,
+      "status": 200,
+      "overflow": false,
+      "javascript_errors": [],
+      "literal_breaks": false,
+      "mobile_menu_expanded": null,
+      "blocked_google_helper_requests": 1
+    },
+    {
+      "path": "/fr/about",
+      "width": 390,
+      "status": 200,
+      "overflow": false,
+      "javascript_errors": [],
+      "literal_breaks": false,
+      "mobile_menu_expanded": null,
+      "blocked_google_helper_requests": 1
+    },
+    {
+      "path": "/fr/article/wilson-isidor-deklarasyon-ayiti-repiblik-dominikenn",
+      "width": 390,
+      "status": 200,
+      "overflow": false,
+      "javascript_errors": [],
+      "literal_breaks": false,
+      "mobile_menu_expanded": null,
+      "blocked_google_helper_requests": 1
+    }
+  ],
+  "photo_ariana": {
+    "owner_statement": "foto ariana pa gen dwa ote",
+    "license_or_author_document_provided": false,
+    "independent_status": "not_verified",
+    "photo_preserved": true
+  },
+  "pending_security_change": {
+    "applied": false,
+    "proposal": "google-csp-proposal.md",
+    "automatic_approval_rejected": true,
+    "restrictive_previous_csp_restored_and_verified": true
+  },
+  "limitations": [
+    "The intentional 404 probe is not a broken site link.",
+    "Source HTTP 401/403 results are access limitations, not findings of false reporting.",
+    "A successful crawl from this session is not a measurement of actual Google crawler traffic.",
+    "Technical tests do not certify Google’s low-value-content assessment.",
+    "No AdSense account review request was submitted."
+  ]
+}
