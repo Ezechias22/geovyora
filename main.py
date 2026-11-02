@@ -268,7 +268,7 @@ async def cookies_and_headers(request,call_next):
     response.headers['X-Content-Type-Options']='nosniff';response.headers['Referrer-Policy']='strict-origin-when-cross-origin'
     response.headers['X-Frame-Options']='SAMEORIGIN'
     if request.url.path.startswith(('/admin','/api')):response.headers['Cache-Control']='no-store'
-    response.headers['Content-Security-Policy']="default-src 'self'; img-src 'self' https: data:; style-src 'self' 'unsafe-inline'; script-src 'self' https://www.gstatic.com https://cdn.jsdelivr.net https://pagead2.googlesyndication.com; connect-src 'self' https://*.mux.com https://*.googleapis.com https://*.firebaseio.com https://*.gstatic.com https://*.googlesyndication.com; media-src 'self' blob: https://*.mux.com; frame-src https://*.googlesyndication.com https://googleads.g.doubleclick.net; object-src 'none'; base-uri 'self'; form-action 'self'"
+    response.headers['Content-Security-Policy']="default-src 'self'; img-src 'self' https: data:; style-src 'self' 'unsafe-inline'; script-src 'self' https://ep2.adtrafficquality.google https://www.gstatic.com https://cdn.jsdelivr.net https://pagead2.googlesyndication.com; connect-src 'self' https://ep1.adtrafficquality.google https://*.mux.com https://*.googleapis.com https://*.firebaseio.com https://*.gstatic.com https://*.googlesyndication.com; media-src 'self' blob: https://*.mux.com; frame-src https://*.googlesyndication.com https://googleads.g.doubleclick.net; object-src 'none'; base-uri 'self'; form-action 'self'"
     from urllib.parse import urlsplit
     storage_origins=set()
     for value in [os.getenv('S3_ENDPOINT_URL',''),os.getenv('MEDIA_PUBLIC_URL','')]:

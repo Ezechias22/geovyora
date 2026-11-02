@@ -1,6 +1,6 @@
-# Proposition CSP Google — en attente d’autorisation
+# Ajustement CSP Google — autorisé par le propriétaire
 
-Cette proposition n’est pas appliquée. La CSP de production reste celle qui précédait l’audit.
+Le propriétaire a explicitement autorisé cet ajustement dans la conversation, après explication de ses effets. Les deux autorisations ci-dessous sont ajoutées ; leur déploiement fait l’objet de contrôles HTTP et navigateur.
 
 ## Modification exacte proposée
 
@@ -14,4 +14,4 @@ Le script de vérification AdSense déjà présent demande une configuration à 
 
 L’ajout permettrait au navigateur de communiquer avec la première origine et d’exécuter du code tiers fourni par la seconde sur les pages chargeant le script AdSense. Il ne déclenche pas l’activation des emplacements publicitaires, ne configure pas une CMP et ne garantit pas l’approbation AdSense.
 
-La revue automatique d’approbation a rejeté la modification persistante, au motif que l’objectif d’audit n’autorisait pas explicitement cet élargissement d’une frontière de sécurité en production. L’ajustement partiel de `connect-src` a donc été retiré ; les réparations éditoriales restent en place. Une autorisation explicite du propriétaire est nécessaire avant d’appliquer la proposition.
+La revue automatique d’approbation a rejeté la modification persistante, au motif que l’objectif d’audit n’autorisait pas explicitement cet élargissement d’une frontière de sécurité en production. L’ajustement partiel de `connect-src` a donc été retiré ; les réparations éditoriales restent en place. Le propriétaire a ensuite donné son autorisation explicite : « ebyen fe sa ». Cette autorisation permet maintenant d’appliquer les deux changements précisément décrits.
