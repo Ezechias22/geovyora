@@ -12,3 +12,16 @@ Consultation HTTP réelle le 2 novembre 2026, avant rédaction. Les textes du fi
 Les informations sur des militaires disparus dans le récit du 19 octobre n’ont pas été utilisées comme un bilan actuel, faute de suivi vérifié. Les chiffres de capacité théorique de la force diffèrent entre deux publications (5 500 / 5 550) : ils n’ont pas été repris. Les prévisions alimentaires ne sont pas présentées comme des faits déjà réalisés.
 
 Le propriétaire a demandé explicitement la publication. La migration 017 ajoute les trois articles en français avec leurs sources et le statut published, sans remplacer les articles existants, y compris en cas de réexécution. Leurs traductions ne sont pas inventées ; elles suivent le workflow existant. L’application effective sur la production dépend du déploiement du code et de l’exécution des migrations au démarrage du service existant.
+
+## Deuxième série — vérification le 2 novembre 2026
+
+La migration 018 publie trois autres articles depuis `2026-11-02-suite.json`. Le propriétaire a confirmé qu’il évoquait bien l’accident du Learjet en Floride du 1er novembre.
+
+| Document consulté | Date du document | Éléments retenus |
+| --- | --- | --- |
+| [FAA — Aviation Accidents and Incidents](https://www.faa.gov/newsroom/statements/accident_incidents) | Entrée du 1er novembre 2026 | Learjet 60, zone résidentielle près de Cresthaven, vers 12 h 50 locales, neuf personnes à bord, départ Austin-Bergstrom, destination North Eleuthera ; NTSB chargé de l’enquête. Pas de cause ni de bilan mortel établis dans cette déclaration. |
+| [NTSB — Investigative Process](https://www.ntsb.gov/investigations/process/Pages/default.aspx) | Page de procédure consultée le 2 novembre | Collecte, analyse, cause probable, rôle de sécurité distinct de l’enquête pénale ; règles générales, pas conclusion sur cet accident. |
+| [ONU Info — recrutement d’enfants](https://news.un.org/fr/story/2026/10/1159597) | 2 octobre 2026 | Estimation de 30 à 50 % de mineurs parmi les membres des gangs, recrutement et utilisation presque triplés en 2025 ; prévention et réinsertion. Aucune identité de mineur reprise. |
+| [ONU Info — sanctions](https://news.un.org/fr/story/2026/10/1159672) | 15 octobre 2026 | Embargo, interdiction de voyager, gel des avoirs ; limites d’exécution rapportées par les experts. Pas de nouvelle accusation individuelle. |
+
+Un flux de recherche a servi uniquement à identifier l’incident et les documents à consulter. Les faits publiés sur l’accident proviennent des deux pages officielles lues, pas des seuls titres de résultats. Des tentatives Reuters et Guardian ont échoué ; elles ne sont pas utilisées comme sources. La rumeur de bombe n’est ni validée ni présentée comme définitivement réfutée : la déclaration FAA consultée ne l’établit pas.
