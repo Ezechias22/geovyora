@@ -1,0 +1,17 @@
+# Cinq articles supplémentaires — consultation le 2 novembre 2026
+
+La migration 024 publie cinq nouveaux articles et leurs quinze traductions anglaises, portugaises et espagnoles dans la même transaction. Les textes sont des synthèses et analyses originales, avec leurs sources visibles. Aucun visuel n’a été repris. Aucun article existant n’est remplacé.
+
+| Sujet | Document effectivement consulté | Périmètre retenu |
+| --- | --- | --- |
+| Climat | [Agência Brasil, 2 novembre 2026](https://agenciabrasil.ebc.com.br/meio-ambiente/noticia/2026-11/pnuma-emissoes-precisam-cair-18-ate-2030-para-limitar-aquecimento) | Réductions conditionnelles de 18 % en 2030, 45 % en 2035 et 69 % en 2040 par rapport à 2025 ; scénario, pas résultat acquis. Plus de 220 évaluations de politiques, avec limites de généralisation. |
+| REC’n’Play | [Agência Brasil, 2 novembre 2026](https://agenciabrasil.ebc.com.br/cultura/noticia/2026-11/recnplay-2026-sera-palco-de-tecnologia-e-criatividade-em-recife) | Événement annoncé du 11 au 14 novembre 2026, huitième édition, gratuit avec inscription, Porto Digital et Sebrae Pernambuco. Programme futur, pas bilan de fréquentation. |
+| Sécurité des journalistes | [UNESCO, page de la journée du 2 novembre](https://www.unesco.org/en/days/end-impunity) | Utilisation explicite de la section IDEI 2026 : 189 journalistes tués en 2024–2025, 67 % en zone de conflit, 50 victimes de drones dans six zones de guerre. Taux global d’impunité de 86 %, dont le périmètre est distinct de ces 189 décès. Les anciens éléments à 85 % présents sur la même page ne sont pas traités comme chiffres du rapport 2026. |
+| Aide en Haïti | [ONU Info, 12 octobre 2026](https://news.un.org/fr/story/2026/10/1159650) | Allocation de 75 millions USD à dix projets, 28 communes, cible de 507 000 personnes ; trois consortiums d’ONG. Une annonce de financement n’est pas une livraison déjà réalisée. |
+| Signalements au Brésil | [Agência Brasil, 1er novembre 2026](https://agenciabrasil.ebc.com.br/politica/noticia/2026-11/violencia-politica-disque-100-recebeu-189-denuncias-durante-eleicao) | 90 communications au Disque 100 du 1er au 25 octobre contre 20 pendant tout septembre ; 19 le 4 octobre et 8 le 25, soit 27/90 = 30 %. Signalements, pas condamnations. Le total plus large de 189 annoncé dans la source n’est pas repris : les sous-totaux publiés dans ce texte ne permettent pas de le réconcilier clairement. |
+
+Le site officiel [REC’n’Play](https://recnplay.pe/) a également été consulté et confirme dans sa présentation les dates du 11 au 14 novembre ; il figure parmi les références de l’article.
+
+Le lien général d’observance `un.org` a répondu 403 ; il n’est pas utilisé comme source consultée. Les liens d’inscription présents chez des tiers ne sont pas reproduits sans contrôle. Les sujets ont été choisis pour relier société, création, information, Haïti et Brésil, sans prétendre que l’ajout d’articles garantit AdSense.
+
+La rubrique Monde devient le catalogue de tous les articles publiés, indépendamment des anciens champs `haiti`, `world` ou `international`. Elle affiche jusqu’à 24 articles par page : les vingt articles actuels tiennent sur la première. Les catégories restent filtrables ; brouillons, contenus dans la corbeille et démonstrations ne sont pas rendus publics en production. Les liens de pagination n’apparaissent que lorsqu’une autre page contient effectivement des résultats.

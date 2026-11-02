@@ -97,7 +97,7 @@ def public_demo_clause(alias=''):
     return '' if os.getenv('ALLOW_DEMO_CONTENT','0')=='1' else ' AND '+alias+'demo=0'
 
 def article_list(where='1=1',args=(),limit=60):
-    return rows("SELECT * FROM articles WHERE status='published' AND "+where+public_demo_clause()+' ORDER BY featured DESC,publish_at DESC LIMIT ?',(*args,limit))
+    return rows("SELECT * FROM articles WHERE status='published' AND "+where+public_demo_clause()+' ORDER BY featured DESC,publish_at DESC,id DESC LIMIT ?',(*args,limit))
 def public_profile_languages(value):
     import unicodedata
     hidden={'ht','haitian creole','creole haitien','haitian creole language','kreyol','creole','creole language'}
@@ -755,7 +755,7 @@ def public(request:Request,locale:str,section:str='home',slug:str='',q:str='',ca
         if category_record:
             category_filter=category_record['id']
             category=category_record['name']
-    page=max(1,min(page,1000));a=None;p=None;videos=[];data=[];title=labels(locale).get(section,section)
+    page=max(1,min(page,1000));a=None;p=None;videos=[];data=[];has_next=False;total_articles=0;title=labels(locale).get(section,section)
     allowed=['home','haiti','world','news','interviews','videos','video','trending','rankings','discoveries','influencers','influencer','article','search','notifications','saved','submit-influencer','submit-news','contact','advertising','about','privacy','terms','cookies','editorial','community','copyright','category','newsletter','newsletter-unsubscribe']
     if section not in allowed:raise HTTPException(404,'Paj sa a pa egziste.')
     if section=='article':
@@ -801,7 +801,7 @@ def public(request:Request,locale:str,section:str='home',slug:str='',q:str='',ca
         data=rows(trending_query+" GROUP BY a.id ORDER BY readership DESC LIMIT 24",tuple(trending_args))
     elif section in ['home','haiti','world','news','interviews','discoveries','category']:
         where='1=1';args=[]
-        if section in ['haiti','world']:where+=' AND region=?';args.append(section)
+        if section=='haiti':where+=' AND region=?';args.append(section)
         if section=='interviews':where+=" AND kind='interview'"
         if section=='discoveries':where+=" AND category='Dekouvèt'"
         if section=='category':
@@ -809,9 +809,13 @@ def public(request:Request,locale:str,section:str='home',slug:str='',q:str='',ca
             if not cat:raise HTTPException(404,'Kategori pa jwenn.')
             where+=' AND category=?';args.append(cat['name']);title=localized_category(cat['name'],locale)
         if category:where+=' AND category=?';args.append(category)
-        data=article_list(where,tuple(args),5000)[(page-1)*12:page*12]
+        page_size=24 if section=='world' else 12
+        matches=article_list(where,tuple(args),5000)
+        total_articles=len(matches)
+        has_next=total_articles>page*page_size
+        data=matches[(page-1)*page_size:page*page_size]
     empty_archive=section in ['home','haiti','world','news','interviews','discoveries','category','trending','rankings','videos','influencers'] and not (videos if section=='videos' else data)
-    return render(request,section,locale,articles=[translate_record(x,locale) for x in data] if section!='influencers' else [],profiles=data if section=='influencers' else rows("SELECT * FROM influencers WHERE status='published'"+public_demo_clause()+" LIMIT 4"),article=a,profile=p,videos=videos,title=title,q=q,category=category,category_filter=category_filter,country=country,platform=platform,sort=sort,pagination=page,seo_noindex=empty_archive)
+    return render(request,section,locale,articles=[translate_record(x,locale) for x in data] if section!='influencers' else [],profiles=data if section=='influencers' else rows("SELECT * FROM influencers WHERE status='published'"+public_demo_clause()+" LIMIT 4"),article=a,profile=p,videos=videos,title=title,q=q,category=category,category_filter=category_filter,country=country,platform=platform,sort=sort,pagination=page,has_next=has_next,total_articles=total_articles,seo_noindex=empty_archive)
 
 @app.post('/admin/campaigns/save')
 async def save_campaign(request:Request):

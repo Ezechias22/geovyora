@@ -89,22 +89,22 @@ class PublicLocalizationIntegrityTests(fixtures.Fixture):
     def test_public_section_summaries_are_localized(self):
         expected = {
             "fr": {
-                "/world": "D’autres voix, d’autres cultures. La créativité à travers le monde.",
+                "/world": "Tous les articles de Geovyora : Haïti, diaspora et actualité du monde.",
                 "/trending": "Les articles les plus lus sur Geovyora au cours des sept derniers jours. Données de ce site uniquement.",
                 "/interviews": "Des conversations sur les idées, l’expérience et le travail créatif.",
             },
             "en": {
-                "/world": "Other voices, other cultures. Creativity around the world.",
+                "/world": "All Geovyora articles: Haiti, the diaspora and news from around the world.",
                 "/trending": "The most-read Geovyora stories over the past seven days. Data from this site only.",
                 "/interviews": "Conversations about ideas, experience and creative work.",
             },
             "pt-BR": {
-                "/world": "Outras vozes, outras culturas. Criatividade pelo mundo.",
+                "/world": "Todos os artigos da Geovyora: Haiti, diáspora e notícias do mundo.",
                 "/trending": "Os artigos mais lidos na Geovyora nos últimos sete dias. Dados apenas deste site.",
                 "/interviews": "Conversas sobre ideias, experiências e trabalho criativo.",
             },
             "es": {
-                "/world": "Otras voces, otras culturas. Creatividad en todo el mundo.",
+                "/world": "Todos los artículos de Geovyora: Haití, diáspora y actualidad del mundo.",
                 "/trending": "Los artículos más leídos de Geovyora en los últimos siete días. Datos de este sitio.",
                 "/interviews": "Conversaciones sobre ideas, experiencias y trabajo creativo.",
             },
