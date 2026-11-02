@@ -45,7 +45,7 @@ class EditorialAudit(fixtures.Fixture):
         schema = json.loads(re.search(r'<script type="application/ld\+json">(.*?)</script>', response.text, re.S)[1])
         self.assertEqual(schema['author']['@type'], 'Organization')
         self.assertEqual(schema['author']['name'], 'Geovyora')
-        self.assertIn('https://ep1.adtrafficquality.google', response.headers['content-security-policy'].split('connect-src', 1)[1].split(';', 1)[0])
+        self.assertNotIn('adtrafficquality.google', response.headers['content-security-policy'])
 
     def test_repair_migration_preserves_photos_and_translation_history(self):
         spec = importlib.util.spec_from_file_location('audit_repairs', ROOT / 'migrations/023_editorial_audit_repairs.py')
