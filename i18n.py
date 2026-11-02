@@ -27,4 +27,15 @@ VALUES['es'].extend([
  '¿Conoces a un creador que deberíamos descubrir? Comparte su nombre, origen y enlaces oficiales.',
  'Para banners directos, colaboraciones editoriales y contenido patrocinado, contacta con nuestro equipo.'
 ])
+KEYS.extend(['article_available_in','editorial_translation','article_sources','article_corrections','article_demo_notice'])
+VALUES['fr'].extend(['Cet article est disponible en {language}.','Traduction éditoriale','Sources et documents','Corrections éditoriales','Article de démonstration. La personne illustrée est fictive ; l’image a été générée par IA.'])
+VALUES['en'].extend(['This article is available in {language}.','Editorial translation','Sources and documents','Editorial corrections','Demonstration article. The illustrated person is fictional; the image was generated with AI.'])
+VALUES['pt-BR'].extend(['Este artigo está disponível em {language}.','Tradução editorial','Fontes e documentos','Correções editoriais','Artigo de demonstração. A pessoa ilustrada é fictícia; a imagem foi gerada por IA.'])
+VALUES['es'].extend(['Este artículo está disponible en {language}.','Traducción editorial','Fuentes y documentos','Correcciones editoriales','Artículo de demostración. La persona ilustrada es ficticia; la imagen se generó con IA.'])
+LANGUAGE_NAMES={
+ 'fr':{'fr':'français','en':'anglais','pt-BR':'portugais (Brésil)','es':'espagnol'},
+ 'en':{'fr':'French','en':'English','pt-BR':'Brazilian Portuguese','es':'Spanish'},
+ 'pt-BR':{'fr':'francês','en':'inglês','pt-BR':'português (Brasil)','es':'espanhol'},
+ 'es':{'fr':'francés','en':'inglés','pt-BR':'portugués (Brasil)','es':'español'},
+}
 def labels(locale): return dict(zip(KEYS,VALUES.get(locale,VALUES['en'])))

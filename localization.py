@@ -2936,6 +2936,7 @@ PHRASES.update({
     'Tri kòmantè':['Trier les commentaires','Sort comments','Ordenar comentários','Ordenar comentarios'],
     'Tri':['Trier','Sort','Ordenar','Ordenar'],
 })
+PHRASES['Société']=['Société','Society','Sociedade','Sociedad']
 def localized_category(value,locale,catalog=None):
     """Return a visitor-facing category label while keeping the stored value stable."""
     index=LOCALES.get(locale)

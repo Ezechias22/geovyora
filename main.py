@@ -10,7 +10,7 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from db import migrate,rows,one,write,connection,sql
 from security import hash_password,verify_password,digest,session,require,csrf,same_origin,rate,visitor
-from i18n import LANGUAGES,labels
+from i18n import LANGUAGES,LANGUAGE_NAMES,labels
 from seed import seed
 from jobs import language_map,normalize_language,queue_translation,enqueue_campaign
 from extensions import initialize_features,categories,public_categories,normalize_search,search_matches
@@ -135,6 +135,9 @@ def render(request,page,locale='fr',**kw):
                 category_values.append({'id':category_record['id'],'value':name,'name':name,'label':localized_category(name,locale,ui)})
     base={'request':request,'locale':locale,'t':t,'languages':language_map(),'settings':cfg,'brand':cfg.get('brand','Geovyora'),'page':page,'categories':category_values,'staff':session(request),'csrf_token':request.state.public_csrf,'title':cfg.get('brand','Geovyora'),'description':'Magazine consacré aux créateurs haïtiens, à la diaspora et aux voix du monde.','path':request.url.path,'ads_allowed':False}
     base.update(kw)
+    base['language_names']=LANGUAGE_NAMES.get(locale,LANGUAGE_NAMES['en'])
+    if page=='article' and base.get('article'):
+        base['description']=base['article']['subtitle']
     base['adsense_publisher_id']=adsense_publisher_id(cfg)
     if page=='editorial':
         from editorial_policy import POLICIES
