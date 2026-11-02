@@ -3499,5 +3499,83 @@
     "A successful crawl from this session is not a measurement of actual Google crawler traffic.",
     "Technical tests do not certify Google’s low-value-content assessment.",
     "No AdSense account review request was submitted."
-  ]
+  ],
+  "google_csp_follow_up": {
+    "checked_at": "2026-11-02T17:09:24.925286+00:00",
+    "code_commit": "4e04402c158f31e5ef2790ec31e1c7677eb51aaf",
+    "owner_explicitly_authorized": true,
+    "applied": true,
+    "targeted_tests_passed": 6,
+    "browser_results": [
+      {
+        "path": "/fr",
+        "width": 1440,
+        "http_status": 200,
+        "javascript_errors": [],
+        "failed_requests": [],
+        "google_resources": [
+          {
+            "host": "ep1.adtrafficquality.google",
+            "status": 200
+          },
+          {
+            "host": "ep2.adtrafficquality.google",
+            "status": 200
+          }
+        ]
+      },
+      {
+        "path": "/pt-BR/article/bresil-registre-electoral-reouverture-3-novembre-2026",
+        "width": 1440,
+        "http_status": 200,
+        "javascript_errors": [],
+        "failed_requests": [],
+        "google_resources": [
+          {
+            "host": "ep1.adtrafficquality.google",
+            "status": 200
+          },
+          {
+            "host": "ep2.adtrafficquality.google",
+            "status": 200
+          }
+        ]
+      },
+      {
+        "path": "/fr",
+        "width": 390,
+        "http_status": 200,
+        "javascript_errors": [],
+        "failed_requests": [],
+        "google_resources": [
+          {
+            "host": "ep1.adtrafficquality.google",
+            "status": 200
+          },
+          {
+            "host": "ep2.adtrafficquality.google",
+            "status": 200
+          }
+        ]
+      },
+      {
+        "path": "/pt-BR/article/bresil-registre-electoral-reouverture-3-novembre-2026",
+        "width": 390,
+        "http_status": 200,
+        "javascript_errors": [],
+        "failed_requests": [],
+        "google_resources": [
+          {
+            "host": "ep1.adtrafficquality.google",
+            "status": 200
+          },
+          {
+            "host": "ep2.adtrafficquality.google",
+            "status": 200
+          }
+        ]
+      }
+    ],
+    "note": "The pending_security_change field records the initial audit state before this explicit authorization."
+  }
 }
