@@ -1,0 +1,14 @@
+{% if delete_record %}
+<section class="panel margin-top" aria-labelledby="delete-heading">
+  <h2 id="delete-heading">{{admin_text('Move this content to the trash?',locale)}}</h2>
+  <p data-no-translate>{{delete_record.title or delete_record.name or delete_record.url}}</p>
+  {% if mode=='media' %}<p>{{admin_text('It will leave the media library. Photos already used in articles remain available.',locale)}}</p>{% else %}<p>{{admin_text('It will disappear from the site and the active library. You can restore it from the trash.',locale)}}</p>{% endif %}
+  {% if mode in ['videos','media'] %}<p>{{admin_text('Files remain stored with Mux or your storage provider so that restoration is possible.',locale)}}</p>{% endif %}
+  <form action="/admin/content/{{mode}}/{{delete_record.id}}/delete" method="post">
+    <input type="hidden" name="csrf_token" value="{{staff_csrf}}">
+    <label class="checkbox"><input type="checkbox" name="confirm" value="yes" required>{{admin_text('I confirm moving this content to the trash.',locale)}}</label>
+    <button class="btn secondary">{{admin_text('Confirm deletion',locale)}}</button>
+    <a class="text-button" href="/admin/{{mode}}">{{admin_text('Cancel',locale)}}</a>
+  </form>
+</section>
+{% endif %}

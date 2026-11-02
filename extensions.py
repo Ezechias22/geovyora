@@ -67,16 +67,18 @@ def validate_attachment(raw,filename,mime):
     raise ValueError('Fòma fichye sa a pa aksepte.')
 
 def verify_media(record,client=None):
+    from admin_content import ensure_not_trashed
+    ensure_not_trashed('media',record['id'])
     client=client or s3_client();stream=None
     try:
         response=client.get_object(Bucket=os.environ['S3_BUCKET'],Key=record['object_key'])
         stream=response['Body']
         if response['ContentLength']>10*1024*1024:raise ValueError('Foto a depase limit la.')
         raw=stream.read(10*1024*1024+1);width,height=validate_image(raw,record['content_type'])
-        write("UPDATE media_assets SET status='ready',size_bytes=?,width=?,height=?,error='' WHERE id=?",(len(raw),width,height,record['id']))
+        write("UPDATE media_assets SET status='ready',size_bytes=?,width=?,height=?,error='' WHERE id=? AND status<>'deleted'",(len(raw),width,height,record['id']))
         return {'ok':True,'url':record['url'],'width':width,'height':height}
     except ValueError as e:
-        write("UPDATE media_assets SET status='rejected',error=? WHERE id=?",(str(e),record['id']))
+        write("UPDATE media_assets SET status='rejected',error=? WHERE id=? AND status<>'deleted'",(str(e),record['id']))
         try:client.delete_object(Bucket=os.environ['S3_BUCKET'],Key=record['object_key'])
         except Exception:pass
         raise HTTPException(422,str(e))

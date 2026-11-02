@@ -340,3 +340,193 @@ COPY.update({
 })
 
 COPY.update({'Tès reyisi':['Test réussi','Test passed','Teste aprovado','Prueba exitosa'],'Tès echwe':['Échec du test','Test failed','Teste falhou','Prueba fallida']})
+
+COPY.update({'Delete': ['Supprimer', 'Delete', 'Excluir', 'Eliminar'],
+ 'Trash': ['Corbeille', 'Trash', 'Lixeira', 'Papelera'],
+ 'Restore': ['Restaurer', 'Restore', 'Restaurar', 'Restaurar'],
+ 'Cancel': ['Annuler', 'Cancel', 'Cancelar', 'Cancelar'],
+ 'Content': ['Contenu', 'Content', 'Conteúdo', 'Contenido'],
+ 'Type': ['Type', 'Type', 'Tipo', 'Tipo'],
+ 'Deleted on': ['Date de suppression', 'Deleted on', 'Data da exclusão', 'Fecha de eliminación'],
+ 'Move this content to the trash?': ['Mettre ce contenu à la corbeille ?',
+                                     'Move this content to the trash?',
+                                     'Mover este conteúdo para a lixeira?',
+                                     '¿Mover este contenido a la papelera?'],
+ 'It will disappear from the site and the active library. You can restore it from the trash.': ['Il sera '
+                                                                                                'retiré du '
+                                                                                                'site et de '
+                                                                                                'la '
+                                                                                                'bibliothèque '
+                                                                                                'active. '
+                                                                                                'Vous '
+                                                                                                'pourrez le '
+                                                                                                'restaurer '
+                                                                                                'depuis la '
+                                                                                                'corbeille.',
+                                                                                                'It will '
+                                                                                                'disappear '
+                                                                                                'from the '
+                                                                                                'site and '
+                                                                                                'the active '
+                                                                                                'library. '
+                                                                                                'You can '
+                                                                                                'restore it '
+                                                                                                'from the '
+                                                                                                'trash.',
+                                                                                                'Ele será '
+                                                                                                'removido do '
+                                                                                                'site e da '
+                                                                                                'biblioteca '
+                                                                                                'ativa. Você '
+                                                                                                'poderá '
+                                                                                                'restaurá-lo '
+                                                                                                'pela '
+                                                                                                'lixeira.',
+                                                                                                'Se retirará '
+                                                                                                'del sitio y '
+                                                                                                'de la '
+                                                                                                'biblioteca '
+                                                                                                'activa. '
+                                                                                                'Podrá '
+                                                                                                'restaurarlo '
+                                                                                                'desde la '
+                                                                                                'papelera.'],
+ 'It will leave the media library. Photos already used in articles remain available.': ['Il sera retiré de '
+                                                                                        'la médiathèque. Les '
+                                                                                        'photos déjà '
+                                                                                        'utilisées dans les '
+                                                                                        'articles resteront '
+                                                                                        'disponibles.',
+                                                                                        'It will leave the '
+                                                                                        'media library. '
+                                                                                        'Photos already used '
+                                                                                        'in articles remain '
+                                                                                        'available.',
+                                                                                        'Ele será removido '
+                                                                                        'da biblioteca de '
+                                                                                        'mídia. Fotos já '
+                                                                                        'usadas nos artigos '
+                                                                                        'continuarão '
+                                                                                        'disponíveis.',
+                                                                                        'Se retirará de la '
+                                                                                        'biblioteca de '
+                                                                                        'medios. Las fotos '
+                                                                                        'ya utilizadas en '
+                                                                                        'los artículos '
+                                                                                        'seguirán '
+                                                                                        'disponibles.'],
+ 'Files remain stored with Mux or your storage provider so that restoration is possible.': ['Les fichiers '
+                                                                                            'restent '
+                                                                                            'conservés chez '
+                                                                                            'Mux ou votre '
+                                                                                            'fournisseur de '
+                                                                                            'stockage pour '
+                                                                                            'permettre leur '
+                                                                                            'restauration.',
+                                                                                            'Files remain '
+                                                                                            'stored with Mux '
+                                                                                            'or your storage '
+                                                                                            'provider so '
+                                                                                            'that '
+                                                                                            'restoration is '
+                                                                                            'possible.',
+                                                                                            'Os arquivos '
+                                                                                            'continuam no '
+                                                                                            'Mux ou no seu '
+                                                                                            'provedor de '
+                                                                                            'armazenamento '
+                                                                                            'para permitir a '
+                                                                                            'restauração.',
+                                                                                            'Los archivos '
+                                                                                            'permanecen en '
+                                                                                            'Mux o en su '
+                                                                                            'proveedor de '
+                                                                                            'almacenamiento '
+                                                                                            'para permitir '
+                                                                                            'la '
+                                                                                            'restauración.'],
+ 'I confirm moving this content to the trash.': ['Je confirme la mise à la corbeille de ce contenu.',
+                                                 'I confirm moving this content to the trash.',
+                                                 'Confirmo o envio deste conteúdo para a lixeira.',
+                                                 'Confirmo el envío de este contenido a la papelera.'],
+ 'Confirm deletion': ['Confirmer la suppression',
+                      'Confirm deletion',
+                      'Confirmar exclusão',
+                      'Confirmar eliminación'],
+ 'Articles and profiles are restored as drafts. Videos and photos return to their previous status.': ['Les '
+                                                                                                      'articles '
+                                                                                                      'et '
+                                                                                                      'profils '
+                                                                                                      'sont '
+                                                                                                      'restaurés '
+                                                                                                      'en '
+                                                                                                      'brouillon. '
+                                                                                                      'Les '
+                                                                                                      'vidéos '
+                                                                                                      'et '
+                                                                                                      'photos '
+                                                                                                      'retrouvent '
+                                                                                                      'leur '
+                                                                                                      'statut '
+                                                                                                      'précédent.',
+                                                                                                      'Articles '
+                                                                                                      'and '
+                                                                                                      'profiles '
+                                                                                                      'are '
+                                                                                                      'restored '
+                                                                                                      'as '
+                                                                                                      'drafts. '
+                                                                                                      'Videos '
+                                                                                                      'and '
+                                                                                                      'photos '
+                                                                                                      'return '
+                                                                                                      'to '
+                                                                                                      'their '
+                                                                                                      'previous '
+                                                                                                      'status.',
+                                                                                                      'Artigos '
+                                                                                                      'e '
+                                                                                                      'perfis '
+                                                                                                      'são '
+                                                                                                      'restaurados '
+                                                                                                      'como '
+                                                                                                      'rascunhos. '
+                                                                                                      'Vídeos '
+                                                                                                      'e '
+                                                                                                      'fotos '
+                                                                                                      'voltam '
+                                                                                                      'ao '
+                                                                                                      'status '
+                                                                                                      'anterior.',
+                                                                                                      'Los '
+                                                                                                      'artículos '
+                                                                                                      'y '
+                                                                                                      'perfiles '
+                                                                                                      'se '
+                                                                                                      'restauran '
+                                                                                                      'como '
+                                                                                                      'borradores. '
+                                                                                                      'Los '
+                                                                                                      'vídeos '
+                                                                                                      'y '
+                                                                                                      'fotos '
+                                                                                                      'recuperan '
+                                                                                                      'su '
+                                                                                                      'estado '
+                                                                                                      'anterior.'],
+ 'I confirm restoration.': ['Je confirme la restauration.',
+                            'I confirm restoration.',
+                            'Confirmo a restauração.',
+                            'Confirmo la restauración.'],
+ 'The trash is empty.': ['La corbeille est vide.',
+                         'The trash is empty.',
+                         'A lixeira está vazia.',
+                         'La papelera está vacía.'],
+ 'Content moved to trash.': ['Contenu placé dans la corbeille.',
+                             'Content moved to trash.',
+                             'Conteúdo enviado para a lixeira.',
+                             'Contenido enviado a la papelera.'],
+ 'Content restored.': ['Contenu restauré.',
+                       'Content restored.',
+                       'Conteúdo restaurado.',
+                       'Contenido restaurado.']})

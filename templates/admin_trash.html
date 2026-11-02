@@ -1,0 +1,12 @@
+<div class="admin-page-title"><h1>{{admin_text('Trash',locale)}}</h1></div>
+<p>{{admin_text('Articles and profiles are restored as drafts. Videos and photos return to their previous status.',locale)}}</p>
+<div class="table-panel"><table><thead><tr><th>{{admin_text('Content',locale)}}</th><th>{{admin_text('Type',locale)}}</th><th>{{admin_text('Deleted on',locale)}}</th><th></th></tr></thead><tbody>
+{% for item in data %}<tr>
+  <td data-no-translate>{{item.title}}</td><td>{{admin_text(item.type_label,locale)}}</td><td>{{item.deleted_at[:16]}}</td>
+  <td><form action="/admin/content/{{item.content_type}}/{{item.content_id}}/restore" method="post">
+    <input type="hidden" name="csrf_token" value="{{staff_csrf}}">
+    <label class="checkbox"><input type="checkbox" name="confirm" value="yes" required>{{admin_text('I confirm restoration.',locale)}}</label>
+    <button class="text-button">{{admin_text('Restore',locale)}}</button>
+  </form></td>
+</tr>{% else %}<tr><td colspan="4">{{admin_text('The trash is empty.',locale)}}</td></tr>{% endfor %}
+</tbody></table></div>

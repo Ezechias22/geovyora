@@ -16,6 +16,7 @@ from jobs import language_map,normalize_language,queue_translation,enqueue_campa
 from extensions import initialize_features,categories,public_categories,normalize_search,search_matches
 from localization import localized_category
 from error_localization import BACK_LABELS,error_message,locale_from_scope
+from admin_content import router as content_router,CONTENT_TYPES,content_record,ensure_not_trashed,trash_entries
 ROOT=Path(__file__).parent
 EDITOR=['super_admin','admin','editor']
 MOD=['super_admin','admin','moderator']
@@ -33,6 +34,7 @@ async def lifespan(app):
 app=FastAPI(title='Geovyora Media',lifespan=lifespan,docs_url=None,redoc_url=None)
 from request_limits import RequestSizeLimit
 app.add_middleware(RequestSizeLimit)
+app.include_router(content_router)
 app.mount('/static',StaticFiles(directory=ROOT/'static'),name='static')
 templates=Jinja2Templates(directory=ROOT/'templates')
 
@@ -360,32 +362,38 @@ def logout(request:Request,csrf_token:str=Form(...)):
 
 @app.get('/admin')
 @app.get('/admin/{section}')
-def admin(request:Request,section:str='overview',edit:str='',service_checks=None):
+def admin(request:Request,section:str='overview',edit:str='',service_checks=None,delete:str=''):
     u=session(request)
     if not u:return RedirectResponse('/admin/login',302)
     editable=['articles','influencers','videos','translations','categories','tags','media','seo']
     if section in editable and u['role'] not in EDITOR:raise HTTPException(403,'Aksè editoryal obligatwa.')
-    if section in ['team','settings','ads','notifications','newsletter','audit'] and u['role'] not in ADMIN:raise HTTPException(403,'Aksè admin obligatwa.')
-    allowed=['overview',*editable,'comments','reports','submissions','analytics','team','settings','ads','notifications','newsletter','audit','account']
+    if section in ['team','settings','ads','notifications','newsletter','audit','trash'] and u['role'] not in ADMIN:raise HTTPException(403,'Aksè admin obligatwa.')
+    allowed=['overview',*editable,'comments','reports','submissions','analytics','team','settings','ads','notifications','newsletter','audit','account','trash']
     if section not in allowed:raise HTTPException(404,'Paj administrasyon sa a pa egziste.')
-    data={};record=None
+    data={};record=None;delete_record=None
+    if delete:
+        require(request,ADMIN)
+        delete_record=content_record(section,delete)
+        if not delete_record or delete_record['status']=='deleted':raise HTTPException(404,'Content not found')
     if section in ['articles','influencers','videos','comments','reports','submissions','translations','audit']:
         table='audit_logs' if section=='audit' else section
-        data=rows('SELECT * FROM '+table+' ORDER BY created_at DESC LIMIT 150')
+        data=rows('SELECT * FROM '+table+(" WHERE status<>'deleted'" if section in CONTENT_TYPES else '')+' ORDER BY created_at DESC LIMIT 150')
         if section=='submissions':
             for item in data:item['attachments']=rows('SELECT id,content_type,size_bytes FROM submission_assets WHERE submission_id=?',(item['id'],))
         if edit:record=one('SELECT * FROM '+table+' WHERE id=?',(edit,))
+        if record and section in CONTENT_TYPES and record['status']=='deleted':raise HTTPException(404,'Content not found')
         if section=='influencers' and record:record['socials']=json.loads(record['socials'])
     elif section in ['categories','tags']:
         data=rows('SELECT * FROM '+section+' ORDER BY name')
         if edit:record=one('SELECT * FROM '+section+' WHERE id=?',(edit,))
     elif section=='seo':data=rows('SELECT * FROM seo_metadata ORDER BY target_type,target_id')
     elif section=='newsletter':data=rows('SELECT id,email,locale,status,created_at FROM newsletter_subscribers ORDER BY created_at DESC')
-    elif section=='media':data=rows('SELECT * FROM media_assets ORDER BY created_at DESC')
+    elif section=='media':data=rows("SELECT * FROM media_assets WHERE status<>'deleted' ORDER BY created_at DESC")
+    elif section=='trash':data=trash_entries()
     elif section=='team':data=rows('SELECT id,email,name,role,active FROM staff')
     counts={}
     for table in ['articles','influencers','comments','reports','submissions','videos','push_subscriptions']:
-        counts[table]=one('SELECT count(*) as n FROM '+table)['n']
+        counts[table]=one('SELECT count(*) as n FROM '+table+(" WHERE status<>'deleted'" if table in CONTENT_TYPES else ''))['n']
     counts['pending_comments']=one("SELECT count(*) n FROM comments WHERE status='pending'")['n']
     counts['pending_reports']=one("SELECT count(*) n FROM reports WHERE status IN ('pending','in_review')")['n']
     counts['views']=one('SELECT count(*) n FROM page_views')['n']
@@ -395,14 +403,15 @@ def admin(request:Request,section:str='overview',edit:str='',service_checks=None
     services['AdSense']=settings().get('ads_enabled')=='1'
     service_details['AdSense']={'missing':[],'optional':True}
 
-    popular=rows("SELECT a.title,count(v.id) views FROM articles a LEFT JOIN page_views v ON a.id=v.article_id GROUP BY a.id,a.title ORDER BY views DESC LIMIT 8")
-    return render(request,'admin',u=u,mode=section,data=data,record=record,counts=counts,services=services,service_details=service_details,service_checks=service_checks or {},popular=popular,staff_csrf=u['csrf'],campaigns=rows('SELECT * FROM campaigns ORDER BY created_at DESC'),translation_jobs=rows('SELECT * FROM translation_jobs ORDER BY created_at DESC LIMIT 100'),usage=one('SELECT characters FROM usage_months WHERE month=?',(now()[:7],)) or {'characters':0},banners=rows('SELECT * FROM ad_placements ORDER BY created_at DESC') if section=='ads' else [],metrics=rows('SELECT * FROM influencer_metrics WHERE influencer_id=? ORDER BY observed_at DESC',(edit,)) if section=='influencers' and edit else [],deliveries=rows('SELECT status,count(*) n FROM deliveries GROUP BY status'))
+    popular=rows("SELECT a.title,count(v.id) views FROM articles a LEFT JOIN page_views v ON a.id=v.article_id WHERE a.status<>'deleted' GROUP BY a.id,a.title ORDER BY views DESC LIMIT 8")
+    return render(request,'admin',u=u,mode=section,data=data,record=record,delete_record=delete_record,counts=counts,services=services,service_details=service_details,service_checks=service_checks or {},popular=popular,staff_csrf=u['csrf'],campaigns=rows('SELECT * FROM campaigns ORDER BY created_at DESC'),translation_jobs=rows('SELECT * FROM translation_jobs ORDER BY created_at DESC LIMIT 100'),usage=one('SELECT characters FROM usage_months WHERE month=?',(now()[:7],)) or {'characters':0},banners=rows('SELECT * FROM ad_placements ORDER BY created_at DESC') if section=='ads' else [],metrics=rows('SELECT * FROM influencer_metrics WHERE influencer_id=? ORDER BY observed_at DESC',(edit,)) if section=='influencers' and edit else [],deliveries=rows('SELECT status,count(*) n FROM deliveries GROUP BY status'))
 
 @app.post('/admin/articles/save')
 async def save_article(request:Request):
     f=await request.form();u=csrf(request,f.get('csrf_token'));require(request,EDITOR)
     id=f.get('id') or uid();old=one('SELECT * FROM articles WHERE id=?',(id,))
     if old:
+        ensure_not_trashed('articles',id)
         revision=dict(old);revision['correction_note']=clean(f.get('correction_note'),1000)
         write('INSERT INTO revisions VALUES (?,?,?,?,?)',(uid(),id,json.dumps(revision),u['id'],now()))
     status=f.get('status','draft')
@@ -436,7 +445,7 @@ async def save_article(request:Request):
 @app.post('/admin/influencers/save')
 async def save_influencer(request:Request):
     f=await request.form();u=csrf(request,f.get('csrf_token'));require(request,EDITOR)
-    id=f.get('id') or uid();old=one('SELECT id FROM influencers WHERE id=?',(id,));socials={}
+    id=f.get('id') or uid();ensure_not_trashed('influencers',id);old=one('SELECT id FROM influencers WHERE id=?',(id,));socials={}
     for platform in ['Instagram','TikTok','YouTube','Facebook','X','Twitch']:
         val=safe_url(f.get(platform))
         if val:socials[platform]=val
@@ -507,6 +516,7 @@ async def restore(request:Request):
     revision=one('SELECT * FROM revisions WHERE id=?',(f.get('id'),))
     if not revision:raise HTTPException(404,'Revision not found')
     record=json.loads(revision['data']);current=one('SELECT * FROM articles WHERE id=?',(revision['article_id'],))
+    ensure_not_trashed('articles',revision['article_id'])
     if record.get('locale','fr') not in language_map():raise HTTPException(409,'Cette ancienne version utilise une langue qui n’est plus prise en charge.')
     write('INSERT INTO revisions VALUES (?,?,?,?,?)',(uid(),current['id'],json.dumps(current),u['id'],now()))
     fields=['title','subtitle','body','category','sources','tags','image','image_credit']
@@ -634,11 +644,11 @@ async def mux_webhook(request:Request):
     with connection() as c:
         n=c.execute(sql('INSERT INTO webhook_events VALUES (?,?) ON CONFLICT(id) DO NOTHING'),(event_id,now())).rowcount
         if not n:return {'ok':True,'duplicate':True}
-        if kind=='video.upload.asset_created':c.execute(sql("UPDATE videos SET status='processing',asset_id=? WHERE upload_id=?"),(d.get('asset_id'),d.get('id')))
+        if kind=='video.upload.asset_created':c.execute(sql("UPDATE videos SET status='processing',asset_id=? WHERE upload_id=? AND status<>'deleted'"),(d.get('asset_id'),d.get('id')))
         elif kind=='video.asset.ready':
             ids=d.get('playback_ids',[]);playback=next((p['id'] for p in ids if p.get('policy')=='public'),None)
-            if playback:c.execute(sql("UPDATE videos SET status='ready',asset_id=?,playback_id=? WHERE id=? OR asset_id=?"),(d.get('id'),playback,d.get('passthrough'),d.get('id')))
-        elif kind in ['video.asset.errored','video.upload.errored']:c.execute(sql("UPDATE videos SET status='error' WHERE asset_id=? OR upload_id=? OR id=?"),(d.get('id'),d.get('id'),d.get('passthrough')))
+            if playback:c.execute(sql("UPDATE videos SET status='ready',asset_id=?,playback_id=? WHERE (id=? OR asset_id=?) AND status<>'deleted'"),(d.get('id'),playback,d.get('passthrough'),d.get('id')))
+        elif kind in ['video.asset.errored','video.upload.errored']:c.execute(sql("UPDATE videos SET status='error' WHERE (asset_id=? OR upload_id=? OR id=?) AND status<>'deleted'"),(d.get('id'),d.get('id'),d.get('passthrough')))
     return {'ok':True}
 
 @app.post('/admin/videos/refresh')
@@ -663,19 +673,19 @@ async def refresh_mux_videos(request:Request):
                     upload_status=upload.get('status')
                     asset_id=upload.get('asset_id')
                     if upload_status in ('errored','cancelled','timed_out'):
-                        write("UPDATE videos SET status='error' WHERE id=?",(video['id'],));error_count+=1
+                        write("UPDATE videos SET status='error' WHERE id=? AND status<>'deleted'",(video['id'],));error_count+=1
                         continue
                     if not asset_id:
-                        write("UPDATE videos SET status='uploading' WHERE id=?",(video['id'],));processing_count+=1
+                        write("UPDATE videos SET status='uploading' WHERE id=? AND status<>'deleted'",(video['id'],));processing_count+=1
                         continue
-                    write('UPDATE videos SET asset_id=? WHERE id=?',(asset_id,video['id']))
+                    write("UPDATE videos SET asset_id=? WHERE id=? AND status<>'deleted'",(asset_id,video['id']))
                 if not asset_id:
                     failed_count+=1
                     continue
                 asset_response=await client.get('https://api.mux.com/video/v1/assets/'+asset_id,auth=auth)
                 if asset_response.status_code in (401,403):raise HTTPException(502,'Mux refize kle API yo. Verifye MUX_TOKEN_ID ak MUX_TOKEN_SECRET sou Render.')
                 if asset_response.status_code==404:
-                    write("UPDATE videos SET status='error' WHERE id=?",(video['id'],));error_count+=1
+                    write("UPDATE videos SET status='error' WHERE id=? AND status<>'deleted'",(video['id'],));error_count+=1
                     continue
                 if asset_response.status_code!=200:
                     failed_count+=1
@@ -684,11 +694,11 @@ async def refresh_mux_videos(request:Request):
                 asset_status=asset.get('status')
                 playback=next((item.get('id') for item in asset.get('playback_ids',[]) if item.get('policy')=='public' and item.get('id')),None)
                 if asset_status=='ready' and playback:
-                    write("UPDATE videos SET status='ready',asset_id=?,playback_id=? WHERE id=?",(asset.get('id') or asset_id,playback,video['id']));ready_count+=1
+                    write("UPDATE videos SET status='ready',asset_id=?,playback_id=? WHERE id=? AND status<>'deleted'",(asset.get('id') or asset_id,playback,video['id']));ready_count+=1
                 elif asset_status in ('errored','deleted') or asset_status=='ready':
-                    write("UPDATE videos SET status='error',asset_id=? WHERE id=?",(asset.get('id') or asset_id,video['id']));error_count+=1
+                    write("UPDATE videos SET status='error',asset_id=? WHERE id=? AND status<>'deleted'",(asset.get('id') or asset_id,video['id']));error_count+=1
                 else:
-                    write("UPDATE videos SET status='processing',asset_id=? WHERE id=?",(asset.get('id') or asset_id,video['id']));processing_count+=1
+                    write("UPDATE videos SET status='processing',asset_id=? WHERE id=? AND status<>'deleted'",(asset.get('id') or asset_id,video['id']));processing_count+=1
             except HTTPException:
                 raise
             except (httpx.HTTPError,ValueError,KeyError,TypeError):
@@ -834,7 +844,7 @@ async def cancel_campaign(request:Request):
 @app.get('/admin/preview/{id}')
 def preview(request:Request,id:str):
     require(request,EDITOR);article=one('SELECT * FROM articles WHERE id=?',(id,))
-    if not article:raise HTTPException(404,'Atik pa jwenn.')
+    if not article or article['status']=='deleted':raise HTTPException(404,'Atik pa jwenn.')
     article=translate_record(article,article['locale']);article['demo']=1
     return render(request,'article',article['locale'],article=article,articles=[],title='Preview · '+article['title'])
 

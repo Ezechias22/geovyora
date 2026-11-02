@@ -46,6 +46,8 @@ Nan yon dezyèm terminal, aktive menm environment lan epi kouri `python worker.p
 
 ## Administrasyon
 
+Administratè yo ak super admin yo gen bouton **Supprimer** nan lis atik, videyo, pwofil ak foto yo. Bouton an louvri yon paj konfimasyon; apre konfimasyon, kontni an antre nan **Corbeille**. Ou ka retabli li nan meni sa a. Atik ak pwofil retabli yo tounen nan draft pou ekip la verifye yo anvan repiblikasyon; videyo ak foto yo reprann estati yo te genyen anvan an. Tradiksyon, vèsyon ak lòt dosye asosye yo konsève. Foto ki deja itilize nan atik yo rete disponib, epi fichye Mux oswa storage yo pa efase fizikman. Editè ak moderatè yo pa gen dwa sou aksyon sa yo.
+
 Modil: Apèsi, Atik/Entèvyou, Enfliyansè, Videyo/Mux, Medya, Kòmantè, Rapò, Soumisyon, Tradiksyon, Kategori, Tags, SEO, Newsletter, Notifikasyon, Piblisite, Analitik, Ekip, Paramèt, Kont ekip la ak Jounal aksyon.
 
 - CMS: draft, in_review, scheduled, published, archived, preview prive, vèsyon ak restore.
