@@ -14,12 +14,12 @@ VALUES['fr'].extend([
 ])
 VALUES['en'].extend([
  'Have information, a correction or a question? Write to the editorial team.',
- 'Know a creator we should discover? Share their name, origin and official links.',
+ 'Know a creator we should discover? Share their name, origin, and official links.',
  'For direct banners, editorial partnerships and sponsored content, contact our team.'
 ])
 VALUES['pt-BR'].extend([
  'Tem uma informação, uma correção ou uma pergunta? Escreva para a equipe editorial.',
- 'Conhece um criador que deveríamos descobrir? Compartilhe o nome, a origem e os links oficiais.',
+ 'Conhece um criador que deveríamos descobrir? Compartilhe seu nome, origem e links oficiais.',
  'Para banners diretos, parcerias editoriais e conteúdo patrocinado, escreva para nossa equipe.'
 ])
 VALUES['es'].extend([

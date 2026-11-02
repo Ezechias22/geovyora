@@ -1,7 +1,8 @@
 <div class="simple policy">
   <span class="eyebrow green">Geovyora</span>
-  <h1>{{ t.about if page=='about' else t.privacy if page=='privacy' else t.terms if page=='terms' else 'Cookies' if page=='cookies' else 'Règleman editoryal' if page=='editorial' else 'Règles de la communauté' if page=='community' and locale=='fr' else 'Community guidelines' if page=='community' and locale=='en' else 'Diretrizes da comunidade' if page=='community' and locale=='pt-BR' else 'Normas de la comunidad' if page=='community' else 'Copyright / Retrè' }}<span class="heading-dot">.</span></h1>
+  <h1>{{ t.about if page=='about' else t.privacy if page=='privacy' else t.terms if page=='terms' else 'Cookies' if page=='cookies' else editorial_policy.title if page=='editorial' else 'Règles de la communauté' if page=='community' and locale=='fr' else 'Community guidelines' if page=='community' and locale=='en' else 'Diretrizes da comunidade' if page=='community' and locale=='pt-BR' else 'Normas de la comunidad' if page=='community' else 'Copyright / Retrè' }}<span class="heading-dot">.</span></h1>
   {% if page=='about' %}
+    <p>{% if locale=='fr' %}Geovyora est un projet de Haytiles.{% elif locale=='en' %}Geovyora is a Haytiles project.{% elif locale=='pt-BR' %}A Geovyora é um projeto da Haytiles.{% elif locale=='es' %}Geovyora es un proyecto de Haytiles.{% endif %}</p>
     <h2>Kreyatè yo nan sant istwa a.</h2>
     <p>Geovyora mete an limyè travay, lide ak trajektwa kreyatè Ayisyen, moun nan dyaspora a ak kreyatè atravè mond lan. Ou jwenn atik, entèvyou, videyo ak pwofil editoryal sou kilti, mizik, komedi, mòd, biznis ak lòt domèn kreyatif.</p>
     <h2>Li, dekouvri, patisipe.</h2>
@@ -88,8 +89,10 @@
       <p>Lyen patnè yo mennen sou lòt sèvis ki gen pwòp règleman vi prive pa yo. Nou make kontni patwone pou lektè yo ka rekonèt li.</p>
     {% endif %}
   {% elif page=='editorial' %}
-    <h2>Sous, kredi ak verifikasyon</h2><p>Chak atik dwe fè diferans ant enfòmasyon verifye, opinyon ak kontni patwone. Chif sou rezo sosyal bezwen yon sous ak yon dat. Yon tradiksyon otomatik se yon zouti lekti; vèsyon orijinal la rete referans lan.</p>
-    <h2>Koreksyon ak dwa repons</h2><p>Voye lyen atik la, pasaj konsène a, koreksyon ou pwopoze a ak sous ki soutni li. Ekip editoryal la egzamine demann lan. Koreksyon pibliye yo dwe parèt nan istwa koreksyon atik la.</p>
+    {% for section in editorial_policy.sections %}
+    <h2>{{section[0]}}</h2><p>{{section[1]}}</p>
+    {% endfor %}
+    <p><a href="/{{locale}}/contact?kind=correction">{{editorial_policy.correction}}</a> · <a href="/{{locale}}/copyright">{{editorial_policy.rights}}</a></p>
   {% elif page=='community' %}
     <h2>Kominote</h2><p>Kòmantè yo pase nan moderasyon anvan piblikasyon. Pa mete menas, rayisman, jouman, enfòmasyon prive oswa spam.</p>
     <p>Pseudo yo pa idantite verifye. Ou ka modifye oswa retire kòmantè ou sèlman sou navigatè kote ou te ekri li a, si cookie ou toujou disponib.</p>
@@ -101,6 +104,11 @@
     <h2>Pataje ak respekte travay lòt moun</h2><p>Ou ka pataje lyen paj yo. Repibliye foto, videyo oswa tèks an antye mande otorizasyon moun ki gen dwa yo. Pwofil kreyatè yo se paj editoryal; yo pa kont itilizatè ni yon verifikasyon idantite pa Geovyora.</p>
     <h2>Revizyon ak moderasyon</h2><p>Rapòte yon kòmantè oswa kontni ak bouton rapò a. Chwazi rezon an epi bay detay ki ede ekip la konprann pwoblèm nan. Rapò yo pa retire kontni otomatikman; moderatè yo pran desizyon apre revizyon.</p>
     <h2>Piblisite ak patenarya</h2><p>Bannè patenè yo ka genyen yon lyen ki mennen sou yon lòt sit. Règleman sit sa a aplike lè ou kite Geovyora. Kontni patwone dwe make pou lektè yo ka rekonèt li.</p>
+  {% endif %}
+  {% if page=='about' %}
+    {% if settings.contact_company %}<h2>{{t.contact}}</h2><p>{{settings.contact_company}}</p>{% endif %}
+    {% if settings.contact_address %}<p>{{settings.contact_address}}</p>{% endif %}
+    {% if settings.contact_email %}<p>{{settings.contact_email}}</p>{% endif %}
   {% endif %}
   <a class="btn secondary" href="/{{locale}}/contact">{{ t.contact }}</a>
 </div>

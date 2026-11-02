@@ -135,6 +135,11 @@ def render(request,page,locale='fr',**kw):
                 category_values.append({'id':category_record['id'],'value':name,'name':name,'label':localized_category(name,locale,ui)})
     base={'request':request,'locale':locale,'t':t,'languages':language_map(),'settings':cfg,'brand':cfg.get('brand','Geovyora'),'page':page,'categories':category_values,'staff':session(request),'csrf_token':request.state.public_csrf,'title':cfg.get('brand','Geovyora'),'description':'Magazine consacré aux créateurs haïtiens, à la diaspora et aux voix du monde.','path':request.url.path,'ads_allowed':False}
     base.update(kw)
+    base['adsense_publisher_id']=adsense_publisher_id(cfg)
+    if page=='editorial':
+        from editorial_policy import POLICIES
+        base['editorial_policy']=POLICIES.get(locale,POLICIES['en'])
+        base['title']=base['editorial_policy']['title']
     if page!='admin':
         def with_category_label(item):
             if not item or not item.get('category'):
@@ -321,10 +326,17 @@ def sitemap():
         meta=one("SELECT noindex FROM seo_metadata WHERE target_type='influencer' AND target_id=? AND locale='fr'",(p['id'],))
         if not meta or not meta['noindex']:paths.append('/fr/influencer/'+p['slug'])
     return Response('<?xml version="1.0"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'+''.join('<url><loc>'+html.escape(site+p)+'</loc></url>' for p in paths)+'</urlset>',media_type='application/xml')
+def adsense_publisher_id(cfg):
+    # Seller authorization is independent of ad serving and consent readiness.
+    publisher=cfg.get('publisher_id') or os.getenv('ADSENSE_PUBLISHER_ID','pub-2023569258267325')
+    return publisher if re.fullmatch(r'pub-[0-9]+',publisher) else ''
+
 @app.get('/ads.txt')
 def ads_txt():
-    s=settings();pub=s.get('publisher_id','')
-    return Response('google.com, '+pub+', DIRECT, f08c47fec0942fa0\n' if s.get('ads_enabled')=='1' and re.fullmatch('pub-[0-9]+',pub) else '# Advertising is not activated.\n',media_type='text/plain')
+    publisher=adsense_publisher_id(settings())
+    if not publisher:
+        return Response('# No valid publisher configured.\n',status_code=404,media_type='text/plain')
+    return Response('google.com, '+publisher+', DIRECT, f08c47fec0942fa0\n',media_type='text/plain')
 
 @app.get('/admin/login')
 def login_page(request:Request):
