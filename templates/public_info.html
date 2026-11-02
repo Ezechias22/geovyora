@@ -3,10 +3,8 @@
   <h1>{{ t.about if page=='about' else t.privacy if page=='privacy' else t.terms if page=='terms' else 'Cookies' if page=='cookies' else editorial_policy.title if page=='editorial' else 'Règles de la communauté' if page=='community' and locale=='fr' else 'Community guidelines' if page=='community' and locale=='en' else 'Diretrizes da comunidade' if page=='community' and locale=='pt-BR' else 'Normas de la comunidad' if page=='community' else 'Copyright / Retrè' }}<span class="heading-dot">.</span></h1>
   {% if page=='about' %}
     <p>{% if locale=='fr' %}Geovyora est un projet de Haytiles.{% elif locale=='en' %}Geovyora is a Haytiles project.{% elif locale=='pt-BR' %}A Geovyora é um projeto da Haytiles.{% elif locale=='es' %}Geovyora es un proyecto de Haytiles.{% endif %}</p>
-    <h2>Kreyatè yo nan sant istwa a.</h2>
-    <p>Geovyora mete an limyè travay, lide ak trajektwa kreyatè Ayisyen, moun nan dyaspora a ak kreyatè atravè mond lan. Ou jwenn atik, entèvyou, videyo ak pwofil editoryal sou kilti, mizik, komedi, mòd, biznis ak lòt domèn kreyatif.</p>
-    <h2>Li, dekouvri, patisipe.</h2>
-    <p>Ou ka li epi pataje lyen san kont. Kòmantè yo pase nan moderasyon. Atik ou sove rete sou aparèy ou. Ou ka pwopoze yon kreyatè, voye yon sous oswa mande yon koreksyon atravè fòm kontak la.</p>
+    <h2>{{t.about_scope_heading}}</h2><p>{{t.about_scope}}</p>
+    <h2>{{t.about_participation_heading}}</h2><p>{{t.about_participation}}</p>
   {% elif page=='privacy' %}
     <p class="muted">{% if locale=='fr' %}Dernière mise à jour : 17 octobre 2026.{% elif locale=='en' %}Last updated: 17 October 2026.{% elif locale=='pt-BR' %}Última atualização: 17 de outubro de 2026.{% elif locale=='es' %}Última actualización: 17 de octubre de 2026.{% else %}Dènye mizajou: 17 oktòb 2026.{% endif %}</p>
     {% if locale=='fr' %}

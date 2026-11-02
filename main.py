@@ -223,11 +223,12 @@ def render(request,page,locale='fr',**kw):
     base['structured_data']=None
     if page=='article' and base.get('article') and not base['article']['demo']:
         a=base['article']
-        base['structured_data']={'@context':'https://schema.org','@type':'Article','headline':a['title'],'description':a['subtitle'],'datePublished':a['publish_at'],'dateModified':a['updated_at'],'author':{'@type':'Person','name':a['author']},'publisher':{'@type':'Organization','name':cfg.get('brand','Geovyora'),'logo':{'@type':'ImageObject','url':origin+'/static/geovyora-mark.png'}},'inLanguage':locale if a.get('translated') else a.get('original_locale',locale),'mainEntityOfPage':base['canonical']}
+        base['structured_data']={'@context':'https://schema.org','@type':'Article','headline':a['title'],'description':a['subtitle'],'datePublished':a['publish_at'],'dateModified':a['updated_at'],'author':{'@type':'Organization' if a['author'] in ['Geovyora','Rédaction Geovyora'] else 'Person','name':a['author']},'publisher':{'@type':'Organization','name':cfg.get('brand','Geovyora'),'logo':{'@type':'ImageObject','url':origin+'/static/geovyora-mark.png'}},'inLanguage':locale if a.get('translated') else a.get('original_locale',locale),'mainEntityOfPage':base['canonical']}
     base['corrections']=[]
     if page=='article' and base.get('article'):
         for revision in rows('SELECT data,created_at FROM revisions WHERE article_id=? ORDER BY created_at DESC LIMIT 30',(base['article']['id'],)):
-            note=json.loads(revision['data']).get('correction_note')
+            details=json.loads(revision['data'])
+            note=(details.get('correction_notes') or {}).get(locale) or details.get('correction_note')
             if note:base['corrections'].append({'note':note,'date':revision['created_at'][:10]})
     base['home_sections']=[v for v in cfg.get('homepage_sections','latest,creators,notifications').split(',') if v in ['latest','creators','notifications']]
     if base.get('article') and base['article'].get('sources'):
@@ -267,7 +268,7 @@ async def cookies_and_headers(request,call_next):
     response.headers['X-Content-Type-Options']='nosniff';response.headers['Referrer-Policy']='strict-origin-when-cross-origin'
     response.headers['X-Frame-Options']='SAMEORIGIN'
     if request.url.path.startswith(('/admin','/api')):response.headers['Cache-Control']='no-store'
-    response.headers['Content-Security-Policy']="default-src 'self'; img-src 'self' https: data:; style-src 'self' 'unsafe-inline'; script-src 'self' https://www.gstatic.com https://cdn.jsdelivr.net https://pagead2.googlesyndication.com; connect-src 'self' https://*.mux.com https://*.googleapis.com https://*.firebaseio.com https://*.gstatic.com https://*.googlesyndication.com; media-src 'self' blob: https://*.mux.com; frame-src https://*.googlesyndication.com https://googleads.g.doubleclick.net; object-src 'none'; base-uri 'self'; form-action 'self'"
+    response.headers['Content-Security-Policy']="default-src 'self'; img-src 'self' https: data:; style-src 'self' 'unsafe-inline'; script-src 'self' https://www.gstatic.com https://cdn.jsdelivr.net https://pagead2.googlesyndication.com; connect-src 'self' https://ep1.adtrafficquality.google https://*.mux.com https://*.googleapis.com https://*.firebaseio.com https://*.gstatic.com https://*.googlesyndication.com; media-src 'self' blob: https://*.mux.com; frame-src https://*.googlesyndication.com https://googleads.g.doubleclick.net; object-src 'none'; base-uri 'self'; form-action 'self'"
     from urllib.parse import urlsplit
     storage_origins=set()
     for value in [os.getenv('S3_ENDPOINT_URL',''),os.getenv('MEDIA_PUBLIC_URL','')]:
