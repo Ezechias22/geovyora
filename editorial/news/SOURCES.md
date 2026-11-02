@@ -25,3 +25,6 @@ La migration 018 publie trois autres articles depuis `2026-11-02-suite.json`. Le
 | [ONU Info — sanctions](https://news.un.org/fr/story/2026/10/1159672) | 15 octobre 2026 | Embargo, interdiction de voyager, gel des avoirs ; limites d’exécution rapportées par les experts. Pas de nouvelle accusation individuelle. |
 
 Un flux de recherche a servi uniquement à identifier l’incident et les documents à consulter. Les faits publiés sur l’accident proviennent des deux pages officielles lues, pas des seuls titres de résultats. Des tentatives Reuters et Guardian ont échoué ; elles ne sont pas utilisées comme sources. La rumeur de bombe n’est ni validée ni présentée comme définitivement réfutée : la déclaration FAA consultée ne l’établit pas.
+
+
+Précision demandée par le lecteur : le texte sur le Learjet indique explicitement qu’une rumeur de bombe a été signalée à Geovyora par un lecteur. Son origine et son ampleur ne sont pas établies. La migration 019 ne remplace que le paragraphe concerné, conserve les autres modifications éventuelles et actualise la version pour éviter de servir une ancienne traduction.
