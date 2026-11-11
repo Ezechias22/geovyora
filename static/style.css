@@ -57,3 +57,5 @@ input[type=file]::file-selector-button{background:var(--surface);color:var(--tex
 .tool-result dl{margin:0}.tool-result dl>div{display:flex;justify-content:space-between;gap:15px;border-bottom:1px solid var(--line);padding:10px 0;font:500 15px/1.5 var(--sans,sans-serif)}.tool-result dd{margin:0;text-align:end}
 .tool-table-wrap{max-width:100%;overflow-x:auto}.tool-result table{width:100%;border-collapse:collapse;font:14px/1.6 var(--sans,sans-serif)}.tool-result caption{text-align:start;margin-bottom:10px}.tool-result th,.tool-result td{padding:10px 6px;border-bottom:1px solid var(--line);text-align:start;overflow-wrap:anywhere}.tool-result[hidden]{display:none}
 @media(max-width:520px){.editorial-tool{padding:16px}.tool-fields{grid-template-columns:1fr}.tool-result dl>div{flex-wrap:wrap}.tool-result dd{text-align:start}}
+
+.tool-controls{border:0;padding:0;margin:0;min-width:0}

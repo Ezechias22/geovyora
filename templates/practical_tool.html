@@ -3,6 +3,7 @@
 <h2 id="tool-title">{{c.quote_title if practical_tool.kind=='quote' else c.time_title}}</h2>
 <p class="tool-note">{{c.privacy}}</p>
 <form class="tool-form">
+<fieldset class="tool-controls" disabled><legend class="sr-only">{{c.quote_title if practical_tool.kind=='quote' else c.time_title}}</legend>
 {% if practical_tool.kind=='quote' %}
 <div class="tool-fields">
 <label for="tool-currency">{{c.currency}}<select id="tool-currency" name="currency"><option>BRL</option><option>USD</option><option>EUR</option><option>HTG</option></select></label>
@@ -20,6 +21,7 @@
 {% if practical_tool.kind=='quote' %}<dl>{% for name,label in [('base',c.base),('invoice',c.invoice),('deduction',c.deduction),('remaining',c.remaining)] %}<div><dt>{{label}}</dt><dd data-result="{{name}}"></dd></div>{% endfor %}</dl>
 {% else %}<div class="tool-table-wrap"><table><caption>{{c.time_title}}</caption><thead><tr><th scope="col">{{c.city}}</th><th scope="col">{{c.local_time}}</th></tr></thead><tbody>{% for city in c.cities %}<tr><th scope="row">{{city}}</th><td data-zone="{{['America/Port-au-Prince','America/Sao_Paulo','Europe/Paris','America/New_York','America/Toronto'][loop.index0]}}"></td></tr>{% endfor %}</tbody></table></div>{% endif %}
 </div>
+</fieldset>
 </form>
 <p class="tool-note">{{c.quote_limit if practical_tool.kind=='quote' else c.time_limit}}</p>
 <noscript><p>{{c.nojs}}</p></noscript>

@@ -55,6 +55,7 @@
     form.addEventListener('submit', event => {event.preventDefault();calculate();});
     form.addEventListener('input',()=>{result.hidden=true;error.textContent='';});
     form.addEventListener('reset',()=>{setTimeout(calculate,0);});
+    form.querySelector('.tool-controls').disabled=false;
     calculate();
   });
 })();
