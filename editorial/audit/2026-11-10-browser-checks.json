@@ -1,0 +1,72 @@
+[
+  {
+    "width": 390,
+    "path": "/fr/contact",
+    "status": 200,
+    "overflow": false,
+    "errors": [],
+    "name_visible": true,
+    "email_visible": true
+  },
+  {
+    "width": 390,
+    "path": "/pt-BR/about",
+    "status": 200,
+    "overflow": false,
+    "errors": [],
+    "name_visible": true,
+    "email_visible": true
+  },
+  {
+    "width": 390,
+    "path": "/en/editorial",
+    "status": 200,
+    "overflow": false,
+    "errors": [],
+    "name_visible": true,
+    "email_visible": true
+  },
+  {
+    "width": 390,
+    "path": "/es/article/bresil-elections-2026-audits-urnes-4-novembre",
+    "status": 200,
+    "overflow": false,
+    "errors": [],
+    "context_visible": true
+  },
+  {
+    "width": 1365,
+    "path": "/fr/contact",
+    "status": 200,
+    "overflow": false,
+    "errors": [],
+    "name_visible": true,
+    "email_visible": true
+  },
+  {
+    "width": 1365,
+    "path": "/pt-BR/about",
+    "status": 200,
+    "overflow": false,
+    "errors": [],
+    "name_visible": true,
+    "email_visible": true
+  },
+  {
+    "width": 1365,
+    "path": "/en/editorial",
+    "status": 200,
+    "overflow": false,
+    "errors": [],
+    "name_visible": true,
+    "email_visible": true
+  },
+  {
+    "width": 1365,
+    "path": "/es/article/bresil-elections-2026-audits-urnes-4-novembre",
+    "status": 200,
+    "overflow": false,
+    "errors": [],
+    "context_visible": true
+  }
+]
