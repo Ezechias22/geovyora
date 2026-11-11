@@ -16,7 +16,7 @@ def initialize_features():
             for tag in a['tags'].split(','):
                 tag=tag.strip()
                 if tag:write('INSERT INTO tags VALUES (?,?,?) ON CONFLICT DO NOTHING',(uid(),tag,core.slugify(tag)))
-        for k,v in {'brand':'Geovyora','tagline':'Culture. Créativité. Impact.','default_locale':'fr','translation_limit':'100000','ads_enabled':'0','publisher_id':'','ad_slot':'','contact_email':'','push_daily_limit':'3','editorial_v2_initialized':'1','contact_company':'','contact_address':'','homepage_sections':'latest,creators,notifications'}.items():write('INSERT INTO settings(key,value) VALUES (?,?) ON CONFLICT(key) DO NOTHING',(k,v))
+        for k,v in {'brand':'Geovyora','tagline':'Culture. Créativité. Impact.','default_locale':'fr','translation_limit':'100000','ads_enabled':'0','publisher_id':'','ad_slot':'','contact_email':'','push_daily_limit':'3','editorial_v2_initialized':'1','contact_company':'','contact_person':'','contact_address':'','homepage_sections':'latest,creators,notifications'}.items():write('INSERT INTO settings(key,value) VALUES (?,?) ON CONFLICT(key) DO NOTHING',(k,v))
 
 def categories():return [r['name'] for r in rows('SELECT name FROM categories WHERE active=1 ORDER BY sort_order,name')]
 def public_categories():

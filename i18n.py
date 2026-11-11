@@ -49,3 +49,10 @@ LANGUAGE_NAMES={
  'es':{'fr':'francés','en':'inglés','pt-BR':'portugués (Brasil)','es':'español'},
 }
 def labels(locale): return dict(zip(KEYS,VALUES.get(locale,VALUES['en'])))
+
+# Public accountability and documentary context, explicitly localized on the server.
+KEYS.extend(['public_contact_person', 'published_on', 'documentary_context', 'editorial_method_link'])
+VALUES['fr'].extend(['Responsable et contact public', 'Publié le', 'Les annonces et chiffres de cet article sont situés à sa date de publication. Une annonce ne confirme pas son résultat ultérieur. Les références et les éventuelles corrections figurent ci-dessous.', 'Sources, méthode et corrections'])
+VALUES['en'].extend(['Responsible person and public contact', 'Published on', 'Announcements and figures in this article are placed in the context of its publication date. An announcement does not confirm its subsequent outcome. References and any corrections appear below.', 'Sources, method and corrections'])
+VALUES['pt-BR'].extend(['Responsável e contato público', 'Publicado em', 'Os anúncios e números deste artigo são apresentados no contexto da data de publicação. Um anúncio não confirma seu resultado posterior. As referências e eventuais correções estão abaixo.', 'Fontes, método e correções'])
+VALUES['es'].extend(['Responsable y contacto público', 'Publicado el', 'Los anuncios y cifras de este artículo se sitúan en el contexto de su fecha de publicación. Un anuncio no confirma su resultado posterior. Las referencias y las posibles correcciones figuran abajo.', 'Fuentes, método y correcciones'])

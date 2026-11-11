@@ -135,7 +135,7 @@ def render(request,page,locale='fr',**kw):
             category_record=one('SELECT id FROM categories WHERE name=? AND active=1',(name,))
             if category_record:
                 category_values.append({'id':category_record['id'],'value':name,'name':name,'label':localized_category(name,locale,ui)})
-    base={'request':request,'locale':locale,'t':t,'languages':language_map(),'settings':cfg,'brand':cfg.get('brand','Geovyora'),'page':page,'categories':category_values,'staff':session(request),'csrf_token':request.state.public_csrf,'title':cfg.get('brand','Geovyora'),'description':'Magazine consacré aux créateurs haïtiens, à la diaspora et aux voix du monde.','path':request.url.path,'ads_allowed':False}
+    base={'request':request,'locale':locale,'t':t,'languages':language_map(),'settings':cfg,'brand':cfg.get('brand','Geovyora'),'page':page,'categories':category_values,'staff':session(request),'csrf_token':request.state.public_csrf,'title':cfg.get('brand','Geovyora'),'description':t['site_summary'],'path':request.url.path,'ads_allowed':False}
     base.update(kw)
     base['language_names']=LANGUAGE_NAMES.get(locale,LANGUAGE_NAMES['en'])
     if page=='article' and base.get('article'):
@@ -321,7 +321,7 @@ def robots():return Response('User-agent: *\nDisallow: /admin\nDisallow: /api\nD
 @app.get('/sitemap.xml')
 def sitemap():
     site=os.getenv('SITE_URL','http://localhost:8000').rstrip('/')
-    paths=['/'+l for l in LANGUAGES]
+    paths=['/'+l+('/'+p if p else '') for l in LANGUAGES for p in ['', 'about', 'contact', 'editorial', 'privacy', 'terms', 'copyright']]
     for a in article_list(limit=5000):
         if a['demo']:continue
         langs={a['locale']}|{r['locale'] for r in rows("SELECT locale FROM translations WHERE target_type='article' AND target_id=? AND version=?",(a['id'],a['updated_at']))}
@@ -489,7 +489,7 @@ async def moderate(request:Request):
 @app.post('/admin/settings/save')
 async def save_settings(request:Request):
     f=await request.form();u=csrf(request,f.get('csrf_token'));require(request,ADMIN)
-    for k in ['brand','contact_email','tagline','default_locale','translation_limit','publisher_id','ad_slot','push_daily_limit','contact_company','contact_address','homepage_sections']:
+    for k in ['brand','contact_email','tagline','default_locale','translation_limit','publisher_id','ad_slot','push_daily_limit','contact_company','contact_person','contact_address','homepage_sections']:
         if k in f:
             value=clean(f[k],500)
             if k=='push_daily_limit' and (not value.isdigit() or not 1<=int(value)<=10):raise HTTPException(422,'Limit push: 1 jiska 10 pa jou.')
@@ -755,6 +755,7 @@ def public(request:Request,locale:str,section:str='home',slug:str='',q:str='',ca
         if category_record:
             category_filter=category_record['id']
             category=category_record['name']
+    if section=='rankings':return RedirectResponse('/'+locale+'/trending'+('?' + request.url.query if request.url.query else ''),status_code=301)
     page=max(1,min(page,1000));a=None;p=None;videos=[];data=[];has_next=False;total_articles=0;title=labels(locale).get(section,section)
     allowed=['home','haiti','world','news','interviews','videos','video','trending','rankings','discoveries','influencers','influencer','article','search','notifications','saved','submit-influencer','submit-news','contact','advertising','about','privacy','terms','cookies','editorial','community','copyright','category','newsletter','newsletter-unsubscribe']
     if section not in allowed:raise HTTPException(404,'Paj sa a pa egziste.')

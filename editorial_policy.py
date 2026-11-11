@@ -50,3 +50,12 @@ POLICIES = {
         ],
     },
 }
+
+# Accountability is explicit without assigning invented reporting credits.
+for locale, section in {
+    'fr': ('Qui répond de la publication ?', 'Geovyora est un projet de Haytiles. Le nom du responsable et ses coordonnées publiques sont indiqués sur les pages À propos et Contact, ainsi que sur cette page. La signature Geovyora désigne la publication ; elle ne signifie pas qu’un journaliste a rencontré les personnes citées ou réalisé un reportage sur place. Les documents et témoignages utilisés doivent être identifiés dans chaque article.'),
+    'en': ('Who is accountable for the publication?', 'Geovyora is a Haytiles project. The responsible person and public contact details are listed on the About and Contact pages and on this page. The Geovyora byline identifies the publication; it does not mean that a journalist met the people mentioned or reported from the scene. Documents and testimony used must be identified in each article.'),
+    'pt-BR': ('Quem responde pela publicação?', 'A Geovyora é um projeto da Haytiles. O responsável e os contatos públicos estão nas páginas Sobre e Contato e nesta página. A assinatura Geovyora identifica a publicação; não significa que um jornalista entrevistou as pessoas citadas ou fez uma reportagem no local. Os documentos e depoimentos utilizados devem ser identificados em cada artigo.'),
+    'es': ('¿Quién responde de la publicación?', 'Geovyora es un proyecto de Haytiles. El responsable y los datos de contacto públicos figuran en las páginas Acerca de y Contacto, y en esta página. La firma Geovyora identifica la publicación; no significa que un periodista haya entrevistado a las personas citadas o haya informado desde el lugar. Los documentos y testimonios utilizados deben identificarse en cada artículo.'),
+}.items():
+    POLICIES[locale]['sections'].append(section)

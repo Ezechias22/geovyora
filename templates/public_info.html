@@ -103,10 +103,11 @@
     <h2>Revizyon ak moderasyon</h2><p>Rapòte yon kòmantè oswa kontni ak bouton rapò a. Chwazi rezon an epi bay detay ki ede ekip la konprann pwoblèm nan. Rapò yo pa retire kontni otomatikman; moderatè yo pran desizyon apre revizyon.</p>
     <h2>Piblisite ak patenarya</h2><p>Bannè patenè yo ka genyen yon lyen ki mennen sou yon lòt sit. Règleman sit sa a aplike lè ou kite Geovyora. Kontni patwone dwe make pou lektè yo ka rekonèt li.</p>
   {% endif %}
-  {% if page=='about' %}
+  {% if settings.contact_person or settings.contact_email or settings.contact_company %}
     {% if settings.contact_company %}<h2>{{t.contact}}</h2><p>{{settings.contact_company}}</p>{% endif %}
+    {% if settings.contact_person %}<p>{{t.public_contact_person}} : {{settings.contact_person}}</p>{% endif %}
     {% if settings.contact_address %}<p>{{settings.contact_address}}</p>{% endif %}
-    {% if settings.contact_email %}<p>{{settings.contact_email}}</p>{% endif %}
+    {% if settings.contact_email %}<p><a href="mailto:{{settings.contact_email}}">{{settings.contact_email}}</a></p>{% endif %}
   {% endif %}
   <a class="btn secondary" href="/{{locale}}/contact">{{ t.contact }}</a>
 </div>
