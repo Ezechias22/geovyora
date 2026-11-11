@@ -179,18 +179,20 @@ def render(request,page,locale='fr',**kw):
     section_stats=one(
         "SELECT (SELECT COUNT(*) FROM articles WHERE status='published'"+public_demo_clause()+" AND kind='interview') AS interviews, "
         "(SELECT COUNT(*) FROM articles WHERE status='published'"+public_demo_clause()+" AND category='Dekouvèt') AS discoveries, "
+        "(SELECT COUNT(*) FROM articles WHERE status='published'"+public_demo_clause()+" AND kind='guide') AS guides, "
         "(SELECT COUNT(*) FROM videos WHERE status='ready') AS videos, "
         "(SELECT COUNT(*) FROM influencers WHERE status='published'"+public_demo_clause()+") AS influencers, "
         "(SELECT COUNT(*) FROM page_views v JOIN articles a ON a.id=v.article_id WHERE a.status='published'"+public_demo_clause('a.')+" AND v.day>=?) AS trending",
         (trend_since,)
     ) or {}
+    base['show_guides']=int(section_stats.get('guides') or 0)>0
     base['show_interviews']=int(section_stats.get('interviews') or 0)>0
     base['show_discoveries']=int(section_stats.get('discoveries') or 0)>0
     base['show_videos']=int(section_stats.get('videos') or 0)>0
     base['show_influencers']=int(section_stats.get('influencers') or 0)>0
     base['show_trending']=int(section_stats.get('trending') or 0)>0
     base['public_nav']=[('home',''),('haiti','haiti'),('world','world'),('news','news')]
-    for nav_key in ['interviews','videos','trending','discoveries']:
+    for nav_key in ['guides','interviews','videos','trending','discoveries']:
         if base['show_'+nav_key]:base['public_nav'].append((nav_key,nav_key))
     base['seo_noindex']=bool(base['seo_noindex'] or page=='interviews' and not base['show_interviews'] or page=='discoveries' and not base['show_discoveries'] or page=='videos' and not base['show_videos'] or page in ['trending','rankings'] and not base['show_trending'] or page=='influencers' and not base['show_influencers'])
     base['submission_upload_configured']=bool(os.getenv('PRIVATE_SUBMISSION_BUCKET') and os.getenv('S3_ACCESS_KEY_ID') and os.getenv('S3_SECRET_ACCESS_KEY'))
@@ -216,6 +218,16 @@ def render(request,page,locale='fr',**kw):
         version=a.get('updated_at','')
         langs={a.get('original_locale',locale)}|{x['locale'] for x in rows("SELECT locale FROM translations WHERE target_type='article' AND target_id=? AND version=?",(a['id'],version))}
         base['alternates']=[{'locale':l,'url':origin+'/'+l+'/article/'+a['slug']} for l in sorted(langs & set(language_map()))]
+    from practical_tools import ARTICLE_TOOLS,COPY as TOOL_COPY
+    base['practical_tool']=None
+    if page=='article' and base.get('article') and base['article']['id'] in ARTICLE_TOOLS:
+        base['practical_tool']={'kind':ARTICLE_TOOLS[base['article']['id']], 'copy':TOOL_COPY.get(locale,TOOL_COPY['en'])}
+    base['home_guides']=[]
+    if page=='home':
+        base['home_guides']=[with_category_label(translate_record(x,locale)) for x in article_list("kind='guide'",(),2)]
+    base['related_guides']=[]
+    if page=='article' and base.get('article'):
+        base['related_guides']=[translate_record(x,locale) for x in article_list("kind='guide' AND id<>?",(base['article']['id'],),2)]
     base['body_blocks']=[]
     if page=='article' and base.get('article'):
         from content import body_blocks
@@ -322,6 +334,8 @@ def robots():return Response('User-agent: *\nDisallow: /admin\nDisallow: /api\nD
 def sitemap():
     site=os.getenv('SITE_URL','http://localhost:8000').rstrip('/')
     paths=['/'+l+('/'+p if p else '') for l in LANGUAGES for p in ['', 'about', 'contact', 'editorial', 'privacy', 'terms', 'copyright']]
+    if one("SELECT id FROM articles WHERE status='published' AND kind='guide'"+public_demo_clause()+" LIMIT 1"):
+        paths.extend('/'+l+'/guides' for l in LANGUAGES)
     for a in article_list(limit=5000):
         if a['demo']:continue
         langs={a['locale']}|{r['locale'] for r in rows("SELECT locale FROM translations WHERE target_type='article' AND target_id=? AND version=?",(a['id'],a['updated_at']))}
@@ -748,7 +762,7 @@ async def unsubscribe(request:Request):
 def public(request:Request,locale:str,section:str='home',slug:str='',q:str='',category:str='',country:str='',platform:str='',sort:str='recent',page:int=1,original:int=0):
     if locale not in language_map():raise HTTPException(404,'Lang sa a pa disponib.')
     category_filter=''
-    if category and section in ['home','haiti','world','news','interviews','discoveries','category','trending','rankings']:
+    if category and section in ['home','haiti','world','news','guides','interviews','discoveries','category','trending','rankings']:
         category_record=one('SELECT id,name FROM categories WHERE id=? AND active=1',(category,))
         if not category_record:
             category_record=one('SELECT id,name FROM categories WHERE name=? AND active=1',(category,))
@@ -757,7 +771,7 @@ def public(request:Request,locale:str,section:str='home',slug:str='',q:str='',ca
             category=category_record['name']
     if section=='rankings':return RedirectResponse('/'+locale+'/trending'+('?' + request.url.query if request.url.query else ''),status_code=301)
     page=max(1,min(page,1000));a=None;p=None;videos=[];data=[];has_next=False;total_articles=0;title=labels(locale).get(section,section)
-    allowed=['home','haiti','world','news','interviews','videos','video','trending','rankings','discoveries','influencers','influencer','article','search','notifications','saved','submit-influencer','submit-news','contact','advertising','about','privacy','terms','cookies','editorial','community','copyright','category','newsletter','newsletter-unsubscribe']
+    allowed=['home','haiti','world','news','guides','interviews','videos','video','trending','rankings','discoveries','influencers','influencer','article','search','notifications','saved','submit-influencer','submit-news','contact','advertising','about','privacy','terms','cookies','editorial','community','copyright','category','newsletter','newsletter-unsubscribe']
     if section not in allowed:raise HTTPException(404,'Paj sa a pa egziste.')
     if section=='article':
         raw=one("SELECT * FROM articles WHERE slug=? AND status='published'"+public_demo_clause(),(slug,))
@@ -800,9 +814,10 @@ def public(request:Request,locale:str,section:str='home',slug:str='',q:str='',ca
             trending_query+=" AND a.category=?"
             trending_args.append(category)
         data=rows(trending_query+" GROUP BY a.id ORDER BY readership DESC LIMIT 24",tuple(trending_args))
-    elif section in ['home','haiti','world','news','interviews','discoveries','category']:
+    elif section in ['home','haiti','world','news','guides','interviews','discoveries','category']:
         where='1=1';args=[]
         if section=='haiti':where+=' AND region=?';args.append(section)
+        if section=='guides':where+=" AND kind='guide'"
         if section=='interviews':where+=" AND kind='interview'"
         if section=='discoveries':where+=" AND category='Dekouvèt'"
         if section=='category':
@@ -815,7 +830,7 @@ def public(request:Request,locale:str,section:str='home',slug:str='',q:str='',ca
         total_articles=len(matches)
         has_next=total_articles>page*page_size
         data=matches[(page-1)*page_size:page*page_size]
-    empty_archive=section in ['home','haiti','world','news','interviews','discoveries','category','trending','rankings','videos','influencers'] and not (videos if section=='videos' else data)
+    empty_archive=section in ['home','haiti','world','news','guides','interviews','discoveries','category','trending','rankings','videos','influencers'] and not (videos if section=='videos' else data)
     return render(request,section,locale,articles=[translate_record(x,locale) for x in data] if section!='influencers' else [],profiles=data if section=='influencers' else rows("SELECT * FROM influencers WHERE status='published'"+public_demo_clause()+" LIMIT 4"),article=a,profile=p,videos=videos,title=title,q=q,category=category,category_filter=category_filter,country=country,platform=platform,sort=sort,pagination=page,has_next=has_next,total_articles=total_articles,seo_noindex=empty_archive)
 
 @app.post('/admin/campaigns/save')

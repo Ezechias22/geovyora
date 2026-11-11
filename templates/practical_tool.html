@@ -1,0 +1,26 @@
+{% set c=practical_tool['copy'] %}
+<section class="editorial-tool" aria-labelledby="tool-title" data-tool="{{practical_tool.kind}}" data-locale="{{locale}}" data-error="{{c.invalid if practical_tool.kind=='quote' else c.invalid_time}}">
+<h2 id="tool-title">{{c.quote_title if practical_tool.kind=='quote' else c.time_title}}</h2>
+<p class="tool-note">{{c.privacy}}</p>
+<form class="tool-form">
+{% if practical_tool.kind=='quote' %}
+<div class="tool-fields">
+<label for="tool-currency">{{c.currency}}<select id="tool-currency" name="currency"><option>BRL</option><option>USD</option><option>EUR</option><option>HTG</option></select></label>
+{% for name,label,value,limit in [('hours',c.hours,6,100000),('rate',c.rate,25,1000000),('expenses',c.expenses,35,1000000),('rights',c.rights,0,1000000),('fee',c.fee,15,99)] %}
+<label for="tool-{{name}}">{{label}}<input id="tool-{{name}}" name="{{name}}" type="number" min="0" max="{{limit}}" step="0.01" value="{{value}}" required inputmode="decimal"></label>
+{% endfor %}
+</div>
+{% else %}
+<label for="tool-instant">{{c.instant}}<input id="tool-instant" name="instant" type="text" value="2026-11-13T20:00:00-03:00" required maxlength="32" aria-describedby="instant-hint" spellcheck="false"></label>
+<p id="instant-hint" class="tool-note">{{c.instant_hint}}</p>
+{% endif %}
+<div class="tool-actions"><button type="submit" class="btn">{{c.calculate}}</button><button type="reset" class="btn secondary">{{c.reset}}</button></div>
+<p class="tool-error" role="alert"></p>
+<div class="tool-result" role="status" aria-live="polite" aria-atomic="true">
+{% if practical_tool.kind=='quote' %}<dl>{% for name,label in [('base',c.base),('invoice',c.invoice),('deduction',c.deduction),('remaining',c.remaining)] %}<div><dt>{{label}}</dt><dd data-result="{{name}}"></dd></div>{% endfor %}</dl>
+{% else %}<div class="tool-table-wrap"><table><caption>{{c.time_title}}</caption><thead><tr><th scope="col">{{c.city}}</th><th scope="col">{{c.local_time}}</th></tr></thead><tbody>{% for city in c.cities %}<tr><th scope="row">{{city}}</th><td data-zone="{{['America/Port-au-Prince','America/Sao_Paulo','Europe/Paris','America/New_York','America/Toronto'][loop.index0]}}"></td></tr>{% endfor %}</tbody></table></div>{% endif %}
+</div>
+</form>
+<p class="tool-note">{{c.quote_limit if practical_tool.kind=='quote' else c.time_limit}}</p>
+<noscript><p>{{c.nojs}}</p></noscript>
+</section>

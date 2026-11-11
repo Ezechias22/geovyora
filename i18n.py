@@ -56,3 +56,22 @@ VALUES['fr'].extend(['Responsable et contact public', 'Publié le', 'Les annonce
 VALUES['en'].extend(['Responsible person and public contact', 'Published on', 'Announcements and figures in this article are placed in the context of its publication date. An announcement does not confirm its subsequent outcome. References and any corrections appear below.', 'Sources, method and corrections'])
 VALUES['pt-BR'].extend(['Responsável e contato público', 'Publicado em', 'Os anúncios e números deste artigo são apresentados no contexto da data de publicação. Um anúncio não confirma seu resultado posterior. As referências e eventuais correções estão abaixo.', 'Fontes, método e correções'])
 VALUES['es'].extend(['Responsable y contacto público', 'Publicado el', 'Los anuncios y cifras de este artículo se sitúan en el contexto de su fecha de publicación. Un anuncio no confirma su resultado posterior. Las referencias y las posibles correcciones figuran abajo.', 'Fuentes, método y correcciones'])
+
+KEYS.extend(['guides','guides_summary'])
+VALUES['fr'].extend(['Guides et outils','Des méthodes, des exemples et des outils Geovyora pour les créateurs et la diaspora.'])
+VALUES['en'].extend(['Guides and tools','Geovyora methods, worked examples and tools for creators and the diaspora.'])
+VALUES['pt-BR'].extend(['Guias e ferramentas','Métodos, exemplos e ferramentas Geovyora para criadores e a diáspora.'])
+VALUES['es'].extend(['Guías y herramientas','Métodos, ejemplos y herramientas Geovyora para creadores y la diáspora.'])
+# Keep the repeated notice brief; detailed limitations live in the linked method.
+for language, text in {
+ 'fr':'Repères et annonces à la date de publication ; voir les références et corrections ci-dessous.',
+ 'en':'Facts and announcements as of publication; see references and corrections below.',
+ 'pt-BR':'Informações e anúncios na data da publicação; veja as referências e correções abaixo.',
+ 'es':'Información y anuncios a la fecha de publicación; véanse las referencias y correcciones abajo.'
+}.items():
+ VALUES[language][KEYS.index('documentary_context')]=text
+KEYS.append('tools_privacy')
+VALUES['fr'].append('Les calculs des outils éditoriaux sont effectués dans votre navigateur. Les valeurs saisies ne sont pas envoyées au serveur Geovyora et ne sont pas enregistrées par ces outils. Les pages restent soumises aux autres traitements décrits ci-dessus, notamment le chargement du script Google de vérification.')
+VALUES['en'].append('Editorial tool calculations run in your browser. Entered values are not sent to the Geovyora server or saved by these tools. Pages remain subject to the other processing described above, including loading the Google verification script.')
+VALUES['pt-BR'].append('Os cálculos das ferramentas editoriais são feitos no navegador. Os valores digitados não são enviados ao servidor Geovyora nem armazenados pelas ferramentas. As páginas continuam sujeitas aos outros tratamentos descritos acima, incluindo o carregamento do script de verificação do Google.')
+VALUES['es'].append('Los cálculos de las herramientas editoriales se realizan en el navegador. Los valores no se envían al servidor Geovyora ni se guardan mediante estas herramientas. Las páginas siguen sujetas a los demás tratamientos descritos arriba, incluida la carga del script de verificación de Google.')
