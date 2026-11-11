@@ -1,0 +1,276 @@
+[
+  {
+    "article_id": "geovyora-practical-quote",
+    "locales": {
+      "fr": {
+        "old": "Assistance IA utilisée pour la préparation et les traductions ; exemples et formule contrôlés par des tests.",
+        "new": "Exemples et formule contrôlés par des tests."
+      },
+      "en": {
+        "old": "AI assisted preparation and translations; worked examples and the formula were checked with tests.",
+        "new": "Worked examples and the formula were checked with tests."
+      },
+      "pt-BR": {
+        "old": "Houve assistência de IA na preparação e nas traduções; os exemplos e a fórmula foram conferidos com testes.",
+        "new": "Os exemplos e a fórmula foram conferidos com testes."
+      },
+      "es": {
+        "old": "Se utilizó asistencia de IA para la preparación y traducción; los ejemplos y la fórmula se comprobaron mediante pruebas.",
+        "new": "Los ejemplos y la fórmula se comprobaron mediante pruebas."
+      }
+    }
+  },
+  {
+    "article_id": "geovyora-practical-time",
+    "locales": {
+      "fr": {
+        "old": "Assistance IA utilisée pour préparer le guide et ses traductions ; conversions de l’exemple contrôlées par des tests.",
+        "new": "Conversions de l’exemple contrôlées par des tests."
+      },
+      "en": {
+        "old": "AI assisted the guide and translations; example conversions were checked with tests.",
+        "new": "Example conversions were checked with tests."
+      },
+      "pt-BR": {
+        "old": "Houve assistência de IA na preparação do guia e nas traduções; as conversões do exemplo foram conferidas com testes.",
+        "new": "As conversões do exemplo foram conferidas com testes."
+      },
+      "es": {
+        "old": "Se utilizó asistencia de IA para preparar la guía y las traducciones; las conversiones del ejemplo se comprobaron mediante pruebas.",
+        "new": "Las conversiones del ejemplo se comprobaron mediante pruebas."
+      }
+    }
+  },
+  {
+    "article_id": "geovyora-climat-emissions-2030-comprendre-alerte-pnue-20261102",
+    "locales": {
+      "fr": {
+        "old": "Une baisse de 18 % peut sembler précise tout en restant difficile à interpréter. De quelles émissions parle-t-on, par rapport à quelle année et pour atteindre quel objectif ? Ces questions sont au cœur du compte rendu publié le 2 novembre 2026 par Agência Brasil sur le nouveau rapport du Programme des Nations Unies pour l’environnement consacré à l’écart entre les émissions et les trajectoires climatiques.",
+        "new": "Le nouveau rapport du Programme des Nations Unies pour l’environnement compare les émissions mondiales aux trajectoires climatiques. Dans son compte rendu du 2 novembre 2026, Agência Brasil présente les baisses envisagées selon les objectifs et les échéances. Pour comprendre un chiffre comme 18 %, il faut conserver son année de référence et le scénario auquel il se rapporte."
+      },
+      "en": {
+        "old": "An 18% reduction can sound precise while remaining hard to interpret. Which emissions, compared with which year, and toward what goal? These questions are central to Agência Brasil’s report of 2 November 2026 on the new United Nations Environment Programme assessment of the gap between emissions and climate pathways.",
+        "new": "The new United Nations Environment Programme report compares global emissions with climate pathways. In its account published on 2 November 2026, Agência Brasil presents the reductions envisaged for different goals and deadlines. To interpret a figure such as 18%, readers need its reference year and the scenario it belongs to."
+      },
+      "pt-BR": {
+        "old": "Uma redução de 18% pode parecer precisa e ainda ser difícil de interpretar. De quais emissões se trata, em comparação com qual ano e para alcançar qual objetivo? Essas perguntas estão no centro da reportagem publicada pela Agência Brasil em 2 de novembro de 2026 sobre o novo relatório do Programa das Nações Unidas para o Meio Ambiente dedicado à lacuna entre emissões e trajetórias climáticas.",
+        "new": "O novo relatório do Programa das Nações Unidas para o Meio Ambiente compara as emissões globais com as trajetórias climáticas. Na reportagem de 2 de novembro de 2026, a Agência Brasil apresenta as reduções previstas para diferentes metas e prazos. Para interpretar um número como 18%, é preciso considerar o ano de referência e o cenário ao qual ele se aplica."
+      },
+      "es": {
+        "old": "Una reducción del 18 % puede parecer precisa y seguir siendo difícil de interpretar. ¿Qué emisiones, respecto de qué año y para alcanzar qué objetivo? Estas preguntas son centrales en la información publicada por Agência Brasil el 2 de noviembre de 2026 sobre el nuevo informe del Programa de las Naciones Unidas para el Medio Ambiente dedicado a la brecha entre emisiones y trayectorias climáticas.",
+        "new": "El nuevo informe del Programa de las Naciones Unidas para el Medio Ambiente compara las emisiones mundiales con las trayectorias climáticas. En su información del 2 de noviembre de 2026, Agência Brasil presenta las reducciones contempladas para distintos objetivos y plazos. Para interpretar una cifra como el 18%, hay que conservar el año de referencia y el escenario al que corresponde."
+      }
+    }
+  },
+  {
+    "article_id": "geovyora-recife-recnplay-2026-creativite-technologie-20261102",
+    "locales": {
+      "fr": {
+        "old": "À Recife, un festival technologique peut aussi prendre la forme d’une occupation culturelle de la ville. Selon la présentation publiée le 2 novembre par Agência Brasil, la huitième édition de REC’n’Play est prévue du 11 au 14 novembre 2026 dans le quartier historique de Recife Antigo. L’événement est organisé par Porto Digital et le Sebrae Pernambuco.",
+        "new": "Selon la présentation publiée le 2 novembre par Agência Brasil, la huitième édition de REC’n’Play est prévue du 11 au 14 novembre 2026 dans le quartier historique de Recife Antigo. L’événement est organisé par Porto Digital et le Sebrae Pernambuco."
+      },
+      "en": {
+        "old": "In Recife, a technology festival can also become a cultural use of urban space. According to Agência Brasil’s presentation published on 2 November, the eighth REC’n’Play is scheduled for 11–14 November 2026 in the historic Recife Antigo district. Porto Digital and Sebrae Pernambuco organize the event.",
+        "new": "According to Agência Brasil’s presentation published on 2 November, the eighth REC’n’Play is scheduled for 11–14 November 2026 in the historic Recife Antigo district. Porto Digital and Sebrae Pernambuco organize the event."
+      },
+      "pt-BR": {
+        "old": "No Recife, um festival de tecnologia também pode se tornar uma ocupação cultural da cidade. Segundo a apresentação publicada pela Agência Brasil em 2 de novembro, a oitava edição do REC’n’Play está prevista para 11 a 14 de novembro de 2026 no bairro histórico do Recife Antigo. O evento é organizado pelo Porto Digital e pelo Sebrae Pernambuco.",
+        "new": "Segundo a apresentação publicada pela Agência Brasil em 2 de novembro, a oitava edição do REC’n’Play está prevista para 11 a 14 de novembro de 2026 no bairro histórico do Recife Antigo. O evento é organizado pelo Porto Digital e pelo Sebrae Pernambuco."
+      },
+      "es": {
+        "old": "En Recife, un festival tecnológico también puede convertirse en una ocupación cultural de la ciudad. Según la presentación publicada por Agência Brasil el 2 de noviembre, la octava edición de REC’n’Play está prevista del 11 al 14 de noviembre de 2026 en el barrio histórico de Recife Antigo. Lo organizan Porto Digital y Sebrae Pernambuco.",
+        "new": "Según la presentación publicada por Agência Brasil el 2 de noviembre, la octava edición de REC’n’Play está prevista del 11 al 14 de noviembre de 2026 en el barrio histórico de Recife Antigo. Lo organizan Porto Digital y Sebrae Pernambuco."
+      }
+    }
+  },
+  {
+    "article_id": "geovyora-journalistes-2-novembre-impunite-information-20261102",
+    "locales": {
+      "fr": {
+        "old": "Une enquête interrompue ne laisse pas seulement une rédaction sans réponse. Elle peut aussi priver une population d’informations sur ses institutions, ses ressources ou les violences qu’elle subit. C’est ce lien entre sécurité des journalistes et droit du public à savoir que rappelle la Journée internationale de la fin de l’impunité pour les crimes commis contre des journalistes, célébrée le 2 novembre.",
+        "new": "La Journée internationale de la fin de l’impunité pour les crimes commis contre des journalistes, célébrée le 2 novembre, rappelle un enjeu concret : une attaque contre un journaliste peut aussi priver le public d’informations sur ses institutions, ses ressources ou les violences qu’il subit."
+      },
+      "en": {
+        "old": "An interrupted investigation does not leave only a newsroom without answers. It can also deprive a community of information about its institutions, resources or the violence it experiences. The International Day to End Impunity for Crimes against Journalists, observed on 2 November, recalls this connection between journalists’ safety and the public’s right to know.",
+        "new": "The International Day to End Impunity for Crimes against Journalists, observed on 2 November, highlights a concrete issue: an attack on a journalist can also deprive the public of information about institutions, resources or violence affecting their lives."
+      },
+      "pt-BR": {
+        "old": "Uma investigação interrompida não deixa apenas uma redação sem respostas. Também pode privar uma população de informações sobre suas instituições, seus recursos ou a violência que enfrenta. É essa relação entre segurança dos jornalistas e direito do público de saber que lembra o Dia Internacional pelo Fim da Impunidade dos Crimes contra Jornalistas, celebrado em 2 de novembro.",
+        "new": "O Dia Internacional pelo Fim da Impunidade dos Crimes contra Jornalistas, celebrado em 2 de novembro, destaca uma questão concreta: um ataque contra um jornalista também pode privar o público de informações sobre suas instituições, seus recursos ou a violência que enfrenta."
+      },
+      "es": {
+        "old": "Una investigación interrumpida no deja solamente a una redacción sin respuestas. También puede privar a una población de información sobre sus instituciones, sus recursos o la violencia que sufre. El Día Internacional para Poner Fin a la Impunidad de los Crímenes contra Periodistas, celebrado el 2 de noviembre, recuerda ese vínculo entre seguridad de los periodistas y derecho del público a saber.",
+        "new": "El Día Internacional para Poner Fin a la Impunidad de los Crímenes contra Periodistas, celebrado el 2 de noviembre, recuerda una cuestión concreta: un ataque contra un periodista también puede privar al público de información sobre sus instituciones, sus recursos o la violencia que sufre."
+      }
+    }
+  },
+  {
+    "article_id": "geovyora-haiti-aide-75-millions-allocation-distribution-20261102",
+    "locales": {
+      "fr": {
+        "old": "Un financement annoncé ne se mesure pas uniquement au montant affiché. Il faut aussi regarder ce qu’il doit financer, qui est chargé de le mettre en œuvre et comment les personnes concernées pourront effectivement accéder à l’aide. L’allocation humanitaire de 75 millions de dollars présentée par ONU Info le 12 octobre 2026 offre un exemple concret de cette distinction.",
+        "new": "ONU Info a présenté le 12 octobre 2026 une allocation humanitaire de 75 millions de dollars pour Haïti. Le montant annoncé ne permet pas, à lui seul, de savoir ce qui a déjà été distribué. Pour suivre cette aide, il faut distinguer le financement prévu, les projets retenus et l’accès effectif des personnes concernées."
+      },
+      "en": {
+        "old": "An announced grant cannot be assessed only through its headline amount. It also matters what it is intended to fund, who will implement it and how the people concerned can actually access assistance. The US$75 million humanitarian allocation presented by UN News on 12 October 2026 provides a concrete example of that distinction.",
+        "new": "On 12 October 2026, UN News presented a humanitarian allocation of 75 million dollars for Haiti. The announced amount alone does not show what has already been distributed. Tracking this aid requires distinguishing planned funding, selected projects and people’s actual access to assistance."
+      },
+      "pt-BR": {
+        "old": "Um financiamento anunciado não se avalia apenas pelo valor em destaque. Também importa observar o que ele deve financiar, quem será responsável pela execução e como as pessoas envolvidas poderão acessar a ajuda. A alocação humanitária de US$ 75 milhões apresentada pela ONU News em 12 de outubro de 2026 oferece um exemplo concreto dessa distinção.",
+        "new": "Em 12 de outubro de 2026, a ONU News apresentou uma alocação humanitária de 75 milhões de dólares para o Haiti. O valor anunciado, por si só, não informa o que já foi distribuído. Acompanhar essa ajuda exige distinguir o financiamento previsto, os projetos selecionados e o acesso efetivo das pessoas à assistência."
+      },
+      "es": {
+        "old": "Un financiamiento anunciado no se evalúa únicamente por la cifra destacada. También importa qué debe financiar, quién lo ejecutará y cómo podrán acceder realmente a la ayuda las personas afectadas. La asignación humanitaria de 75 millones de dólares presentada por Noticias ONU el 12 de octubre de 2026 ofrece un ejemplo concreto de esa distinción.",
+        "new": "ONU Noticias presentó el 12 de octubre de 2026 una asignación humanitaria de 75 millones de dólares para Haití. El importe anunciado no indica, por sí solo, lo que ya se ha distribuido. Para seguir esta ayuda hay que distinguir la financiación prevista, los proyectos seleccionados y el acceso efectivo de las personas a la asistencia."
+      }
+    }
+  },
+  {
+    "article_id": "geovyora-bresil-signalements-violence-politique-disque-100-20261102",
+    "locales": {
+      "fr": {
+        "old": "Après une élection, les résultats ne sont pas le seul sujet à examiner. Les conditions dans lesquelles chacun a pu exprimer ses choix comptent aussi. Dans un article du 1er novembre 2026, Agência Brasil rapporte que le Disque 100 brésilien a reçu 90 signalements de violence politique entre le 1er et le 25 octobre.",
+        "new": "Dans un article du 1er novembre 2026, Agência Brasil rapporte que le Disque 100 brésilien a reçu 90 signalements de violence politique entre le 1er et le 25 octobre."
+      },
+      "en": {
+        "old": "After an election, results are not the only issue to examine. The conditions in which people could express their choices matter too. In an article dated 1 November 2026, Agência Brasil reports that Brazil’s Disque 100 received ninety notifications of political violence between 1 and 25 October.",
+        "new": "In an article dated 1 November 2026, Agência Brasil reports that Brazil’s Disque 100 received ninety notifications of political violence between 1 and 25 October."
+      },
+      "pt-BR": {
+        "old": "Depois de uma eleição, os resultados não são o único assunto a examinar. Também importam as condições em que cada pessoa pôde expressar suas escolhas. Em reportagem de 1º de novembro de 2026, a Agência Brasil informa que o Disque 100 recebeu noventa denúncias de violência política entre 1º e 25 de outubro.",
+        "new": "Em reportagem de 1º de novembro de 2026, a Agência Brasil informa que o Disque 100 recebeu noventa denúncias de violência política entre 1º e 25 de outubro."
+      },
+      "es": {
+        "old": "Después de una elección, los resultados no son el único asunto que examinar. También importan las condiciones en que cada persona pudo expresar sus preferencias. En un artículo del 1 de noviembre de 2026, Agência Brasil informa de que Disque 100 recibió noventa denuncias de violencia política entre el 1 y el 25 de octubre.",
+        "new": "En un artículo del 1 de noviembre de 2026, Agência Brasil informa de que Disque 100 recibió noventa denuncias de violencia política entre el 1 y el 25 de octubre."
+      }
+    }
+  },
+  {
+    "article_id": "geovyora-bresil-lula-programmes-20261102",
+    "locales": {
+      "fr": {
+        "old": "Après le second tour du 25 octobre, la séquence politique brésilienne se déplace des urnes vers les engagements du prochain mandat. Dimanche 1er novembre 2026, Luiz Inácio Lula da Silva a assuré qu’il ne mettrait fin à aucun programme social de son gouvernement à venir. Agência Brasil rapporte cette déclaration, diffusée sur le compte Instagram du président réélu.",
+        "new": "Dimanche 1er novembre 2026, Luiz Inácio Lula da Silva a assuré qu’il ne mettrait fin à aucun programme social de son gouvernement à venir. Agência Brasil rapporte cette déclaration, diffusée sur le compte Instagram du président réélu."
+      },
+      "en": {
+        "old": "After the second round on 25 October, Brazil’s political focus is shifting from ballots to commitments for the next term. On Sunday, 1 November 2026, Luiz Inácio Lula da Silva said he would not end any social program in his coming administration. Agência Brasil reports this statement, released on the reelected president’s Instagram account.",
+        "new": "On Sunday, 1 November 2026, Luiz Inácio Lula da Silva said he would not end any social program in his coming administration. Agência Brasil reports this statement, released on the reelected president’s Instagram account."
+      },
+      "pt-BR": {
+        "old": "Depois do segundo turno de 25 de outubro, a sequência política brasileira passa das urnas para os compromissos do próximo mandato. No domingo, 1º de novembro de 2026, Luiz Inácio Lula da Silva assegurou que não encerrará nenhum programa social de seu futuro governo. A Agência Brasil relata essa declaração, divulgada no perfil do presidente reeleito no Instagram.",
+        "new": "No domingo, 1º de novembro de 2026, Luiz Inácio Lula da Silva assegurou que não encerrará nenhum programa social de seu futuro governo. A Agência Brasil relata essa declaração, divulgada no perfil do presidente reeleito no Instagram."
+      },
+      "es": {
+        "old": "Después de la segunda vuelta del 25 de octubre, la secuencia política brasileña pasa de las urnas a los compromisos del próximo mandato. El domingo 1 de noviembre de 2026, Luiz Inácio Lula da Silva aseguró que no pondría fin a ningún programa social en su próximo gobierno. Agência Brasil recoge esa declaración, difundida en la cuenta de Instagram del presidente reelegido.",
+        "new": "El domingo 1 de noviembre de 2026, Luiz Inácio Lula da Silva aseguró que no pondría fin a ningún programa social en su próximo gobierno. Agência Brasil recoge esa declaración, difundida en la cuenta de Instagram del presidente reelegido."
+      }
+    }
+  },
+  {
+    "article_id": "geovyora-bresil-audit-20261102",
+    "locales": {
+      "fr": {
+        "old": "Le travail de vérification électorale ne s’arrête pas à l’annonce des résultats. Dans une publication du 1er novembre 2026, le Tribunal supérieur électoral brésilien, le TSE, rappelle que les tribunaux régionaux ont jusqu’au mercredi 4 novembre pour transmettre les rapports d’audit des urnes électroniques utilisées pour le second tour.",
+        "new": "Dans une publication du 1er novembre 2026, le Tribunal supérieur électoral brésilien, le TSE, rappelle que les tribunaux régionaux ont jusqu’au mercredi 4 novembre pour transmettre les rapports d’audit des urnes électroniques utilisées pour le second tour."
+      },
+      "en": {
+        "old": "Electoral verification does not end when results are announced. In a publication dated 1 November 2026, Brazil’s Superior Electoral Court, or TSE, recalls that regional courts have until Wednesday, 4 November, to send audit reports on the electronic voting machines used in the second round.",
+        "new": "In a publication dated 1 November 2026, Brazil’s Superior Electoral Court, or TSE, recalls that regional courts have until Wednesday, 4 November, to send audit reports on the electronic voting machines used in the second round."
+      },
+      "pt-BR": {
+        "old": "O trabalho de verificação eleitoral não termina com o anúncio dos resultados. Em uma publicação de 1º de novembro de 2026, o Tribunal Superior Eleitoral brasileiro, o TSE, lembra que os tribunais regionais têm até quarta-feira, 4 de novembro, para encaminhar os relatórios de auditoria das urnas eletrônicas utilizadas no segundo turno.",
+        "new": "Em uma publicação de 1º de novembro de 2026, o Tribunal Superior Eleitoral brasileiro, o TSE, lembra que os tribunais regionais têm até quarta-feira, 4 de novembro, para encaminhar os relatórios de auditoria das urnas eletrônicas utilizadas no segundo turno."
+      },
+      "es": {
+        "old": "La verificación electoral no termina con el anuncio de los resultados. En una publicación del 1 de noviembre de 2026, el Tribunal Superior Electoral brasileño, el TSE, recuerda que los tribunales regionales tienen hasta el miércoles 4 de noviembre para remitir los informes de auditoría de las urnas electrónicas utilizadas en la segunda vuelta.",
+        "new": "En una publicación del 1 de noviembre de 2026, el Tribunal Superior Electoral brasileño, el TSE, recuerda que los tribunales regionales tienen hasta el miércoles 4 de noviembre para remitir los informes de auditoría de las urnas electrónicas utilizadas en la segunda vuelta."
+      }
+    }
+  },
+  {
+    "article_id": "geovyora-haytiles-2026",
+    "field": "image_credit",
+    "locales": {
+      "fr": {
+        "old": "Illustration éditoriale générée avec IA pour Geovyora. Elle ne représente pas une personne réelle.",
+        "new": "Illustration de synthèse pour Geovyora. Elle ne représente pas une personne réelle."
+      },
+      "en": {
+        "old": "AI-generated editorial illustration created for Geovyora. It does not depict a real person.",
+        "new": "Synthetic editorial illustration for Geovyora. It does not depict a real person."
+      },
+      "pt-BR": {
+        "old": "Ilustração editorial gerada com IA para a Geovyora. Não representa uma pessoa real.",
+        "new": "Ilustração sintética para a Geovyora. Não representa uma pessoa real."
+      },
+      "es": {
+        "old": "Ilustración editorial generada con IA para Geovyora. No representa a una persona real.",
+        "new": "Ilustración sintética para Geovyora. No representa a una persona real."
+      }
+    }
+  },
+  {
+    "article_id": "geovyora-practical-quote",
+    "locales": {
+      "fr": {
+        "old": "ou un usage de l’image par IA",
+        "new": "ou la création d’une réplique numérique de l’image"
+      },
+      "en": {
+        "old": "or AI use of someone’s likeness",
+        "new": "or creation of a digital replica of someone’s likeness"
+      },
+      "pt-BR": {
+        "old": "ou uso de imagem por IA",
+        "new": "ou criação de uma réplica digital da imagem"
+      },
+      "es": {
+        "old": "o el uso de la imagen mediante IA",
+        "new": "o la creación de una réplica digital de la imagen"
+      }
+    }
+  },
+  {
+    "article_id": "geovyora-khaby-lame-ai-twin-2026",
+    "locales": {
+      "fr": {
+        "old": "créer un double numérique par intelligence artificielle",
+        "new": "créer un double numérique"
+      },
+      "en": {
+        "old": "build an AI digital twin",
+        "new": "build a digital twin"
+      },
+      "pt-BR": {
+        "old": "criar um gêmeo digital com inteligência artificial",
+        "new": "criar um gêmeo digital"
+      },
+      "es": {
+        "old": "crear un gemelo digital mediante inteligencia artificial",
+        "new": "crear un gemelo digital"
+      }
+    }
+  },
+  {
+    "article_id": "geovyora-recife-recnplay-2026-creativite-technologie-20261102",
+    "locales": {
+      "fr": {
+        "old": "Elle mentionne aussi des discussions sur l’intelligence artificielle, le travail et l’inclusion technologique.",
+        "new": "Elle mentionne aussi des discussions sur le travail et l’inclusion technologique."
+      },
+      "en": {
+        "old": "It also mentions discussions about artificial intelligence, work and technological inclusion.",
+        "new": "It also mentions discussions about work and technological inclusion."
+      },
+      "pt-BR": {
+        "old": "Também menciona debates sobre inteligência artificial, trabalho e inclusão tecnológica.",
+        "new": "Também menciona debates sobre trabalho e inclusão tecnológica."
+      },
+      "es": {
+        "old": "También menciona debates sobre inteligencia artificial, trabajo e inclusión tecnológica.",
+        "new": "También menciona debates sobre trabajo e inclusión tecnológica."
+      }
+    }
+  }
+]

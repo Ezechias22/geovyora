@@ -9,6 +9,7 @@ import test_workflows as fixtures
 from db import write
 
 ROOT = Path(__file__).parent
+COPY_EDITS = json.loads((ROOT / 'editorial/audit/2026-11-10-reader-copy-changes.json').read_text())
 PACKAGES = ('2026-11-02.json', '2026-11-02-suite.json', '2026-11-02-bresil.json')
 ARTICLES = sum([json.loads((ROOT / 'editorial/news' / name).read_text()) for name in PACKAGES], [])
 TRANSLATIONS = {locale: json.loads((ROOT / 'editorial/translations' / (locale+'.json')).read_text())
@@ -21,6 +22,11 @@ class ArticleTranslations(fixtures.Fixture):
         for article in ARTICLES:
             for locale in ('fr', 'en', 'pt-BR', 'es'):
                 expected = article if locale == 'fr' else TRANSLATIONS[locale][article['id']]
+                expected = dict(expected)
+                for edit in COPY_EDITS:
+                    if edit['article_id'] == article['id'] and edit.get('field','body') == 'body':
+                        copy = edit['locales'][locale]
+                        expected['body'] = expected['body'].replace(copy['old'],copy['new'],1)
                 with self.subTest(article=article['slug'], locale=locale):
                     response = self.c.get('/'+locale+'/article/'+article['slug'])
                     self.assertEqual(response.status_code, 200)
