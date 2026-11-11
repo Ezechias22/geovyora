@@ -13,6 +13,7 @@ from db import rows, write
 
 ROOT = Path(__file__).parent
 COPY_EDITS = json.loads((ROOT / 'editorial/audit/2026-11-10-reader-copy-changes.json').read_text())
+REPORTING = {r['article_id']:r['expected'] for r in json.loads((ROOT / 'editorial/reporting/2026-11-10-content-review.json').read_text())}
 ARTICLES = json.loads((ROOT / 'editorial/news/2026-11-02-expansion.json').read_text())
 
 
@@ -93,6 +94,7 @@ class WorldCatalog(fixtures.Fixture):
                     if edit['article_id'] == article['id'] and edit.get('field','body') == 'body':
                         copy = edit['locales'][locale]
                         expected['body'] = expected['body'].replace(copy['old'],copy['new'],1)
+                expected.update(REPORTING.get(article['id'],{}).get(locale,{}))
                 with self.subTest(article=article['slug'], locale=locale):
                     response = self.c.get('/'+locale+'/article/'+article['slug'])
                     self.assertEqual(response.status_code, 200)

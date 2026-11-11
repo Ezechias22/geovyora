@@ -1,0 +1,302 @@
+{
+  "http_checks": [
+    {
+      "url": "https://agenciabrasil.ebc.com.br/cultura/noticia/2026-11/recnplay-2026-sera-palco-de-tecnologia-e-criatividade-em-recife",
+      "status": 500,
+      "file": "7f371bd6a353.txt",
+      "length": 250
+    },
+    {
+      "url": "https://agenciabrasil.ebc.com.br/meio-ambiente/noticia/2026-11/pnuma-emissoes-precisam-cair-18-ate-2030-para-limitar-aquecimento",
+      "status": 500,
+      "file": "96fb138ebd79.txt",
+      "length": 250
+    },
+    {
+      "url": "https://agenciabrasil.ebc.com.br/politica/noticia/2026-11/lula-garante-que-programas-sociais-serao-mantidos",
+      "status": 500,
+      "file": "6abcba6e5363.txt",
+      "length": 250
+    },
+    {
+      "url": "https://agenciabrasil.ebc.com.br/politica/noticia/2026-11/violencia-politica-disque-100-recebeu-189-denuncias-durante-eleicao",
+      "status": 500,
+      "file": "f54679d1e6bc.txt",
+      "length": 250
+    },
+    {
+      "url": "https://apnews.com/article/1328b020711e2bef10f0a3f8a1fa1987",
+      "status": 200,
+      "file": "b9f0e655bd87.txt",
+      "length": 50051
+    },
+    {
+      "url": "https://apnews.com/article/34ee8ca588f6e54b33f6f2723b3a510c",
+      "status": 200,
+      "file": "29f433d352ef.txt",
+      "length": 46981
+    },
+    {
+      "url": "https://apnews.com/article/mrbeast-jimmy-donaldson-rockefeller-foundation-18f75839ecf7276a14bfcaf7caba07ba",
+      "status": 200,
+      "file": "45646088b2b3.txt",
+      "length": 49470
+    },
+    {
+      "url": "https://belidemag.net/societe/ariana-m-lafond-participe-au-festival-international-de-la-jeunesse-en-russie/",
+      "status": 200,
+      "file": "ccdbe2d3f6c3.txt",
+      "length": 5618
+    },
+    {
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat",
+      "status": 200,
+      "file": "a6932f365414.txt",
+      "length": 11198
+    },
+    {
+      "url": "https://fr.linkedin.com/posts/bovann-k-559b8b3b6_comme-je-le-dis-toujours-les-opportunit%C3%A9s-activity-7509698423940349952-2D8w",
+      "status": 200,
+      "file": "f4fc54f0216a.txt",
+      "length": 4507
+    },
+    {
+      "url": "https://haytiles.com/",
+      "status": 200,
+      "file": "b56de56f48aa.txt",
+      "length": 5934
+    },
+    {
+      "url": "https://intellectual-property-helpdesk.ec.europa.eu/news-events/news/khaby-lame-sells-his-image-rights-create-ai-powered-digital-twins-britney-spears-sells-rights-her-2026-02-12_en",
+      "status": 200,
+      "file": "78dfefa9f3df.txt",
+      "length": 5050
+    },
+    {
+      "url": "https://lenouvelliste.com/article/266189/ariana-dinfluenceuse-de-lannee-a-championne",
+      "status": 200,
+      "file": "17a5f07812fb.txt",
+      "length": 1922
+    },
+    {
+      "url": "https://lenouvelliste.com/en/article/272541/wilson-isidor-scores-his-first-brace-for-haiti",
+      "status": 200,
+      "file": "05156e564ca8.txt",
+      "length": 2180
+    },
+    {
+      "url": "https://lenouvelliste.com/en/article/272591/the-celebration-of-wilson-isidor-was-strictly-sporting-according-to-the-haitian-football-federation",
+      "status": 200,
+      "file": "51334784f83d.txt",
+      "length": 2277
+    },
+    {
+      "url": "https://news.un.org/fr/story/2026/09/1159573",
+      "status": 200,
+      "file": "dc6a97f3c93f.txt",
+      "length": 7479
+    },
+    {
+      "url": "https://news.un.org/fr/story/2026/10/1159597",
+      "status": 200,
+      "file": "031115cd0e06.txt",
+      "length": 10165
+    },
+    {
+      "url": "https://news.un.org/fr/story/2026/10/1159650",
+      "status": 200,
+      "file": "7923dedffa70.txt",
+      "length": 7248
+    },
+    {
+      "url": "https://news.un.org/fr/story/2026/10/1159672",
+      "status": 200,
+      "file": "59ae5182d4a7.txt",
+      "length": 9115
+    },
+    {
+      "url": "https://news.un.org/fr/story/2026/10/1159684",
+      "status": 200,
+      "file": "5368e3c79793.txt",
+      "length": 8090
+    },
+    {
+      "url": "https://news.un.org/fr/story/2026/10/1159744",
+      "status": 200,
+      "file": "672b423a7458.txt",
+      "length": 7430
+    },
+    {
+      "url": "https://ny1.com/nyc/all-boroughs/ap-top-news/2026/08/05/qa-ms-lauryn-hill-on-the-diaspora-calling-festival-in-the-uk-the-fugees-legacy-and-dangelo",
+      "status": 200,
+      "file": "a553be9d6988.txt",
+      "length": 9721
+    },
+    {
+      "url": "https://play.google.com/store/apps/details?id=com.haytile.topup",
+      "status": 200,
+      "file": "d1cb9b7f70e2.txt",
+      "length": 3327
+    },
+    {
+      "url": "https://recnplay.pe/",
+      "status": 200,
+      "file": "f4b53601621b.txt",
+      "length": 1729
+    },
+    {
+      "url": "https://togo-today.com/house-of-challenge-voici-les-prix-remportes-par-la-gagnante-ariana-video/",
+      "status": 200,
+      "file": "743f5960124a.txt",
+      "length": 4310
+    },
+    {
+      "url": "https://www.concacaf.com/competitions/nations-league/news/bacuna-seals-curacao-s-third-straight-win",
+      "status": 200,
+      "file": "0319290abc22.txt",
+      "length": 8139
+    },
+    {
+      "url": "https://www.concacaf.com/competitions/nations-league/news/haiti-and-curacao-advance-to-nations-league-quarterfinals",
+      "status": 200,
+      "file": "7886059d920a.txt",
+      "length": 8425
+    },
+    {
+      "url": "https://www.faa.gov/newsroom/statements/accident_incidents",
+      "status": 200,
+      "file": "18e1e3f94486.txt",
+      "length": 453125
+    },
+    {
+      "url": "https://www.ftc.gov/business-guidance/resources/disclosures-101-social-media-influencers",
+      "status": 200,
+      "file": "4167a0e036d8.txt",
+      "length": 12674
+    },
+    {
+      "url": "https://www.haiti.org/dt_team/wyclef-jean/",
+      "status": 200,
+      "file": "2ce625b0abb3.txt",
+      "length": 10612
+    },
+    {
+      "url": "https://www.iana.org/time-zones",
+      "status": 200,
+      "file": "6478dc39d042.txt",
+      "length": 2339
+    },
+    {
+      "url": "https://www.juno7.ht/ariana-lafond-house-of-challenge-togo/",
+      "status": 200,
+      "file": "c0cc43e53fd7.txt",
+      "length": 7773
+    },
+    {
+      "url": "https://www.ntsb.gov/investigations/process/Pages/default.aspx",
+      "status": 200,
+      "file": "a2b7e1916b96.txt",
+      "length": 6128
+    },
+    {
+      "url": "https://www.presidencia.gob.sv/gobierno-de-el-salvador-ofrece-implementar-plan-control-territorial-en-haiti-para-combatir-criminalidad/",
+      "status": 200,
+      "file": "6c0ee204bcdc.txt",
+      "length": 4165
+    },
+    {
+      "url": "https://www.prnewswire.com/news-releases/rich-sparkle-holdings-closes-acquisition-of-tiktok-icon-khaby-lames-core-company-302658017.html",
+      "status": 200,
+      "file": "0cbab358ac77.txt",
+      "length": 15961
+    },
+    {
+      "url": "https://www.sec.gov/Archives/edgar/data/2031688/000121390026002713/ea0272099-6k_rich.htm",
+      "status": 200,
+      "file": "3adeaea55d10.txt",
+      "length": 3632
+    },
+    {
+      "url": "https://www.sec.gov/Archives/edgar/data/2031688/000121390026104911/ea030682201ex99-1.htm",
+      "status": 200,
+      "file": "0c39fdcc41e8.txt",
+      "length": 8666
+    },
+    {
+      "url": "https://www.sec.gov/Archives/edgar/data/2031688/000121390026104911/ea030682201ex99-2.htm",
+      "status": 200,
+      "file": "3b754195a5e1.txt",
+      "length": 6350
+    },
+    {
+      "url": "https://www.tse.jus.br/comunicacao/noticias/2026/Novembro/justica-eleitoral-reabre-o-cadastro-eleitoral-nesta-terca-feira-3",
+      "status": 200,
+      "file": "25be48ad6826.txt",
+      "length": 12945
+    },
+    {
+      "url": "https://www.tse.jus.br/comunicacao/noticias/2026/Novembro/tres-devem-encaminhar-ao-tse-relatorios-de-auditoria-das-urnas-eletronicas-ate-4-de-novembro",
+      "status": 204,
+      "file": "61e0e3ec2eab.txt",
+      "length": 0
+    },
+    {
+      "url": "https://www.tse.jus.br/comunicacao/noticias/2026/Outubro/da-eleicao-a-diplomacao-entenda-as-etapas-ate-a-posse-dos-eleitos-238683",
+      "status": 204,
+      "file": "02502a2009ac.txt",
+      "length": 0
+    },
+    {
+      "url": "https://www.tse.jus.br/comunicacao/noticias/2026/Outubro/resultados-do-2o-turno-das-eleicoes-2026-estao-disponiveis-em-pagina-do-tse",
+      "status": 200,
+      "file": "a6b9a0207ce4.txt",
+      "length": 10366
+    },
+    {
+      "url": "https://www.tse.jus.br/servicos-eleitorais/autoatendimento-eleitoral",
+      "status": 200,
+      "file": "c878aa73c759.txt",
+      "length": 6663
+    },
+    {
+      "url": "https://www.unesco.org/en/days/end-impunity",
+      "status": 200,
+      "file": "086359337b96.txt",
+      "length": 11230
+    },
+    {
+      "url": "https://www.wipo.int/en/web/copyright/faq-copyright",
+      "status": 200,
+      "file": "1dfb7878686a.txt",
+      "length": 36418
+    },
+    {
+      "url": "https://wyffest.com/en/events/mfm2026",
+      "status": 200,
+      "file": "ce54153cf6dd.txt",
+      "length": 22086
+    }
+  ],
+  "browser_resolved": [
+    {
+      "topic": "climate",
+      "status": 200,
+      "url": "https://agenciabrasil.ebc.com.br/meio-ambiente/noticia/2026-11/pnuma-emissoes-precisam-cair-18-ate-2030-para-limitar-aquecimento"
+    },
+    {
+      "topic": "lula",
+      "status": 200,
+      "url": "https://agenciabrasil.ebc.com.br/politica/noticia/2026-11/lula-garante-que-programas-sociais-serao-mantidos"
+    },
+    {
+      "topic": "disque",
+      "status": 200,
+      "url": "https://agenciabrasil.ebc.com.br/politica/noticia/2026-11/violencia-politica-disque-100-recebeu-189-denuncias-durante-eleicao"
+    },
+    {
+      "topic": "audit",
+      "status": 200,
+      "url": "https://www.tse.jus.br/comunicacao/noticias/2026/Novembro/tres-devem-encaminhar-ao-tse-relatorios-de-auditoria-das-urnas-eletronicas-ate-4-de-novembro"
+    }
+  ]
+}

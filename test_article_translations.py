@@ -10,6 +10,7 @@ from db import write
 
 ROOT = Path(__file__).parent
 COPY_EDITS = json.loads((ROOT / 'editorial/audit/2026-11-10-reader-copy-changes.json').read_text())
+REPORTING = {r['article_id']:r['expected'] for r in json.loads((ROOT / 'editorial/reporting/2026-11-10-content-review.json').read_text())}
 PACKAGES = ('2026-11-02.json', '2026-11-02-suite.json', '2026-11-02-bresil.json')
 ARTICLES = sum([json.loads((ROOT / 'editorial/news' / name).read_text()) for name in PACKAGES], [])
 TRANSLATIONS = {locale: json.loads((ROOT / 'editorial/translations' / (locale+'.json')).read_text())
@@ -27,6 +28,7 @@ class ArticleTranslations(fixtures.Fixture):
                     if edit['article_id'] == article['id'] and edit.get('field','body') == 'body':
                         copy = edit['locales'][locale]
                         expected['body'] = expected['body'].replace(copy['old'],copy['new'],1)
+                expected.update(REPORTING.get(article['id'],{}).get(locale,{}))
                 with self.subTest(article=article['slug'], locale=locale):
                     response = self.c.get('/'+locale+'/article/'+article['slug'])
                     self.assertEqual(response.status_code, 200)
