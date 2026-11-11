@@ -54,6 +54,23 @@ class EditorialAudit(fixtures.Fixture):
         self.assertNotIn('ep2.adtrafficquality.google', connect)
         self.assertNotIn('*.adtrafficquality.google', policy)
 
+    def test_google_verification_frames_are_limited_to_observed_paths(self):
+        policy = self.c.get('/fr').headers['content-security-policy']
+        directives = {part.strip().split()[0]: part.strip().split()[1:]
+                      for part in policy.split(';') if part.strip()}
+        frames = directives['frame-src']
+        self.assertIn('https://ep2.adtrafficquality.google/sodar/', frames)
+        self.assertIn('https://www.google.com/recaptcha/api2/aframe', frames)
+        self.assertNotIn('https://ep2.adtrafficquality.google', frames)
+        self.assertNotIn('https://www.google.com', frames)
+        self.assertNotIn('*', frames)
+        self.assertNotIn('https:', frames)
+        self.assertNotIn("'unsafe-inline'", directives['script-src'])
+        self.assertNotIn('https://www.google.com', directives['script-src'])
+        self.assertNotIn('https://www.google.com', directives['connect-src'])
+        self.assertEqual(directives['object-src'], ["'none'"])
+        self.assertEqual(directives['form-action'], ["'self'"])
+
     def test_repair_migration_preserves_photos_and_translation_history(self):
         spec = importlib.util.spec_from_file_location('audit_repairs', ROOT / 'migrations/023_editorial_audit_repairs.py')
         module = importlib.util.module_from_spec(spec)
