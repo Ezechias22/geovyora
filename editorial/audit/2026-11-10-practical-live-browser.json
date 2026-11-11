@@ -1,0 +1,150 @@
+{
+  "base": "https://geovyora.com",
+  "cases": [
+    {
+      "width": 390,
+      "locale": "fr",
+      "tool": "quote",
+      "status": 200,
+      "errors": [],
+      "overflow": false,
+      "tool_posts": []
+    },
+    {
+      "width": 390,
+      "locale": "fr",
+      "tool": "time",
+      "status": 200,
+      "errors": [],
+      "overflow": false,
+      "tool_posts": []
+    },
+    {
+      "width": 390,
+      "locale": "en",
+      "tool": "quote",
+      "status": 200,
+      "errors": [],
+      "overflow": false,
+      "tool_posts": []
+    },
+    {
+      "width": 390,
+      "locale": "en",
+      "tool": "time",
+      "status": 200,
+      "errors": [],
+      "overflow": false,
+      "tool_posts": []
+    },
+    {
+      "width": 390,
+      "locale": "pt-BR",
+      "tool": "quote",
+      "status": 200,
+      "errors": [],
+      "overflow": false,
+      "tool_posts": []
+    },
+    {
+      "width": 390,
+      "locale": "pt-BR",
+      "tool": "time",
+      "status": 200,
+      "errors": [],
+      "overflow": false,
+      "tool_posts": []
+    },
+    {
+      "width": 390,
+      "locale": "es",
+      "tool": "quote",
+      "status": 200,
+      "errors": [],
+      "overflow": false,
+      "tool_posts": []
+    },
+    {
+      "width": 390,
+      "locale": "es",
+      "tool": "time",
+      "status": 200,
+      "errors": [],
+      "overflow": false,
+      "tool_posts": []
+    },
+    {
+      "width": 1365,
+      "locale": "fr",
+      "tool": "quote",
+      "status": 200,
+      "errors": [],
+      "overflow": false,
+      "tool_posts": []
+    },
+    {
+      "width": 1365,
+      "locale": "fr",
+      "tool": "time",
+      "status": 200,
+      "errors": [],
+      "overflow": false,
+      "tool_posts": []
+    },
+    {
+      "width": 1365,
+      "locale": "en",
+      "tool": "quote",
+      "status": 200,
+      "errors": [],
+      "overflow": false,
+      "tool_posts": []
+    },
+    {
+      "width": 1365,
+      "locale": "en",
+      "tool": "time",
+      "status": 200,
+      "errors": [],
+      "overflow": false,
+      "tool_posts": []
+    },
+    {
+      "width": 1365,
+      "locale": "pt-BR",
+      "tool": "quote",
+      "status": 200,
+      "errors": [],
+      "overflow": false,
+      "tool_posts": []
+    },
+    {
+      "width": 1365,
+      "locale": "pt-BR",
+      "tool": "time",
+      "status": 200,
+      "errors": [],
+      "overflow": false,
+      "tool_posts": []
+    },
+    {
+      "width": 1365,
+      "locale": "es",
+      "tool": "quote",
+      "status": 200,
+      "errors": [],
+      "overflow": false,
+      "tool_posts": []
+    },
+    {
+      "width": 1365,
+      "locale": "es",
+      "tool": "time",
+      "status": 200,
+      "errors": [],
+      "overflow": false,
+      "tool_posts": []
+    }
+  ],
+  "no_js_readable": true
+}

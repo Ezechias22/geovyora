@@ -44,3 +44,17 @@ Deux URL explorées par numéro (`10437795` et `10437489`) menaient respectiveme
 Les changements apportent une contribution éditoriale et fonctionnelle vérifiable, plutôt qu'un objectif artificiel de nombre de textes ou de mots. Les détails de rédaction et sources des guides figurent dans `editorial/news/PRACTICAL-GUIDES-SOURCES.md`.
 
 Aucune action ne peut garantir « tout est conforme » ou une approbation Google à partir de tests de code. Les droits d'un média, les éléments privés du compte et l'appréciation globale de qualité restent des limites distinctes. La demande de réexamen n'est pas envoyée automatiquement et aucune exemption de droit d'auteur n'est inventée.
+
+## Contrôle final du déploiement
+
+Le code des guides (`2266545`) et la protection des formulaires sans JavaScript (`f14a395`) sont déployés sur geovyora.com. Résultats constatés :
+
+- 22 articles publics ; 120 URL dans le sitemap (88 versions d'articles, 28 pages d'accueil/identité/contact/règles et quatre archives Guides).
+- Les huit nouvelles versions d'article exposent le titre, le premier et le dernier paragraphe attendus, leurs références, quatre liens de langues et une URL canonique cohérente. Aucun fallback de traduction.
+- Les deux guides sont présents dans l'accueil, la rubrique Guides et le sitemap des quatre langues. Les 22 articles figurent ensemble sur la première page de Monde.
+- Ezechias Toussaint et contact@haytiles.com visibles dans les quatre langues. URL de la photo d'Ariana inchangée ; ads.txt valide.
+- 78 tests Python passent par modules isolés. Les suites touchées par les derniers ajustements sont repassées. La suite JavaScript vérifie les deux devis, zéro, les bornes, les commissions invalides, les dates impossibles, le décalage obligatoire et les différences saisonnières de fuseaux.
+- 16 parcours Chromium sur le domaine public : deux outils × quatre langues × mobile/ordinateur. Calculs, conversion, erreurs et réinitialisation vérifiés ; aucun débordement horizontal ni erreur JavaScript observée ; aucune requête POST déclenchée par les saisies et calculs.
+- Lecture sans JavaScript vérifiée : exemples conservés et champs/bouton de calcul désactivés, pour empêcher une soumission native des valeurs. Le formulaire n'est activé qu'une fois le calcul local et ses gestionnaires installés.
+
+Les résultats du navigateur sont conservés dans `2026-11-10-practical-live-browser.json`. Ces contrôles prouvent les changements décrits et le fonctionnement des cas testés. Ils ne constituent pas une certification juridique des médias ni la décision privée d'AdSense.
