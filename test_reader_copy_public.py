@@ -30,3 +30,4 @@ class ReaderCopyPublic(fixtures.Fixture):
             self.assertNotIn('AI tools may assist',text)
             self.assertNotIn('Les outils d’IA peuvent aider',text)
             self.assertIn('Ezechias Toussaint',text)
+            self.assertNotIn('✦',self.c.get('/'+locale).text)
