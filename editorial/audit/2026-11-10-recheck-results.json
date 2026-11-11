@@ -1,0 +1,304 @@
+{
+  "sitemap_count": 120,
+  "linked_pages_count": 150,
+  "local_assets_count": 9,
+  "http_errors": [],
+  "sitemap_metadata_issues": [],
+  "asset_errors": [],
+  "initial_navigation_checks": [
+    {
+      "width": 390,
+      "locale": "fr",
+      "overflow": false,
+      "broken_images": [],
+      "creole_ui_leaks": [],
+      "errors": [],
+      "csp": [
+        "Framing 'https://ep2.adtrafficquality.google/' violates the following Content Security Policy directive: \"frame-src https://*.googlesyndication.com https://googleads.g.doubleclick.net\". The request has been blocked.\n",
+        "Framing 'https://www.google.com/' violates the following Content Security Policy directive: \"frame-src https://*.googlesyndication.com https://googleads.g.doubleclick.net\". The request has been blocked.\n"
+      ]
+    },
+    {
+      "width": 390,
+      "locale": "en",
+      "overflow": false,
+      "broken_images": [],
+      "creole_ui_leaks": [],
+      "errors": [],
+      "csp": []
+    },
+    {
+      "width": 390,
+      "locale": "pt-BR",
+      "overflow": false,
+      "broken_images": [],
+      "creole_ui_leaks": [],
+      "errors": [],
+      "csp": [
+        "Framing 'https://ep2.adtrafficquality.google/' violates the following Content Security Policy directive: \"frame-src https://*.googlesyndication.com https://googleads.g.doubleclick.net\". The request has been blocked.\n",
+        "Framing 'https://www.google.com/' violates the following Content Security Policy directive: \"frame-src https://*.googlesyndication.com https://googleads.g.doubleclick.net\". The request has been blocked.\n"
+      ]
+    },
+    {
+      "width": 390,
+      "locale": "es",
+      "overflow": false,
+      "broken_images": [],
+      "creole_ui_leaks": [],
+      "errors": [],
+      "csp": [
+        "Framing 'https://ep2.adtrafficquality.google/' violates the following Content Security Policy directive: \"frame-src https://*.googlesyndication.com https://googleads.g.doubleclick.net\". The request has been blocked.\n",
+        "Framing 'https://www.google.com/' violates the following Content Security Policy directive: \"frame-src https://*.googlesyndication.com https://googleads.g.doubleclick.net\". The request has been blocked.\n"
+      ]
+    },
+    {
+      "width": 1365,
+      "locale": "fr",
+      "overflow": false,
+      "broken_images": [],
+      "creole_ui_leaks": [],
+      "errors": [],
+      "csp": []
+    },
+    {
+      "width": 1365,
+      "locale": "en",
+      "overflow": false,
+      "broken_images": [],
+      "creole_ui_leaks": [],
+      "errors": [],
+      "csp": [
+        "Framing 'https://ep2.adtrafficquality.google/' violates the following Content Security Policy directive: \"frame-src https://*.googlesyndication.com https://googleads.g.doubleclick.net\". The request has been blocked.\n",
+        "Framing 'https://www.google.com/' violates the following Content Security Policy directive: \"frame-src https://*.googlesyndication.com https://googleads.g.doubleclick.net\". The request has been blocked.\n"
+      ]
+    },
+    {
+      "width": 1365,
+      "locale": "pt-BR",
+      "overflow": false,
+      "broken_images": [],
+      "creole_ui_leaks": [],
+      "errors": [],
+      "csp": []
+    },
+    {
+      "width": 1365,
+      "locale": "es",
+      "overflow": false,
+      "broken_images": [],
+      "creole_ui_leaks": [],
+      "errors": [],
+      "csp": []
+    }
+  ],
+  "final_google_frame_checks": [
+    {
+      "locale": "fr",
+      "width": 390,
+      "csp": [],
+      "errors": [],
+      "responses": [
+        {
+          "host": "ep2.adtrafficquality.google",
+          "path": "/sodar/sodar2.js",
+          "status": 200,
+          "type": "script"
+        },
+        {
+          "host": "ep2.adtrafficquality.google",
+          "path": "/sodar/sodar2/257/runner.html",
+          "status": 200,
+          "type": "document"
+        },
+        {
+          "host": "www.google.com",
+          "path": "/recaptcha/api2/aframe",
+          "status": 200,
+          "type": "document"
+        }
+      ]
+    },
+    {
+      "locale": "en",
+      "width": 390,
+      "csp": [],
+      "errors": [],
+      "responses": [
+        {
+          "host": "ep2.adtrafficquality.google",
+          "path": "/sodar/sodar2.js",
+          "status": 200,
+          "type": "script"
+        },
+        {
+          "host": "www.google.com",
+          "path": "/recaptcha/api2/aframe",
+          "status": 200,
+          "type": "document"
+        },
+        {
+          "host": "ep2.adtrafficquality.google",
+          "path": "/sodar/sodar2/257/runner.html",
+          "status": 200,
+          "type": "document"
+        }
+      ]
+    },
+    {
+      "locale": "pt-BR",
+      "width": 390,
+      "csp": [],
+      "errors": [],
+      "responses": [
+        {
+          "host": "ep2.adtrafficquality.google",
+          "path": "/sodar/sodar2.js",
+          "status": 200,
+          "type": "script"
+        },
+        {
+          "host": "ep2.adtrafficquality.google",
+          "path": "/sodar/sodar2/257/runner.html",
+          "status": 200,
+          "type": "document"
+        },
+        {
+          "host": "www.google.com",
+          "path": "/recaptcha/api2/aframe",
+          "status": 200,
+          "type": "document"
+        }
+      ]
+    },
+    {
+      "locale": "es",
+      "width": 390,
+      "csp": [],
+      "errors": [],
+      "responses": [
+        {
+          "host": "ep2.adtrafficquality.google",
+          "path": "/sodar/sodar2.js",
+          "status": 200,
+          "type": "script"
+        },
+        {
+          "host": "ep2.adtrafficquality.google",
+          "path": "/sodar/sodar2/257/runner.html",
+          "status": 200,
+          "type": "document"
+        },
+        {
+          "host": "www.google.com",
+          "path": "/recaptcha/api2/aframe",
+          "status": 200,
+          "type": "document"
+        }
+      ]
+    },
+    {
+      "locale": "fr",
+      "width": 1365,
+      "csp": [],
+      "errors": [],
+      "responses": [
+        {
+          "host": "ep2.adtrafficquality.google",
+          "path": "/sodar/sodar2.js",
+          "status": 200,
+          "type": "script"
+        },
+        {
+          "host": "www.google.com",
+          "path": "/recaptcha/api2/aframe",
+          "status": 200,
+          "type": "document"
+        },
+        {
+          "host": "ep2.adtrafficquality.google",
+          "path": "/sodar/sodar2/257/runner.html",
+          "status": 200,
+          "type": "document"
+        }
+      ]
+    },
+    {
+      "locale": "en",
+      "width": 1365,
+      "csp": [],
+      "errors": [],
+      "responses": [
+        {
+          "host": "ep2.adtrafficquality.google",
+          "path": "/sodar/sodar2.js",
+          "status": 200,
+          "type": "script"
+        },
+        {
+          "host": "ep2.adtrafficquality.google",
+          "path": "/sodar/sodar2/257/runner.html",
+          "status": 200,
+          "type": "document"
+        },
+        {
+          "host": "www.google.com",
+          "path": "/recaptcha/api2/aframe",
+          "status": 200,
+          "type": "document"
+        }
+      ]
+    },
+    {
+      "locale": "pt-BR",
+      "width": 1365,
+      "csp": [],
+      "errors": [],
+      "responses": [
+        {
+          "host": "ep2.adtrafficquality.google",
+          "path": "/sodar/sodar2.js",
+          "status": 200,
+          "type": "script"
+        },
+        {
+          "host": "ep2.adtrafficquality.google",
+          "path": "/sodar/sodar2/257/runner.html",
+          "status": 200,
+          "type": "document"
+        },
+        {
+          "host": "www.google.com",
+          "path": "/recaptcha/api2/aframe",
+          "status": 200,
+          "type": "document"
+        }
+      ]
+    },
+    {
+      "locale": "es",
+      "width": 1365,
+      "csp": [],
+      "errors": [],
+      "responses": [
+        {
+          "host": "ep2.adtrafficquality.google",
+          "path": "/sodar/sodar2.js",
+          "status": 200,
+          "type": "script"
+        },
+        {
+          "host": "ep2.adtrafficquality.google",
+          "path": "/sodar/sodar2/257/runner.html",
+          "status": 200,
+          "type": "document"
+        },
+        {
+          "host": "www.google.com",
+          "path": "/recaptcha/api2/aframe",
+          "status": 200,
+          "type": "document"
+        }
+      ]
+    }
+  ]
+}
