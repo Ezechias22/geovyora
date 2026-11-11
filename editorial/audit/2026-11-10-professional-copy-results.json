@@ -1,0 +1,112 @@
+{
+  "verified_passages": 52,
+  "articles_modified": 11,
+  "public_article_count": 22,
+  "sitemap_count": 120,
+  "languages": [
+    "fr",
+    "en",
+    "pt-BR",
+    "es"
+  ],
+  "browser_checks": [
+    {
+      "locale": "fr",
+      "slug": "haytiles-ezechias-toussaint-entrepreneuriat-numerique",
+      "status": 200,
+      "errors": [],
+      "visible_preparation_labels": false,
+      "overflow": false
+    },
+    {
+      "locale": "fr",
+      "slug": "createurs-calculer-devis-partenariat-droits",
+      "status": 200,
+      "errors": [],
+      "visible_preparation_labels": false,
+      "overflow": false
+    },
+    {
+      "locale": "fr",
+      "slug": "diaspora-horaires-evenement-fuseaux-date",
+      "status": 200,
+      "errors": [],
+      "visible_preparation_labels": false,
+      "overflow": false
+    },
+    {
+      "locale": "en",
+      "slug": "haytiles-ezechias-toussaint-entrepreneuriat-numerique",
+      "status": 200,
+      "errors": [],
+      "visible_preparation_labels": false,
+      "overflow": false
+    },
+    {
+      "locale": "en",
+      "slug": "createurs-calculer-devis-partenariat-droits",
+      "status": 200,
+      "errors": [],
+      "visible_preparation_labels": false,
+      "overflow": false
+    },
+    {
+      "locale": "en",
+      "slug": "diaspora-horaires-evenement-fuseaux-date",
+      "status": 200,
+      "errors": [],
+      "visible_preparation_labels": false,
+      "overflow": false
+    },
+    {
+      "locale": "pt-BR",
+      "slug": "haytiles-ezechias-toussaint-entrepreneuriat-numerique",
+      "status": 200,
+      "errors": [],
+      "visible_preparation_labels": false,
+      "overflow": false
+    },
+    {
+      "locale": "pt-BR",
+      "slug": "createurs-calculer-devis-partenariat-droits",
+      "status": 200,
+      "errors": [],
+      "visible_preparation_labels": false,
+      "overflow": false
+    },
+    {
+      "locale": "pt-BR",
+      "slug": "diaspora-horaires-evenement-fuseaux-date",
+      "status": 200,
+      "errors": [],
+      "visible_preparation_labels": false,
+      "overflow": false
+    },
+    {
+      "locale": "es",
+      "slug": "haytiles-ezechias-toussaint-entrepreneuriat-numerique",
+      "status": 200,
+      "errors": [],
+      "visible_preparation_labels": false,
+      "overflow": false
+    },
+    {
+      "locale": "es",
+      "slug": "createurs-calculer-devis-partenariat-droits",
+      "status": 200,
+      "errors": [],
+      "visible_preparation_labels": false,
+      "overflow": false
+    },
+    {
+      "locale": "es",
+      "slug": "diaspora-horaires-evenement-fuseaux-date",
+      "status": 200,
+      "errors": [],
+      "visible_preparation_labels": false,
+      "overflow": false
+    }
+  ],
+  "python_tests_passed": 82,
+  "decorative_stars_removed": true
+}

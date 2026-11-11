@@ -1,5 +1,6 @@
 """Professional public wording retains articles and honest illustration captions."""
 import html
+import re
 import json
 from pathlib import Path
 import test_workflows as fixtures
@@ -27,6 +28,7 @@ class ReaderCopyPublic(fixtures.Fixture):
             text=html.unescape(self.c.get('/'+locale+'/editorial').text)
             self.assertEqual(self.c.get('/'+locale+'/editorial').status_code,200)
             self.assertIn(policy['sections'][3][0],text)
+            self.assertIsNone(re.search(r'\b(?:IA|AI)\b',text),locale)
             self.assertNotIn('AI tools may assist',text)
             self.assertNotIn('Les outils d’IA peuvent aider',text)
             self.assertIn('Ezechias Toussaint',text)
